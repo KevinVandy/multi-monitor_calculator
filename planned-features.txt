@@ -1,0 +1,6 @@
+SMALL GOALS:
+tooltips for necessary things
+
+BIG GOALS:
+rewrite the html files in PHP
+prebuilt setups from dropdown menu for inspiration

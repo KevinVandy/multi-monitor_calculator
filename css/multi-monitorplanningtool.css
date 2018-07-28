@@ -1,0 +1,353 @@
+/* By Kevin Van Cott*/
+
+a {
+	text-decoration: none;
+	color: darkblue;
+	text-align: center;
+	font-style: normal;
+}
+
+
+
+a:hover {
+	color: darkred;
+	font-weight: bold;
+}
+
+a:active {
+
+}
+
+a:visited {
+
+}
+
+body {
+	/*background-image: url("../images/gaming-pattern.png");
+	background-repeat: repeat;*/
+	/*background-image: linear-gradient(#fff, #fff);*/
+	margin-left: auto;
+	margin-right: auto;
+	font-family: monospace;
+	text-align: center;
+	min-width: 720px;
+	font-size: 16px;
+}
+
+footer {
+	padding: 40px;
+	margin: 40px;
+	border-top: dashed 1px #000;
+}
+
+h1 {
+	font-size: 38pt;
+	font-weight: bold;
+	margin: 10px;
+}
+
+h2 {
+	text-align: center;
+}
+
+h3 {
+	text-align: center;
+	margin: 6px;
+}
+
+table {
+	border-collapse: collapse;
+	margin: auto;
+}
+
+table td {
+	padding: 2px;
+}
+
+button {
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+}
+
+select {
+	width: 100px;
+}
+
+input {
+	display: inline;
+	margin: 6px;
+	text-align: center;
+	max-width: 70px;
+	text-align: center;
+}
+
+.standard {
+	font-weight: bolder;
+}
+
+.rare {
+	font-weight: lighter;
+}
+
+.monitor {
+	border: 5px solid #aaa;
+	width: 0px;
+	height: 0px;
+	background-color: #333;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+
+.monitorBox {
+	text-align: left;
+	display: inline-block;
+	padding: 0px;
+}
+
+.monitorOptions {
+	margin-top: 6px;
+	padding-bottom: 6px;
+	border-bottom: dashed 1px #888;
+	width: 100%;
+}
+
+.stats {
+	margin-top: 6px;
+	padding-bottom: 6px;
+	border-bottom: dashed 1px #888;
+	width: 100%;
+}
+
+.stats td {
+	line-height: 1em;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	padding-left:  10px;
+	max-width: 80px;
+}
+
+.extraSpecs {
+	display: none;
+	margin-top: 6px;
+	padding-bottom: 6px;
+	width: 100%;
+}
+
+.extraSpecs td {
+	line-height: 1em;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	padding-left:  10px;
+}
+
+.extraSpecs input[type=text] {
+	max-width: 150px;
+}
+
+.toggle {
+	font-size: 1.6em;
+	color: darkblue;
+}
+
+.toggle:hover {
+	cursor: pointer;
+	color: darkred;
+}
+
+.search {
+	margin-top: 12px;
+	padding-top: 30px;
+	padding-bottom: 6px;
+	border-bottom: dashed 1px #888;
+	border-top: dashed 1px #888;
+	width: 100%;
+}
+
+.search td{
+	text-align: center;
+	padding-top: 20px;
+}
+
+.search a {
+	padding-top: 55px;
+	padding: 6px;
+	text-align: center;
+	background-color: #ccc;
+	border-radius: 12px;
+}
+
+.noscriptmsg {
+	color: darkred;
+	font-size: 2em;
+	font-family: sans-serif;
+	font-weight: bold;
+}
+
+.right {
+	text-align: right;
+}
+
+.left {
+	text-align: left;
+	padding-left: 10px;
+}
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 0;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+	transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+#addMonitor,
+#removeMonitor,
+#zoomIn,
+#zoomOut,
+#reset,
+#print {
+	font-size: 1em;
+	height: 2.3em;
+	padding: 8px;
+	margin-top: 3px;
+}
+
+#zoomIn:hover {
+	cursor: zoom-in;
+}
+
+#zoomOut:hover {
+	cursor: zoom-out;
+}
+
+#options {
+	margin-bottom: 20px;
+}
+
+#monitorArea {
+	margin-left: auto;
+	margin-right: auto;
+	display: inline-block;
+}
+
+#monitorBox3,
+#monitorBox4,
+#monitorBox5,
+#monitorBox6 {
+	display: none;
+}
+
+#monitor1,
+#monitor2 {
+	margin-left: auto;
+}
+
+#analysis {
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	min-width: 480px;
+}
+
+#analysis table {
+	margin: auto;
+}
+
+#analysis td {
+	font-size: 1.1em;
+}
+
+.monitor:hover,
+button:hover {
+	box-shadow: 5px 5px 20px #ccc;
+}
+
+/*easter egg */
+
+.monitor:active {
+	animation-name: spin;
+	animation-duration: 1000ms;
+	animation-iteration-count: 3;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(180deg);
+	}
+}
+
+@media print {
+	.stats {
+		margin-bottom: 0px;
+		line-height: 1.2;
+	}
+	#totals p {
+		margin-bottom: 0px;
+		margin-top: 10px;
+	}
+	h1,
+	h2 {
+		font-size: 1.3em;
+		margin-top: 0px;
+		padding: 0px;
+		line-height: 0.8;
+	}
+	h3,
+	footer,
+	.monitorOptions,
+	.extraSpecs,
+	.search,
+	input,
+	button {
+		display: none;
+		/*Gets rid of buttons and options for printing*/
+	}
+}
+
+@page {
+	size: A4 landscape;
+	/*forces printing in landscape, at least works for chrome*/
+}
