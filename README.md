@@ -1,11 +1,12 @@
 # multi-monitor_planning_tool
 A tool written in JavaScript that assists a user in planning their multi-monitor setup and search for potential monitors.
 
-view the old beta at: http://monitorplannerbeta.atwebpages.com/
-
 view the new official beta at: http://www.kevinvandy.com/multi-monitor_planning_tool.html
 
-# planned features
+view the old original beta at: http://monitorplannerbeta.atwebpages.com/
+
+
+# Planned Features
 SMALL GOALS:
 tooltips for necessary things, 
 reorganize options, maybe add more stat output, 
