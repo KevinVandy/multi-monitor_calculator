@@ -93,7 +93,7 @@ input {
 	border: 5px solid #aaa;
 	width: 0px;
 	height: 0px;
-	background-color: #333;
+	background-image: radial-gradient(#333, #111);
 	margin-bottom: 10px;
 	margin-top: 10px;
 }

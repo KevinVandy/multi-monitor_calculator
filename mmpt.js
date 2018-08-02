@@ -1,4 +1,5 @@
 'use strict';
+
 /*  By Kevin Van Cott
     theta values calculated from arctan(aspect ratio)
     32:9 theta = .2742 rad
@@ -10,11 +11,18 @@
     height = size * sin (theta)
     width = size * cos (theta)
     14px = 1" (default, changed by ZoomIn & ZoomOut) */
+
+
 /*global $, alert, document */
+
+
+// begin global variables
 var SCALE = 14; //scale
 var monitorCount = 2;
 // end global variables
-// functions to get data from the html
+
+
+// begin functions to get data from the html
 function getUnit(i) {
 	return parseFloat($("input[name=units" + i + "]:radio:checked").val());
 }
@@ -125,7 +133,9 @@ function getSearchEngine(i) {
 	return searchEngine; //TODO change all radio buttons for all monitors to prefered search engine on change of 1.
 }
 // end functions to get data from the html
-//functions to make simple calculations
+
+
+// begin functions to make simple calculations
 function calculateHeight(i) {
 	if (getOrientation(i) === "landscape") {
 		return parseFloat(getSize(i) * Math.sin(getTheta(i)));
@@ -145,27 +155,22 @@ function calculateWidth(i) {
 		return 0;
 	}
 }
-
-function getHeight(i) {
-	return calculateHeight(i);
-}
-
-function getWidth(i) {
-	return calculateWidth(i);
-}
-
 function calculateArea(i) {
-	return getHeight(i) * getWidth(i);
+	return calculateHeight(i) * calculateWidth(i);
 }
 
 function calculateNumPixels(i) {
 	return parseInt($("#verRes" + i).val()) * parseInt($("#horRes" + i).val());
 }
+// end functions to make simple calculations
+
+
+// begin draw monitor functions
 //used to draw the monitors on page load without doing the animation
 function drawMonitorPageLoad(i) {
 	var monitor = getMonitor(i);
-	var pixHeight = SCALE * getHeight(i) * getUnit(i);
-	var pixWidth = SCALE * getWidth(i) * getUnit(i);
+	var pixHeight = SCALE * calculateHeight(i) * getUnit(i);
+	var pixWidth = SCALE * calculateWidth(i) * getUnit(i);
 	monitor.animate({
 		width: pixWidth + "px",
 		height: pixHeight + "px"
@@ -173,17 +178,19 @@ function drawMonitorPageLoad(i) {
 }
 // Calculates height in pixels, updates size of monitor, applies it to the css to draw the monitor in its new size with animation
 function drawMonitor(i) {
-	if (getHeight(i) > 3 && getHeight(i) < 500 && getWidth(i) > 3 && getWidth(i) < 500 && getHorRes(i) > 200 && getHorRes(i) < 20000 && getVerRes(i) > 200 && getVerRes(i) < 20000) {
+	if (calculateHeight(i) > 3 && calculateHeight(i) < 500 && calculateWidth(i) > 3 && calculateWidth(i) < 500 && getHorRes(i) > 200 && getHorRes(i) < 20000 && getVerRes(i) > 200 && getVerRes(i) < 20000) {
 		var monitor = getMonitor(i);
-		var pixHeight = SCALE * getHeight(i) * getUnit(i);
-		var pixWidth = SCALE * getWidth(i) * getUnit(i);
+		var pixHeight = SCALE * calculateHeight(i) * getUnit(i);
+		var pixWidth = SCALE * calculateWidth(i) * getUnit(i);
 		monitor.finish().animate({
 			width: pixWidth + "px",
 			height: pixHeight + "px"
 		}, 400);
 	}
 }
-// end functions to make simple calculations
+// end draw monitor functions
+
+
 //functions for buttons
 function addMonitor() {
 	if (monitorCount >= 6) {
@@ -207,7 +214,9 @@ function zoom(x) {
 	updateOutput();
 }
 // end functions for buttons
-//functions for displaying values in the stats output section
+
+
+// begin functions for displaying values in the stats output section
 function displaySize(i) {
 	var size = getSize(i).toFixed(1);
 	if (getUnit(i) > 0.5) {
@@ -218,9 +227,9 @@ function displaySize(i) {
 	$("#size" + i).html(size);
 	return size;
 }
-// Shortens height to two decimals places, update the value in html
-function displayHeight(i) {
-	var height = getHeight(i).toFixed(1);
+
+function displayHeight(i) { // Shortens height to two decimals places, update the value in html
+	var height = calculateHeight(i).toFixed(1);
 	if (getUnit(i) > 0.5) {
 		height += "\"";
 	} else {
@@ -229,9 +238,9 @@ function displayHeight(i) {
 	$("#height" + i).html(height);
 	return height;
 }
-// Shortens width to one decimal place, updates the value in stats section
-function displayWidth(i) {
-	var width = getWidth(i).toFixed(1);
+
+function displayWidth(i) { // Shortens width to one decimal place, updates the value in stats section
+	var width = calculateWidth(i).toFixed(1);
 	if (getUnit(i) > 0.5) {
 		width += "\"";
 	} else {
@@ -240,8 +249,8 @@ function displayWidth(i) {
 	$("#width" + i).html(width);
 	return width;
 }
-//Display Monitor area aka screen real estate
-function displayArea(i) {
+
+function displayArea(i) { //Display Monitor area aka screen real estate
 	var area = calculateArea(i).toFixed(1);
 	if (getUnit(i) > 0.5) {
 		area += "\"<sup>2</sup>";
@@ -250,8 +259,8 @@ function displayArea(i) {
 	}
 	$("#area" + i).html(area);
 }
-//Display the Aspect Ratio in the stats section. The extra arctan calculations see if a custom resolution is close enough to a default aspect ratio
-function displayAspectRatio(i) {
+
+function displayAspectRatio(i) { //Detect and display the correct aspect ratio in the stats sections
 	var aspectRatio;
 	if (getTheta(i) === 0.2742 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.27) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.28)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.27) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.28))) {
 		aspectRatio = "32:9";
@@ -273,42 +282,44 @@ function displayAspectRatio(i) {
 	$("#ratio" + i).html(aspectRatio);
 	return aspectRatio;
 }
-//Display the Resolution again in the stats section, input from the custom resolution
-function displayResolution(i) {
+
+function displayResolution(i) { //Display the Resolution again in the stats section, input from the custom resolution
 	var resolution = parseInt($("#horRes" + i).val()) + "x" + parseInt($("#verRes" + i).val());
 	$("#res" + i).html(resolution);
-	return resolution; //used in google search function
+	return resolution; //used in search function
 }
-// Displays number of pixels of the monitor in the stats section
-function displayPixels(i) {
+
+function displayPixels(i) { // Displays number of pixels of the monitor in the stats section
 	$("#pixels" + i).html(calculateNumPixels(i).toLocaleString());
 }
-// Displays pixels per inch and updates values in the stats section
-function displayPPI(i) {
+
+function displayPPI(i) { // Displays pixels per inch and updates values in the stats section
 	if (getUnit(i) === 1) {
 		$("#ppu" + i).html("PPI: ");
 	} else {
 		$("#ppu" + i).html("PPCM");
 	}
-	$("#ppi" + i).html((getRes(i) / ((getHeight(i) + getWidth(i)) / 2)).toFixed(1)); //Just uses the average of the vertical and horizontal values
+	$("#ppi" + i).html((getRes(i) / ((calculateHeight(i) + calculateWidth(i)) / 2)).toFixed(1)); //Just uses the average of the vertical and horizontal values
 }
 // end functions for displaying values in the stats output section
-//Display culmitive number of pixels of all active monitors at the bottom of the page
-function displayTotalNumPixels() {
+
+
+// begin functions for monitor analysis
+function displayTotalNumPixels() { //Display culmitive number of pixels of all active monitors at the bottom of the page
 	var totalNumPixels = 0;
 	for (var i = 1; i <= monitorCount; i++) {
 		totalNumPixels += parseInt($("#horRes" + i).val()) * parseInt($("#verRes" + i).val());
 	}
 	$("#totalPixels").text(totalNumPixels.toLocaleString());
 }
-//Display an estimate of the total width that will be needed for desk space to accomadate all monitors assuming 1 inch bezzels
-function displayTotalWidth() {
+
+function displayTotalWidth() { //Display an estimate of the total width that will be needed for desk space to accomadate all monitors assuming 1 inch bezzels
 	var totalWidthSmallUnit = 0;
 	var totalWidthLargeUnit = 0;
 	var inchesRemainder = 0;
 	var unit = 0;
 	for (var i = 1; i <= monitorCount; i++) {
-		totalWidthSmallUnit += getWidth(i);
+		totalWidthSmallUnit += calculateWidth(i);
 		unit = getUnit(i);
 	}
 	totalWidthSmallUnit += monitorCount * 2; //adds bezzels that are 1 inch/cm wide on each side of the monitor
@@ -328,8 +339,8 @@ function displayTotalWidth() {
 	}
 	$("#totalWidth").text(totalWidthSmallUnit + " (" + totalWidthLargeUnit + ")");
 }
-//Display the total area (screen real estate) of all of the active monitors
-function displayTotalArea() {
+
+function displayTotalArea() { //Display the total area (screen real estate) of all of the active monitors
 	var totalAreaSmallUnit = 0;
 	var totalAreaLargeUnit = 0;
 	var unit = 0;
@@ -352,8 +363,11 @@ function displayTotalArea() {
 	}
 	$("#totalArea").html(totalAreaSmallUnit + " (" + totalAreaLargeUnit + ")");
 }
-//updates the values for the resolution based on the aspect ratio and resolution
-function updateResolution(i) {
+// end functions for monitor analysis
+
+
+
+function updateResolution(i) { //updates the values for the resolution based on the aspect ratio and resolution type
 	var x, y;
 	var ratio = getRatio(i);
 	var resolutionType = getResolutionType(i);
@@ -571,13 +585,15 @@ function updateResolution(i) {
 	}
 	return x + "x" + y;
 }
+// end updateResolution
 
-function checkIfCustom(i) {
+
+function checkIfCustom(i) { //Logic for auto checking custom resolution stuff
 	$("input[name=resolution" + i + "]").change(function () {
 		if ($("#customRes" + i).is(':checked')) {
 			$("#horRes" + i).prop('disabled', false);
 			$("#verRes" + i).prop('disabled', false);
-			$("#customRatio" + i).prop("checked", true); //check custom ratio automatically too
+			$("#customRatio" + i).prop("checked", true); //check custom ratio automatically if custom res is checked
 		} else {
 			$("#horRes" + i).prop('disabled', true);
 			$("#verRes" + i).prop('disabled', true);
@@ -587,37 +603,45 @@ function checkIfCustom(i) {
 		if ($("#customRatio" + i).is(':checked')) {
 			$("#horRes" + i).prop('disabled', false);
 			$("#verRes" + i).prop('disabled', false);
-			$("#customRes" + i).prop("checked", true); //check custom resolution automatically too
+			$("#customRes" + i).prop("checked", true); //check custom resolution automatically if custom ratio is checked
 		}
 	});
 }
 
-function search(i) {
-	var searchEngine = getSearchEngine(i);
+function search(i) { // updates the search url for each monitor
+	var searchEngine = getSearchEngine(i); //get the selected search engine
 	var searchURL;
+
+	//detect which search engine is selected
 	if (searchEngine === "google") searchURL = "https://www.google.com/search?q=";
 	if (searchEngine === "bing") searchURL = "https://www.bing.com/search?q=";
 	if (searchEngine === "duckduckgo") searchURL = "https://www.duckduckgo.com/?q=";
-	searchURL += "Shop+Monitor"
-	if (displayAspectRatio(i) != "Custom") searchURL += "+" + displayAspectRatio(i);
+
+	searchURL += "Shop+Monitor"; //starting keywords of search
+
+	if (displayAspectRatio(i) != "Custom") searchURL += "+" + displayAspectRatio(i); //add aspect ratio to search if it is known
 	searchURL += "+" + updateResolution(i); //add resolution to the search
 	searchURL += "+" + displaySize(i); //add size to the search
+
 	//add extra specs if present to the search
-	if(getHDR(i) != null) searchURL += "+" + getHDR(i);
-	if(getCurved(i) != null) searchURL += "+" + getCurved(i);
-	if(getTouch(i) != null) searchURL += "+" + getTouch(i);
-	if(getSync(i) != null) searchURL += "+" + getSync(i);
-	if(getDisplayType(i) != "any") searchURL += "+" + getDisplayType(i);
-	if(getRefreshRate(i) != "any") searchURL += "+" + getRefreshRate(i);
-	if(getResponseTime(i) != "any") searchURL += "+" + getResponseTime(i);
-	if(getBrand(i) != null) searchURL += "+" + getBrand(i);
-	//apply the search href
+	if(getHDR(i) != null) searchURL += "+" + getHDR(i); //adds HDR to search if checked
+	if(getCurved(i) != null) searchURL += "+" + getCurved(i); //adds curved to search if checked
+	if(getTouch(i) != null) searchURL += "+" + getTouch(i); //adds touch to search if checked
+	if(getSync(i) != null) searchURL += "+" + getSync(i); //adds value of sync radio button to search if one is selected
+	if(getDisplayType(i) != "any") searchURL += "+" + getDisplayType(i); //adds display type to search if 'any' is not selected
+	if(getRefreshRate(i) != "any") searchURL += "+" + getRefreshRate(i); //adds refresh rate to search if 'any' is not selected
+	if(getResponseTime(i) != "any") searchURL += "+" + getResponseTime(i); //adds response time to searc if 'any' is not selected
+	if(getBrand(i) != null) searchURL += "+" + getBrand(i); // adds any text from the brand textbox to the search
+
+	//apply the search to the href in the html links for 'Search for a Monitor Like This' buttons
 	$("#search" + i).attr("href", searchURL);
 	$("#search" + i).attr("target", "_blank");
 }
 
-function updateOutput() {
-	for (var i = 1; i <= monitorCount; i++) {
+
+// The most important function
+function updateOutput() { //
+	for (var i = 1; i <= monitorCount; i++) { //updates all output for only the monitors that are show
 		checkIfCustom(i);
 		updateResolution(i);
 		drawMonitor(i); //with animation
@@ -635,9 +659,9 @@ function updateOutput() {
 		displayTotalArea();
 	}
 }
-$(document).ready(function () {
-	//draws monitors for the first time. Disables custom resolution input boxes at first until the radio button is selected
-	//sets up everything for the first time
+$(document).ready(function () { //page load function
+
+	//sets up everything for the first time (for all 6 monitors, even if they are not shown), slightly different than updateOutput
 	for (var i = 1; i <= 6; i++) {
 		checkIfCustom(i);
 		updateResolution(i);
@@ -654,11 +678,13 @@ $(document).ready(function () {
 		displayTotalNumPixels();
 		displayTotalWidth();
 		displayTotalArea();
+
+		//disable custom resolution boxes so they can't be edited until radio button is selected
 		$("#horRes" + i).prop('disabled', true);
 		$("#verRes" + i).prop('disabled', true);
 	}
-	// setup click listeners and set the monitors to their initial sizes (set from values in the html)"
-	//functions for setting up events
+
+	// sets up events to detect changes of the input, and then trigger the updateOutput() function
 	$("input[type=radio]").change(function () {
 		updateOutput();
 	});
@@ -680,6 +706,13 @@ $(document).ready(function () {
 	$("select").change(function () {
 		updateOutput();
 	});
+	$("input[name=resolution" + i + "]").change(function () {
+		updateOutput();
+	});
+	//end set up events triggers
+
+
+	//begin events for buttons being clicked
 	$("#zoomIn").click(function () {
 		zoom("1");
 	});
@@ -692,9 +725,8 @@ $(document).ready(function () {
 	$("#removeMonitor").click(function () {
 		removeMonitor();
 	});
-	$("input[name=resolution" + i + "]").change(function () {
-		updateOutput();
-	});
+
+	//special click function to animate the 'More Specs' +/- button that reveals/hides extra options for search
 	$(".toggle").click(function () {
 		$(".extraSpecs").toggle(500);
 		if ($(".toggle").html() === "-") {
@@ -703,4 +735,7 @@ $(document).ready(function () {
 			$(".toggle").html("-");
 		}
 	});
+	//end events for buttons being clicked
+
+
 });
