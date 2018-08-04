@@ -1,0 +1,5 @@
+July 31, 2018
+	Initial Launch
+	
+August 4, 2018
+	Transitioned from index.html to index.php - makes future development a whole lot easier as it writes each monitor within a for loop

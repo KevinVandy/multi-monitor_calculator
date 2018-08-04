@@ -17,8 +17,9 @@
 
 
 // begin global variables
-var SCALE = 14; //scale
-var monitorCount = 2;
+var SCALE = 15; //scale
+var numActiveMonitors = 2;
+var maxNumMonitors = 6;
 // end global variables
 
 
@@ -193,18 +194,18 @@ function drawMonitor(i) {
 
 //functions for buttons
 function addMonitor() {
-	if (monitorCount >= 6) {
+	if (numActiveMonitors >= 6) {
 		alert("This tool has a limit of 6 monitors");
 	} else {
-		$("#monitorBox" + ++monitorCount).fadeIn(400);
-		$("#monitorBox" + monitorCount).css("display", "inline-block");
+		$("#monitorBox" + ++numActiveMonitors).fadeIn(400);
+		$("#monitorBox" + numActiveMonitors).css("display", "inline-block");
 		updateOutput();
 	}
 }
 
 function removeMonitor() {
-	if (monitorCount > 0) {
-		$("#monitorBox" + monitorCount--).fadeOut(200);
+	if (numActiveMonitors > 0) {
+		$("#monitorBox" + numActiveMonitors--).fadeOut(200);
 		updateOutput();
 	}
 }
@@ -307,7 +308,7 @@ function displayPPI(i) { // Displays pixels per inch and updates values in the s
 // begin functions for monitor analysis
 function displayTotalNumPixels() { //Display culmitive number of pixels of all active monitors at the bottom of the page
 	var totalNumPixels = 0;
-	for (var i = 1; i <= monitorCount; i++) {
+	for (var i = 1; i <= numActiveMonitors; i++) {
 		totalNumPixels += parseInt($("#horRes" + i).val()) * parseInt($("#verRes" + i).val());
 	}
 	$("#totalPixels").text(totalNumPixels.toLocaleString());
@@ -318,11 +319,11 @@ function displayTotalWidth() { //Display an estimate of the total width that wil
 	var totalWidthLargeUnit = 0;
 	var inchesRemainder = 0;
 	var unit = 0;
-	for (var i = 1; i <= monitorCount; i++) {
+	for (var i = 1; i <= numActiveMonitors; i++) {
 		totalWidthSmallUnit += calculateWidth(i);
 		unit = getUnit(i);
 	}
-	totalWidthSmallUnit += monitorCount * 2; //adds bezzels that are 1 inch/cm wide on each side of the monitor
+	totalWidthSmallUnit += numActiveMonitors * 2; //adds bezzels that are 1 inch/cm wide on each side of the monitor
 	if (unit === 1) {
 		totalWidthLargeUnit = totalWidthSmallUnit / 12;
 		inchesRemainder = totalWidthSmallUnit % 12;
@@ -344,7 +345,7 @@ function displayTotalArea() { //Display the total area (screen real estate) of a
 	var totalAreaSmallUnit = 0;
 	var totalAreaLargeUnit = 0;
 	var unit = 0;
-	for (var i = 0; i <= monitorCount; i++) {
+	for (var i = 0; i <= numActiveMonitors; i++) {
 		totalAreaSmallUnit += calculateArea(i);
 		unit = getUnit(i);
 	}
@@ -641,7 +642,7 @@ function search(i) { // updates the search url for each monitor
 
 // The most important function
 function updateOutput() { //
-	for (var i = 1; i <= monitorCount; i++) { //updates all output for only the monitors that are show
+	for (var i = 1; i <= numActiveMonitors; i++) { //updates all output for only the monitors that are show
 		checkIfCustom(i);
 		updateResolution(i);
 		drawMonitor(i); //with animation
@@ -661,8 +662,8 @@ function updateOutput() { //
 }
 $(document).ready(function () { //page load function
 
-	//sets up everything for the first time (for all 6 monitors, even if they are not shown), slightly different than updateOutput
-	for (var i = 1; i <= 6; i++) {
+	//sets up everything for the first time (for all monitors, even if they are not shown), slightly different than updateOutput
+	for (var i = 1; i <= maxNumMonitors; i++) {
 		checkIfCustom(i);
 		updateResolution(i);
 		drawMonitorPageLoad(i); //no animation on page load. This is why its not just a call to updateOutput()
