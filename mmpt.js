@@ -17,9 +17,9 @@
 
 
 // begin global variables
-var SCALE = 15; //scale
+var SCALE = 15;
 var numActiveMonitors = 2;
-var maxNumMonitors = 6;
+var maxNumMonitors = 9;
 // end global variables
 
 
@@ -194,8 +194,8 @@ function drawMonitor(i) {
 
 //functions for buttons
 function addMonitor() {
-	if (numActiveMonitors >= 6) {
-		alert("This tool has a limit of 6 monitors");
+	if (numActiveMonitors >= maxNumMonitors) {
+		alert("This tool has a limit of " + maxNumMonitors + " monitors");
 	} else {
 		$("#monitorBox" + ++numActiveMonitors).fadeIn(400);
 		$("#monitorBox" + numActiveMonitors).css("display", "inline-block");

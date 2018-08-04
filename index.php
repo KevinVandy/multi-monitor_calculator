@@ -6,6 +6,11 @@ Created by Kevin Van Cott
 4:3 theta = .6435 rad, 5:4 theta = .6747
 where theta is the angle the hypotenuse makes with the bottom of the monitor
 -->
+
+<?php
+	$maxNumMonitors = 9;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,11 +53,11 @@ where theta is the angle the hypotenuse makes with the bottom of the monitor
 			<button id="print" onClick="window.print();">Print</button>
 		</div>
 		<div id="monitorArea">
-		<?php for($i = 1; $i <= 6; $i++){ ?>
+		<!-- Start of For Loop to make all monitors divs -->
+		<?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?>
 			<!--Monitor <?php echo $i ?>-->
-			<div id="monitorBox<?php echo $i ?>" class="monitorBox">
-				<div id="monitor<?php echo $i ?>" class="monitor"></div>
-				<!-- Input Size & Toggle for switching from in to cm -->
+			<div class="monitorBox" id="monitorBox<?php echo $i ?>">
+				<div class="monitor" id="monitor<?php echo $i ?>"></div>
 				<div class="monitorOptions">
 					<h3>Size</h3>
 					<table>
@@ -241,7 +246,7 @@ where theta is the angle the hypotenuse makes with the bottom of the monitor
 					</tr>
 				</table>
 			</div>
-		<?php } ?>
+		<?php } ?> <!-- End of For Loop to make all monitors divs -->
 		</div>
 		<div id="analysis">
 			<h3>Set-up Analysis</h3>

@@ -15,11 +15,17 @@ a:hover {
 }
 
 a:active {
-
+	text-decoration: none;
+	color: darkred;
+	text-align: center;
+	font-style: normal;
 }
 
 a:visited {
-
+	text-decoration: none;
+	color: darkblue;
+	text-align: center;
+	font-style: normal;
 }
 
 body {
@@ -272,7 +278,10 @@ input {
 #monitorBox3,
 #monitorBox4,
 #monitorBox5,
-#monitorBox6 {
+#monitorBox6,
+#monitorBox7,
+#monitorBox8,
+#monitorBox9 {
 	display: none;
 }
 
