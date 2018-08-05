@@ -134,6 +134,10 @@ input {
 	max-width: 80px;
 }
 
+.stats th {
+	padding-bottom: 10px;
+}
+
 .extraSpecs {
 	display: none;
 	margin-top: 6px;
