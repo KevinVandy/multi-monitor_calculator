@@ -34,14 +34,14 @@ where theta is the angle the hypotenuse makes with the bottom of the monitor
 			<h2>A tool for planning your multi-monitor setup.</h2>
 		</header>
 		<noscript>
-    	<style type="text/css">
-        	main {display:none;} /* Stops the main part of page that runs on javascript from showing if javascript is disabled */
-    	</style>
-    	<div class="noscriptmsg">
-    		This tool runs on javascript.<br>Please enable scripting in your browser settings<br>or consider trying another web browser.<br><br>
-    		Need to see the source code? <a href="https://github.com/KevinVandy/multi-monitor_planning_tool.git">View it on Github</a>.
-    	</div>
-	</noscript>
+			<style type="text/css">
+				main {display:none;} /* Stops the main part of page that runs on javascript from showing if javascript is disabled */
+			</style>
+			<div class="noscriptmsg">
+				This tool runs on javascript.<br>Please enable scripting in your browser settings<br>or consider trying another web browser.<br><br>
+				Need to see the source code? <a href="https://github.com/KevinVandy/multi-monitor_planning_tool.git">View it on Github</a>.
+			</div>
+		</noscript>
 		<main>
 			<div id="options">
 				<button id="addMonitor">Add Monitor</button>
@@ -144,7 +144,7 @@ where theta is the angle the hypotenuse makes with the bottom of the monitor
 								<td><input type="checkbox" name="touch<?php echo $i ?>" value="Touch">Touch</td>
 							</tr>
 							<tr>
-								<td><input type="radio" name="sync<?php echo $i ?>" value="any">Any Sync</td>
+								<td><input type="radio" name="sync<?php echo $i ?>" value="any">No Sync</td>
 								<td><input type="radio" name="sync<?php echo $i ?>" value="G-Sync">G-Sync</td>
 								<td><input type="radio" name="sync<?php echo $i ?>" value="FreeSync">FreeSync</td>
 
