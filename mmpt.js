@@ -628,7 +628,7 @@ function search(i) { // updates the search url for each monitor
 	if(getHDR(i) != null) searchURL += "+" + getHDR(i); //adds HDR to search if checked
 	if(getCurved(i) != null) searchURL += "+" + getCurved(i); //adds curved to search if checked
 	if(getTouch(i) != null) searchURL += "+" + getTouch(i); //adds touch to search if checked
-	if(getSync(i) != null || getSync(i) != "any") searchURL += "+" + getSync(i); //adds value of sync radio button to search if one is selected
+	if(getSync(i) != null && getSync(i) != "any") searchURL += "+" + getSync(i); //adds value of sync radio button to search if one is selected
 	if(getDisplayType(i) != "any") searchURL += "+" + getDisplayType(i); //adds display type to search if 'any' is not selected
 	if(getRefreshRate(i) != "any") searchURL += "+" + getRefreshRate(i); //adds refresh rate to search if 'any' is not selected
 	if(getResponseTime(i) != "any") searchURL += "+" + getResponseTime(i); //adds response time to searc if 'any' is not selected
