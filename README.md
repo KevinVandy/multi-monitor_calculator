@@ -3,7 +3,7 @@ A tool written in JavaScript that assists a user in planning their multi-monitor
 
 view the new official beta at: http://www.kevinvandy.com/multi-monitor_planning_tool (recommended)
 
-view the old original alpha at: http://monitorplannerbeta.atwebpages.com/ (for legacy and nostalgia)
+view the old original alpha at: http://monitorplannerbeta.atwebpages.com/ (for legacy)
 
 
 # Small Planned Features:
