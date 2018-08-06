@@ -10,9 +10,11 @@ view the old original alpha at: http://monitorplannerbeta.atwebpages.com/ (for l
 
 tooltips for necessary things,
 
-reorganize options, maybe add more stat outputs, 
+reorganize options, add more stat outputs, 
 
-add more set-up analysis stuff, 
+make bezzel width an option and reflect it in the monitor border width,
+
+add more set-up analysis stats, 
 
 fix inconsistencies with "detect from custom resolution" and "custom" radio buttons, 
 
@@ -20,19 +22,17 @@ change some of the radio button options to select combo boxes instead (still to 
 
 depreciate the need for retrieving theta values (aspect ratio) from the html and just rely on the calculations from the resolution input (alomst there in the js)
 
-make the javascript look more pretty. (sort and better document, and moar whitespace)
-
 
 
 # BIG GOALS:
 
-rewrite the html files in PHP, 
-
 prebuilt setups from dropdown menu for inspiration, 
 
-somehow rebuild it to support stacking monitors vertically to see how they fit (big maybe, probably not by OP),
+Make the Monitors Draggable so that it will be possible to stack them vertically
 
-have better support for mixing english and metric units
+have better support for mixing english and metric units,
+
+optimize better for mobile
 
 
 # Please comment if you have any issues or feature requests in the issues tab.
