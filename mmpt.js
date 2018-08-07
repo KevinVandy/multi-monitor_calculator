@@ -217,6 +217,13 @@ function zoom(x) {
 // end functions for buttons
 
 
+
+// begin functions for dragging monitors
+
+// end functions for dragging monitors
+
+
+
 // begin functions for displaying values in the stats output section
 function displaySize(i) {
 	var size = getSize(i).toFixed(1);
@@ -683,6 +690,7 @@ $(document).ready(function () { //page load function
 		//disable custom resolution boxes so they can't be edited until radio button is selected
 		$("#horRes" + i).prop('disabled', true);
 		$("#verRes" + i).prop('disabled', true);
+
 	}
 
 	// sets up events to detect changes of the input, and then trigger the updateOutput() function
@@ -737,6 +745,5 @@ $(document).ready(function () { //page load function
 		}
 	});
 	//end events for buttons being clicked
-
 
 });
