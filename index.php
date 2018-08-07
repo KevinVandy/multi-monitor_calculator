@@ -35,7 +35,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../normalize.css">
 		<link rel="stylesheet" type="text/css" href="mmpt.css">
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>-->
+		<script src=jquery-3.3.1.js></script>
 		<script src="mmpt.js"></script>
 		<link rel="shortcut icon" href="../favicon.ico">
 	</head>
@@ -104,19 +105,20 @@
 						<table>
 							<tr>
 								<th>Common: </th>
-								<td><input type="radio" name="aspectRatio<?php echo $i ?>" id="standardRatio<?php echo $i ?>" <?php if(!$customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="aspectRatioCommonCustom<?php echo $i ?>" id="standardRatio<?php echo $i ?>" <?php if(!$customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
 									<select name="aspectRatioType<?php echo $i ?>">
+										<option value="custom" <?php if($aspectRatioType[$i] == "custom") echo htmlspecialchars("selected") ?>>Custom</option>
 										<optgroup label="Tall">
 											<option value="5:4" <?php if($aspectRatioType[$i] == "5:4") echo htmlspecialchars("selected") ?>>5:4</option>
 											<option value="4:3" <?php if($aspectRatioType[$i] == "4:3") echo htmlspecialchars("selected") ?>>4:3</option>
 										</optgroup>
 										<optgroup label="Wide">
 											<option value="16:9" <?php if($aspectRatioType[$i] == "16:9") echo htmlspecialchars("selected") ?>>16:9</option>
-											<option value="16:10" <?php if($aspectRatioType[$i] == "16:10") echo htmlspecialchars("selected") ?>>16:10 (8:5)</option>
+											<option value="16:10" <?php if($aspectRatioType[$i] == "16:10") echo htmlspecialchars("selected") ?>>16:10</option>
 										</optgroup>
 										<optgroup label="Ultrawide">
-											<option value="21:9" <?php if($aspectRatioType[$i] == "21:9") echo htmlspecialchars("selected") ?>>21:9 (64:27)</option>
+											<option value="21:9" <?php if($aspectRatioType[$i] == "21:9") echo htmlspecialchars("selected") ?>>21:9</option>
 											<option value="32:9" <?php if($aspectRatioType[$i] == "32:9") echo htmlspecialchars("selected") ?>>32:9</option>
 										</optgroup>
 									</select>
@@ -124,7 +126,7 @@
 							</tr>
 							<tr>
 								<th>Custom:</th>
-								<td><input type="radio" name="aspectRatio<?php echo $i ?>" id="customRatio<?php echo $i ?>" value="0" <?php if($customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="aspectRatioCommonCustom<?php echo $i ?>" id="customRatio<?php echo $i ?>" value="custom" <?php if($customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>Detect Ratio</td>
 							</tr>
 						</table>
@@ -135,7 +137,7 @@
 						<table>
 							<tr>
 								<th>Common: </th>
-								<td><input type="radio" name="resolution<?php echo $i ?>" id="customRes<?php echo $i ?>" value="standard" <?php if(!$customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="customRes<?php echo $i ?>" value="standard" <?php if(!$customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
 									<select name="resolutionType<?php echo $i ?>">
 										<option value="VGA" <?php if($resolutionType[$i] == "VGA") echo htmlspecialchars("selected") ?>>SVGA ~600i</option>
@@ -153,9 +155,9 @@
 							</tr>
 							<tr>
 								<th>Custom: </th>
-								<td><input type="radio" name="resolution<?php echo $i ?>" id="customRes<?php echo $i ?>" value="Custom" <?php if($customResolution[$i]) echo htmlspecialchars("checked") ?>></td>
+								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="customRes<?php echo $i ?>" value="custom" <?php if($customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
-									<input type="number" id="horRes<?php echo $i ?>" value="1920">X<input type="number" id="verRes<?php echo $i ?>" value="1080">
+									<input type="number" id="horRes<?php echo $i ?>" value="1920">x<input type="number" id="verRes<?php echo $i ?>" value="1080">
 								</td>
 							</tr>
 						</table>
@@ -166,8 +168,8 @@
 					<div class="extraSpecs">
 						<table>
 							<tr>
-								<td><input type="checkbox" name="HDR<?php echo $i ?>" value="HDR" <?php if($hdr[$i]) echo htmlspecialchars("checked") ?>>HDR</td>
-								<td><input type="checkbox" name="curved<?php echo $i ?>" value="Curved" <?php if($curved[$i]) echo htmlspecialchars("checked") ?>>Curved</td>
+								<td><input type="checkbox" name="hdr<?php echo $i ?>" value="HDR" <?php if($hdr[$i]) echo htmlspecialchars( "checked") ?>>HDR</td>
+								<td><input type="checkbox" name="curved<?php echo $i ?>" value="Curved" <?php if($curved[$i]) echo htmlspecialchars( "checked") ?>>Curved</td>
 								<td><input type="checkbox" name="touch<?php echo $i ?>" value="Touch" <?php if($touch[$i]) echo htmlspecialchars( "checked") ?>>Touch</td>
 							</tr>
 						</table>
@@ -213,11 +215,11 @@
 								</td>
 							</tr>
 							<tr>
-								<td>Response Time: </td>
+								<td class="right">Response Time: </td>
 								<td><input type="number" name="responseTime<?php echo $i ?>" value="<?php echo $responseTime[$i] ?>">ms</td>
 							</tr>
 							<tr>
-								<td>Brand: </td>
+								<td class="right">Brand: </td>
 								<td><input type="text" name="brand<?php echo $i ?>"></td>
 							</tr>
 						</table>

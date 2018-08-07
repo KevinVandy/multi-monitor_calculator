@@ -10,7 +10,12 @@
     5:4 theta = .6747 rad
     height = size * sin (theta)
     width = size * cos (theta)
-    14px = 1" (default, changed by ZoomIn & ZoomOut) */
+    15px = 1" (default, changed by ZoomIn & ZoomOut)
+	when you see:
+		function functionName(i){}
+	'i' stands for the monitor that the calculations are being done on
+	so that it only does the function on 1 monitor
+*/
 
 
 /*global $, alert, document */
@@ -52,16 +57,16 @@ function getRes(i) {
 	return (parseInt($("#verRes" + i).val()) + parseInt($("#horRes" + i).val())) / 2;
 }
 
-function getRatio(i) {
-	return parseFloat($("input[name=aspectRatio" + i + "]:option:selected").val());
+function getAspectRatio(i) {
+	return $("select[name=aspectRatioType" + i + "] option:selected").val();
 }
 
 function getResolutionType(i) {
-	return $("input[name=resolution" + i + "]:option:selected").val();
+	return $("select[name=resolutionType" + i + "] option:selected").val();
 }
 
 function getHDR(i) {
-	var HDR = $("input[name=HDR" + i + "]:checkbox:checked").val();
+	var HDR = $("input[name=hdr" + i + "]:checkbox:checked").val();
 	if (HDR === undefined || HDR === null || HDR === "") {
 		return null;
 	} else {
@@ -87,17 +92,12 @@ function getTouch(i) {
 	}
 }
 
-function getSync(i) {
-	var sync = $("input[name=sync" + i + "]:radio:checked").val();
-	if (sync === undefined || sync === null || sync === "") {
-		return null;
-	} else {
-		return sync;
-	}
-}
-
 function getDisplayType(i) {
 	return $("select[name=displayType" + i + "] option:selected").val();
+}
+
+function getSync(i) {
+	return $("select[name=syncType" + i + "] option:selected").val();
 }
 
 function getRefreshRate(i) {
@@ -105,7 +105,7 @@ function getRefreshRate(i) {
 }
 
 function getResponseTime(i) {
-	return $("select[name=responseTime" + i + "] option:selected").val();
+	return $("input[name=responseTime" + i + "]").val();
 }
 
 function getBrand(i) {
@@ -117,9 +117,8 @@ function getBrand(i) {
 	}
 }
 
-function getSearchEngine(i) {
-	var searchEngine = $("input[name=searchEngine" + i + "]:radio:checked").val();
-	return searchEngine; //TODO change all radio buttons for all monitors to prefered search engine on change of 1.
+function getSearchEngine() {
+	return $("input[name=searchEngine]:radio:checked").val();
 }
 // end functions to get data from the html
 
@@ -147,6 +146,24 @@ function calculateWidth(i) {
 
 function calculateTheta(i) {
 	return Math.atan(getVerRes(i) / getHorRes(i));
+}
+
+function calculateAspectRatio(i) {
+	var aspectRatio = getAspectRatio(i);
+	if (aspectRatio == "custom") {
+		var theta = calculateTheta(i);
+		if (theta > 0.784 && theta < 0.787) aspectRatio = "1:1";
+		else if (theta > 0.673 && theta < 0.676) aspectRatio = "5:4";
+		else if (theta > 0.642 && theta < 0.645) aspectRatio = "4:3";
+		else if (theta > 0.557 && theta < 0.560) aspectRatio = "16:10";
+		else if (theta > 0.587 && theta < 0.590) aspectRatio = "3:2";
+		else if (theta > 0.511 && theta < 0.514) aspectRatio = "16:9";
+		else if (theta > 0.462 && theta < 0.465) aspectRatio = "2:1";
+		else if (theta > 0.398 && theta < 0.406) aspectRatio = "21:9";
+		else if (theta > 0.273 && theta < 0.276) aspectRatio = "32:9";
+		else aspectRatio = "Unknown";
+	}
+	return aspectRatio;
 }
 
 function calculateArea(i) {
@@ -225,7 +242,7 @@ function displaySize(i) {
 	} else {
 		size += "cm";
 	}
-	$("#size" + i).html(size);
+	$("#sizeStat" + i).html(size);
 	return size;
 }
 
@@ -236,7 +253,7 @@ function displayHeight(i) { // Shortens height to two decimals places, update th
 	} else {
 		height += "cm";
 	}
-	$("#height" + i).html(height);
+	$("#heightStat" + i).html(height);
 	return height;
 }
 
@@ -247,7 +264,7 @@ function displayWidth(i) { // Shortens width to one decimal place, updates the v
 	} else {
 		width += "cm";
 	}
-	$("#width" + i).html(width);
+	$("#widthStat" + i).html(width);
 	return width;
 }
 
@@ -258,49 +275,32 @@ function displayArea(i) { //Display Monitor area aka screen real estate
 	} else {
 		area += "cm<sup>2</sup>";
 	}
-	$("#area" + i).html(area);
+	$("#areaStat" + i).html(area);
 }
 
 function displayAspectRatio(i) { //Detect and display the correct aspect ratio in the stats sections
-	var aspectRatio;
-	if (calculateTheta(i) === 0.2742 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.27) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.28)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.27) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.28))) {
-		aspectRatio = "32:9";
-	} else if (calculateTheta(i) === 0.3992 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.39) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.4)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.38) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.42))) {
-		aspectRatio = "21:9";
-	} else if (calculateTheta(i) === 0.5123 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.51) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.52)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.51) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.52))) {
-		aspectRatio = "16:9";
-	} else if (calculateTheta(i) === 0.5586 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.55) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.56)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.55) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.56))) {
-		aspectRatio = "16:10";
-	} else if (calculateTheta(i) === 0.6435 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.64) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.65)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.64) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.65))) {
-		aspectRatio = "4:3";
-	} else if (calculateTheta(i) === 0.6747 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.67) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.68)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.67) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.68))) {
-		aspectRatio = "5:4";
-	} else if (calculateTheta(i) === 0 || getResolutionType(i) === "Custom") {
-		aspectRatio = "Custom"; //This only occurs if the user has entered their own resolution that does not match a default aspect ratio
-	} else {
-		aspectRatio = "Unknown"; //This only occurs if the user has entered their own resolution that does not match a default aspect ratio
-	}
-	$("#ratio" + i).html(aspectRatio);
+	var aspectRatio = calculateAspectRatio(i);
+	$("#aspectRatioStat" + i).html(aspectRatio);
 	return aspectRatio;
 }
 
 function displayResolution(i) { //Display the Resolution again in the stats section, input from the custom resolution
 	var resolution = parseInt($("#horRes" + i).val()) + "x" + parseInt($("#verRes" + i).val());
-	$("#res" + i).html(resolution);
+	$("#resolutionStat" + i).html(resolution);
 	return resolution; //used in search function
 }
 
 function displayPixels(i) { // Displays number of pixels of the monitor in the stats section
-	$("#pixels" + i).html(calculateNumPixels(i).toLocaleString());
+	$("#pixelsStat" + i).html(calculateNumPixels(i).toLocaleString());
 }
 
 function displayPPI(i) { // Displays pixels per inch and updates values in the stats section
 	if (getUnit(i) === 1) {
-		$("#ppu" + i).html("PPI: ");
+		$("#ppuStat" + i).html("PPI: ");
 	} else {
-		$("#ppu" + i).html("PPCM");
+		$("#ppuStat" + i).html("PPCM");
 	}
-	$("#ppi" + i).html((getRes(i) / ((calculateHeight(i) + calculateWidth(i)) / 2)).toFixed(1)); //Just uses the average of the vertical and horizontal values
+	$("#ppiStat" + i).html((getRes(i) / ((calculateHeight(i) + calculateWidth(i)) / 2)).toFixed(1)); //Just uses the average of the vertical and horizontal values
 }
 // end functions for displaying values in the stats output section
 
@@ -370,10 +370,10 @@ function displayTotalArea() { //Display the total area (screen real estate) of a
 
 function updateResolution(i) { //updates the values for the resolution based on the aspect ratio and resolution type
 	var x, y;
-	var ratio = getRatio(i);
+	var ratio = calculateAspectRatio(i);
 	var resolutionType = getResolutionType(i);
 	//if a 32:9 aspect ratio
-	if (ratio === .2742) {
+	if (ratio === "32:9") {
 		if (resolutionType === "VGA") {
 			x = 2160;
 			y = 600;
@@ -407,7 +407,7 @@ function updateResolution(i) { //updates the values for the resolution based on 
 		}
 	}
 	//if a 21:9 aspect ratio
-	else if (ratio === .3992) {
+	else if (ratio === "21:9") {
 		if (resolutionType === "VGA") {
 			x = 1420;
 			y = 600;
@@ -441,7 +441,7 @@ function updateResolution(i) { //updates the values for the resolution based on 
 		}
 	}
 	//if a 16:9 aspect ratio
-	else if (ratio === .5123) {
+	else if (ratio === "16:9") {
 		if (resolutionType === "VGA") {
 			x = 1024;
 			y = 600;
@@ -475,7 +475,7 @@ function updateResolution(i) { //updates the values for the resolution based on 
 		}
 	}
 	//if a 16:10 aspect ratio
-	else if (ratio === .5586) {
+	else if (ratio === "16:10") {
 		if (resolutionType === "VGA") {
 			x = 1024;
 			y = 640;
@@ -509,7 +509,7 @@ function updateResolution(i) { //updates the values for the resolution based on 
 		}
 	}
 	//if a 4:3 aspect ratio
-	else if (ratio === .6435) {
+	else if (ratio === "4:3") {
 		if (resolutionType === "VGA") {
 			x = 800;
 			y = 600;
@@ -543,7 +543,7 @@ function updateResolution(i) { //updates the values for the resolution based on 
 		}
 	}
 	//if a 5:4 aspect ratio
-	else if (ratio === .6747) {
+	else if (ratio === "5:4") {
 		if (resolutionType === "VGA") {
 			x = 750;
 			y = 600;
@@ -590,7 +590,7 @@ function updateResolution(i) { //updates the values for the resolution based on 
 
 
 function checkIfCustom(i) { //Logic for auto checking custom resolution stuff
-	$("input[name=resolution" + i + "]").change(function () {
+	$("input[name=resolutionCommonCustom" + i + "]").change(function () {
 		if ($("#customRes" + i).is(':checked')) {
 			$("#horRes" + i).prop('disabled', false);
 			$("#verRes" + i).prop('disabled', false);
@@ -600,7 +600,7 @@ function checkIfCustom(i) { //Logic for auto checking custom resolution stuff
 			$("#verRes" + i).prop('disabled', true);
 		}
 	});
-	$("input[name=aspect" + i + "]").change(function () {
+	$("input[name=aspectRatioCommonCustom" + i + "]").change(function () {
 		if ($("#customRatio" + i).is(':checked')) {
 			$("#horRes" + i).prop('disabled', false);
 			$("#verRes" + i).prop('disabled', false);
@@ -610,7 +610,7 @@ function checkIfCustom(i) { //Logic for auto checking custom resolution stuff
 }
 
 function search(i) { // updates the search url for each monitor
-	var searchEngine = getSearchEngine(i); //get the selected search engine
+	var searchEngine = getSearchEngine(); //get the selected search engine
 	var searchURL;
 
 	//detect which search engine is selected
@@ -625,14 +625,14 @@ function search(i) { // updates the search url for each monitor
 	searchURL += "+" + displaySize(i); //add size to the search
 
 	//add extra specs if present to the search
-	if(getHDR(i) != null) searchURL += "+" + getHDR(i); //adds HDR to search if checked
-	if(getCurved(i) != null) searchURL += "+" + getCurved(i); //adds curved to search if checked
-	if(getTouch(i) != null) searchURL += "+" + getTouch(i); //adds touch to search if checked
-	if(getSync(i) != null && getSync(i) != "any") searchURL += "+" + getSync(i); //adds value of sync radio button to search if one is selected
-	if(getDisplayType(i) != "any") searchURL += "+" + getDisplayType(i); //adds display type to search if 'any' is not selected
-	if(getRefreshRate(i) != "any") searchURL += "+" + getRefreshRate(i); //adds refresh rate to search if 'any' is not selected
-	if(getResponseTime(i) != "any") searchURL += "+" + getResponseTime(i); //adds response time to searc if 'any' is not selected
-	if(getBrand(i) != null) searchURL += "+" + getBrand(i); // adds any text from the brand textbox to the search
+	if (getHDR(i) != null) searchURL += "+" + getHDR(i); //adds HDR to search if checked
+	if (getCurved(i) != null) searchURL += "+" + getCurved(i); //adds curved to search if checked
+	if (getTouch(i) != null) searchURL += "+" + getTouch(i); //adds touch to search if checked
+	if (getSync(i) != null && getSync(i) != "any") searchURL += "+" + getSync(i); //adds value of sync radio button to search if one is selected
+	if (getDisplayType(i) != "any") searchURL += "+" + getDisplayType(i); //adds display type to search if 'any' is not selected
+	if (getRefreshRate(i) != "any") searchURL += "+" + getRefreshRate(i); //adds refresh rate to search if 'any' is not selected
+	if (getResponseTime(i) != "any") searchURL += "+" + getResponseTime(i); //adds response time to searc if 'any' is not selected
+	if (getBrand(i) != null) searchURL += "+" + getBrand(i); // adds any text from the brand textbox to the search
 
 	//apply the search to the href in the html links for 'Search for a Monitor Like This' buttons
 	$("#search" + i).attr("href", searchURL);
