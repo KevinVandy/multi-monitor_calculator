@@ -68,6 +68,7 @@ table {
 
 table td {
 	padding: 2px;
+	border: 1px solid black;
 }
 
 button {
@@ -76,12 +77,12 @@ button {
 }
 
 select {
-	width: 100px;
+	min-width: 100px;
 }
 
 input {
 	display: inline;
-	margin: 6px;
+	margin: 1px;
 	text-align: center;
 	max-width: 70px;
 	text-align: center;

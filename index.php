@@ -1,14 +1,18 @@
 <!--
-Created by Kevin Van Cott
-    Notes:
-32:9 theta = .2742, 21:9 theta = .3992,
-16:9 theta = .5123 rad, 16:10 theta = .5586 rad,
-4:3 theta = .6435 rad, 5:4 theta = .6747
-where theta is the angle the hypotenuse makes with the bottom of the monitor
+	Created by Kevin Van Cott
 -->
 
 <?php
 	$maxNumMonitors = 9;
+
+	//default values, they get set for all 9 monitors in a for loop (arrays)
+	//NOTICE!!! THESE ARRAYS START AT 1 INSTEAD OF 0 TO AVOID CONFUSION BELOW WHEN REFERENCED... OR TO MAKE MORE CONFUSION... now no [$i-1] is needed, just [$i]
+	if(!isset($unitType)) for($i = 1; $i <= $maxNumMonitors; $i++) $unitType[$i] = "in";
+	if(!isset($orientation)) for($i = 1; $i <= $maxNumMonitors; $i++) $orientation[$i] = "landscape";
+	if(!isset($customAspectRatio)) for($i = 1; $i <= $maxNumMonitors; $i++) $customAspectRatio[$i] = FALSE;
+	if(!isset($aspectRatioType)) for($i = 1; $i <= $maxNumMonitors; $i++) $aspectRatioType[$i] = "16:9";
+	if(!isset($customResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $customResolution[$i] = FALSE;
+	if(!isset($resolutionType)) for($i = 1; $i <= $maxNumMonitors; $i++) $resolutionType[$i] = "FHD";
 ?>
 
 	<!DOCTYPE html>
@@ -54,8 +58,7 @@ where theta is the angle the hypotenuse makes with the bottom of the monitor
 			</div>
 			<div id="monitorArea">
 				<!-- Start of For Loop to make all monitors divs -->
-				<?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?>
-				<!--Monitor <?php echo $i ?>-->
+				<?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?><!--Monitor <?php echo $i ?>-->
 				<div class="monitorBox" id="monitorBox<?php echo $i ?>">
 					<div class="monitor" id="monitor<?php echo $i ?>"></div>
 					<div class="monitorOptions">
@@ -63,9 +66,9 @@ where theta is the angle the hypotenuse makes with the bottom of the monitor
 						<table>
 							<tr>
 								<td>
-									Diagonal: <input type="number" id="sizeBox<?php echo $i ?>" value="24">
-									<input type="radio" name="units<?php echo $i ?>" value="1.0" checked>in
-									<input type="radio" name="units<?php echo $i ?>" value=".3937">cm
+									Diagonal:<input type="number" id="sizeBox<?php echo $i ?>" value="24">
+									<input type="radio" name="units<?php echo $i ?>" value="1.0" <?php if($unitType[$i] == "in") echo htmlspecialchars("checked") ?>>in
+									<input type="radio" name="units<?php echo $i ?>" value=".3937" <?php if($unitType[$i] == "cm") echo htmlspecialchars("checked") ?>>cm
 								</td>
 							</tr>
 						</table>
@@ -75,8 +78,8 @@ where theta is the angle the hypotenuse makes with the bottom of the monitor
 						<h3>Orientation</h3>
 						<table>
 							<tr>
-								<td><input type="radio" name="orientation<?php echo $i ?>" value="landscape" checked>Landscape</td>
-								<td><input type="radio" name="orientation<?php echo $i ?>" value="portrait">Portrait</td>
+								<td><input type="radio" name="orientation<?php echo $i ?>" value="landscape" <?php if($orientation[$i] == "landscape") echo htmlspecialchars("checked") ?>>Landscape</td>
+								<td><input type="radio" name="orientation<?php echo $i ?>" value="portrait" <?php if($orientation[$i] == "portrait") echo htmlspecialchars("checked") ?>>Portrait</td>
 							</tr>
 						</table>
 					</div>
@@ -85,22 +88,29 @@ where theta is the angle the hypotenuse makes with the bottom of the monitor
 						<h3>Aspect Ratio</h3>
 						<table>
 							<tr>
-								<th>Ultrawide:</th>
-								<td class="rare"><input type="radio" name="aspect<?php echo $i ?>" value=".2742">32:9</td>
-								<td class="standard"><input type="radio" name="aspect<?php echo $i ?>" value=".3992">21:9</td>
+								<th>Common: </th>
+								<td><input type="radio" name="aspectRatio<?php echo $i ?>" id="standardRatio<?php echo $i ?>" <?php if(!$customAspectRatio[$i]) echo htmlspecialchars("checked") ?>></td>
+								<td>
+									<select name="aspectRatioType<?php echo $i ?>">
+										<optgroup label="Tall">
+											<option value="5:4" <?php if($aspectRatioType[$i] == "5:4") echo htmlspecialchars("selected") ?>>5:4</option>
+											<option value="4:3" <?php if($aspectRatioType[$i] == "4:3") echo htmlspecialchars("selected") ?>>4:3</option>
+										</optgroup>
+										<optgroup label="Wide">
+											<option value="16:9" <?php if($aspectRatioType[$i] == "16:9") echo htmlspecialchars("selected") ?>>16:9</option>
+											<option value="16:10" <?php if($aspectRatioType[$i] == "16:10") echo htmlspecialchars("selected") ?>>16:10 (8:5)</option>
+										</optgroup>
+										<optgroup label="Ultrawide">
+											<option value="21:9" <?php if($aspectRatioType[$i] == "21:9") echo htmlspecialchars("selected") ?>>21:9 (64:27)</option>
+											<option value="32:9" <?php if($aspectRatioType[$i] == "32:9") echo htmlspecialchars("selected") ?>>32:9</option>
+										</optgroup>
+									</select>
+								</td>
 							</tr>
 							<tr>
-								<th>Wide:</th>
-								<td class="standard"><input type="radio" name="aspect<?php echo $i ?>" value=".5123" checked>16:9</td>
-								<td class="standard"><input type="radio" name="aspect<?php echo $i ?>" value=".5586">16:10</td>
-							</tr>
-							<tr>
-								<th>Tall:</th>
-								<td class="rare"><input type="radio" name="aspect<?php echo $i ?>" value=".6435">4:3</td>
-								<td class="standard"><input type="radio" name="aspect<?php echo $i ?>" value=".6747">5:4</td>
-							</tr>
-							<tr>
-								<td colspan="3"><input type="radio" name="aspect<?php echo $i ?>" id="customRatio<?php echo $i ?>" value="0">Detect from Custom Resolution</td>
+								<th>Custom:</th>
+								<td><input type="radio" name="aspectRatio<?php echo $i ?>" id="customRatio<?php echo $i ?>" value="0" <?php if($customAspectRatio[$i]) echo htmlspecialchars("checked") ?>></td>
+								<td>Detect Ratio</td>
 							</tr>
 						</table>
 					</div>
@@ -109,27 +119,29 @@ where theta is the angle the hypotenuse makes with the bottom of the monitor
 						<h3>Resolution</h3>
 						<table>
 							<tr>
-								<td class="rare"><input type="radio" name="resolution<?php echo $i ?>" value="VGA">SVGA ~600i</td>
-								<td class="standard"><input type="radio" name="resolution<?php echo $i ?>" value="HD">HD ~768p</td>
+								<th>Common: </th>
+								<td><input type="radio" name="resolution<?php echo $i ?>" id="customRes<?php echo $i ?>" value="standard" <?php if(!$customResolution[$i]) echo htmlspecialchars("checked") ?>></td>
+								<td>
+									<select name="resolutionType<?php echo $i ?>">
+										<option value="VGA" <?php if($resolutionType[$i] == "VGA") echo htmlspecialchars("selected") ?>>SVGA ~600i</option>
+										<option value="HD" <?php if($resolutionType[$i] == "HD") echo htmlspecialchars("selected") ?>>HD ~768p</option>
+										<option value="HDplus" <?php if($resolutionType[$i] == "HDplus") echo htmlspecialchars("selected") ?>>HD+ ~900p</option>
+										<option value="FHD" <?php if($resolutionType[$i] == "FHD") echo htmlspecialchars("selected") ?>>FHD ~1080p</option>
+										<option value="FHDplus" <?php if($resolutionType[$i] == "FHDplus") echo htmlspecialchars("selected") ?>>FHD+ ~1200p</option>
+										<option value="QHD" <?php if($resolutionType[$i] == "QHD") echo htmlspecialchars("selected") ?>>QHD ~1440p</option>
+										<option value="QHDplus" <?php if($resolutionType[$i] == "QHDplus") echo htmlspecialchars("selected") ?>>QHD+ ~1600p</option>
+										<option value="4K" <?php if($resolutionType[$i] == "4K") echo htmlspecialchars("selected") ?>>4K ~2160p</option>
+										<option value="5K" <?php if($resolutionType[$i] == "5K") echo htmlspecialchars("selected") ?>>5K ~2880p</option>
+										<option value="8K" <?php if($resolutionType[$i] == "8K") echo htmlspecialchars("selected") ?>>8K ~4320p</option>
+									</select>
+								</td>
 							</tr>
 							<tr>
-								<td class="rare"><input type="radio" name="resolution<?php echo $i ?>" value="HDplus">HD+ ~900p</td>
-								<td class="standard"><input type="radio" name="resolution<?php echo $i ?>" value="FHD" checked>FHD ~1080p</td>
-							</tr>
-							<tr>
-								<td class="rare"><input type="radio" name="resolution<?php echo $i ?>" value="FHDplus">FHD+ ~1200p</td>
-								<td class="standard"><input type="radio" name="resolution<?php echo $i ?>" value="QHD">QHD ~1440p</td>
-							</tr>
-							<tr>
-								<td class="rare"><input type="radio" name="resolution<?php echo $i ?>" value="QHDplus">QHD+ ~1600p</td>
-								<td class="standard"><input type="radio" name="resolution<?php echo $i ?>" value="4K">4K ~2160p</td>
-							</tr>
-							<tr>
-								<td class="rare"><input type="radio" name="resolution<?php echo $i ?>" value="5K">5K ~2880p</td>
-								<td class="rare"><input type="radio" name="resolution<?php echo $i ?>" value="8K">8K ~4320p</td>
-							</tr>
-							<tr>
-								<td colspan="2">Custom: <input type="radio" name="resolution<?php echo $i ?>" id="customRes<?php echo $i ?>" value="Custom"><input type="number" id="horRes<?php echo $i ?>" value="1920">X<input type="number" id="verRes<?php echo $i ?>" value="1080"></td>
+								<th>Custom: </th>
+								<td><input type="radio" name="resolution<?php echo $i ?>" id="customRes<?php echo $i ?>" value="Custom" <?php if($customResolution[$i]) echo htmlspecialchars("checked") ?>></td>
+								<td>
+									<input type="number" id="horRes<?php echo $i ?>" value="1920">X<input type="number" id="verRes<?php echo $i ?>" value="1080">
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -155,42 +167,42 @@ where theta is the angle the hypotenuse makes with the bottom of the monitor
 								<td class="right">Display Type: </td>
 								<td>
 									<select name="displayType<?php echo $i ?>">
-								<option value="any">Any</option>
-								<option value="TN">TN Panel</option>
-								<option value="LCD">LCD</option>
-								<option value="IPS">IPS</option>
-								<option value="OLED">OLED</option>
-								</select>
+										<option value="any">Any</option>
+										<option value="TN">TN Panel</option>
+										<option value="LCD">LCD</option>
+										<option value="IPS">IPS</option>
+										<option value="OLED">OLED</option>
+									</select>
 								</td>
 							</tr>
 							<tr>
 								<td class="right">Refresh Rate: </td>
 								<td>
 									<select name="refreshRate<?php echo $i ?>">
-								<option value="any">Any</option>
-								<option value="30Hz">30Hz</option>
-								<option value="60Hz">60Hz</option>
-								<option value="90Hz">90Hz</option>
-								<option value="120Hz">120Hz</option>
-								<option value="144Hz">144Hz</option>
-								<option value="240Hz">240Hz</option>
-							</select>
+										<option value="any">Any</option>
+										<option value="30Hz">30Hz</option>
+										<option value="60Hz">60Hz</option>
+										<option value="90Hz">90Hz</option>
+										<option value="120Hz">120Hz</option>
+										<option value="144Hz">144Hz</option>
+										<option value="240Hz">240Hz</option>
+									</select>
 								</td>
 							</tr>
 							<tr>
 								<td class="right">Response Time:</td>
 								<td>
 									<select name="responseTime<?php echo $i ?>">
-								<option value="any">Any</option>
-								<option value="1ms">1ms</option>
-								<option value="2ms">2ms</option>
-								<option value="3ms">3ms</option>
-								<option value="4ms">4ms</option>
-								<option value="5ms">5ms</option>
-								<option value="6ms">6ms</option>
-                                <option value="7ms">7ms</option>
-								<option value="8ms">8ms</option>
-							</select>
+										<option value="any">Any</option>
+										<option value="1ms">1ms</option>
+										<option value="2ms">2ms</option>
+										<option value="3ms">3ms</option>
+										<option value="4ms">4ms</option>
+										<option value="5ms">5ms</option>
+										<option value="6ms">6ms</option>
+										<option value="7ms">7ms</option>
+										<option value="8ms">8ms</option>
+									</select>
 								</td>
 							</tr>
 						</table>

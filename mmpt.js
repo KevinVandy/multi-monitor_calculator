@@ -61,7 +61,7 @@ function getRatio(i) {
 }
 
 function getResolutionType(i) {
-	return $("input[name=resolution" + i + "]:radio:checked").val();
+	return $("input[name=resolution" + i + "]:option:selected").val();
 }
 
 function getTheta(i) {
