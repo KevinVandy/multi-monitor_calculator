@@ -7,7 +7,6 @@
 
 	//default values, they get set for all 9 monitors in a for loop (arrays)
 	//NOTICE!!! THESE ARRAYS START AT 1 INSTEAD OF 0 TO AVOID CONFUSION BELOW WHEN REFERENCED... OR TO MAKE MORE CONFUSION... now no [$i-1] is needed, just [$i]
-	if(!isset($diagonal)) for($i = 1; $i <= $maxNumMonitors; $i++) $diagonal[$i] = 24;
 	if(!isset($unitType)) for($i = 1; $i <= $maxNumMonitors; $i++) $unitType[$i] = "in";
 	if(!isset($orientation)) for($i = 1; $i <= $maxNumMonitors; $i++) $orientation[$i] = "landscape";
 	if(!isset($customAspectRatio)) for($i = 1; $i <= $maxNumMonitors; $i++) $customAspectRatio[$i] = FALSE;
@@ -74,14 +73,8 @@
 						<h3>Size</h3>
 						<table>
 							<tr>
-								<th>Diagonal:</th>
 								<td>
-									<input type="number" id="size<?php echo $i ?>" value="<?php echo $diagonal[$i] ?>">
-								</td>
-							</tr>
-							<tr>
-								<th>Units:</th>
-								<td>
+									Diagonal:<input type="number" id="sizeBox<?php echo $i ?>" value="24">
 									<input type="radio" name="units<?php echo $i ?>" value="1.0" <?php if($unitType[$i]=="in" ) echo htmlspecialchars( "checked") ?>>in
 									<input type="radio" name="units<?php echo $i ?>" value=".3937" <?php if($unitType[$i]=="cm" ) echo htmlspecialchars( "checked") ?>>cm
 								</td>
@@ -153,7 +146,7 @@
 							</tr>
 							<tr>
 								<th>Custom: </th>
-								<td><input type="radio" name="resolution<?php echo $i ?>" id="customRes<?php echo $i ?>" value="Custom" <?php if($customResolution[$i]) echo htmlspecialchars("checked") ?>></td>
+								<td><input type="radio" name="resolution<?php echo $i ?>" id="customRes<?php echo $i ?>" value="Custom" <?php if($customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
 									<input type="number" id="horRes<?php echo $i ?>" value="1920">X<input type="number" id="verRes<?php echo $i ?>" value="1080">
 								</td>
@@ -163,12 +156,12 @@
 					<!-- Toggle to Show more specs -->
 					<h3>More Specs <span class="toggle">+</span></h3>
 					<!-- More specs to be choses -->
-					<div class="extraSpecs">
+					<div class="extraSpecs1">
 						<table>
 							<tr>
-								<td><input type="checkbox" name="HDR<?php echo $i ?>" value="HDR" <?php if($hdr[$i]) echo htmlspecialchars("checked") ?>>HDR</td>
-								<td><input type="checkbox" name="curved<?php echo $i ?>" value="Curved" <?php if($curved[$i]) echo htmlspecialchars("checked") ?>>Curved</td>
-								<td><input type="checkbox" name="touch<?php echo $i ?>" value="Touch" <?php if($touch[$i]) echo htmlspecialchars( "checked") ?>>Touch</td>
+								<td><input type="checkbox" name="HDR<?php echo $i ?>" value="HDR">HDR</td>
+								<td><input type="checkbox" name="curved<?php echo $i ?>" value="Curved">Curved</td>
+								<td><input type="checkbox" name="touch<?php echo $i ?>" value="Touch">Touch</td>
 							</tr>
 						</table>
 						<table>
@@ -217,7 +210,7 @@
 								<td><input type="number" name="responseTime<?php echo $i ?>" value="<?php echo $responseTime[$i] ?>">ms</td>
 							</tr>
 							<tr>
-								<td>Brand: </td>
+								<td class="right">Brand: </td>
 								<td><input type="text" name="brand<?php echo $i ?>"></td>
 							</tr>
 						</table>
@@ -227,35 +220,35 @@
 						<table>
 							<tr>
 								<th class="right">Size: </th>
-								<td id="sizeStat<?php echo $i ?>"></td>
+								<td id="size<?php echo $i ?>"></td>
 							</tr>
 							<tr>
 								<th class="right">Height: </th>
-								<td id="heightStat<?php echo $i ?>"></td>
+								<td id="height<?php echo $i ?>"></td>
 							</tr>
 							<tr>
 								<th class="right">Width: </th>
-								<td id="widthStat<?php echo $i ?>"></td>
+								<td id="width<?php echo $i ?>"></td>
 							</tr>
 							<tr>
 								<th class="right">Area: </th>
-								<td id="areaStat<?php echo $i ?>"></td>
+								<td id="area<?php echo $i ?>"></td>
 							</tr>
 							<tr>
 								<th class="right">Aspect Ratio: </th>
-								<td id="aspectRatioStat<?php echo $i ?>"></td>
+								<td id="ratio<?php echo $i ?>"></td>
 							</tr>
 							<tr>
 								<th class="right">Resolution: </th>
-								<td id="resolutionStat<?php echo $i ?>"></td>
+								<td id="res<?php echo $i ?>"></td>
 							</tr>
 							<tr>
 								<th class="right">Pixels: </th>
-								<td id="pixelsStat<?php echo $i ?>"></td>
+								<td id="pixels<?php echo $i ?>"></td>
 							</tr>
 							<tr>
-								<th class="right" id="ppuStat<?php echo $i ?>">PPI: </th>
-								<td id="ppiStat<?php echo $i ?>"></td>
+								<th class="right" id="ppu<?php echo $i ?>">PPI: </th>
+								<td id="ppi<?php echo $i ?>"></td>
 							</tr>
 						</table>
 					</div>

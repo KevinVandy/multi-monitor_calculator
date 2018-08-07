@@ -36,12 +36,8 @@ function getMonitor(i) {
 	return $("#monitor" + i);
 }
 
-function getSizeBox(i) {
-	return $("#sizeBox" + i);
-}
-
 function getSize(i) {
-	return parseFloat(getSizeBox(i).val());
+	return parseFloat($("#size" + i).val());
 }
 
 function getHorRes(i) {
@@ -57,19 +53,11 @@ function getRes(i) {
 }
 
 function getRatio(i) {
-	return parseFloat($("input[name=aspect" + i + "]:radio:checked").val());
+	return parseFloat($("input[name=aspectRatio" + i + "]:option:selected").val());
 }
 
 function getResolutionType(i) {
 	return $("input[name=resolution" + i + "]:option:selected").val();
-}
-
-function getTheta(i) {
-	var theta = parseFloat($("input[name=aspect" + i + "]:radio:checked").val());
-	if (theta === 0) { //if custom aspect ratio (denoted by 0) then recalculate theta
-		theta = Math.atan(getVerRes(i) / getHorRes(i));
-	}
-	return theta;
 }
 
 function getHDR(i) {
@@ -139,9 +127,9 @@ function getSearchEngine(i) {
 // begin functions to make simple calculations
 function calculateHeight(i) {
 	if (getOrientation(i) === "landscape") {
-		return parseFloat(getSize(i) * Math.sin(getTheta(i)));
+		return parseFloat(getSize(i) * Math.sin(calculateTheta(i)));
 	} else if (getOrientation(i) === "portrait") {
-		return parseFloat(getSize(i) * Math.cos(getTheta(i)));
+		return parseFloat(getSize(i) * Math.cos(calculateTheta(i)));
 	} else {
 		return 0;
 	}
@@ -149,13 +137,18 @@ function calculateHeight(i) {
 
 function calculateWidth(i) {
 	if (getOrientation(i) === "landscape") {
-		return parseFloat(getSize(i) * Math.cos(getTheta(i)));
+		return parseFloat(getSize(i) * Math.cos(calculateTheta(i)));
 	} else if (getOrientation(i) === "portrait") {
-		return parseFloat(getSize(i) * Math.sin(getTheta(i)));
+		return parseFloat(getSize(i) * Math.sin(calculateTheta(i)));
 	} else {
 		return 0;
 	}
 }
+
+function calculateTheta(i) {
+	return Math.atan(getVerRes(i) / getHorRes(i));
+}
+
 function calculateArea(i) {
 	return calculateHeight(i) * calculateWidth(i);
 }
@@ -270,19 +263,19 @@ function displayArea(i) { //Display Monitor area aka screen real estate
 
 function displayAspectRatio(i) { //Detect and display the correct aspect ratio in the stats sections
 	var aspectRatio;
-	if (getTheta(i) === 0.2742 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.27) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.28)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.27) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.28))) {
+	if (calculateTheta(i) === 0.2742 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.27) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.28)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.27) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.28))) {
 		aspectRatio = "32:9";
-	} else if (getTheta(i) === 0.3992 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.39) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.4)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.38) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.42))) {
+	} else if (calculateTheta(i) === 0.3992 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.39) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.4)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.38) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.42))) {
 		aspectRatio = "21:9";
-	} else if (getTheta(i) === 0.5123 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.51) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.52)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.51) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.52))) {
+	} else if (calculateTheta(i) === 0.5123 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.51) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.52)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.51) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.52))) {
 		aspectRatio = "16:9";
-	} else if (getTheta(i) === 0.5586 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.55) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.56)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.55) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.56))) {
+	} else if (calculateTheta(i) === 0.5586 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.55) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.56)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.55) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.56))) {
 		aspectRatio = "16:10";
-	} else if (getTheta(i) === 0.6435 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.64) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.65)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.64) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.65))) {
+	} else if (calculateTheta(i) === 0.6435 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.64) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.65)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.64) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.65))) {
 		aspectRatio = "4:3";
-	} else if (getTheta(i) === 0.6747 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.67) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.68)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.67) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.68))) {
+	} else if (calculateTheta(i) === 0.6747 || ((Math.atan(getVerRes(i) / getHorRes(i)) >= 0.67) && (Math.atan(getVerRes(i) / getHorRes(i)) <= 0.68)) || ((Math.atan(getHorRes(i) / getVerRes(i)) >= 0.67) && (Math.atan(getHorRes(i) / getVerRes(i)) <= 0.68))) {
 		aspectRatio = "5:4";
-	} else if (getTheta(i) === 0 || getResolutionType(i) === "Custom") {
+	} else if (calculateTheta(i) === 0 || getResolutionType(i) === "Custom") {
 		aspectRatio = "Custom"; //This only occurs if the user has entered their own resolution that does not match a default aspect ratio
 	} else {
 		aspectRatio = "Unknown"; //This only occurs if the user has entered their own resolution that does not match a default aspect ratio
