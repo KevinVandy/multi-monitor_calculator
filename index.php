@@ -21,6 +21,7 @@
 	if(!isset($syncType)) for($i = 1; $i <= $maxNumMonitors; $i++) $syncType[$i] = "any";
 	if(!isset($refreshRate)) for($i = 1; $i <= $maxNumMonitors; $i++) $refreshRate[$i] = "any";
 	if(!isset($responseTime)) for($i = 1; $i <= $maxNumMonitors; $i++) $responseTime[$i] = NULL;
+	if(!isset($searchEngine)) $searchEngine = "google";
 ?>
 
 	<!DOCTYPE html>
@@ -70,7 +71,7 @@
 				<?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?>
 				<!--Monitor <?php echo $i ?>-->
 				<div class="monitorBox" id="monitorBox<?php echo $i ?>">
-					<div class="monitor" id="monitor<?php echo $i ?>"></div>
+					<div class="monitor" id="monitor<?php echo $i ?>"><p><?php echo $i ?></p></div>
 					<div class="monitorOptions">
 						<h3>Size</h3>
 						<table>
@@ -264,19 +265,25 @@
 					<div class="search">
 						<table>
 							<tr>
-								<td colspan="3"><a id="search<?php echo $i ?>">Search for a Monitor Like This</a></td>
+								<td colspan="3"><a id="search<?php echo $i ?>">Search for This Monitor</a></td>
 							</tr>
 						</table>
 					</div>
 				</div>
 				<?php } ?>
 				<!-- End of For Loop to make all monitors divs -->
-				<div class="search">
-					<select name="searchEngine">
-				<option value="google">Google</option>
-				<option value="bing">Bing</option>
-				<option value="duckduckgo">Duck Duck Go</option>
-			</select>
+				<div class="searchEngine">
+				<table>
+					<tr>
+						<th>Select Search Engine: </th>
+						<td><select name="searchEngine">
+								<option value="google" <?php if($searchEngine == "google") echo htmlspecialchars("selected") ?>>Google</option>
+								<option value="bing" <?php if($searchEngine == "bing") echo htmlspecialchars("selected") ?>>Bing</option>
+								<option value="duckduckgo" <?php if($searchEngine == "duckduckgo") echo htmlspecialchars("selected") ?>>Duck Duck Go</option>
+							</select>
+						</td>
+					</tr>
+				</table>
 				</div>
 			</div>
 			<div id="analysis">

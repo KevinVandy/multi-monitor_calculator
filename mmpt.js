@@ -10,7 +10,7 @@
     5:4 theta = .6747 rad
     height = size * sin (theta)
     width = size * cos (theta)
-    15px = 1" (default, changed by ZoomIn & ZoomOut)
+    12px = 1" (default, changed by ZoomIn & ZoomOut)
 	when you see:
 		function functionName(i){}
 	'i' stands for the monitor that the calculations are being done on
@@ -22,7 +22,7 @@
 
 
 // begin global variables
-var SCALE = 15;
+var SCALE = 14;
 var numActiveMonitors = 2;
 var maxNumMonitors = 9;
 // end global variables
@@ -118,7 +118,7 @@ function getBrand(i) {
 }
 
 function getSearchEngine() {
-	return $("input[name=searchEngine]:radio:checked").val();
+	return $("select[name=searchEngine] option:selected").val();
 }
 // end functions to get data from the html
 
@@ -628,10 +628,10 @@ function search(i) { // updates the search url for each monitor
 	if (getHDR(i) != null) searchURL += "+" + getHDR(i); //adds HDR to search if checked
 	if (getCurved(i) != null) searchURL += "+" + getCurved(i); //adds curved to search if checked
 	if (getTouch(i) != null) searchURL += "+" + getTouch(i); //adds touch to search if checked
-	if (getSync(i) != null && getSync(i) != "any") searchURL += "+" + getSync(i); //adds value of sync radio button to search if one is selected
+	if (getSync(i) != "any") searchURL += "+" + getSync(i); //adds value of sync radio button to search if one is selected
 	if (getDisplayType(i) != "any") searchURL += "+" + getDisplayType(i); //adds display type to search if 'any' is not selected
 	if (getRefreshRate(i) != "any") searchURL += "+" + getRefreshRate(i); //adds refresh rate to search if 'any' is not selected
-	if (getResponseTime(i) != "any") searchURL += "+" + getResponseTime(i); //adds response time to searc if 'any' is not selected
+	if (getResponseTime(i) != null) searchURL += "+" + getResponseTime(i); //adds response time to searc if 'any' is not selected
 	if (getBrand(i) != null) searchURL += "+" + getBrand(i); // adds any text from the brand textbox to the search
 
 	//apply the search to the href in the html links for 'Search for a Monitor Like This' buttons
