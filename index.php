@@ -36,9 +36,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../normalize.css">
 		<link rel="stylesheet" type="text/css" href="mmpt.css">
-		<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>-->
 		<script src=jquery-3.3.1.js></script>
-		<script src="mmpt.js"></script> <!--mmpt-min.js is a compressed version of mmpt.js, develop on mmpt.js, but use mmpt-min.js for faster loading times-->
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>-->
+
+		<script src="mmpt.js"></script>
+		<!--mmpt-min.js is a compressed version of mmpt.js, develop on mmpt.js, but use mmpt-min.js for faster loading times-->
 		<link rel="shortcut icon" href="../favicon.ico">
 	</head>
 
@@ -57,7 +61,7 @@
 			</div>
 		</noscript>
 		<main>
-			<div id="options">
+			<section id="buttons">
 				<button id="addMonitor">Add Monitor</button>
 				<button id="removeMonitor">Remove Monitor</button>
 				<button id="zoomIn">Zoom In</button>
@@ -65,13 +69,19 @@
 				<button id="reset" onClick="location.reload(true);">Reset</button>
 				<!--The true parameter forces to reload from server instead of cache, makes it work in firefox-->
 				<button id="print" onClick="window.print();">Print</button>
-			</div>
-			<div id="monitorArea">
+			</section>
+			<section id="monitorCanvas"></section>
+			<p id="areaTip">Drag Down for more Area</p>
+			<section id="monitorOptionsArea">
 				<!-- Start of For Loop to make all monitors divs -->
 				<?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?>
 				<!--Monitor <?php echo $i ?>-->
 				<div class="monitorBox" id="monitorBox<?php echo $i ?>">
-					<div class="monitor" id="monitor<?php echo $i ?>"><p><?php echo $i ?></p></div>
+					<div class="monitor" id="monitor<?php echo $i ?>" class="ui-widget-content">
+						<p>
+							<?php echo $i ?>
+						</p>
+					</div>
 					<div class="monitorOptions">
 						<h3>Size</h3>
 						<table>
@@ -274,19 +284,19 @@
 				<?php } ?>
 				<!-- End of For Loop to make all monitors divs -->
 				<div class="searchEngine">
-				<table>
-					<tr>
-						<th>Select Search Engine: </th>
-						<td><select name="searchEngine">
+					<table>
+						<tr>
+							<th>Select Search Engine: </th>
+							<td><select name="searchEngine">
 								<option value="google" <?php if($searchEngine == "google") echo htmlspecialchars("selected") ?>>Google</option>
 								<option value="bing" <?php if($searchEngine == "bing") echo htmlspecialchars("selected") ?>>Bing</option>
 								<option value="duckduckgo" <?php if($searchEngine == "duckduckgo") echo htmlspecialchars("selected") ?>>Duck Duck Go</option>
 							</select>
-						</td>
-					</tr>
-				</table>
+							</td>
+						</tr>
+					</table>
 				</div>
-			</div>
+			</section>
 			<div id="analysis">
 				<h3>Set-up Analysis</h3>
 				<table>

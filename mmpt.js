@@ -138,7 +138,7 @@ function calculateTheta(i) {
 
 function calculateAspectRatio(i) {
 	var aspectRatio = getAspectRatio(i);
-	if (aspectRatio == "custom") {
+	if (aspectRatio === "custom") {
 		var theta = calculateTheta(i);
 		if (theta > 0.784 && theta < 0.787) aspectRatio = "1:1";
 		else if (theta > 0.673 && theta < 0.676) aspectRatio = "5:4";
@@ -333,7 +333,7 @@ function displayTotalArea() { //Display the total area (screen real estate) of a
 	var totalAreaSmallUnit = 0;
 	var totalAreaLargeUnit = 0;
 	var unit = 0;
-	for (var i = 0; i <= numActiveMonitors; i++) {
+	for (var i = 1; i <= numActiveMonitors; i++) {
 		totalAreaSmallUnit += calculateArea(i);
 		unit = getUnit(i);
 	}
@@ -727,5 +727,11 @@ $(document).ready(function () { //page load function
 		}
 	});
 	//end events for buttons being clicked
+
+	$( ".monitor" ).draggable();
+
+	$("#monitorCanvas").resizeable({
+		handles: 'w',
+	});
 
 });

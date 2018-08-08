@@ -101,12 +101,11 @@ input[type="text"] {
 
 .monitor {
 	border: 5px solid #aaa;
-	width: 0px;
-	height: 0px;
+	min-width: 1px;
+	min-height: 1px;
 	background-image: radial-gradient(#333, #111);
 	margin-bottom: 10px;
 	margin-top: 10px;
-	vertical-align: middle;
 }
 
 .monitor p {
@@ -239,14 +238,32 @@ input[type="text"] {
 	cursor: zoom-out;
 }
 
-#options {
-	margin-bottom: 20px;
+#monitorCanvas {
+	margin: auto;
+	min-width: 90%;
+	max-width: 90%;
+	width: 90%;
+	height: 5px;
+	min-height: 5px;
+	max-height: 400px;
+	border-bottom: dashed white 2px;
+	resize: both;
+	overflow: auto;
 }
 
-#monitorArea {
-	margin-left: auto;
-	margin-right: auto;
-	display: inline-block;
+#areaTip {
+	line-height: 0em;
+	padding: 0px;
+	margin: 10px 60px;
+	text-align: right;
+	font-size: 0.6em;
+}
+
+#monitorCanvas:active {
+	border-bottom: dashed red 2px;
+}
+
+#buttons {
 }
 
 #monitorBox3,
