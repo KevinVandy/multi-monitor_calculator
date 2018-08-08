@@ -125,23 +125,11 @@ function getSearchEngine() {
 
 // begin functions to make simple calculations
 function calculateHeight(i) {
-	if (getOrientation(i) === "landscape") {
-		return parseFloat(getSize(i) * Math.sin(calculateTheta(i)));
-	} else if (getOrientation(i) === "portrait") {
-		return parseFloat(getSize(i) * Math.cos(calculateTheta(i)));
-	} else {
-		return 0;
-	}
+	return parseFloat(getSize(i) * Math.sin(calculateTheta(i)));
 }
 
 function calculateWidth(i) {
-	if (getOrientation(i) === "landscape") {
-		return parseFloat(getSize(i) * Math.cos(calculateTheta(i)));
-	} else if (getOrientation(i) === "portrait") {
-		return parseFloat(getSize(i) * Math.sin(calculateTheta(i)));
-	} else {
-		return 0;
-	}
+	return parseFloat(getSize(i) * Math.cos(calculateTheta(i)));
 }
 
 function calculateTheta(i) {
@@ -189,7 +177,7 @@ function drawMonitorPageLoad(i) {
 }
 // Calculates height in pixels, updates size of monitor, applies it to the css to draw the monitor in its new size with animation
 function drawMonitor(i) {
-	if (calculateHeight(i) > 3 && calculateHeight(i) < 500 && calculateWidth(i) > 3 && calculateWidth(i) < 500 && getHorRes(i) > 200 && getHorRes(i) < 20000 && getVerRes(i) > 200 && getVerRes(i) < 20000) {
+	if (1) {
 		var monitor = getMonitor(i);
 		var pixHeight = SCALE * calculateHeight(i) * getUnit(i);
 		var pixWidth = SCALE * calculateWidth(i) * getUnit(i);
@@ -285,9 +273,9 @@ function displayAspectRatio(i) { //Detect and display the correct aspect ratio i
 }
 
 function displayResolution(i) { //Display the Resolution again in the stats section, input from the custom resolution
-	var resolution = parseInt($("#horRes" + i).val()) + "x" + parseInt($("#verRes" + i).val());
+	var resolution = parseInt($("#horRes" + i).val()) + " x " + parseInt($("#verRes" + i).val());
 	$("#resolutionStat" + i).html(resolution);
-	return resolution; //used in search function
+	return resolution;
 }
 
 function displayPixels(i) { // Displays number of pixels of the monitor in the stats section
@@ -589,24 +577,25 @@ function updateResolution(i) { //updates the values for the resolution based on 
 // end updateResolution
 
 
-function checkIfCustom(i) { //Logic for auto checking custom resolution stuff
-	$("input[name=resolutionCommonCustom" + i + "]").change(function () {
-		if ($("#customRes" + i).is(':checked')) {
-			$("#horRes" + i).prop('disabled', false);
-			$("#verRes" + i).prop('disabled', false);
-			$("#customRatio" + i).prop("checked", true); //check custom ratio automatically if custom res is checked
-		} else {
-			$("#horRes" + i).prop('disabled', true);
-			$("#verRes" + i).prop('disabled', true);
-		}
-	});
-	$("input[name=aspectRatioCommonCustom" + i + "]").change(function () {
-		if ($("#customRatio" + i).is(':checked')) {
-			$("#horRes" + i).prop('disabled', false);
-			$("#verRes" + i).prop('disabled', false);
-			$("#customRes" + i).prop("checked", true); //check custom resolution automatically if custom ratio is checked
-		}
-	});
+function checkIfCustom(i) { //Logic for auto checking custom resolution and aspect ratio stuff
+	if ($("#customResolution" + i).is(':checked')) {
+		$("#horRes" + i).prop('disabled', false);
+		$("#verRes" + i).prop('disabled', false);
+		$('#resolutionChoices' + i + ' option[value="custom"]').prop("selected", "selected");
+		$('#resolutionChoices' + i).prop("disabled", true);
+		$("#customAspectRatio" + i).prop('checked', true);
+	} else {
+		$("#horRes" + i).prop('disabled', true);
+		$("#verRes" + i).prop('disabled', true);
+		$('#resolutionChoices' + i).prop("disabled", false);
+	}
+	if ($("#customAspectRatio" + i).is(":checked")) {
+		$('#aspectRatioChoices' + i + ' option[value="detect"]').prop("selected", "selected");
+		$('#aspectRatioChoices' + i).prop("disabled", true);
+	}
+	else {
+		$('#aspectRatioChoices' + i).prop("disabled", false);
+	}
 }
 
 function search(i) { // updates the search url for each monitor
@@ -681,8 +670,8 @@ $(document).ready(function () { //page load function
 		displayTotalArea();
 
 		//disable custom resolution boxes so they can't be edited until radio button is selected
-		$("#horRes" + i).prop('disabled', true);
-		$("#verRes" + i).prop('disabled', true);
+		$("#horRes" + i).prop("disabled", true);
+		$("#verRes" + i).prop("disabled", true);
 
 	}
 

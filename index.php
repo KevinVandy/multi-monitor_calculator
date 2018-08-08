@@ -106,10 +106,10 @@
 						<table>
 							<tr>
 								<th>Common: </th>
-								<td><input type="radio" name="aspectRatioCommonCustom<?php echo $i ?>" id="standardRatio<?php echo $i ?>" <?php if(!$customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="aspectRatioCommonCustom<?php echo $i ?>" id="commonAspectRatio<?php echo $i ?>" <?php if(!$customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
-									<select name="aspectRatioType<?php echo $i ?>">
-										<option value="custom" <?php if($aspectRatioType[$i] == "custom") echo htmlspecialchars("selected") ?>>Custom</option>
+									<select name="aspectRatioType<?php echo $i ?>" id="aspectRatioChoices<?php echo $i ?>">
+										<option value="detect" <?php if($aspectRatioType[$i] == "detect") echo htmlspecialchars("selected") ?>>Detect</option>
 										<optgroup label="Tall">
 											<option value="5:4" <?php if($aspectRatioType[$i] == "5:4") echo htmlspecialchars("selected") ?>>5:4</option>
 											<option value="4:3" <?php if($aspectRatioType[$i] == "4:3") echo htmlspecialchars("selected") ?>>4:3</option>
@@ -127,7 +127,7 @@
 							</tr>
 							<tr>
 								<th>Custom:</th>
-								<td><input type="radio" name="aspectRatioCommonCustom<?php echo $i ?>" id="customRatio<?php echo $i ?>" value="custom" <?php if($customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="aspectRatioCommonCustom<?php echo $i ?>" id="customAspectRatio<?php echo $i ?>" value="custom" <?php if($customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>Detect Ratio</td>
 							</tr>
 						</table>
@@ -138,9 +138,10 @@
 						<table>
 							<tr>
 								<th>Common: </th>
-								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="customRes<?php echo $i ?>" value="standard" <?php if(!$customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="commonResolution<?php echo $i ?>" value="standard" <?php if(!$customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
-									<select name="resolutionType<?php echo $i ?>">
+									<select name="resolutionType<?php echo $i ?>" id="resolutionChoices<?php echo $i ?>">
+										<option value="custom" <?php if($resolutionType[$i] == "custom") echo htmlspecialchars("selected") ?> id="customResolutionChoice">Custom</option>
 										<option value="VGA" <?php if($resolutionType[$i] == "VGA") echo htmlspecialchars("selected") ?>>SVGA ~600i</option>
 										<option value="HD" <?php if($resolutionType[$i] == "HD") echo htmlspecialchars("selected") ?>>HD ~768p</option>
 										<option value="HDplus" <?php if($resolutionType[$i] == "HDplus") echo htmlspecialchars("selected") ?>>HD+ ~900p</option>
@@ -156,7 +157,7 @@
 							</tr>
 							<tr>
 								<th>Custom: </th>
-								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="customRes<?php echo $i ?>" value="custom" <?php if($customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="customResolution<?php echo $i ?>" value="custom" <?php if($customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
 									<input type="number" id="horRes<?php echo $i ?>" value="1920">x<input type="number" id="verRes<?php echo $i ?>" value="1080">
 								</td>

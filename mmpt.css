@@ -143,9 +143,9 @@ input[type="text"] {
 .stats td {
 	line-height: 1em;
 	padding-bottom: 10px;
-	padding-right: 10px;
-	padding-left:  10px;
-	max-width: 80px;
+	padding-right: 5px;
+	padding-left:  5px;
+	word-wrap: normal;
 }
 
 .stats th {
@@ -259,8 +259,7 @@ input[type="text"] {
 	display: none;
 }
 
-#monitor1,
-#monitor2 {
+#monitor1 {
 	margin-left: auto;
 }
 
