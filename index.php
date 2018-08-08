@@ -38,7 +38,7 @@
 		<link rel="stylesheet" type="text/css" href="mmpt.css">
 		<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>-->
 		<script src=jquery-3.3.1.js></script>
-		<script src="mmpt.js"></script>
+		<script src="mmpt.js"></script> <!--mmpt-min.js is a compressed version of mmpt.js, develop on mmpt.js, but use mmpt-min.js for faster loading times-->
 		<link rel="shortcut icon" href="../favicon.ico">
 	</head>
 
