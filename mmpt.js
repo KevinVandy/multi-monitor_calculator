@@ -177,7 +177,7 @@ function drawMonitorPageLoad(i) {
 }
 // Calculates height in pixels, updates size of monitor, applies it to the css to draw the monitor in its new size with animation
 function drawMonitor(i) {
-	if (1) {
+	if (getSize(i) > 3 && getSize(i) < 100) {
 		var monitor = getMonitor(i);
 		var pixHeight = SCALE * calculateHeight(i) * getUnit(i);
 		var pixWidth = SCALE * calculateWidth(i) * getUnit(i);
