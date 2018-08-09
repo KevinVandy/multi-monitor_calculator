@@ -138,17 +138,17 @@ function calculateTheta(i) {
 
 function calculateAspectRatio(i) {
 	var aspectRatio = getAspectRatio(i);
-	if (aspectRatio === "custom") {
+	if (aspectRatio === "detect") {
 		var theta = calculateTheta(i);
-		if (theta > 0.784 && theta < 0.787) aspectRatio = "1:1";
-		else if (theta > 0.673 && theta < 0.676) aspectRatio = "5:4";
-		else if (theta > 0.642 && theta < 0.645) aspectRatio = "4:3";
-		else if (theta > 0.557 && theta < 0.560) aspectRatio = "16:10";
-		else if (theta > 0.587 && theta < 0.590) aspectRatio = "3:2";
-		else if (theta > 0.511 && theta < 0.514) aspectRatio = "16:9";
-		else if (theta > 0.462 && theta < 0.465) aspectRatio = "2:1";
-		else if (theta > 0.398 && theta < 0.406) aspectRatio = "21:9";
-		else if (theta > 0.273 && theta < 0.276) aspectRatio = "32:9";
+		if (theta > 0.784 && theta < 0.787) aspectRatio = "1:1"; //the small ranges give a 3-10 pixel buffer
+		else if ((theta > 0.673 && theta < 0.676)) aspectRatio = "5:4";
+		else if ((theta > 0.642 && theta < 0.645)) aspectRatio = "4:3";
+		else if ((theta > 0.557 && theta < 0.560)) aspectRatio = "16:10";
+		else if ((theta > 0.587 && theta < 0.590)) aspectRatio = "3:2";
+		else if ((theta > 0.511 && theta < 0.514)) aspectRatio = "16:9";
+		else if ((theta > 0.462 && theta < 0.465)) aspectRatio = "2:1";
+		else if ((theta > 0.398 && theta < 0.406)) aspectRatio = "21:9";
+		else if ((theta > 0.273 && theta < 0.276)) aspectRatio = "32:9";
 		else aspectRatio = "Unknown";
 	}
 	return aspectRatio;
@@ -267,7 +267,7 @@ function displayArea(i) { //Display Monitor area aka screen real estate
 }
 
 function displayAspectRatio(i) { //Detect and display the correct aspect ratio in the stats sections
-	var aspectRatio = calculateAspectRatio(i);
+	var aspectRatio = calculateAspectRatio(i); //not getAspectRatio for detect
 	$("#aspectRatioStat" + i).html(aspectRatio);
 	return aspectRatio;
 }
@@ -357,222 +357,220 @@ function displayTotalArea() { //Display the total area (screen real estate) of a
 
 
 function updateResolution(i) { //updates the values for the resolution based on the aspect ratio and resolution type
-	var x, y;
-	var ratio = calculateAspectRatio(i);
 	var resolutionType = getResolutionType(i);
-	//if a 32:9 aspect ratio
-	if (ratio === "32:9") {
-		if (resolutionType === "VGA") {
-			x = 2160;
-			y = 600;
-		} else if (resolutionType === "HD") {
-			x = 2560;
-			y = 768;
-		} else if (resolutionType === "HDplus") {
-			x = 3440;
-			y = 900;
-		} else if (resolutionType === "FHD") {
-			x = 3840;
-			y = 1080;
-		} else if (resolutionType === "FHDplus") {
-			x = 4320;
-			y = 1200;
-		} else if (resolutionType === "QHD") {
-			x = 5120;
-			y = 1440;
-		} else if (resolutionType === "QHDplus") {
-			x = 5690;
-			y = 1600;
-		} else if (resolutionType === "4K") {
-			x = 7860;
-			y = 2160;
-		} else if (resolutionType === "5K") {
-			x = 10240;
-			y = 2880;
-		} else if (resolutionType === "8K") {
-			x = 15720;
-			y = 4320;
+	if(resolutionType != "custom") { //skips this function if custom because nothing will be accomplished
+		var ratio = calculateAspectRatio(i);
+		var x, y;
+
+		if (ratio === "32:9") {
+			if (resolutionType === "VGA") {
+				x = 2160;
+				y = 600;
+			} else if (resolutionType === "HD") {
+				x = 2560;
+				y = 768;
+			} else if (resolutionType === "HDplus") {
+				x = 3440;
+				y = 900;
+			} else if (resolutionType === "FHD") {
+				x = 3840;
+				y = 1080;
+			} else if (resolutionType === "FHDplus") {
+				x = 4320;
+				y = 1200;
+			} else if (resolutionType === "QHD") {
+				x = 5120;
+				y = 1440;
+			} else if (resolutionType === "QHDplus") {
+				x = 5690;
+				y = 1600;
+			} else if (resolutionType === "4K") {
+				x = 7860;
+				y = 2160;
+			} else if (resolutionType === "5K") {
+				x = 10240;
+				y = 2880;
+			} else if (resolutionType === "8K") {
+				x = 15720;
+				y = 4320;
+			}
 		}
-	}
-	//if a 21:9 aspect ratio
-	else if (ratio === "21:9") {
-		if (resolutionType === "VGA") {
-			x = 1420;
-			y = 600;
-		} else if (resolutionType === "HD") {
-			x = 1820;
-			y = 768;
-		} else if (resolutionType === "HDplus") {
-			x = 2130;
-			y = 900;
-		} else if (resolutionType === "FHD") {
-			x = 2560;
-			y = 1080;
-		} else if (resolutionType === "FHDplus") {
-			x = 2560;
-			y = 1080;
-		} else if (resolutionType === "QHD") {
-			x = 3440;
-			y = 1440;
-		} else if (resolutionType === "QHDplus") {
-			x = 3840;
-			y = 1600;
-		} else if (resolutionType === "4K") {
-			x = 5120;
-			y = 2160;
-		} else if (resolutionType === "5K") {
-			x = 6720;
-			y = 2880;
-		} else if (resolutionType === "8K") {
-			x = 10240;
-			y = 4320;
+		//if a 21:9 aspect ratio
+		else if (ratio === "21:9") {
+			if (resolutionType === "VGA") {
+				x = 1420;
+				y = 600;
+			} else if (resolutionType === "HD") {
+				x = 1820;
+				y = 768;
+			} else if (resolutionType === "HDplus") {
+				x = 2130;
+				y = 900;
+			} else if (resolutionType === "FHD") {
+				x = 2560;
+				y = 1080;
+			} else if (resolutionType === "FHDplus") {
+				x = 2560;
+				y = 1080;
+			} else if (resolutionType === "QHD") {
+				x = 3440;
+				y = 1440;
+			} else if (resolutionType === "QHDplus") {
+				x = 3840;
+				y = 1600;
+			} else if (resolutionType === "4K") {
+				x = 5120;
+				y = 2160;
+			} else if (resolutionType === "5K") {
+				x = 6720;
+				y = 2880;
+			} else if (resolutionType === "8K") {
+				x = 10240;
+				y = 4320;
+			}
 		}
-	}
-	//if a 16:9 aspect ratio
-	else if (ratio === "16:9") {
-		if (resolutionType === "VGA") {
-			x = 1024;
-			y = 600;
-		} else if (resolutionType === "HD") {
-			x = 1366;
-			y = 768;
-		} else if (resolutionType === "HDplus") {
-			x = 1600;
-			y = 900;
-		} else if (resolutionType === "FHD") {
-			x = 1920;
-			y = 1080;
-		} else if (resolutionType === "FHDplus") {
-			x = 2130;
-			y = 1200;
-		} else if (resolutionType === "QHD") {
-			x = 2560;
-			y = 1440;
-		} else if (resolutionType === "QHDplus") {
-			x = 2844;
-			y = 1600;
-		} else if (resolutionType === "4K") {
-			x = 3840;
-			y = 2160;
-		} else if (resolutionType === "5K") {
-			x = 5120;
-			y = 2880;
-		} else if (resolutionType === "8K") {
-			x = 7860;
-			y = 4320;
+		else if (ratio === "16:9") {
+			if (resolutionType === "VGA") {
+				x = 1024;
+				y = 600;
+			} else if (resolutionType === "HD") {
+				x = 1366;
+				y = 768;
+			} else if (resolutionType === "HDplus") {
+				x = 1600;
+				y = 900;
+			} else if (resolutionType === "FHD") {
+				x = 1920;
+				y = 1080;
+			} else if (resolutionType === "FHDplus") {
+				x = 2130;
+				y = 1200;
+			} else if (resolutionType === "QHD") {
+				x = 2560;
+				y = 1440;
+			} else if (resolutionType === "QHDplus") {
+				x = 2844;
+				y = 1600;
+			} else if (resolutionType === "4K") {
+				x = 3840;
+				y = 2160;
+			} else if (resolutionType === "5K") {
+				x = 5120;
+				y = 2880;
+			} else if (resolutionType === "8K") {
+				x = 7860;
+				y = 4320;
+			}
 		}
-	}
-	//if a 16:10 aspect ratio
-	else if (ratio === "16:10") {
-		if (resolutionType === "VGA") {
-			x = 1024;
-			y = 640;
-		} else if (resolutionType === "HD") {
-			x = 1230;
-			y = 768;
-		} else if (resolutionType === "HDplus") {
-			x = 1440;
-			y = 900;
-		} else if (resolutionType === "FHD") {
-			x = 1680;
-			y = 1050;
-		} else if (resolutionType === "FHDplus") {
-			x = 1920;
-			y = 1200;
-		} else if (resolutionType === "QHD") {
-			x = 2304;
-			y = 1440;
-		} else if (resolutionType === "QHDplus") {
-			x = 2560;
-			y = 1600;
-		} else if (resolutionType === "4K") {
-			x = 3840;
-			y = 2400;
-		} else if (resolutionType === "5K") {
-			x = 5120;
-			y = 3200;
-		} else if (resolutionType === "8K") {
-			x = 7680;
-			y = 4800;
+		else if (ratio === "16:10") {
+			if (resolutionType === "VGA") {
+				x = 1024;
+				y = 640;
+			} else if (resolutionType === "HD") {
+				x = 1230;
+				y = 768;
+			} else if (resolutionType === "HDplus") {
+				x = 1440;
+				y = 900;
+			} else if (resolutionType === "FHD") {
+				x = 1680;
+				y = 1050;
+			} else if (resolutionType === "FHDplus") {
+				x = 1920;
+				y = 1200;
+			} else if (resolutionType === "QHD") {
+				x = 2304;
+				y = 1440;
+			} else if (resolutionType === "QHDplus") {
+				x = 2560;
+				y = 1600;
+			} else if (resolutionType === "4K") {
+				x = 3840;
+				y = 2400;
+			} else if (resolutionType === "5K") {
+				x = 5120;
+				y = 3200;
+			} else if (resolutionType === "8K") {
+				x = 7680;
+				y = 4800;
+			}
 		}
-	}
-	//if a 4:3 aspect ratio
-	else if (ratio === "4:3") {
-		if (resolutionType === "VGA") {
-			x = 800;
-			y = 600;
-		} else if (resolutionType === "HD") {
-			x = 1024;
-			y = 768;
-		} else if (resolutionType === "HDplus") {
-			x = 1280;
-			y = 960;
-		} else if (resolutionType === "FHD") {
-			x = 1440;
-			y = 1080;
-		} else if (resolutionType === "FHDplus") {
-			x = 1600;
-			y = 1200;
-		} else if (resolutionType === "QHD") {
-			x = 1920;
-			y = 1440;
-		} else if (resolutionType === "QHDplus") {
-			x = 2133;
-			y = 1600;
-		} else if (resolutionType === "4K") {
-			x = 2800;
-			y = 2100;
-		} else if (resolutionType === "5K") {
-			x = 4096;
-			y = 3072;
-		} else if (resolutionType === "8K") {
-			x = 6400;
-			y = 4800;
+		else if (ratio === "4:3") {
+			if (resolutionType === "VGA") {
+				x = 800;
+				y = 600;
+			} else if (resolutionType === "HD") {
+				x = 1024;
+				y = 768;
+			} else if (resolutionType === "HDplus") {
+				x = 1280;
+				y = 960;
+			} else if (resolutionType === "FHD") {
+				x = 1440;
+				y = 1080;
+			} else if (resolutionType === "FHDplus") {
+				x = 1600;
+				y = 1200;
+			} else if (resolutionType === "QHD") {
+				x = 1920;
+				y = 1440;
+			} else if (resolutionType === "QHDplus") {
+				x = 2133;
+				y = 1600;
+			} else if (resolutionType === "4K") {
+				x = 2800;
+				y = 2100;
+			} else if (resolutionType === "5K") {
+				x = 4096;
+				y = 3072;
+			} else if (resolutionType === "8K") {
+				x = 6400;
+				y = 4800;
+			}
 		}
-	}
-	//if a 5:4 aspect ratio
-	else if (ratio === "5:4") {
-		if (resolutionType === "VGA") {
-			x = 750;
-			y = 600;
-		} else if (resolutionType === "HD") {
-			x = 960;
-			y = 768;
-		} else if (resolutionType === "HDplus") {
-			x = 1280;
-			y = 1024;
-		} else if (resolutionType === "FHD") {
-			x = 1280;
-			y = 1024;
-		} else if (resolutionType === "FHDplus") {
-			x = 1600;
-			y = 1280;
-		} else if (resolutionType === "QHD") {
-			x = 1800;
-			y = 1440;
-		} else if (resolutionType === "QHDplus") {
-			x = 2000;
-			y = 1600;
-		} else if (resolutionType === "4K") {
-			x = 2560;
-			y = 2048;
-		} else if (resolutionType === "5K") {
-			x = 3600;
-			y = 2880;
-		} else if (resolutionType === "8K") {
-			x = 5120;
-			y = 4096;
+		else if (ratio === "5:4") {
+			if (resolutionType === "VGA") {
+				x = 750;
+				y = 600;
+			} else if (resolutionType === "HD") {
+				x = 960;
+				y = 768;
+			} else if (resolutionType === "HDplus") {
+				x = 1280;
+				y = 1024;
+			} else if (resolutionType === "FHD") {
+				x = 1280;
+				y = 1024;
+			} else if (resolutionType === "FHDplus") {
+				x = 1600;
+				y = 1280;
+			} else if (resolutionType === "QHD") {
+				x = 1800;
+				y = 1440;
+			} else if (resolutionType === "QHDplus") {
+				x = 2000;
+				y = 1600;
+			} else if (resolutionType === "4K") {
+				x = 2560;
+				y = 2048;
+			} else if (resolutionType === "5K") {
+				x = 3600;
+				y = 2880;
+			} else if (resolutionType === "8K") {
+				x = 5120;
+				y = 4096;
+			}
 		}
+		//flips x and y if the orientation is portrait
+		if (getOrientation(i) === "landscape" && x != null && y != null && getResolutionType(i) != "Custom") {
+			$("#horRes" + i).val(x);
+			$("#verRes" + i).val(y);
+		} else if (getOrientation(i) === "portrait" && x != null && y != null && getResolutionType(i) != "Custom") {
+			$("#horRes" + i).val(y);
+			$("#verRes" + i).val(x);
+		}
+		return x + "x" + y; //used in search
 	}
-	//flips x and y if the orientation is portrait
-	if (getOrientation(i) === "landscape" && x != null && y != null && getResolutionType(i) != "Custom") {
-		$("#horRes" + i).val(x);
-		$("#verRes" + i).val(y);
-	} else if (getOrientation(i) === "portrait" && x != null && y != null && getResolutionType(i) != "Custom") {
-		$("#horRes" + i).val(y);
-		$("#verRes" + i).val(x);
-	}
-	return x + "x" + y; //used in search
 }
 // end updateResolution
 

@@ -1,6 +1,4 @@
-<!--
-	Created by Kevin Van Cott
--->
+<!--Created by Kevin Van Cott-->
 
 <?php
 
@@ -37,8 +35,8 @@ if(!isset($searchEngine)) $searchEngine = "google";
 	<head>
 		<title>Multi-Monitor Planning Tool</title>
 		<meta name="title" content="Multi-Monitor Planning Tool by Kevin Vandy">
-		<meta name="keywords" content="monitor calculator, monitor, monitor planning tool, kevin vandy, multi-monitor, PPI, resolution">
-		<meta name="description" content="The Multi-Monitor Planning tool is for planning your multi-monitor setup. Check your aspect ratios, resolutions, width, height, and PPI!">
+		<meta name="keywords" content="monitor calculator, monitor, calculator, monitor planning tool, kevin vandy, multi-monitor, PPI, resolution">
+		<meta name="description" content="The Multi-Monitor Planning tool is for planning your multi-monitor setup. Check your aspect ratios, resolutions, width, height, and PPI! You can even drag monitors around to see how they fit together">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../normalize.css">
@@ -193,7 +191,7 @@ if(!isset($searchEngine)) $searchEngine = "google";
 						</table>
 						<table>
 							<tr>
-								<td>Display Type: </td>
+								<th>Display Type: </th>
 								<td>
 									<select name="displayType<?php echo $i ?>">
 										<option value="any" <?php if($displayType[$i] == "any") echo htmlspecialchars("selected") ?>>Any</option>
@@ -206,7 +204,7 @@ if(!isset($searchEngine)) $searchEngine = "google";
 								</td>
 							</tr>
 							<tr>
-								<td>Sync Type: </td>
+								<th>Sync Type: </th>
 								<td>
 									<select name="syncType<?php echo $i ?>">
 										<option value="any" <?php if($syncType[$i] == "any") echo htmlspecialchars("selected") ?>>Any</option>
@@ -216,7 +214,7 @@ if(!isset($searchEngine)) $searchEngine = "google";
 								</td>
 							</tr>
 							<tr>
-								<td>Refresh Rate: </td>
+								<th>Refresh Rate: </th>
 								<td>
 									<select name="refreshRate<?php echo $i ?>">
 									<option value="any" <?php if($refreshRate[$i] == "any") echo htmlspecialchars("selected") ?>>Any</option>
@@ -233,11 +231,11 @@ if(!isset($searchEngine)) $searchEngine = "google";
 								</td>
 							</tr>
 							<tr>
-								<td>Response Time: </td>
+								<th>Response Time: </th>
 								<td><input type="number" name="responseTime<?php echo $i ?>" value="<?php echo $responseTime[$i] ?>">ms</td>
 							</tr>
 							<tr>
-								<td>Brand: </td>
+								<th>Brand: </th>
 								<td><input type="text" name="brand<?php echo $i ?>" value="<?php echo $brand[$i] ?>"></td>
 							</tr>
 						</table>
