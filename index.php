@@ -3,25 +3,32 @@
 -->
 
 <?php
-	$maxNumMonitors = 9;
 
-	//default values, they get set for all 9 monitors in a for loop (arrays)
-	//NOTICE!!! THESE ARRAYS START AT 1 INSTEAD OF 0 TO AVOID CONFUSION BELOW WHEN REFERENCED... OR TO MAKE MORE CONFUSION... now no [$i-1] is needed, just [$i]
-	if(!isset($diagonal)) for($i = 1; $i <= $maxNumMonitors; $i++) $diagonal[$i] = 24;
-	if(!isset($unitType)) for($i = 1; $i <= $maxNumMonitors; $i++) $unitType[$i] = "in";
-	if(!isset($orientation)) for($i = 1; $i <= $maxNumMonitors; $i++) $orientation[$i] = "landscape";
-	if(!isset($customAspectRatio)) for($i = 1; $i <= $maxNumMonitors; $i++) $customAspectRatio[$i] = FALSE;
-	if(!isset($aspectRatioType)) for($i = 1; $i <= $maxNumMonitors; $i++) $aspectRatioType[$i] = "16:9";
-	if(!isset($customResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $customResolution[$i] = FALSE;
-	if(!isset($resolutionType)) for($i = 1; $i <= $maxNumMonitors; $i++) $resolutionType[$i] = "FHD";
-	if(!isset($hdr)) for($i = 1; $i <= $maxNumMonitors; $i++) $hdr[$i] = FALSE;
-	if(!isset($curved)) for($i = 1; $i <= $maxNumMonitors; $i++) $curved[$i] = FALSE;
-	if(!isset($touch)) for($i = 1; $i <= $maxNumMonitors; $i++) $touch[$i] = FALSE;
-	if(!isset($displayType)) for($i = 1; $i <= $maxNumMonitors; $i++) $displayType[$i] = "any";
-	if(!isset($syncType)) for($i = 1; $i <= $maxNumMonitors; $i++) $syncType[$i] = "any";
-	if(!isset($refreshRate)) for($i = 1; $i <= $maxNumMonitors; $i++) $refreshRate[$i] = "any";
-	if(!isset($responseTime)) for($i = 1; $i <= $maxNumMonitors; $i++) $responseTime[$i] = NULL;
-	if(!isset($searchEngine)) $searchEngine = "google";
+$maxNumMonitors = 9;
+
+//default values, they get set for all 9 monitors in a for loop (arrays)
+//NOTICE!!! THESE ARRAYS START AT 1 INSTEAD OF 0 TO AVOID CONFUSION BELOW WHEN REFERENCED... OR TO MAKE MORE CONFUSION... now no [$i-1] is needed, just [$i]
+if(!isset($monitorDrag)) $monitorDrag = TRUE;
+if(!isset($monitorSnap)) $monitorSnap = FALSE;
+if(!isset($diagonal)) for($i = 1; $i <= $maxNumMonitors; $i++) $diagonal[$i] = 24;
+if(!isset($unitType)) for($i = 1; $i <= $maxNumMonitors; $i++) $unitType[$i] = "in";
+if(!isset($orientation)) for($i = 1; $i <= $maxNumMonitors; $i++) $orientation[$i] = "landscape";
+if(!isset($customAspectRatio)) for($i = 1; $i <= $maxNumMonitors; $i++) $customAspectRatio[$i] = FALSE;
+if(!isset($aspectRatioType)) for($i = 1; $i <= $maxNumMonitors; $i++) $aspectRatioType[$i] = "16:9";
+if(!isset($customResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $customResolution[$i] = FALSE;
+if(!isset($resolutionType)) for($i = 1; $i <= $maxNumMonitors; $i++) $resolutionType[$i] = "FHD";
+if(!isset($horizontalResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $horizontalResolution[$i] = NULL; //gets set by js from resolution type
+if(!isset($verticalResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $verticalResolution[$i] = NULL; //gets set by js from resolution type
+if(!isset($hdr)) for($i = 1; $i <= $maxNumMonitors; $i++) $hdr[$i] = FALSE;
+if(!isset($curved)) for($i = 1; $i <= $maxNumMonitors; $i++) $curved[$i] = FALSE;
+if(!isset($touch)) for($i = 1; $i <= $maxNumMonitors; $i++) $touch[$i] = FALSE;
+if(!isset($displayType)) for($i = 1; $i <= $maxNumMonitors; $i++) $displayType[$i] = "any";
+if(!isset($syncType)) for($i = 1; $i <= $maxNumMonitors; $i++) $syncType[$i] = "any";
+if(!isset($refreshRate)) for($i = 1; $i <= $maxNumMonitors; $i++) $refreshRate[$i] = "any";
+if(!isset($responseTime)) for($i = 1; $i <= $maxNumMonitors; $i++) $responseTime[$i] = NULL;
+if(!isset($brand)) for($i = 1; $i <= $maxNumMonitors; $i++) $brand[$i] = "";
+if(!isset($searchEngine)) $searchEngine = "google";
+
 ?>
 
 	<!DOCTYPE html>
@@ -35,14 +42,12 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../normalize.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href="mmpt.css">
-		<script src=jquery-3.3.1.js></script>
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 		<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>-->
-
+		<script src=jquery-3.3.1.js></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script src="mmpt.js"></script>
-		<!--mmpt-min.js is a compressed version of mmpt.js, develop on mmpt.js, but use mmpt-min.js for faster loading times-->
 		<link rel="shortcut icon" href="../favicon.ico">
 	</head>
 
@@ -68,10 +73,11 @@
 				<button id="zoomOut">Zoom Out</button>
 				<button id="reset" onClick="location.reload(true);">Reset</button>
 				<!--The true parameter forces to reload from server instead of cache, makes it work in firefox-->
-				<button id="print" onClick="window.print();">Print</button>
+				<button id="print" onClick="window.print();">Print</button><br>
+				<!--<input type="checkbox" name="dragSnap" id="monitorDrag" checked><label>Draggable Monitors</label>
+				<input type="checkbox" name="dragSnap" id="monitorSnap"><label>Monitors Snap to Each Other</label>-->
+				<p id="areaTip" title="May not work in Edge">Drag Down for more Area</p>
 			</section>
-			<section id="monitorCanvas"></section>
-			<p id="areaTip">Drag Down for more Area</p>
 			<section id="monitorOptionsArea">
 				<!-- Start of For Loop to make all monitors divs -->
 				<?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?>
@@ -169,7 +175,7 @@
 								<th>Custom: </th>
 								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="customResolution<?php echo $i ?>" value="custom" <?php if($customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
-									<input type="number" id="horRes<?php echo $i ?>" value="1920">x<input type="number" id="verRes<?php echo $i ?>" value="1080">
+									<input type="number" id="horRes<?php echo $i ?>" value="<?php echo htmlspecialchars($horizontalResolution) ?>">x<input type="number" id="verRes<?php echo $i ?>" value="<?php echo htmlspecialchars($verticalResolution) ?>">
 								</td>
 							</tr>
 						</table>
@@ -187,52 +193,52 @@
 						</table>
 						<table>
 							<tr>
-								<td class="right">Display Type: </td>
+								<td>Display Type: </td>
 								<td>
 									<select name="displayType<?php echo $i ?>">
-										<option value="any">Any</option>
-										<option value="TN">TN Panel</option>
-										<option value="VA">VA Panel</option>
-										<option value="LCD">LCD</option>
-										<option value="IPS">IPS</option>
-										<option value="OLED">OLED</option>
+										<option value="any" <?php if($displayType[$i] == "any") echo htmlspecialchars("selected") ?>>Any</option>
+										<option value="TN" <?php if($displayType[$i] == "TN") echo htmlspecialchars("selected") ?>>TN Panel</option>
+										<option value="VA" <?php if($displayType[$i] == "VA") echo htmlspecialchars("selected") ?>>VA Panel</option>
+										<option value="LCD" <?php if($displayType[$i] == "LCD") echo htmlspecialchars("selected") ?>>LCD</option>
+										<option value="IPS" <?php if($displayType[$i] == "IPS") echo htmlspecialchars("selected") ?>>IPS</option>
+										<option value="OLED" <?php if($displayType[$i] == "OLED") echo htmlspecialchars("selected") ?>>OLED</option>
 									</select>
 								</td>
 							</tr>
 							<tr>
-								<td class="right">Sync Type: </td>
+								<td>Sync Type: </td>
 								<td>
 									<select name="syncType<?php echo $i ?>">
-										<option value="any">Any</option>
-										<option value="G-Sync">G-Sync</option>
-										<option value="FreeSync">FreeSync</option>
+										<option value="any" <?php if($syncType[$i] == "any") echo htmlspecialchars("selected") ?>>Any</option>
+										<option value="G-Sync" <?php if($syncType[$i] == "G-Sync") echo htmlspecialchars("selected") ?>>G-Sync</option>
+										<option value="FreeSync" <?php if($syncType[$i] == "FreeSync") echo htmlspecialchars("selected") ?>>FreeSync</option>
 									</select>
 								</td>
 							</tr>
 							<tr>
-								<td class="right">Refresh Rate: </td>
+								<td>Refresh Rate: </td>
 								<td>
 									<select name="refreshRate<?php echo $i ?>">
-									<option value="any">Any</option>
-									<option value="30Hz">30Hz</option>
-									<option value="45Hz">45Hz</option>
-									<option value="60Hz">60Hz</option>
-									<option value="75Hz">75Hz</option>
-									<option value="90Hz">90Hz</option>
-									<option value="100Hz">100Hz</option>
-									<option value="120Hz">120Hz</option>
-									<option value="144Hz">144Hz</option>
-									<option value="240Hz">240Hz</option>
+									<option value="any" <?php if($refreshRate[$i] == "any") echo htmlspecialchars("selected") ?>>Any</option>
+									<option value="30Hz" <?php if($refreshRate[$i] == "30Hz") echo htmlspecialchars("selected") ?>>30Hz</option>
+									<option value="45Hz" <?php if($refreshRate[$i] == "45Hz") echo htmlspecialchars("selected") ?>>45Hz</option>
+									<option value="60Hz" <?php if($refreshRate[$i] == "60Hz") echo htmlspecialchars("selected") ?>>60Hz</option>
+									<option value="75Hz" <?php if($refreshRate[$i] == "75Hz") echo htmlspecialchars("selected") ?>>75Hz</option>
+									<option value="90Hz" <?php if($refreshRate[$i] == "90Hz") echo htmlspecialchars("selected") ?>>90Hz</option>
+									<option value="100Hz" <?php if($refreshRate[$i] == "100Hz") echo htmlspecialchars("selected") ?>>100Hz</option>
+									<option value="120Hz" <?php if($refreshRate[$i] == "120Hz") echo htmlspecialchars("selected") ?>>120Hz</option>
+									<option value="144Hz" <?php if($refreshRate[$i] == "144Hz") echo htmlspecialchars("selected") ?>>144Hz</option>
+									<option value="240Hz" <?php if($refreshRate[$i] == "240Hz") echo htmlspecialchars("selected") ?>>240Hz</option>
 								</select>
 								</td>
 							</tr>
 							<tr>
-								<td class="right">Response Time: </td>
+								<td>Response Time: </td>
 								<td><input type="number" name="responseTime<?php echo $i ?>" value="<?php echo $responseTime[$i] ?>">ms</td>
 							</tr>
 							<tr>
-								<td class="right">Brand: </td>
-								<td><input type="text" name="brand<?php echo $i ?>"></td>
+								<td>Brand: </td>
+								<td><input type="text" name="brand<?php echo $i ?>" value="<?php echo $brand[$i] ?>"></td>
 							</tr>
 						</table>
 					</div>
@@ -240,35 +246,35 @@
 						<h3>Stats</h3>
 						<table>
 							<tr>
-								<th class="right">Size: </th>
+								<th>Size: </th>
 								<td id="sizeStat<?php echo $i ?>"></td>
 							</tr>
 							<tr>
-								<th class="right">Height: </th>
+								<th>Height: </th>
 								<td id="heightStat<?php echo $i ?>"></td>
 							</tr>
 							<tr>
-								<th class="right">Width: </th>
+								<th>Width: </th>
 								<td id="widthStat<?php echo $i ?>"></td>
 							</tr>
 							<tr>
-								<th class="right">Area: </th>
+								<th>Area: </th>
 								<td id="areaStat<?php echo $i ?>"></td>
 							</tr>
 							<tr>
-								<th class="right">Aspect Ratio: </th>
+								<th>Aspect Ratio: </th>
 								<td id="aspectRatioStat<?php echo $i ?>"></td>
 							</tr>
 							<tr>
-								<th class="right">Resolution: </th>
+								<th>Resolution: </th>
 								<td id="resolutionStat<?php echo $i ?>"></td>
 							</tr>
 							<tr>
-								<th class="right">Pixels: </th>
+								<th>Pixels: </th>
 								<td id="pixelsStat<?php echo $i ?>"></td>
 							</tr>
 							<tr>
-								<th class="right" id="ppuStat<?php echo $i ?>">PPI: </th>
+								<th id="ppuStat<?php echo $i ?>">PPI: </th>
 								<td id="ppiStat<?php echo $i ?>"></td>
 							</tr>
 						</table>
@@ -286,7 +292,7 @@
 				<div class="searchEngine">
 					<table>
 						<tr>
-							<th>Select Search Engine: </th>
+							<th>Change Search Engine: </th>
 							<td><select name="searchEngine">
 								<option value="google" <?php if($searchEngine == "google") echo htmlspecialchars("selected") ?>>Google</option>
 								<option value="bing" <?php if($searchEngine == "bing") echo htmlspecialchars("selected") ?>>Bing</option>
@@ -301,16 +307,16 @@
 				<h3>Set-up Analysis</h3>
 				<table>
 					<tr>
-						<td class="right">Total Pixels: </td>
-						<td class="left" id="totalPixels"></td>
+						<th>Total Pixels: </th>
+						<td id="totalPixels"></td>
 					</tr>
-					<tr>
-						<td class="right">Total Width: </td>
-						<td class="left" id="totalWidth"></td>
+					<tr title="This assumes 1 inch bezels">
+						<th>Total Width: </th>
+						<td id="totalWidth"></td>
 					</tr>
-					<tr>
-						<td class="right">Total Screen Area: </td>
-						<td class="left" id="totalArea"></td>
+					<tr title="Total Screen Area">
+						<th>Total Screen Real Estate: </th>
+						<td id="totalArea"></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -320,7 +326,7 @@
 			</div>
 		</main>
 		<footer>
-			<p>A Kevin Vandy Project <img src="../assets/logos/favicon-small.png" width="15" height="15" alt="logo"></p>
+			<p>A Kevin Vandy Project <img src="../assets/logos/favicon-small.png" width="16" height="16" alt="logo"></p>
 			<p>View on this project on <a href="https://github.com/KevinVandy/multi-monitor_planning_tool" target="_blank">Github</a></p>
 		</footer>
 	</body>

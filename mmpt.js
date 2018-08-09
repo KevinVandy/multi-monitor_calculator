@@ -592,8 +592,7 @@ function checkIfCustom(i) { //Logic for auto checking custom resolution and aspe
 	if ($("#customAspectRatio" + i).is(":checked")) {
 		$('#aspectRatioChoices' + i + ' option[value="detect"]').prop("selected", "selected");
 		$('#aspectRatioChoices' + i).prop("disabled", true);
-	}
-	else {
+	} else {
 		$('#aspectRatioChoices' + i).prop("disabled", false);
 	}
 }
@@ -610,18 +609,18 @@ function search(i) { // updates the search url for each monitor
 	searchURL += "Shop+Monitor"; //starting keywords of search
 
 	if (displayAspectRatio(i) != "Custom") searchURL += "+" + displayAspectRatio(i); //add aspect ratio to search if it is known
-	searchURL += "+" + updateResolution(i); //add resolution to the search
-	searchURL += "+" + displaySize(i); //add size to the search
+	if (updateResolution(i) != undefined) searchURL += "+" + updateResolution(i); //add resolution to the search
+	if (displaySize(i) != undefined) searchURL += "+" + displaySize(i); //add size to the search
 
 	//add extra specs if present to the search
-	if (getHDR(i) != null) searchURL += "+" + getHDR(i); //adds HDR to search if checked
-	if (getCurved(i) != null) searchURL += "+" + getCurved(i); //adds curved to search if checked
-	if (getTouch(i) != null) searchURL += "+" + getTouch(i); //adds touch to search if checked
-	if (getSync(i) != "any") searchURL += "+" + getSync(i); //adds value of sync radio button to search if one is selected
-	if (getDisplayType(i) != "any") searchURL += "+" + getDisplayType(i); //adds display type to search if 'any' is not selected
-	if (getRefreshRate(i) != "any") searchURL += "+" + getRefreshRate(i); //adds refresh rate to search if 'any' is not selected
-	if (getResponseTime(i) != null) searchURL += "+" + getResponseTime(i); //adds response time to searc if 'any' is not selected
-	if (getBrand(i) != null) searchURL += "+" + getBrand(i); // adds any text from the brand textbox to the search
+	if (getHDR(i) != null && getHDR(i) != undefined) searchURL += "+" + getHDR(i); //adds HDR to search if checked
+	if (getCurved(i) != null && getCurved(i) != undefined) searchURL += "+" + getCurved(i); //adds curved to search if checked
+	if (getTouch(i) != null && getTouch(i) != undefined) searchURL += "+" + getTouch(i); //adds touch to search if checked
+	if (getSync(i) != "any" && getSync(i) != undefined) searchURL += "+" + getSync(i); //adds value of sync radio button to search if one is selected
+	if (getDisplayType(i) != "any" && getDisplayType(i) != undefined) searchURL += "+" + getDisplayType(i); //adds display type to search if 'any' is not selected
+	if (getRefreshRate(i) != "any" && getRefreshRate(i) != undefined && getRefreshRate != "") searchURL += "+" + getRefreshRate(i); //adds refresh rate to search if 'any' is not selected
+	if (getResponseTime(i) != null && getResponseTime(i) != undefined && getResponseTime(i) != "") searchURL += "+" + getResponseTime(i) + "ms"; //adds response time to searc if 'any' is not selected
+	if (getBrand(i) != null && getBrand(i) != undefined && getBrand != "") searchURL += "+" + getBrand(i); // adds any text from the brand textbox to the search
 
 	//apply the search to the href in the html links for 'Search for a Monitor Like This' buttons
 	$("#search" + i).attr("href", searchURL);
@@ -650,7 +649,6 @@ function updateOutput() { //
 	}
 }
 $(document).ready(function () { //page load function
-
 	//sets up everything for the first time (for all monitors, even if they are not shown), slightly different than updateOutput
 	for (var i = 1; i <= maxNumMonitors; i++) {
 		checkIfCustom(i);
@@ -674,6 +672,8 @@ $(document).ready(function () { //page load function
 		$("#verRes" + i).prop("disabled", true);
 
 	}
+
+	$(".monitor").draggable();
 
 	// sets up events to detect changes of the input, and then trigger the updateOutput() function
 	$("input[type=radio]").change(function () {
@@ -700,6 +700,15 @@ $(document).ready(function () { //page load function
 	$("input[name=resolution" + i + "]").change(function () {
 		updateOutput();
 	});
+/*	$("#input[name=dragSnap]").change(function () {
+		if($("#monitorDrag").checked){
+			$(".monitor").draggable();
+		}
+		else if($("#monitorSnap").checked) {
+			$(".monitor").draggable({snap: true}); //makes the monitors draggable(snap to each other)
+		}
+
+	}); */
 	//end set up events triggers
 
 
@@ -727,11 +736,5 @@ $(document).ready(function () { //page load function
 		}
 	});
 	//end events for buttons being clicked
-
-	$( ".monitor" ).draggable();
-
-	$("#monitorCanvas").resizeable({
-		handles: 'w',
-	});
 
 });
