@@ -6,18 +6,16 @@ $maxNumMonitors = 9;
 
 //default values, they get set for all 9 monitors in a for loop (arrays)
 //NOTICE!!! THESE ARRAYS START AT 1 INSTEAD OF 0 TO AVOID CONFUSION BELOW WHEN REFERENCED... OR TO MAKE MORE CONFUSION... now no [$i-1] is needed, just [$i]
-if(!isset($monitorDrag)) $monitorDrag = TRUE;
-if(!isset($monitorSnap)) $monitorSnap = FALSE;
 if(!isset($diagonal)) for($i = 1; $i <= $maxNumMonitors; $i++) $diagonal[$i] = 24;
 if(!isset($unitType)) for($i = 1; $i <= $maxNumMonitors; $i++) $unitType[$i] = "in";
-if(!isset($bezelWidth)) for($i = 1; $i <= $maxNumMonitors; $i++) $bezelWidth[$i] = 0.75;
+if(!isset($bezelWidth)) for($i = 1; $i <= $maxNumMonitors; $i++) $bezelWidth[$i] = 0.5;
 if(!isset($orientation)) for($i = 1; $i <= $maxNumMonitors; $i++) $orientation[$i] = "landscape";
 if(!isset($customAspectRatio)) for($i = 1; $i <= $maxNumMonitors; $i++) $customAspectRatio[$i] = FALSE;
 if(!isset($aspectRatioType)) for($i = 1; $i <= $maxNumMonitors; $i++) $aspectRatioType[$i] = "16:9";
 if(!isset($customResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $customResolution[$i] = FALSE;
 if(!isset($resolutionType)) for($i = 1; $i <= $maxNumMonitors; $i++) $resolutionType[$i] = "FHD";
-if(!isset($horizontalResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $horizontalResolution[$i] = NULL; //gets set by js from resolution type
-if(!isset($verticalResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $verticalResolution[$i] = NULL; //gets set by js from resolution type
+if(!isset($horizontalResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $horizontalResolution[$i] = NULL; //gets set by js from resolution type and aspect ratio type
+if(!isset($verticalResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $verticalResolution[$i] = NULL; //gets set by js from resolution type aspect ratio type
 if(!isset($hdr)) for($i = 1; $i <= $maxNumMonitors; $i++) $hdr[$i] = FALSE;
 if(!isset($srgb)) for($i = 1; $i <= $maxNumMonitors; $i++) $srgb[$i] = FALSE;
 if(!isset($curved)) for($i = 1; $i <= $maxNumMonitors; $i++) $curved[$i] = FALSE;
@@ -30,7 +28,6 @@ if(!isset($refreshRate)) for($i = 1; $i <= $maxNumMonitors; $i++) $refreshRate[$
 if(!isset($responseTime)) for($i = 1; $i <= $maxNumMonitors; $i++) $responseTime[$i] = NULL;
 if(!isset($brand)) for($i = 1; $i <= $maxNumMonitors; $i++) $brand[$i] = "";
 if(!isset($searchEngine)) $searchEngine = "google";
-
 ?>
 
 	<!DOCTYPE html>
@@ -75,8 +72,6 @@ if(!isset($searchEngine)) $searchEngine = "google";
 				<button id="reset" onClick="location.reload(true);">Reset</button>
 				<!--The true parameter forces to reload from server instead of cache, makes it work in firefox-->
 				<button id="print" onClick="window.print();">Print</button><br>
-				<!--<input type="checkbox" name="dragSnap" id="monitorDrag" checked><label>Draggable Monitors</label>
-				<input type="checkbox" name="dragSnap" id="monitorSnap"><label>Monitors Snap to Each Other</label>-->
 				<p id="areaTip" title="May not work in Edge">Drag Down for more Area</p>
 			</section>
 			<section id="monitorOptionsArea">
@@ -107,7 +102,7 @@ if(!isset($searchEngine)) $searchEngine = "google";
 							<tr>
 								<th>Bezel Width: </th>
 								<td>
-									<input type="range" min="0" max="2" value="<?php echo $bezelWidth[$i] ?>" step="0.25" data-show-value="true" name="bezelWidth<?php echo $i ?>">
+									<input type="range" min="0.125" max="2" value="<?php echo $bezelWidth[$i] ?>" step="0.125" data-show-value="true" name="bezelWidth<?php echo $i ?>">
 									<span id="bezelValue<?php echo $i ?>"><?php echo $bezelWidth[$i] ?>"</span>
 								</td>
 
@@ -341,7 +336,8 @@ if(!isset($searchEngine)) $searchEngine = "google";
 		</main>
 		<footer>
 			<p>A Kevin Vandy Project <img src="../assets/logos/favicon-small.png" width="16" height="16" alt="logo"></p>
-			<p>View on this project on <a href="https://github.com/KevinVandy/multi-monitor_planning_tool" target="_blank">Github</a></p>
+			<p>View on this project on <a href="https://github.com/KevinVandy/multi-monitor_planning_tool" target="_blank">GitHub</a></p>
+			<p>Submit bug reports or feature requests on the <a href="https://github.com/KevinVandy/multi-monitor_planning_tool/issues" target="_blank">GitHub Issues Tab</a></p>
 		</footer>
 	</body>
 

@@ -203,7 +203,7 @@ function drawMonitorPageLoad(i) {
 	var bezelWidth = getBezelWidth(i);
 	var pixHeight = SCALE * calculateHeight(i) * getUnit(i);
 	var pixWidth = SCALE * calculateWidth(i) * getUnit(i);
-	var pixBezel = SCALE * bezelWidth * getUnit(i) / 2;
+	var pixBezel = SCALE * bezelWidth * getUnit(i);
 	monitor.animate({
 		width: pixWidth + "px",
 		height: pixHeight + "px",
@@ -217,14 +217,14 @@ function drawMonitor(i) {
 		var bezelWidth = getBezelWidth(i);
 		var pixHeight = SCALE * calculateHeight(i) * getUnit(i);
 		var pixWidth = SCALE * calculateWidth(i) * getUnit(i);
-		var pixBezel = SCALE * bezelWidth * getUnit(i) / 2;
+		var pixBezel = SCALE * bezelWidth * getUnit(i);
 		monitor.finish().animate({
 			width: pixWidth + "px",
 			height: pixHeight + "px",
 			borderWidth: pixBezel + "px"
 		}, 400);
 	}
-	$("#bezelValue" + i).html(bezelWidth.toFixed(2) + "\"");
+	$("#bezelValue" + i).html(bezelWidth.toFixed(3) + "\"");
 }
 // end draw monitor functions
 
@@ -705,9 +705,21 @@ $(document).ready(function () { //page load function
 		$("#horRes" + i).prop("disabled", true);
 		$("#verRes" + i).prop("disabled", true);
 
+		/*$("input[name=units" + i + "]").change(function () {
+			if(getUnit(i) == .3937) {
+				$("#size" + i).val(getSize(i) * 2.54);
+			}
+			else if(getUnit(i) == 1) {
+				$("#size" + i).val(getSize(i) * .3937);
+			}
+			else {
+				$("#size" + i).val(getSize(i));
+			}
+		});*/
 	}
 
-	$(".monitor").draggable(); //makes monitors draggable
+	//makes monitors draggable
+	$(".monitor").draggable({});
 
 	// sets up events to detect changes of the input, and then trigger the updateOutput() function
 	$("input[type=radio]").change(function () {
@@ -737,18 +749,6 @@ $(document).ready(function () { //page load function
 	$("select").change(function () {
 		updateOutput();
 	});
-	$("input[name=resolution" + i + "]").change(function () {
-		updateOutput();
-	});
-/*	$("#input[name=dragSnap]").change(function () {
-		if($("#monitorDrag").checked){
-			$(".monitor").draggable();
-		}
-		else if($("#monitorSnap").checked) {
-			$(".monitor").draggable({snap: true}); //makes the monitors draggable(snap to each other)
-		}
-
-	}); */
 	//end set up events triggers
 
 
@@ -776,5 +776,6 @@ $(document).ready(function () { //page load function
 		}
 	});
 	//end events for buttons being clicked
+
 
 });
