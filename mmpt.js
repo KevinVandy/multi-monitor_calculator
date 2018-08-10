@@ -65,12 +65,25 @@ function getResolutionType(i) {
 	return $("select[name=resolutionType" + i + "] option:selected").val();
 }
 
+function getBezelWidth(i) {
+	return parseFloat($("input[name=bezelWidth" + i + "]").val());
+}
+
 function getHDR(i) {
-	var HDR = $("input[name=hdr" + i + "]:checkbox:checked").val();
-	if (HDR === undefined || HDR === null || HDR === "") {
+	var hdr = $("input[name=hdr" + i + "]:checkbox:checked").val();
+	if (hdr === undefined || hdr === null || hdr === "") {
 		return null;
 	} else {
-		return HDR;
+		return hdr;
+	}
+}
+
+function getSRGB(i) {
+	var srgb = $("input[name=srgb" + i + "]:checkbox:checked").val();
+	if (srgb === undefined || srgb === null || srgb === "") {
+		return null;
+	} else {
+		return srgb;
 	}
 }
 
@@ -89,6 +102,24 @@ function getTouch(i) {
 		return null;
 	} else {
 		return touch;
+	}
+}
+
+function getWebcam(i) {
+	var webcam = $("input[name=webcam" + i + "]:checkbox:checked").val();
+	if (webcam === undefined || webcam === null || webcam === "") {
+		return null;
+	} else {
+		return webcam;
+	}
+}
+
+function getSpeakers(i) {
+	var speakers = $("input[name=speakers" + i + "]:checkbox:checked").val();
+	if (speakers === undefined || speakers === null || speakers === "") {
+		return null;
+	} else {
+		return speakers;
 	}
 }
 
@@ -121,6 +152,7 @@ function getSearchEngine() {
 	return $("select[name=searchEngine] option:selected").val();
 }
 // end functions to get data from the html
+
 
 
 // begin functions to make simple calculations
@@ -168,24 +200,31 @@ function calculateNumPixels(i) {
 //used to draw the monitors on page load without doing the animation
 function drawMonitorPageLoad(i) {
 	var monitor = getMonitor(i);
+	var bezelWidth = getBezelWidth(i);
 	var pixHeight = SCALE * calculateHeight(i) * getUnit(i);
 	var pixWidth = SCALE * calculateWidth(i) * getUnit(i);
+	var pixBezel = SCALE * bezelWidth * getUnit(i) / 2;
 	monitor.animate({
 		width: pixWidth + "px",
-		height: pixHeight + "px"
+		height: pixHeight + "px",
+		borderWidth: pixBezel + "px"
 	}, 1);
 }
 // Calculates height in pixels, updates size of monitor, applies it to the css to draw the monitor in its new size with animation
 function drawMonitor(i) {
 	if (getSize(i) > 3 && getSize(i) < 100) {
 		var monitor = getMonitor(i);
+		var bezelWidth = getBezelWidth(i);
 		var pixHeight = SCALE * calculateHeight(i) * getUnit(i);
 		var pixWidth = SCALE * calculateWidth(i) * getUnit(i);
+		var pixBezel = SCALE * bezelWidth * getUnit(i) / 2;
 		monitor.finish().animate({
 			width: pixWidth + "px",
-			height: pixHeight + "px"
+			height: pixHeight + "px",
+			borderWidth: pixBezel + "px"
 		}, 400);
 	}
+	$("#bezelValue" + i).html(bezelWidth.toFixed(2) + "\"");
 }
 // end draw monitor functions
 
@@ -213,12 +252,6 @@ function zoom(x) {
 	updateOutput();
 }
 // end functions for buttons
-
-
-
-// begin functions for dragging monitors
-
-// end functions for dragging monitors
 
 
 
@@ -308,10 +341,9 @@ function displayTotalWidth() { //Display an estimate of the total width that wil
 	var inchesRemainder = 0;
 	var unit = 0;
 	for (var i = 1; i <= numActiveMonitors; i++) {
-		totalWidthSmallUnit += calculateWidth(i);
+		totalWidthSmallUnit += calculateWidth(i) + parseFloat(getBezelWidth(i)) * 2;
 		unit = getUnit(i);
 	}
-	totalWidthSmallUnit += numActiveMonitors * 2; //adds bezzels that are 1 inch/cm wide on each side of the monitor
 	if (unit === 1) {
 		totalWidthLargeUnit = totalWidthSmallUnit / 12;
 		inchesRemainder = totalWidthSmallUnit % 12;
@@ -341,8 +373,8 @@ function displayTotalArea() { //Display the total area (screen real estate) of a
 		totalAreaLargeUnit = totalAreaSmallUnit / 144;
 		totalAreaSmallUnit = totalAreaSmallUnit.toFixed(0);
 		totalAreaLargeUnit = totalAreaLargeUnit.toFixed(2);
-		totalAreaSmallUnit += "in<sup>2</sup>";
-		totalAreaLargeUnit += "ft<sup>2</sup>";
+		totalAreaSmallUnit += "\"<sup>2</sup>";
+		totalAreaLargeUnit += "\'<sup>2</sup>";
 	} else {
 		totalAreaLargeUnit = totalAreaSmallUnit / 10000;
 		totalAreaSmallUnit = totalAreaSmallUnit.toFixed(0);
@@ -606,23 +638,27 @@ function search(i) { // updates the search url for each monitor
 
 	searchURL += "Shop+Monitor"; //starting keywords of search
 
-	if (displayAspectRatio(i) != "Custom") searchURL += "+" + displayAspectRatio(i); //add aspect ratio to search if it is known
-	if (updateResolution(i) != undefined) searchURL += "+" + updateResolution(i); //add resolution to the search
-	if (displaySize(i) != undefined) searchURL += "+" + displaySize(i); //add size to the search
+	//add basic specs to search
+	if (displayAspectRatio(i) != "Custom") searchURL += "+" + displayAspectRatio(i);
+	if (updateResolution(i) != undefined) searchURL += "+" + updateResolution(i);
+	if (displaySize(i) != undefined) searchURL += "+" + displaySize(i);
 
 	//add extra specs if present to the search
-	if (getHDR(i) != null && getHDR(i) != undefined) searchURL += "+" + getHDR(i); //adds HDR to search if checked
-	if (getCurved(i) != null && getCurved(i) != undefined) searchURL += "+" + getCurved(i); //adds curved to search if checked
-	if (getTouch(i) != null && getTouch(i) != undefined) searchURL += "+" + getTouch(i); //adds touch to search if checked
-	if (getSync(i) != "any" && getSync(i) != undefined) searchURL += "+" + getSync(i); //adds value of sync radio button to search if one is selected
-	if (getDisplayType(i) != "any" && getDisplayType(i) != undefined) searchURL += "+" + getDisplayType(i); //adds display type to search if 'any' is not selected
-	if (getRefreshRate(i) != "any" && getRefreshRate(i) != undefined && getRefreshRate != "") searchURL += "+" + getRefreshRate(i); //adds refresh rate to search if 'any' is not selected
-	if (getResponseTime(i) != null && getResponseTime(i) != undefined && getResponseTime(i) != "") searchURL += "+" + getResponseTime(i) + "ms"; //adds response time to searc if 'any' is not selected
-	if (getBrand(i) != null && getBrand(i) != undefined && getBrand != "") searchURL += "+" + getBrand(i); // adds any text from the brand textbox to the search
+	if (getHDR(i) != null && getHDR(i) != undefined) searchURL += "+" + getHDR(i);
+	if (getSRGB(i) != null && getSRGB(i) != undefined) searchURL += "+" + getSRGB(i);
+	if (getCurved(i) != null && getCurved(i) != undefined) searchURL += "+" + getCurved(i);
+	if (getTouch(i) != null && getTouch(i) != undefined) searchURL += "+" + getTouch(i);
+	if (getWebcam(i) != null && getWebcam(i) != undefined) searchURL += "+" + getWebcam(i);
+	if (getSpeakers(i) != null && getSpeakers(i) != undefined) searchURL += "+" + getSpeakers(i);
+	if (getSync(i) != "any" && getSync(i) != undefined) searchURL += "+" + getSync(i);
+	if (getDisplayType(i) != "any" && getDisplayType(i) != undefined) searchURL += "+" + getDisplayType(i);
+	if (getRefreshRate(i) != "any" && getRefreshRate(i) != undefined && getRefreshRate != "") searchURL += "+" + getRefreshRate(i);
+	if (getResponseTime(i) != null && getResponseTime(i) != undefined && getResponseTime(i) != "") searchURL += "+" + getResponseTime(i) + "ms";
+	if (getBrand(i) != null && getBrand(i) != undefined && getBrand != "") searchURL += "+" + getBrand(i);
 
 	//apply the search to the href in the html links for 'Search for a Monitor Like This' buttons
-	$("#search" + i).attr("href", searchURL);
-	$("#search" + i).attr("target", "_blank");
+	$("#search" + i).prop("href", searchURL);
+	$("#search" + i).prop("target", "_blank");
 }
 
 
@@ -671,7 +707,7 @@ $(document).ready(function () { //page load function
 
 	}
 
-	$(".monitor").draggable();
+	$(".monitor").draggable(); //makes monitors draggable
 
 	// sets up events to detect changes of the input, and then trigger the updateOutput() function
 	$("input[type=radio]").change(function () {
@@ -685,6 +721,12 @@ $(document).ready(function () { //page load function
 	});
 	$("input[type=text]").change(function () {
 		updateOutput();
+	});
+	$("input[type=range]").change(function () {
+		for (var i = 1; i <= numActiveMonitors; i++) {
+			drawMonitor(i);
+		}
+		displayTotalWidth();
 	});
 	$("input[type=number]").keyup(function () {
 		updateOutput();

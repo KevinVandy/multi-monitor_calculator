@@ -66,6 +66,10 @@ table {
 	margin: auto;
 }
 
+table th {
+	text-align: right;
+}
+
 table td {
 	padding: 2px;
 }
@@ -92,6 +96,10 @@ input[type="text"] {
 	width: 100px;
 }
 
+input[type="range"] {
+	width: 80%;
+}
+
 .standard {
 	font-weight: bolder;
 }
@@ -109,7 +117,7 @@ input[type="text"] {
 	margin-top: 10px;
 	z-index: 8;
 	display: table;
-	margin: 0px 6px;
+	margin: 0px 4px;
 	padding: 0px;
 }
 
@@ -172,11 +180,11 @@ input[type="text"] {
 
 .extraSpecs th{
 	text-align: right;
-	margin: 12px;
+	padding: 6px;
 }
 
 .extraSpecs td {
-	margin: 12px;
+	padding: 6px;
 }
 
 .extraSpecs input[type=text] {

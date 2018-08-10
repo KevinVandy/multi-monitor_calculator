@@ -10,6 +10,7 @@ if(!isset($monitorDrag)) $monitorDrag = TRUE;
 if(!isset($monitorSnap)) $monitorSnap = FALSE;
 if(!isset($diagonal)) for($i = 1; $i <= $maxNumMonitors; $i++) $diagonal[$i] = 24;
 if(!isset($unitType)) for($i = 1; $i <= $maxNumMonitors; $i++) $unitType[$i] = "in";
+if(!isset($bezelWidth)) for($i = 1; $i <= $maxNumMonitors; $i++) $bezelWidth[$i] = 0.75;
 if(!isset($orientation)) for($i = 1; $i <= $maxNumMonitors; $i++) $orientation[$i] = "landscape";
 if(!isset($customAspectRatio)) for($i = 1; $i <= $maxNumMonitors; $i++) $customAspectRatio[$i] = FALSE;
 if(!isset($aspectRatioType)) for($i = 1; $i <= $maxNumMonitors; $i++) $aspectRatioType[$i] = "16:9";
@@ -18,8 +19,11 @@ if(!isset($resolutionType)) for($i = 1; $i <= $maxNumMonitors; $i++) $resolution
 if(!isset($horizontalResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $horizontalResolution[$i] = NULL; //gets set by js from resolution type
 if(!isset($verticalResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $verticalResolution[$i] = NULL; //gets set by js from resolution type
 if(!isset($hdr)) for($i = 1; $i <= $maxNumMonitors; $i++) $hdr[$i] = FALSE;
+if(!isset($srgb)) for($i = 1; $i <= $maxNumMonitors; $i++) $srgb[$i] = FALSE;
 if(!isset($curved)) for($i = 1; $i <= $maxNumMonitors; $i++) $curved[$i] = FALSE;
 if(!isset($touch)) for($i = 1; $i <= $maxNumMonitors; $i++) $touch[$i] = FALSE;
+if(!isset($webcam)) for($i = 1; $i <= $maxNumMonitors; $i++) $webcam[$i] = FALSE;
+if(!isset($speakers)) for($i = 1; $i <= $maxNumMonitors; $i++) $speakers[$i] = FALSE;
 if(!isset($displayType)) for($i = 1; $i <= $maxNumMonitors; $i++) $displayType[$i] = "any";
 if(!isset($syncType)) for($i = 1; $i <= $maxNumMonitors; $i++) $syncType[$i] = "any";
 if(!isset($refreshRate)) for($i = 1; $i <= $maxNumMonitors; $i++) $refreshRate[$i] = "any";
@@ -42,8 +46,7 @@ if(!isset($searchEngine)) $searchEngine = "google";
 		<link rel="stylesheet" type="text/css" href="../normalize.css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href="mmpt.css">
-		<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>-->
-		<script src=jquery-3.3.1.js></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script src="mmpt.js"></script>
 		<link rel="shortcut icon" href="../favicon.ico">
@@ -78,8 +81,7 @@ if(!isset($searchEngine)) $searchEngine = "google";
 			</section>
 			<section id="monitorOptionsArea">
 				<!-- Start of For Loop to make all monitors divs -->
-				<?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?>
-				<!--Monitor <?php echo $i ?>-->
+				<?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?><!--Monitor <?php echo $i ?>-->
 				<div class="monitorBox" id="monitorBox<?php echo $i ?>">
 					<div class="monitor" id="monitor<?php echo $i ?>" class="ui-widget-content">
 						<p>
@@ -101,6 +103,14 @@ if(!isset($searchEngine)) $searchEngine = "google";
 									<input type="radio" name="units<?php echo $i ?>" value="1.0" <?php if($unitType[$i]=="in" ) echo htmlspecialchars( "checked") ?>>in
 									<input type="radio" name="units<?php echo $i ?>" value=".3937" <?php if($unitType[$i]=="cm" ) echo htmlspecialchars( "checked") ?>>cm
 								</td>
+							</tr>
+							<tr>
+								<th>Bezel Width: </th>
+								<td>
+									<input type="range" min="0" max="2" value="<?php echo $bezelWidth[$i] ?>" step="0.25" data-show-value="true" name="bezelWidth<?php echo $i ?>">
+									<span id="bezelValue<?php echo $i ?>"><?php echo $bezelWidth[$i] ?>"</span>
+								</td>
+
 							</tr>
 						</table>
 					</div>
@@ -185,8 +195,14 @@ if(!isset($searchEngine)) $searchEngine = "google";
 						<table>
 							<tr>
 								<td><input type="checkbox" name="hdr<?php echo $i ?>" value="HDR" <?php if($hdr[$i]) echo htmlspecialchars( "checked") ?>>HDR</td>
+								<td><input type="checkbox" name="srgb<?php echo $i ?>" value="sRGB" <?php if($srgb[$i]) echo htmlspecialchars( "checked") ?>>sRGB</td>
 								<td><input type="checkbox" name="curved<?php echo $i ?>" value="Curved" <?php if($curved[$i]) echo htmlspecialchars( "checked") ?>>Curved</td>
+
+							</tr>
+							<tr>
 								<td><input type="checkbox" name="touch<?php echo $i ?>" value="Touch" <?php if($touch[$i]) echo htmlspecialchars( "checked") ?>>Touch</td>
+								<td><input type="checkbox" name="webcam<?php echo $i ?>" value="Webcam" <?php if($webcam[$i]) echo htmlspecialchars( "checked") ?>>Webcam</td>
+								<td><input type="checkbox" name="speakers<?php echo $i ?>" value="Speakers" <?php if($speakers[$i]) echo htmlspecialchars( "checked") ?>>Speakers</td>
 							</tr>
 						</table>
 						<table>
@@ -302,18 +318,18 @@ if(!isset($searchEngine)) $searchEngine = "google";
 				</div>
 			</section>
 			<div id="analysis">
-				<h3>Set-up Analysis</h3>
+				<h2>Set-up Analysis</h2>
 				<table>
 					<tr>
 						<th>Total Pixels: </th>
 						<td id="totalPixels"></td>
 					</tr>
-					<tr title="This assumes 1 inch bezels">
+					<tr title="This includes bezels">
 						<th>Total Width: </th>
 						<td id="totalWidth"></td>
 					</tr>
 					<tr title="Total Screen Area">
-						<th>Total Screen Real Estate: </th>
+						<th>Screen Real Estate: </th>
 						<td id="totalArea"></td>
 					</tr>
 					<tr>
