@@ -291,6 +291,7 @@ else $searchEngine = "google";
 								<td>
 									<select name="syncType<?php echo $i ?>">
 										<option value="any" <?php if($syncType[$i] == "any") echo htmlspecialchars("selected") ?>>Any</option>
+										<option value="none" <?php if($syncType[$i] == "none") echo htmlspecialchars("selected") ?>>None</option>
 										<option value="G-Sync" <?php if($syncType[$i] == "G-Sync") echo htmlspecialchars("selected") ?>>G-Sync</option>
 										<option value="FreeSync" <?php if($syncType[$i] == "FreeSync") echo htmlspecialchars("selected") ?>>FreeSync</option>
 									</select>

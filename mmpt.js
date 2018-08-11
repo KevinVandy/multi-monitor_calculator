@@ -663,7 +663,7 @@ function search(i) { // updates the search url for each monitor
 	if (getTouch(i) != null && getTouch(i) != undefined) searchURL += "+" + getTouch(i);
 	if (getWebcam(i) != null && getWebcam(i) != undefined) searchURL += "+" + getWebcam(i);
 	if (getSpeakers(i) != null && getSpeakers(i) != undefined) searchURL += "+" + getSpeakers(i);
-	if (getSync(i) != "any" && getSync(i) != undefined) searchURL += "+" + getSync(i);
+	if (getSync(i) != "any" && getSync(i) != "none" && getSync(i) != undefined) searchURL += "+" + getSync(i);
 	if (getDisplayType(i) != "any" && getDisplayType(i) != undefined) searchURL += "+" + getDisplayType(i);
 	if (getRefreshRate(i) != "any" && getRefreshRate(i) != undefined && getRefreshRate != "") searchURL += "+" + getRefreshRate(i);
 	if (getResponseTime(i) != null && getResponseTime(i) != undefined && getResponseTime(i) != "") searchURL += "+" + getResponseTime(i) + "ms";

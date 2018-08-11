@@ -239,13 +239,6 @@ input[type="range"] {
 	font-weight: bold;
 }
 
-.ui-resizable-handle {
-	width: 0;
-	height: 0;
-	border: 4px solid blue;
-	border-radius: 10px;
-}
-
 #buttons {
 	margin: auto;
 	width: auto;
@@ -284,31 +277,12 @@ input[type="range"] {
 	cursor: zoom-out;
 }
 
-#monitorCanvas {
-	margin: auto;
-	min-width: 90%;
-	max-width: 90%;
-	width: 90%;
-	height: 10px;
-	min-height: 10px;
-	max-height: 300px;
-	border-bottom: dashed white 2px;
-	resize: both;
-	overflow: auto;
-}
-
-#monitorCanvas:active {
-	border-bottom: dashed red 2px;
-}
-
 #areaTip {
 	text-align: right;
 	font-size: .6em;
 	margin: 10px 5px;
 	line-height: 0;
 }
-
-
 
 #monitorBox3,
 #monitorBox4,
@@ -326,6 +300,7 @@ input[type="range"] {
 
 #save {
 	width: 50%;
+	max-width: 700px;
 	margin: auto;
 	text-align: left;
 	color: darkred;
