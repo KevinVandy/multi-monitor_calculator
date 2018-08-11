@@ -1,38 +1,40 @@
 # multi-monitor_planning_tool
-A tool written in JavaScript that assists a user in planning their multi-monitor setup and search for potential monitors.
+A tool written in JavaScript and PHP that assists a user in planning their multi-monitor setup and search for potential monitors.
 
-view the new official beta at: https://www.kevinvandy.com/multi-monitor_planning_tool (recommended)
+View the new official beta at: https://www.kevinvandy.com/multi-monitor_planning_tool (recommended)
 
-view the old original alpha at: http://monitorplannerbeta.atwebpages.com/ (for legacy)
+View the old original alpha at: http://monitorplannerbeta.atwebpages.com/ (for legacy)
+
+
+# Next Planned Features That Will be Done Shortly
+
+Prebuilt setups from dropdown menu for inspiration (Using a get request link for each one), 
+
+Remember how many monitors were active on a saved setup
 
 
 # Small Planned Features:
 
-tooltips for necessary things,
+More tooltips for necessary things,
 
-reorganize options, add more stat outputs, 
-
-make bezzel width an option and reflect it in the monitor border width,
-
-add more set-up analysis stats, 
+Add more set-up analysis stats, 
 
 fix inconsistencies with "detect from custom resolution" and "custom" radio buttons, 
 
-change some of the radio button options to select combo boxes instead (still to be pondered),
-
-depreciate the need for retrieving theta values (aspect ratio) from the html and just rely on the calculations from the resolution input (alomst there in the js)
-
+Add a copy URL button to make saving a link to your setup easier
 
 
 # BIG GOALS:
 
-prebuilt setups from dropdown menu for inspiration, 
+Design Overhaul to look more modern
 
-Make the Monitors Draggable so that it will be possible to stack them vertically
+Optimize better for mobile,
 
-have better support for mixing english and metric units,
+Have better support for mixing english and metric units,
 
-optimize better for mobile
+Improve Loading Time, make more efficient,
+
+Remember monitor placement if they were dragged in a saved setup
 
 
 # Please comment if you have any issues or feature requests in the issues tab.
