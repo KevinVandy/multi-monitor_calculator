@@ -86,7 +86,7 @@ select {
 
 input {
 	display: inline;
-	margin: 5px 1px;
+	margin: 10px 1px;
 	text-align: center;
 	max-width: 80px;
 	text-align: center;
@@ -246,11 +246,29 @@ input[type="range"] {
 	border-radius: 10px;
 }
 
+#buttons {
+	margin: auto;
+	width: auto;
+	min-width: 800px;
+	max-width: 800px;
+	height: 70px;
+	min-height: 70px;
+	max-height: 300px;
+	border-bottom: dashed white 2px;
+	resize: vertical;
+	overflow: auto;
+}
+
+#buttons:active {
+	border-bottom: dashed darkred 2px;
+}
+
 #addMonitor,
 #removeMonitor,
 #zoomIn,
 #zoomOut,
-#reset,
+#undo,
+#startover,
 #print {
 	font-size: 1em;
 	height: 2.3em;
@@ -290,18 +308,7 @@ input[type="range"] {
 	line-height: 0;
 }
 
-#buttons {
-	margin: auto;
-	width: auto;
-	min-width: 700px;
-	max-width: 700px;
-	height: 70px;
-	min-height: 70px;
-	max-height: 300px;
-	border-bottom: dashed white 2px;
-	resize: vertical;
-	overflow: auto;
-}
+
 
 #monitorBox3,
 #monitorBox4,
@@ -379,9 +386,25 @@ input[type="range"] {
 	.extraSpecs,
 	.search,
 	input,
-	button {
+	button,
+	.searchEngine,
+	#save,
+	#areaTip {
 		display: none;
+		border: none;
 		/*Gets rid of buttons and options for printing*/
+	}
+
+	section {
+		border: none;
+	}
+
+	div {
+		border: none;
+	}
+
+	#analysis {
+		border: none;
 	}
 }
 

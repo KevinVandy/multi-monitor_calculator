@@ -25,7 +25,7 @@ for($i = 1; $i <= $maxNumMonitors; $i++)
 	if($temp != NULL) $orientation[$i] = $temp;
 	else $orientation[$i] = "landscape";
 
-	$temp = filter_input(INPUT_GET, 'aspectRatioCommonCustom' . $i);
+	$temp = filter_input(INPUT_GET, 'aspectRatioCC' . $i);
 	if($temp != NULL && $temp === "custom") $customAspectRatio[$i] = TRUE;
 	else $customAspectRatio[$i] = FALSE;
 
@@ -33,7 +33,7 @@ for($i = 1; $i <= $maxNumMonitors; $i++)
 	if($temp != NULL) $aspectRatioType[$i] = $temp;
 	else $aspectRatioType[$i] = "16:9";
 
-	$temp = filter_input(INPUT_GET, 'resolutionCommonCustom' . $i);
+	$temp = filter_input(INPUT_GET, 'resolutionCC' . $i);
 	if($temp != NULL && $temp === "custom") $customResolution[$i] = TRUE;
 	else $customResolution[$i] = FALSE;
 
@@ -139,7 +139,8 @@ else $searchEngine = "google";
 				<button id="removeMonitor">Remove Monitor</button>
 				<button id="zoomIn">Zoom In</button>
 				<button id="zoomOut">Zoom Out</button>
-				<button id="reset" onClick="location.reload(true);">Reset</button>
+				<button id="undo" onClick="location.reload(true);" title="Undo the changes you have made since loading the page">Undo</button>
+				<a href="index.php"><button id="startover" title="Start Over with the Default values">Start Over</button></a>
 				<!--The true parameter forces to reload from server instead of cache, makes it work in firefox-->
 				<button id="print" onClick="window.print();">Print</button><br>
 				<p id="areaTip" title="May not work in Edge">Drag Down for more Area</p>
@@ -196,7 +197,7 @@ else $searchEngine = "google";
 						<table>
 							<tr>
 								<th>Common: </th>
-								<td><input type="radio" name="aspectRatioCommonCustom<?php echo $i ?>" id="commonAspectRatio<?php echo $i ?>" value="common" <?php if(!$customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="aspectRatioCC<?php echo $i ?>" id="commonAspectRatio<?php echo $i ?>" value="common" <?php if(!$customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
 									<select name="aspectRatioType<?php echo $i ?>" id="aspectRatioChoices<?php echo $i ?>">
 										<option value="detect" <?php if($aspectRatioType[$i] == "detect") echo htmlspecialchars("selected") ?>>Detect</option>
@@ -217,7 +218,7 @@ else $searchEngine = "google";
 							</tr>
 							<tr>
 								<th>Custom:</th>
-								<td><input type="radio" name="aspectRatioCommonCustom<?php echo $i ?>" id="customAspectRatio<?php echo $i ?>" value="custom" <?php if($customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="aspectRatioCC<?php echo $i ?>" id="customAspectRatio<?php echo $i ?>" value="custom" <?php if($customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>Detect Ratio</td>
 							</tr>
 						</table>
@@ -228,7 +229,7 @@ else $searchEngine = "google";
 						<table>
 							<tr>
 								<th>Common: </th>
-								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="commonResolution<?php echo $i ?>" value="common" <?php if(!$customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="resolutionCC<?php echo $i ?>" id="commonResolution<?php echo $i ?>" value="common" <?php if(!$customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
 									<select name="resolutionType<?php echo $i ?>" id="resolutionChoices<?php echo $i ?>">
 										<option value="custom" <?php if($resolutionType[$i] == "custom") echo htmlspecialchars("selected") ?> id="customResolutionChoice">Custom</option>
@@ -247,7 +248,7 @@ else $searchEngine = "google";
 							</tr>
 							<tr>
 								<th>Custom: </th>
-								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="customResolution<?php echo $i ?>" value="custom" <?php if($customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="resolutionCC<?php echo $i ?>" id="customResolution<?php echo $i ?>" value="custom" <?php if($customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
 									<input type="number" id="horRes<?php echo $i ?>" value="<?php echo $horizontalResolution[$i] ?>">x<input type="number" id="verRes<?php echo $i ?>" value="<?php echo $verticalResolution[$i] ?>">
 								</td>
