@@ -3,31 +3,101 @@
 <?php
 
 $maxNumMonitors = 9;
+$numActiveMonitors = 2;
 
-//default values, they get set for all 9 monitors in a for loop (arrays)
+//load values from get request (bookmark url) if this was a saved setup, else set default value
 //NOTICE!!! THESE ARRAYS START AT 1 INSTEAD OF 0 TO AVOID CONFUSION BELOW WHEN REFERENCED... OR TO MAKE MORE CONFUSION... now no [$i-1] is needed, just [$i]
-if(!isset($diagonal)) for($i = 1; $i <= $maxNumMonitors; $i++) $diagonal[$i] = 24;
-if(!isset($unitType)) for($i = 1; $i <= $maxNumMonitors; $i++) $unitType[$i] = "in";
-if(!isset($bezelWidth)) for($i = 1; $i <= $maxNumMonitors; $i++) $bezelWidth[$i] = 0.5;
-if(!isset($orientation)) for($i = 1; $i <= $maxNumMonitors; $i++) $orientation[$i] = "landscape";
-if(!isset($customAspectRatio)) for($i = 1; $i <= $maxNumMonitors; $i++) $customAspectRatio[$i] = FALSE;
-if(!isset($aspectRatioType)) for($i = 1; $i <= $maxNumMonitors; $i++) $aspectRatioType[$i] = "16:9";
-if(!isset($customResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $customResolution[$i] = FALSE;
-if(!isset($resolutionType)) for($i = 1; $i <= $maxNumMonitors; $i++) $resolutionType[$i] = "FHD";
-if(!isset($horizontalResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $horizontalResolution[$i] = NULL; //gets set by js from resolution type and aspect ratio type
-if(!isset($verticalResolution)) for($i = 1; $i <= $maxNumMonitors; $i++) $verticalResolution[$i] = NULL; //gets set by js from resolution type aspect ratio type
-if(!isset($hdr)) for($i = 1; $i <= $maxNumMonitors; $i++) $hdr[$i] = FALSE;
-if(!isset($srgb)) for($i = 1; $i <= $maxNumMonitors; $i++) $srgb[$i] = FALSE;
-if(!isset($curved)) for($i = 1; $i <= $maxNumMonitors; $i++) $curved[$i] = FALSE;
-if(!isset($touch)) for($i = 1; $i <= $maxNumMonitors; $i++) $touch[$i] = FALSE;
-if(!isset($webcam)) for($i = 1; $i <= $maxNumMonitors; $i++) $webcam[$i] = FALSE;
-if(!isset($speakers)) for($i = 1; $i <= $maxNumMonitors; $i++) $speakers[$i] = FALSE;
-if(!isset($displayType)) for($i = 1; $i <= $maxNumMonitors; $i++) $displayType[$i] = "any";
-if(!isset($syncType)) for($i = 1; $i <= $maxNumMonitors; $i++) $syncType[$i] = "any";
-if(!isset($refreshRate)) for($i = 1; $i <= $maxNumMonitors; $i++) $refreshRate[$i] = "any";
-if(!isset($responseTime)) for($i = 1; $i <= $maxNumMonitors; $i++) $responseTime[$i] = NULL;
-if(!isset($brand)) for($i = 1; $i <= $maxNumMonitors; $i++) $brand[$i] = "";
-if(!isset($searchEngine)) $searchEngine = "google";
+for($i = 1; $i <= $maxNumMonitors; $i++)
+{
+	$temp = filter_input(INPUT_GET, 'diagonal' . $i);
+	if($temp != NULL) $diagonal[$i] = $temp;
+	else $diagonal[$i] = 24;
+
+	$temp = filter_input(INPUT_GET, 'units' . $i);
+	if($temp != NULL) $unitType[$i] = $temp;
+	else $unitType[$i] = "in";
+
+	$temp = filter_input(INPUT_GET, 'bezelWidth' . $i);
+	if($temp != NULL) $bezelWidth[$i] = $temp;
+	else $bezelWidth[$i] = 0.50;
+
+	$temp = filter_input(INPUT_GET, 'orientation' . $i);
+	if($temp != NULL) $orientation[$i] = $temp;
+	else $orientation[$i] = "landscape";
+
+	$temp = filter_input(INPUT_GET, 'aspectRatioCommonCustom' . $i);
+	if($temp != NULL && $temp === "custom") $customAspectRatio[$i] = TRUE;
+	else $customAspectRatio[$i] = FALSE;
+
+	$temp = filter_input(INPUT_GET, 'aspectRatioType' . $i);
+	if($temp != NULL) $aspectRatioType[$i] = $temp;
+	else $aspectRatioType[$i] = "16:9";
+
+	$temp = filter_input(INPUT_GET, 'resolutionCommonCustom' . $i);
+	if($temp != NULL && $temp === "custom") $customResolution[$i] = TRUE;
+	else $customResolution[$i] = FALSE;
+
+	$temp = filter_input(INPUT_GET, 'resolutionType' . $i);
+	if($temp != NULL) $resolutionType[$i] = $temp;
+	else $resolutionType[$i] = "FHD";
+
+	$temp = filter_input(INPUT_GET, 'horRes' . $i);
+	if($temp != NULL) $horizontalResolution[$i] = $temp;
+	else $horizontalResolution[$i] = 1920;
+
+	$temp = filter_input(INPUT_GET, 'verRes' . $i);
+	if($temp != NULL) $verticalResolution[$i] = $temp;
+	else $verticalResolution[$i] = 1080;
+
+	$temp = filter_input(INPUT_GET, 'hdr' . $i);
+	if($temp != null) $hdr[$i] = $temp;
+	else $hdr[$i] = FALSE;
+
+	$temp = filter_input(INPUT_GET, 'srgb' . $i);
+	if($temp != null) $srgb[$i] = $temp;
+	else $srgb[$i] = FALSE;
+
+	$temp = filter_input(INPUT_GET, 'curved' . $i);
+	if($temp != null) $curved[$i] = $temp;
+	else $curved[$i] = FALSE;
+
+	$temp = filter_input(INPUT_GET, 'touch' . $i);
+	if($temp != null) $touch[$i] = $temp;
+	else $touch[$i] = FALSE;
+
+	$temp = filter_input(INPUT_GET, 'webcam' . $i);
+	if($temp != null) $webcam[$i] = $temp;
+	else $webcam[$i] = FALSE;
+
+	$temp = filter_input(INPUT_GET, 'speakers' . $i);
+	if($temp != null) $speakers[$i] = $temp;
+	else $speakers[$i] = FALSE;
+
+	$temp = filter_input(INPUT_GET, 'displayType' . $i);
+	if($temp != null) $displayType[$i] = $temp;
+	else $displayType[$i] = "any";
+
+	$temp = filter_input(INPUT_GET, 'syncType' . $i);
+	if($temp != null) $syncType[$i] = $temp;
+	else $syncType[$i] = "any";
+
+	$temp = filter_input(INPUT_GET, 'refreshRate' . $i);
+	if($temp != null) $refreshRate[$i] = $temp;
+	else $refreshRate[$i] = "any";
+
+	$temp = filter_input(INPUT_GET, 'responseTime' . $i);
+	if($temp != null) $responseTime[$i] = $temp;
+	else $responseTime[$i] = NULL;
+
+	$temp = filter_input(INPUT_GET, 'brand' . $i);
+	if($temp != null) $brand[$i] = $temp;
+	else $brand[$i] = "";
+}
+
+$temp = filter_input(INPUT_GET, 'searchEngine');
+if($temp != null) $searchEngine = $temp;
+else $searchEngine = "google";
+
 ?>
 
 	<!DOCTYPE html>
@@ -74,10 +144,11 @@ if(!isset($searchEngine)) $searchEngine = "google";
 				<button id="print" onClick="window.print();">Print</button><br>
 				<p id="areaTip" title="May not work in Edge">Drag Down for more Area</p>
 			</section>
-			<section id="monitorOptionsArea">
+			<form action="index.php" method="get" id="monitorOptionsArea">
 				<!-- Start of For Loop to make all monitors divs -->
-				<?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?><!--Monitor <?php echo $i ?>-->
-				<div class="monitorBox" id="monitorBox<?php echo $i ?>">
+				<?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?>
+				<!--Monitor <?php echo $i ?>-->
+				<section class="monitorBox" id="monitorBox<?php echo $i ?>">
 					<div class="monitor" id="monitor<?php echo $i ?>" class="ui-widget-content">
 						<p>
 							<?php echo $i ?>
@@ -89,20 +160,20 @@ if(!isset($searchEngine)) $searchEngine = "google";
 							<tr>
 								<th>Diagonal:</th>
 								<td>
-									<input type="number" id="size<?php echo $i ?>" value="<?php echo $diagonal[$i] ?>">
+									<input type="number" name="diagonal<?php echo $i ?>" id="diagonal<?php echo $i ?>" value="<?php echo $diagonal[$i] ?>">
 								</td>
 							</tr>
 							<tr>
 								<th>Units:</th>
 								<td>
-									<input type="radio" name="units<?php echo $i ?>" value="1.0" <?php if($unitType[$i]=="in" ) echo htmlspecialchars( "checked") ?>>in
-									<input type="radio" name="units<?php echo $i ?>" value=".3937" <?php if($unitType[$i]=="cm" ) echo htmlspecialchars( "checked") ?>>cm
+									<input type="radio" name="units<?php echo $i ?>" value="in" <?php if($unitType[$i]=="in" ) echo htmlspecialchars( "checked") ?>>in
+									<input type="radio" name="units<?php echo $i ?>" value="cm" <?php if($unitType[$i]=="cm" ) echo htmlspecialchars( "checked") ?>>cm
 								</td>
 							</tr>
 							<tr>
 								<th>Bezel Width: </th>
 								<td>
-									<input type="range" min="0.125" max="2" value="<?php echo $bezelWidth[$i] ?>" step="0.125" data-show-value="true" name="bezelWidth<?php echo $i ?>">
+									<input type="range" min="0.0" max="1.5" value="<?php echo $bezelWidth[$i] ?>" step="0.25" data-show-value="true" name="bezelWidth<?php echo $i ?>">
 									<span id="bezelValue<?php echo $i ?>"><?php echo $bezelWidth[$i] ?>"</span>
 								</td>
 
@@ -125,7 +196,7 @@ if(!isset($searchEngine)) $searchEngine = "google";
 						<table>
 							<tr>
 								<th>Common: </th>
-								<td><input type="radio" name="aspectRatioCommonCustom<?php echo $i ?>" id="commonAspectRatio<?php echo $i ?>" <?php if(!$customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="aspectRatioCommonCustom<?php echo $i ?>" id="commonAspectRatio<?php echo $i ?>" value="common" <?php if(!$customAspectRatio[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
 									<select name="aspectRatioType<?php echo $i ?>" id="aspectRatioChoices<?php echo $i ?>">
 										<option value="detect" <?php if($aspectRatioType[$i] == "detect") echo htmlspecialchars("selected") ?>>Detect</option>
@@ -157,7 +228,7 @@ if(!isset($searchEngine)) $searchEngine = "google";
 						<table>
 							<tr>
 								<th>Common: </th>
-								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="commonResolution<?php echo $i ?>" value="standard" <?php if(!$customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
+								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="commonResolution<?php echo $i ?>" value="common" <?php if(!$customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
 									<select name="resolutionType<?php echo $i ?>" id="resolutionChoices<?php echo $i ?>">
 										<option value="custom" <?php if($resolutionType[$i] == "custom") echo htmlspecialchars("selected") ?> id="customResolutionChoice">Custom</option>
@@ -178,7 +249,7 @@ if(!isset($searchEngine)) $searchEngine = "google";
 								<th>Custom: </th>
 								<td><input type="radio" name="resolutionCommonCustom<?php echo $i ?>" id="customResolution<?php echo $i ?>" value="custom" <?php if($customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
-									<input type="number" id="horRes<?php echo $i ?>" value="<?php echo htmlspecialchars($horizontalResolution) ?>">x<input type="number" id="verRes<?php echo $i ?>" value="<?php echo htmlspecialchars($verticalResolution) ?>">
+									<input type="number" id="horRes<?php echo $i ?>" value="<?php echo $horizontalResolution[$i] ?>">x<input type="number" id="verRes<?php echo $i ?>" value="<?php echo $verticalResolution[$i] ?>">
 								</td>
 							</tr>
 						</table>
@@ -295,10 +366,10 @@ if(!isset($searchEngine)) $searchEngine = "google";
 							</tr>
 						</table>
 					</div>
-				</div>
+				</section>
 				<?php } ?>
 				<!-- End of For Loop to make all monitors divs -->
-				<div class="searchEngine">
+				<section class="searchEngine">
 					<table>
 						<tr>
 							<th>Change Search Engine: </th>
@@ -310,33 +381,33 @@ if(!isset($searchEngine)) $searchEngine = "google";
 							</td>
 						</tr>
 					</table>
-				</div>
-			</section>
-			<div id="analysis">
-				<h2>Set-up Analysis</h2>
-				<table>
-					<tr>
-						<th>Total Pixels: </th>
-						<td id="totalPixels"></td>
-					</tr>
-					<tr title="This includes bezels">
-						<th>Total Width: </th>
-						<td id="totalWidth"></td>
-					</tr>
-					<tr title="Total Screen Area">
-						<th>Screen Real Estate: </th>
-						<td id="totalArea"></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
-			</div>
+				</section>
+				<section id="analysis">
+					<h2>Set-up Analysis</h2>
+					<table>
+						<tr>
+							<th>Total Pixels: </th>
+							<td id="totalPixels"></td>
+						</tr>
+						<tr title="This includes bezels">
+							<th>Total Width: </th>
+							<td id="totalWidth"></td>
+						</tr>
+						<tr title="Total Screen Area">
+							<th>Screen Real Estate: </th>
+							<td id="totalArea"></td>
+						</tr>
+					</table>
+				</section>
+				<section id="save">
+					<p>Want to save this setup for later or share your setup with a friend? Click the 'Save This Setup' Button, and then bookmark or share the URL. (It's a very long URL! Also, it may not fully work in older verions of Internet Explorer or Edge)</p>
+				</section>
+				<input type="submit" value="Save This Setup">
+			</form>
 		</main>
 		<footer>
 			<p>A Kevin Vandy Project <img src="../assets/logos/favicon-small.png" width="16" height="16" alt="logo"></p>
-			<p>View on this project on <a href="https://github.com/KevinVandy/multi-monitor_planning_tool" target="_blank">GitHub</a></p>
+			<p>View on this project on <a href="https://github.com/KevinVandy/multi-monitor_planning_tool" target="_blank">GitHub</a> or <a href="https://gitlab.com/KevinVandy/multi-monitor_planning_tool" target="_blank"> GitLab</a></p>
 			<p>Submit bug reports or feature requests on the <a href="https://github.com/KevinVandy/multi-monitor_planning_tool/issues" target="_blank">GitHub Issues Tab</a></p>
 		</footer>
 	</body>

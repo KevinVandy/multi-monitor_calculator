@@ -30,7 +30,7 @@ var maxNumMonitors = 9;
 
 // begin functions to get data from the html
 function getUnit(i) {
-	return parseFloat($("input[name=units" + i + "]:radio:checked").val());
+	return $("input[name=units" + i + "]:radio:checked").val();
 }
 
 function getOrientation(i) {
@@ -42,7 +42,7 @@ function getMonitor(i) {
 }
 
 function getSize(i) {
-	return parseFloat($("#size" + i).val());
+	return parseFloat($("#diagonal" + i).val());
 }
 
 function getHorRes(i) {
@@ -156,6 +156,12 @@ function getSearchEngine() {
 
 
 // begin functions to make simple calculations
+function calculateUnitValue(i) {
+	if (getUnit(i) === "in") return 1;
+	else if (getUnit(i) === "cm") return .3937;
+	else return 0;
+}
+
 function calculateHeight(i) {
 	return parseFloat(getSize(i) * Math.sin(calculateTheta(i)));
 }
@@ -199,11 +205,12 @@ function calculateNumPixels(i) {
 // begin draw monitor functions
 //used to draw the monitors on page load without doing the animation
 function drawMonitorPageLoad(i) {
+	var unitValue = calculateUnitValue(i);
 	var monitor = getMonitor(i);
 	var bezelWidth = getBezelWidth(i);
-	var pixHeight = SCALE * calculateHeight(i) * getUnit(i);
-	var pixWidth = SCALE * calculateWidth(i) * getUnit(i);
-	var pixBezel = SCALE * bezelWidth * getUnit(i);
+	var pixHeight = SCALE * calculateHeight(i) * unitValue;
+	var pixWidth = SCALE * calculateWidth(i) * unitValue;
+	var pixBezel = SCALE * bezelWidth * unitValue;
 	monitor.animate({
 		width: pixWidth + "px",
 		height: pixHeight + "px",
@@ -213,18 +220,19 @@ function drawMonitorPageLoad(i) {
 // Calculates height in pixels, updates size of monitor, applies it to the css to draw the monitor in its new size with animation
 function drawMonitor(i) {
 	if (getSize(i) > 3 && getSize(i) < 100) {
+		var unitValue = calculateUnitValue(i);
 		var monitor = getMonitor(i);
 		var bezelWidth = getBezelWidth(i);
-		var pixHeight = SCALE * calculateHeight(i) * getUnit(i);
-		var pixWidth = SCALE * calculateWidth(i) * getUnit(i);
-		var pixBezel = SCALE * bezelWidth * getUnit(i);
+		var pixHeight = SCALE * calculateHeight(i) * unitValue;
+		var pixWidth = SCALE * calculateWidth(i) * unitValue;
+		var pixBezel = SCALE * bezelWidth * unitValue;
 		monitor.finish().animate({
 			width: pixWidth + "px",
 			height: pixHeight + "px",
 			borderWidth: pixBezel + "px"
 		}, 400);
 	}
-	$("#bezelValue" + i).html(bezelWidth.toFixed(3) + "\"");
+	$("#bezelValue" + i).html(bezelWidth.toFixed(2) + "\"");
 }
 // end draw monitor functions
 
@@ -258,7 +266,9 @@ function zoom(x) {
 // begin functions for displaying values in the stats output section
 function displaySize(i) {
 	var size = getSize(i).toFixed(1);
-	if (getUnit(i) > 0.5) {
+	var unitValue = calculateUnitValue(i);
+
+	if (unitValue === 1) {
 		size += "\"";
 	} else {
 		size += "cm";
@@ -269,7 +279,8 @@ function displaySize(i) {
 
 function displayHeight(i) { // Shortens height to two decimals places, update the value in html
 	var height = calculateHeight(i).toFixed(1);
-	if (getUnit(i) > 0.5) {
+	var unitValue = calculateUnitValue(i);
+	if (unitValue === 1) {
 		height += "\"";
 	} else {
 		height += "cm";
@@ -280,7 +291,8 @@ function displayHeight(i) { // Shortens height to two decimals places, update th
 
 function displayWidth(i) { // Shortens width to one decimal place, updates the value in stats section
 	var width = calculateWidth(i).toFixed(1);
-	if (getUnit(i) > 0.5) {
+	var unitValue = calculateUnitValue(i);
+	if (unitValue === 1) {
 		width += "\"";
 	} else {
 		width += "cm";
@@ -291,7 +303,8 @@ function displayWidth(i) { // Shortens width to one decimal place, updates the v
 
 function displayArea(i) { //Display Monitor area aka screen real estate
 	var area = calculateArea(i).toFixed(1);
-	if (getUnit(i) > 0.5) {
+	var unitValue = calculateUnitValue(i);
+	if (unitValue === 1) {
 		area += "\"<sup>2</sup>";
 	} else {
 		area += "cm<sup>2</sup>";
@@ -316,7 +329,7 @@ function displayPixels(i) { // Displays number of pixels of the monitor in the s
 }
 
 function displayPPI(i) { // Displays pixels per inch and updates values in the stats section
-	if (getUnit(i) === 1) {
+	if (calculateUnitValue(i) === 1) {
 		$("#ppuStat" + i).html("PPI: ");
 	} else {
 		$("#ppuStat" + i).html("PPCM");
@@ -342,7 +355,7 @@ function displayTotalWidth() { //Display an estimate of the total width that wil
 	var unit = 0;
 	for (var i = 1; i <= numActiveMonitors; i++) {
 		totalWidthSmallUnit += calculateWidth(i) + parseFloat(getBezelWidth(i)) * 2;
-		unit = getUnit(i);
+		unit = calculateUnitValue(i);
 	}
 	if (unit === 1) {
 		totalWidthLargeUnit = totalWidthSmallUnit / 12;
@@ -367,7 +380,7 @@ function displayTotalArea() { //Display the total area (screen real estate) of a
 	var unit = 0;
 	for (var i = 1; i <= numActiveMonitors; i++) {
 		totalAreaSmallUnit += calculateArea(i);
-		unit = getUnit(i);
+		unit = calculateUnitValue(i);
 	}
 	if (unit === 1) {
 		totalAreaLargeUnit = totalAreaSmallUnit / 144;
@@ -707,13 +720,13 @@ $(document).ready(function () { //page load function
 
 		/*$("input[name=units" + i + "]").change(function () {
 			if(getUnit(i) == .3937) {
-				$("#size" + i).val(getSize(i) * 2.54);
+				$("#diagonal" + i).val(getSize(i) * 2.54);
 			}
 			else if(getUnit(i) == 1) {
-				$("#size" + i).val(getSize(i) * .3937);
+				$("#diagonal" + i).val(getSize(i) * .3937);
 			}
 			else {
-				$("#size" + i).val(getSize(i));
+				$("#diagonal" + i).val(getSize(i));
 			}
 		});*/
 	}

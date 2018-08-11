@@ -100,6 +100,8 @@ input[type="range"] {
 	width: 80%;
 }
 
+
+
 .standard {
 	font-weight: bolder;
 }
@@ -117,7 +119,7 @@ input[type="range"] {
 	margin-top: 10px;
 	z-index: 1;
 	display: table;
-	margin: 0px 4px;
+	margin: 6px;
 	padding: 0px;
 }
 
@@ -227,7 +229,7 @@ input[type="range"] {
 }
 
 .searchEngine {
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 .noscriptmsg {
@@ -315,11 +317,25 @@ input[type="range"] {
 	margin-left: auto;
 }
 
-#analysis {
+#save {
+	width: 50%;
 	margin: auto;
-	margin-top: 30px;
+	text-align: left;
+	color: darkred;
+	font-weight: bold;
+	line-height: 1.5em;
+}
+
+#analysis {
+	padding-bottom: 20px;
+	margin: auto;
+	margin-top: 20px;
 	margin-bottom: 20px;
 	min-width: 480px;
+	max-width: 700px;
+	width: 50%;
+	border-top: 1px dashed #888;
+	border-bottom: 1px dashed #888;
 }
 
 #analysis table {
@@ -372,4 +388,10 @@ input[type="range"] {
 @page {
 	size: A4 landscape;
 	/*forces printing in landscape, at least works for chrome*/
+}
+
+input[type="submit"] {
+	max-width: 300px;
+	width: 300px;
+	padding: 5px;
 }
