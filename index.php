@@ -2,10 +2,23 @@
 
 <?php
 
-$maxNumMonitors = 9;
-$numActiveMonitors = 2;
-
 //load values from get request (bookmark url) if this was a saved setup, else set default value
+	$temp = filter_input(INPUT_GET, 'SCALE');
+	if($temp != NULL && $temp > 2 && $temp < 50) $SCALE = $temp;
+	else $SCALE = 14;
+
+	$temp = filter_input(INPUT_GET, 'maxNumMonitors');
+	if($temp != NULL && $temp < 15) $maxNumMonitors = $temp;
+	else $maxNumMonitors = 9;
+
+	$temp = filter_input(INPUT_GET, 'numActiveMonitors');
+	if($temp != NULL && $temp > 0 && $temp < $maxNumMonitors) $numActiveMonitors = $temp;
+	else $numActiveMonitors = 2;
+
+	$temp = filter_input(INPUT_GET, 'searchEngine');
+	if($temp != null && ($temp === "google" || $temp === "bing" || $temp === "duckduckgo")) $searchEngine = $temp;
+	else $searchEngine = "google";
+
 //NOTICE!!! THESE ARRAYS START AT 1 INSTEAD OF 0 TO AVOID CONFUSION BELOW WHEN REFERENCED... OR TO MAKE MORE CONFUSION... now no [$i-1] is needed, just [$i]
 for($i = 1; $i <= $maxNumMonitors; $i++)
 {
@@ -19,7 +32,7 @@ for($i = 1; $i <= $maxNumMonitors; $i++)
 
 	$temp = filter_input(INPUT_GET, 'bezelWidth' . $i);
 	if($temp != NULL) $bezelWidth[$i] = $temp;
-	else $bezelWidth[$i] = 0.50;
+	else $bezelWidth[$i] = 1;
 
 	$temp = filter_input(INPUT_GET, 'orientation' . $i);
 	if($temp != NULL) $orientation[$i] = $temp;
@@ -94,9 +107,15 @@ for($i = 1; $i <= $maxNumMonitors; $i++)
 	else $brand[$i] = "";
 }
 
-$temp = filter_input(INPUT_GET, 'searchEngine');
-if($temp != null) $searchEngine = $temp;
-else $searchEngine = "google";
+	$temp = filter_input(INPUT_GET, 'prebuiltSetup');
+	if($temp != null) $setup = $temp;
+	else $setup = "default";
+
+$kingSetup = 'index.php?SCALE=14&maxNumMonitors=9&numActiveMonitors=2&diagonal1=38&units1=in&bezelWidth1=1&orientation1=landscape&aspectRatioCC1=common&aspectRatioType1=21%3A9&resolutionCC1=common&resolutionType1=QHDplus&curved1=Curved&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=30&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=16%3A10&resolutionCC2=common&resolutionType2=QHDplus&displayType2=any&syncType2=any&refreshRate2=any&responseTime2=&brand2=&searchEngine=google';
+
+$ultrawideMasterRaceSetup = 'index.php';
+
+
 
 ?>
 
@@ -115,7 +134,7 @@ else $searchEngine = "google";
 		<link rel="stylesheet" type="text/css" href="mmpt.css">
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<script src="mmpt.js"></script>
+
 		<link rel="shortcut icon" href="../favicon.ico">
 	</head>
 
@@ -134,6 +153,14 @@ else $searchEngine = "google";
 			</div>
 		</noscript>
 		<main>
+			<section id="prebuiltSetups">
+				<!--Start with a Prebuilt Setup:
+				<select name="prebuilt" onchange="location = this.value;">
+					 <option value="index.php" <?php if($setup === "default") echo htmlspecialchars("selected") ?>>Default</option>
+					 <option value="<?php echo htmlspecialchars($ultrawideMasterRaceSetup) ?>" <?php if($setup === $ultrawideMasterRaceSetup) echo htmlspecialchars("selected") ?>>Ultrawide Master Race</option>
+					 <option value="<?php echo htmlspecialchars($kingSetup) ?>">1600p King</option>
+				</select>-->
+			</section>
 			<section id="buttons">
 				<button id="addMonitor">Add Monitor</button>
 				<button id="removeMonitor">Remove Monitor</button>
@@ -146,6 +173,9 @@ else $searchEngine = "google";
 				<p id="areaTip" title="May not work in Edge">Drag Down for more Area</p>
 			</section>
 			<form action="index.php" method="get" id="monitorOptionsArea">
+				<input type="hidden" name="SCALE" id="SCALE" value="<?php echo $SCALE ?>">
+				<input type="hidden" name="maxNumMonitors" id="maxNumMonitors" value="<?php echo $maxNumMonitors ?>">
+				<input type="hidden" name="numActiveMonitors" id="numActiveMonitors" value="<?php echo $numActiveMonitors ?>">
 				<!-- Start of For Loop to make all monitors divs -->
 				<?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?>
 				<!--Monitor <?php echo $i ?>-->
@@ -174,7 +204,7 @@ else $searchEngine = "google";
 							<tr>
 								<th>Bezel Width: </th>
 								<td>
-									<input type="range" min="0.0" max="1.5" value="<?php echo $bezelWidth[$i] ?>" step="0.25" data-show-value="true" name="bezelWidth<?php echo $i ?>">
+									<input type="range" min="0.0" max="2" value="<?php echo $bezelWidth[$i] ?>" step="0.25" data-show-value="true" name="bezelWidth<?php echo $i ?>">
 									<span id="bezelValue<?php echo $i ?>"><?php echo $bezelWidth[$i] ?>"</span>
 								</td>
 
@@ -206,8 +236,8 @@ else $searchEngine = "google";
 											<option value="4:3" <?php if($aspectRatioType[$i] == "4:3") echo htmlspecialchars("selected") ?>>4:3</option>
 										</optgroup>
 										<optgroup label="Wide">
-											<option value="16:9" <?php if($aspectRatioType[$i] == "16:9") echo htmlspecialchars("selected") ?>>16:9</option>
 											<option value="16:10" <?php if($aspectRatioType[$i] == "16:10") echo htmlspecialchars("selected") ?>>16:10</option>
+											<option value="16:9" <?php if($aspectRatioType[$i] == "16:9") echo htmlspecialchars("selected") ?>>16:9</option>
 										</optgroup>
 										<optgroup label="Ultrawide">
 											<option value="21:9" <?php if($aspectRatioType[$i] == "21:9") echo htmlspecialchars("selected") ?>>21:9</option>
@@ -402,7 +432,13 @@ else $searchEngine = "google";
 					</table>
 				</section>
 				<section id="save">
-					<p>Want to save this setup for later or share your setup with a friend? Click the 'Save This Setup' Button, and then bookmark or share the URL. (It's a very long URL! Also, it may not fully work in older verions of Internet Explorer or Edge)</p>
+					<h4>Want to save this setup for later or share your setup with a friend?</h4>
+					<ul>
+						<li>Click the "<em>Save This Setup</em>" Button</li>
+						<li>Wait for the Page to Reload</li>
+						<li>Then either Copy the URL, Bookmarkmark the URL, or Share the URL (It's a very long URL!)</li>
+						<li>With this Custom URL, All of your Options will be Saved!</li>
+					</ul>
 				</section>
 				<input type="submit" value="Save This Setup">
 			</form>
@@ -415,3 +451,5 @@ else $searchEngine = "google";
 	</body>
 
 	</html>
+	<script src="mmpt.js"></script>
+	<!-- This has to be here to get values from index.html -->

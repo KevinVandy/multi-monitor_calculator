@@ -21,11 +21,22 @@
 /*global $, alert, document */
 
 
-// begin global variables
-var SCALE = 14;
-var numActiveMonitors = 2;
-var maxNumMonitors = 9;
+// begin global variables from index.php
+var SCALE = parseInt($("#SCALE").val());
+var numActiveMonitors = parseInt($("#numActiveMonitors").val());
+var maxNumMonitors = parseInt($("#maxNumMonitors").val());
 // end global variables
+
+
+// begin functions to get global variables from hidden inputs
+
+function changeSCALE() {
+	$("#SCALE").val(SCALE);
+}
+
+function changeNumActiveMonitors() {
+	$("#numActiveMonitors").val(numActiveMonitors);
+}
 
 
 // begin functions to get data from the html
@@ -210,7 +221,7 @@ function drawMonitorPageLoad(i) {
 	var bezelWidth = getBezelWidth(i);
 	var pixHeight = SCALE * calculateHeight(i) * unitValue;
 	var pixWidth = SCALE * calculateWidth(i) * unitValue;
-	var pixBezel = SCALE * bezelWidth * unitValue;
+	var pixBezel = SCALE * bezelWidth * unitValue / Math.sqrt(2);
 	monitor.animate({
 		width: pixWidth + "px",
 		height: pixHeight + "px",
@@ -225,7 +236,7 @@ function drawMonitor(i) {
 		var bezelWidth = getBezelWidth(i);
 		var pixHeight = SCALE * calculateHeight(i) * unitValue;
 		var pixWidth = SCALE * calculateWidth(i) * unitValue;
-		var pixBezel = SCALE * bezelWidth * unitValue;
+		var pixBezel = SCALE * bezelWidth * unitValue / Math.sqrt(2);
 		monitor.finish().animate({
 			width: pixWidth + "px",
 			height: pixHeight + "px",
@@ -244,7 +255,7 @@ function addMonitor() {
 	} else {
 		$("#monitorBox" + ++numActiveMonitors).fadeIn(400);
 		$("#monitorBox" + numActiveMonitors).css("display", "inline-block");
-		updateOutput();
+		//updateOutput();
 	}
 }
 
@@ -696,11 +707,12 @@ function updateOutput() { //
 	}
 }
 $(document).ready(function () { //page load function
+
 	//sets up everything for the first time (for all monitors, even if they are not shown), slightly different than updateOutput
 	for (var i = 1; i <= maxNumMonitors; i++) {
 		checkIfCustom(i);
 		updateResolution(i);
-		drawMonitorPageLoad(i); //no animation on page load. This is why its not just a call to updateOutput()
+		drawMonitorPageLoad(i); //no animation on page load.
 		displaySize(i);
 		displayHeight(i);
 		displayWidth(i);
@@ -717,22 +729,18 @@ $(document).ready(function () { //page load function
 		//disable custom resolution boxes so they can't be edited until radio button is selected
 		$("#horRes" + i).prop("disabled", true);
 		$("#verRes" + i).prop("disabled", true);
+	}
 
-		/*$("input[name=units" + i + "]").change(function () {
-			if(getUnit(i) == .3937) {
-				$("#diagonal" + i).val(getSize(i) * 2.54);
-			}
-			else if(getUnit(i) == 1) {
-				$("#diagonal" + i).val(getSize(i) * .3937);
-			}
-			else {
-				$("#diagonal" + i).val(getSize(i));
-			}
-		});*/
+	//loads the correct number of monitors to be shown on page load. Remembers a saved setup
+	for (var i = 1; i <= numActiveMonitors; i++) {
+		numActiveMonitors--;
+		$("#monitorBox" + i).fadeIn(2000);
+		$("#monitorBox" + i).css("display", "inline-block");
+		numActiveMonitors++;
 	}
 
 	//makes monitors draggable
-	$(".monitor").draggable({});
+	$(".monitor").draggable({snap: true});
 
 	// sets up events to detect changes of the input, and then trigger the updateOutput() function
 	$("input[type=radio]").change(function () {
@@ -768,15 +776,19 @@ $(document).ready(function () { //page load function
 	//begin events for buttons being clicked
 	$("#zoomIn").click(function () {
 		zoom("1");
+		changeSCALE();
 	});
 	$("#zoomOut").click(function () {
 		zoom("-1");
+		changeSCALE();
 	});
 	$("#addMonitor").click(function () {
 		addMonitor();
+		changeNumActiveMonitors();
 	});
 	$("#removeMonitor").click(function () {
 		removeMonitor();
+		changeNumActiveMonitors();
 	});
 
 	//special click function to animate the 'More Specs' +/- button that reveals/hides extra options for search
@@ -789,6 +801,5 @@ $(document).ready(function () { //page load function
 		}
 	});
 	//end events for buttons being clicked
-
 
 });

@@ -47,6 +47,7 @@ footer {
 }
 
 h1 {
+	text-align: center;
 	font-size: 38pt;
 	font-weight: bold;
 	margin: 10px;
@@ -59,6 +60,11 @@ h2 {
 h3 {
 	text-align: center;
 	margin: 6px;
+}
+
+h4 {
+	text-align: center;
+	font-size: 1.0em;
 }
 
 table {
@@ -82,6 +88,7 @@ button {
 
 select {
 	min-width: 100px;
+	cursor: pointer;
 }
 
 input {
@@ -92,12 +99,26 @@ input {
 	text-align: center;
 }
 
+input[type="radio"],
+input[type="checkbox"] {
+	cursor: pointer;
+	margin: 3px;
+}
+
+input[type="number"] {
+	margin: 0;
+	cursor: text;
+}
+
 input[type="text"] {
 	width: 100px;
+	margin: 0;
+	cursor: text;
 }
 
 input[type="range"] {
 	width: 80%;
+	margin: 1;
 }
 
 
@@ -145,7 +166,7 @@ input[type="range"] {
 
 .monitorBox {
 	text-align: left;
-	display: inline-block;
+	display: none;
 }
 
 .monitorOptions {
@@ -186,8 +207,7 @@ input[type="range"] {
 	width: 100%;
 }
 
-.extraSpecs th{
-	text-align: right;
+.extraSpecs th {
 	padding: 6px;
 }
 
@@ -284,16 +304,6 @@ input[type="range"] {
 	line-height: 0;
 }
 
-#monitorBox3,
-#monitorBox4,
-#monitorBox5,
-#monitorBox6,
-#monitorBox7,
-#monitorBox8,
-#monitorBox9 {
-	display: none;
-}
-
 #monitor1 {
 	margin-left: auto;
 }
@@ -306,6 +316,15 @@ input[type="range"] {
 	color: darkred;
 	font-weight: bold;
 	line-height: 1.5em;
+}
+
+input[type="submit"] {
+	font-size: 1.5em;
+	font-weight: bold;
+	max-width: 300px;
+	width: 300px;
+	padding: 5px;
+	cursor: pointer;
 }
 
 #analysis {
@@ -386,10 +405,4 @@ input[type="range"] {
 @page {
 	size: A4 landscape;
 	/*forces printing in landscape, at least works for chrome*/
-}
-
-input[type="submit"] {
-	max-width: 300px;
-	width: 300px;
-	padding: 5px;
 }
