@@ -8,7 +8,7 @@
 	else $SCALE = 14;
 
 	$temp = filter_input(INPUT_GET, 'maxNumMonitors');
-	if($temp != NULL && $temp < 15) $maxNumMonitors = $temp;
+	if($temp != NULL && $temp <= 16) $maxNumMonitors = $temp;
 	else $maxNumMonitors = 9;
 
 	$temp = filter_input(INPUT_GET, 'numActiveMonitors');
@@ -23,19 +23,19 @@
 for($i = 1; $i <= $maxNumMonitors; $i++)
 {
 	$temp = filter_input(INPUT_GET, 'diagonal' . $i);
-	if($temp != NULL) $diagonal[$i] = $temp;
+	if($temp != NULL && $temp > 0 && $temp < 200) $diagonal[$i] = $temp;
 	else $diagonal[$i] = 24;
 
 	$temp = filter_input(INPUT_GET, 'units' . $i);
-	if($temp != NULL) $unitType[$i] = $temp;
+	if($temp != NULL && ($temp === "in" || $temp === "cm")) $unitType[$i] = $temp;
 	else $unitType[$i] = "in";
 
 	$temp = filter_input(INPUT_GET, 'bezelWidth' . $i);
-	if($temp != NULL) $bezelWidth[$i] = $temp;
+	if($temp != NULL && $temp >= 0 && $temp < 5) $bezelWidth[$i] = $temp;
 	else $bezelWidth[$i] = 1;
 
 	$temp = filter_input(INPUT_GET, 'orientation' . $i);
-	if($temp != NULL) $orientation[$i] = $temp;
+	if($temp != NULL && ($temp === "landscape" || $temp === "portrait")) $orientation[$i] = $temp;
 	else $orientation[$i] = "landscape";
 
 	$temp = filter_input(INPUT_GET, 'aspectRatioCC' . $i);
@@ -55,11 +55,11 @@ for($i = 1; $i <= $maxNumMonitors; $i++)
 	else $resolutionType[$i] = "FHD";
 
 	$temp = filter_input(INPUT_GET, 'horRes' . $i);
-	if($temp != NULL) $horizontalResolution[$i] = $temp;
+	if($temp != NULL && $temp > 0 && $temp < 1000000) $horizontalResolution[$i] = $temp;
 	else $horizontalResolution[$i] = 1920;
 
 	$temp = filter_input(INPUT_GET, 'verRes' . $i);
-	if($temp != NULL) $verticalResolution[$i] = $temp;
+	if($temp != NULL && $temp > 0 && $temp < 1000000) $verticalResolution[$i] = $temp;
 	else $verticalResolution[$i] = 1080;
 
 	$temp = filter_input(INPUT_GET, 'hdr' . $i);
@@ -107,16 +107,6 @@ for($i = 1; $i <= $maxNumMonitors; $i++)
 	else $brand[$i] = "";
 }
 
-	$temp = filter_input(INPUT_GET, 'prebuiltSetup');
-	if($temp != null) $setup = $temp;
-	else $setup = "default";
-
-$kingSetup = 'index.php?SCALE=14&maxNumMonitors=9&numActiveMonitors=2&diagonal1=38&units1=in&bezelWidth1=1&orientation1=landscape&aspectRatioCC1=common&aspectRatioType1=21%3A9&resolutionCC1=common&resolutionType1=QHDplus&curved1=Curved&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=30&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=16%3A10&resolutionCC2=common&resolutionType2=QHDplus&displayType2=any&syncType2=any&refreshRate2=any&responseTime2=&brand2=&searchEngine=google';
-
-$ultrawideMasterRaceSetup = 'index.php';
-
-
-
 ?>
 
 	<!DOCTYPE html>
@@ -154,12 +144,7 @@ $ultrawideMasterRaceSetup = 'index.php';
 		</noscript>
 		<main>
 			<section id="prebuiltSetups">
-				<!--Start with a Prebuilt Setup:
-				<select name="prebuilt" onchange="location = this.value;">
-					 <option value="index.php" <?php if($setup === "default") echo htmlspecialchars("selected") ?>>Default</option>
-					 <option value="<?php echo htmlspecialchars($ultrawideMasterRaceSetup) ?>" <?php if($setup === $ultrawideMasterRaceSetup) echo htmlspecialchars("selected") ?>>Ultrawide Master Race</option>
-					 <option value="<?php echo htmlspecialchars($kingSetup) ?>">1600p King</option>
-				</select>-->
+
 			</section>
 			<section id="buttons">
 				<button id="addMonitor">Add Monitor</button>
