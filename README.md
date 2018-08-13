@@ -10,8 +10,6 @@ View the old original alpha at: http://monitorplannerbeta.atwebpages.com/ (for l
 
 Prebuilt setups from dropdown menu for inspiration (Using a get request link for each one), 
 
-Remember how many monitors were active on a saved setup
-
 
 # Small Planned Features:
 
@@ -19,7 +17,7 @@ More tooltips for necessary things,
 
 Add more set-up analysis stats, 
 
-fix inconsistencies with "detect from custom resolution" and "custom" radio buttons, 
+Fix inconsistencies with "detect from custom resolution" and "custom" radio buttons, 
 
 Add a copy URL button to make saving a link to your setup easier
 
@@ -28,7 +26,7 @@ Add a copy URL button to make saving a link to your setup easier
 
 Design Overhaul to look more modern
 
-Optimize better for mobile,
+Optimize better for mobile (viewport css),
 
 Have better support for mixing english and metric units,
 
