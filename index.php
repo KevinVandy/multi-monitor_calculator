@@ -120,11 +120,12 @@ for($i = 1; $i <= $maxNumMonitors; $i++)
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../normalize.css">
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="mmpt.css">
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+		<script src="jquery-3.3.1.min.js"></script>
+		<script src="jquery-ui.min.js"></script>
+		<script src="jquery.ui.touch-punch.min.js"></script>
+		<script src="mmpt.js" defer></script>
 		<link rel="shortcut icon" href="../favicon.ico">
 	</head>
 
@@ -436,5 +437,3 @@ for($i = 1; $i <= $maxNumMonitors; $i++)
 	</body>
 
 	</html>
-	<script src="mmpt.js"></script>
-	<!-- This has to be here to get values from index.html -->

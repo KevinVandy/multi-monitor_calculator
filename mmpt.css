@@ -356,7 +356,36 @@ input[type="submit"] {
 }
 
 @media only screen and (max-width: 768px) {
-	min-width: 768px;
+	main {
+		max-width: 760px;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	main {
+		max-width: 480px;
+		font-size: .8em;
+	}
+	#buttons {
+		width: 400px;
+		height: auto;
+		max-height: 600px;
+		margin: auto;
+	}
+	button {
+		display: block;
+		padding: 2px;
+		margin: 5px auto;
+
+	}
+
+	#save {
+		width: 90%;
+	}
+	#analysis {
+		width: 90%;
+	}
+
 }
 
 

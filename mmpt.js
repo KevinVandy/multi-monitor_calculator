@@ -189,15 +189,16 @@ function calculateAspectRatio(i) {
 	var aspectRatio = getAspectRatio(i);
 	if (aspectRatio === "detect") {
 		var theta = calculateTheta(i);
-		if (theta > 0.784 && theta < 0.787) aspectRatio = "1:1"; //the small ranges give a 3-10 pixel buffer
-		else if ((theta > 0.673 && theta < 0.676)) aspectRatio = "5:4";
-		else if ((theta > 0.642 && theta < 0.645)) aspectRatio = "4:3";
-		else if ((theta > 0.557 && theta < 0.560)) aspectRatio = "16:10";
-		else if ((theta > 0.587 && theta < 0.590)) aspectRatio = "3:2";
-		else if ((theta > 0.511 && theta < 0.514)) aspectRatio = "16:9";
-		else if ((theta > 0.462 && theta < 0.465)) aspectRatio = "2:1";
-		else if ((theta > 0.398 && theta < 0.406)) aspectRatio = "21:9";
-		else if ((theta > 0.273 && theta < 0.276)) aspectRatio = "32:9";
+			 if (theta > 0.784 && theta < 0.787) aspectRatio = "1:1"; //the small ranges give a 3-10 pixel buffer
+		else if ((theta > 0.673 && theta < 0.676) || (theta > 0.894 && theta < 0.898)) aspectRatio = "5:4";
+		else if ((theta > 0.642 && theta < 0.645) || (theta > 0.925 && theta < 0.929)) aspectRatio = "4:3";
+		else if ((theta > 0.587 && theta < 0.590) || (theta > 0.980 && theta < 0.984)) aspectRatio = "3:2";
+		else if ((theta > 0.557 && theta < 0.560) || (theta > 1.010 && theta < 1.014)) aspectRatio = "16:10";
+		else if ((theta > 0.538 && theta < 0.542) || (theta > 1.028 && theta < 1.032)) aspectRatio = "5:3";
+		else if ((theta > 0.511 && theta < 0.514) || (theta > 1.056 && theta < 1.056)) aspectRatio = "16:9";
+		else if ((theta > 0.462 && theta < 0.465) || (theta > 1.105 && theta < 1.109)) aspectRatio = "2:1";
+		else if ((theta > 0.398 && theta < 0.406) || (theta > 1.164 && theta < 1.173)) aspectRatio = "21:9";
+		else if ((theta > 0.273 && theta < 0.276) || (theta > 1.294 && theta < 1.298)) aspectRatio = "32:9";
 		else aspectRatio = "Unknown";
 	}
 	return aspectRatio;
@@ -230,7 +231,7 @@ function drawMonitorPageLoad(i) {
 }
 // Calculates height in pixels, updates size of monitor, applies it to the css to draw the monitor in its new size with animation
 function drawMonitor(i) {
-	if (getSize(i) > 3 && getSize(i) < 100) {
+	if (getSize(i) > 3 && getSize(i) < 100 && getHorRes(i) > 100 && getHorRes(i) < 50000 && getVerRes(i) > 100 && getVerRes(i) < 50000) {
 		var unitValue = calculateUnitValue(i);
 		var monitor = getMonitor(i);
 		var bezelWidth = getBezelWidth(i);
@@ -734,7 +735,7 @@ $(document).ready(function () { //page load function
 	//loads the correct number of monitors to be shown on page load. Remembers a saved setup
 	for (var i = 1; i <= numActiveMonitors; i++) {
 		numActiveMonitors--;
-		$("#monitorBox" + i).fadeIn(2000);
+		$("#monitorBox" + i).fadeIn(400);
 		$("#monitorBox" + i).css("display", "inline-block");
 		numActiveMonitors++;
 	}
