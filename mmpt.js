@@ -1,6 +1,8 @@
 'use strict';
 
-/*  By Kevin Van Cott
+/*
+	This is the development file. Index.php actually references the min version of this code for faster loading time
+	By Kevin Van Cott
     theta values calculated from arctan(aspect ratio)
     32:9 theta = .2742 rad
     21:9 theta = .3992 rad  -- 21:9 is actually 64:27

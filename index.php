@@ -121,11 +121,11 @@ for($i = 1; $i <= $maxNumMonitors; $i++)
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../normalize.css">
 		<link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
-		<link rel="stylesheet" type="text/css" href="mmpt.css">
+		<link rel="stylesheet" type="text/css" href="mmpt.min.css"><!-- Refers to minified version -->
 		<script src="jquery-3.3.1.min.js"></script>
-		<script src="jquery-ui.min.js"></script>
-		<script src="jquery.ui.touch-punch.min.js"></script>
-		<script src="mmpt.js" defer></script>
+		<script src="jquery-ui.min.js"></script><!-- For making dragging monitors possible -->
+		<script src="jquery.ui.touch-punch.min.js"></script><!-- For making dragging monitors work on mobile -->
+		<script src="mmpt.min.js" defer></script><!-- Refers to minified version -->
 		<link rel="shortcut icon" href="../favicon.ico">
 	</head>
 

@@ -7,8 +7,6 @@ a {
 	font-style: normal;
 }
 
-
-
 a:hover {
 	color: darkred;
 	font-weight: bold;
@@ -16,7 +14,7 @@ a:hover {
 
 a:active {
 	text-decoration: none;
-	color: darkred;
+	color: red;
 	text-align: center;
 	font-style: normal;
 }
