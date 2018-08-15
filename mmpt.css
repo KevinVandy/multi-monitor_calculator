@@ -259,6 +259,10 @@ input[type="range"] {
 	font-weight: bold;
 }
 
+#prebuiltSetups {
+	margin-bottom: 10px;
+}
+
 #buttons {
 	margin: auto;
 	width: auto;
@@ -357,32 +361,56 @@ input[type="submit"] {
 	main {
 		max-width: 760px;
 	}
+	#buttons {
+		max-width: 760px;
+	}
 }
 
 @media only screen and (max-width: 480px) {
-	main {
+	/*body, main {
 		max-width: 480px;
-		font-size: .8em;
+		width: 100%;
+		font-size: 1.1em;
 	}
 	#buttons {
-		width: 400px;
+		width: 90%;
+		max-width: 480px;
 		height: auto;
-		max-height: 600px;
+		max-height: 700px;
 		margin: auto;
 	}
 	button {
 		display: block;
 		padding: 2px;
 		margin: 5px auto;
+		width: 30%;
+		text-align: center;
 
 	}
-
+	select {
+		margin: auto;
+		text-align: center;
+	}
 	#save {
 		width: 90%;
 	}
 	#analysis {
 		width: 90%;
 	}
+
+	h1 {
+		font-size: 1.5em;
+	}
+	h2 {
+		font-size: 1.2em;
+	}
+	h3 {
+		1.1em;
+	}
+	h4 {
+		1em;
+	}
+	}*/
 
 }
 
