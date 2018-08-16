@@ -144,7 +144,7 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 		<meta name="keywords" content="monitor calculator, monitor, calculator, monitor planning tool, kevin vandy, multi-monitor, PPI, resolution">
 		<meta name="description" content="The Multi-Monitor Planning tool is for planning your multi-monitor setup. Check your aspect ratios, resolutions, width, height, and PPI! You can even drag monitors around to see how they fit together">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="800px, user-scalable=yes">
+		<meta name="viewport" content="device-width, user-scalable=yes">
 		<link rel="stylesheet" type="text/css" href="../normalize.css">
 		<link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="mmpt.min.css"><!-- Refers to minified version, change to mmpt.css during deveopment -->
@@ -177,8 +177,6 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 						<option value="<?php echo $setupBS ?>">Common Business Setup</option>
 						<option value="<?php echo $setupCD ?>">1080p Dual Monitors</option>
 						<option value="<?php echo $setupGD ?>">1440p Dual Monitors</option>
-
-
 					</optgroup>
 					<optgroup label="Specific">
 						<option value="<?php echo $setupPCS ?>">Poor College Student</option>

@@ -30,19 +30,23 @@ body {
 	/*background-image: url("../images/gaming-pattern.png");
 	background-repeat: repeat;*/
 	/*background-image: linear-gradient(#fff, #fff);*/
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: 0px;
+	margin-right: 0px;
 	font-family: monospace;
 	text-align: center;
 	min-width: 720px;
 	font-size: 16px;
 }
 
+main {
+	margin: 0px;
+}
+
 footer {
 	padding: 40px;
 	margin: 40px;
 	border-top: dashed 1px #000;
-	width: 99%;
+	width: 80%;
 }
 
 h1 {

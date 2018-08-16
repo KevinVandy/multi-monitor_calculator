@@ -3,18 +3,8 @@
 /*
 	This is the development file. Index.php actually references the min version of this code for faster loading time
 	By Kevin Van Cott
-    theta values calculated from arctan(aspect ratio)
-    32:9 theta = .2742 rad
-    21:9 theta = .3992 rad  -- 21:9 is actually 64:27
-    16:9 theta = .5123 rad
-    16:10 theta = .5586 rad
-    4:3 theta = .6435 rad
-    5:4 theta = .6747 rad
-    height = size * sin (theta)
-    width = size * cos (theta)
-    12px = 1" (default, changed by ZoomIn & ZoomOut)
-	when you see:
-		function functionName(i){}
+
+	when you see: function functionName(i){}
 	'i' stands for the monitor that the calculations are being done on
 	so that it only does the function on 1 monitor
 */
