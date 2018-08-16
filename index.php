@@ -107,27 +107,29 @@ for($i = 1; $i <= $maxNumMonitors; $i++)
 	else $brand[$i] = "";
 }
 
-$setupCD = "index.php?numActiveMonitors=2&diagonal1=24&units1=in&bezelWidth1=1&orientation1=landscape&aspectRatioCC1=common&aspectRatioType1=16%3A9&resolutionCC1=common&resolutionType1=FHD&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=24&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=16%3A9&resolutionCC2=common&resolutionType2=FHD";
+$setupCD = "index.php?numActiveMonitors=2&diagonal1=24&orientation1=landscape&aspectRatioType1=16%3A9&resolutionType1=FHD&diagonal2=24&orientation2=landscape&aspectRatioType2=16%3A9&resolutionType2=FHD";
 
-$setupGD = "index.php?numActiveMonitors=2&diagonal1=27&units1=in&bezelWidth1=1&orientation1=landscape&aspectRatioCC1=common&aspectRatioType1=16%3A9&resolutionCC1=common&resolutionType1=QHD&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=27&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=16%3A9&resolutionCC2=common&resolutionType2=QHD";
+$setupGD = "index.php?numActiveMonitors=2&diagonal1=27&orientation1=landscape&aspectRatioType1=16%3A9&resolutionType1=QHD&diagonal2=27&orientation2=landscape&aspectRatioType2=16%3A9&resolutionType2=QHD";
 
-$setupPHO = "index.php?numActiveMonitors=2&diagonal1=27&units1=in&bezelWidth1=1&orientation1=landscape&aspectRatioCC1=common&aspectRatioType1=16%3A9&resolutionCC1=common&resolutionType1=5K&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=30&units2=in&bezelWidth2=1&orientation2=portrait&aspectRatioCC2=common&aspectRatioType2=16%3A10&resolutionCC2=common&resolutionType2=QHDplus";
+$setupBS = "index.php?numActiveMonitors=2&diagonal1=24&orientation1=landscape&aspectRatioType1=16%3A9&resolutionType1=FHD&diagonal2=22&orientation2=landscape&aspectRatioType2=16%3A10&resolutionType2=FHD";
 
-$setupVID = "index.php?numActiveMonitors=2&diagonal1=49&units1=in&bezelWidth1=1&orientation1=landscape&aspectRatioCC1=common&aspectRatioType1=32%3A9&resolutionCC1=common&resolutionType1=FHD&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=27&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=16%3A9&resolutionCC2=common&resolutionType2=4K";
+$setupPHO = "index.php?numActiveMonitors=2&diagonal1=30&orientation1=landscape&aspectRatioType1=16%3A10&resolutionType1=QHDplus&diagonal2=30&orientation2=portrait&aspectRatioType2=16%3A10&resolutionType2=QHDplus";
 
-$setup16K = "index.php?numActiveMonitors=3&diagonal1=17&units1=in&bezelWidth1=1&orientation1=portrait&aspectRatioCC1=common&aspectRatioType1=16%3A9&resolutionCC1=common&resolutionType1=HDplus&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=38&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=21%3A9&resolutionCC2=common&resolutionType2=QHDplus&displayType2=any&syncType2=any&refreshRate2=any&responseTime2=&brand2=&diagonal3=30&units3=in&bezelWidth3=1&orientation3=landscape&aspectRatioCC3=common&aspectRatioType3=16%3A10&resolutionCC3=common&resolutionType3=QHDplus";
+$setupVID = "index.php?numActiveMonitors=2&diagonal1=49&orientation1=landscape&aspectRatioType1=32%3A9&resolutionType1=FHD&diagonal2=27&orientation2=landscape&aspectRatioType2=16%3A9&resolutionType2=4K";
 
-$setupUWMR = "index.php?numActiveMonitors=2&diagonal1=29&units1=in&orientation1=landscape&aspectRatioCC1=common&aspectRatioType1=21%3A9&resolutionCC1=common&resolutionType1=FHD&diagonal2=29&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=21%3A9&resolutionCC2=common&resolutionType2=FHD";
+$setup16K = "index.php?numActiveMonitors=3&diagonal1=17&orientation1=portrait&aspectRatioType1=16%3A9&resolutionType1=HDplus&diagonal2=38&orientation2=landscape&aspectRatioType2=21%3A9&resolutionType2=QHDplus&diagonal3=30&orientation3=landscape&aspectRatioType3=16%3A10&resolutionType3=QHDplus";
 
-$setupUWgod = "index.php?numActiveMonitors=2&diagonal1=34&units1=in&bezelWidth1=1&orientation1=landscape&aspectRatioCC1=common&aspectRatioType1=21%3A9&resolutionCC1=common&resolutionType1=QHD&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=34&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=21%3A9&resolutionCC2=common&resolutionType2=QHD";
+$setupUWMR = "index.php?numActiveMonitors=2&diagonal1=29&units1=in&orientation1=landscape&aspectRatioType1=21%3A9&resolutionType1=FHD&diagonal2=29&orientation2=landscape&aspectRatioType2=21%3A9&resolutionType2=FHD";
 
-$setupUWGod = "index.php?numActiveMonitors=2&diagonal1=38&units1=in&bezelWidth1=1&orientation1=landscape&aspectRatioCC1=common&aspectRatioType1=21%3A9&resolutionCC1=common&resolutionType1=QHDplus&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=38&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=21%3A9&resolutionCC2=common&resolutionType2=QHDplus";
+$setupUWgod = "index.php?numActiveMonitors=2&diagonal1=34&orientation1=landscape&aspectRatioType1=21%3A9&resolutionType1=QHD&diagonal2=34&orientation2=landscape&aspectRatioType2=21%3A9&resolutionType2=QHD";
 
-$setupUWGOD = "index.php?numActiveMonitors=2&diagonal1=49&units1=in&bezelWidth1=1&orientation1=landscape&aspectRatioCC1=common&aspectRatioType1=32%3A9&resolutionCC1=common&resolutionType1=FHD&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=49&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=32%3A9&resolutionCC2=common&resolutionType2=FHD&displayType2=any&syncType2=any&refreshRate2=any&responseTime2=&brand2=&diagonal3=24&units3=in&bezelWidth3=1&orientation3=landscape&aspectRatioCC3=common&aspectRatioType3=16%3A9&resolutionCC3=common&resolutionType3=FHD";
+$setupUWGod = "index.php?numActiveMonitors=2&diagonal1=38&orientation1=landscape&aspectRatioType1=21%3A9&resolutionType1=QHDplus&diagonal2=38&orientation2=landscape&aspectRatioType2=21%3A9&resolutionType2=QHDplus";
 
-$setupPCS = "index.php?SCALE=18&numActiveMonitors=2&diagonal1=15&units1=in&bezelWidth1=1&orientation1=landscape&aspectRatioCC1=common&aspectRatioType1=16%3A9&resolutionCC1=common&resolutionType1=FHD&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=19&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=5%3A4&resolutionCC2=common&resolutionType2=HDplus";
+$setupUWGOD = "index.php?numActiveMonitors=2&diagonal1=49&orientation1=landscape&aspectRatioType1=32%3A9&resolutionType1=FHD&diagonal2=49&orientation2=landscape&aspectRatioType2=32%3A9&resolutionType2=FHD&diagonal3=24&orientation3=landscape&aspectRatioType3=16%3A9&resolutionType3=FHD";
 
-$setupKV = "index.php?numActiveMonitors=4&diagonal1=17&units1=in&bezelWidth1=1&orientation1=portrait&aspectRatioCC1=common&aspectRatioType1=5%3A4&resolutionCC1=common&resolutionType1=HDplus&displayType1=any&syncType1=any&refreshRate1=any&responseTime1=&brand1=&diagonal2=34&units2=in&bezelWidth2=1&orientation2=landscape&aspectRatioCC2=common&aspectRatioType2=21%3A9&resolutionCC2=common&resolutionType2=FHD&displayType2=any&syncType2=any&refreshRate2=any&responseTime2=&brand2=&diagonal3=27&units3=in&bezelWidth3=1&orientation3=landscape&aspectRatioCC3=common&aspectRatioType3=16%3A9&resolutionCC3=common&resolutionType3=FHD&displayType3=any&syncType3=any&refreshRate3=any&responseTime3=&brand3=&diagonal4=17&units4=in&bezelWidth4=1&orientation4=portrait&aspectRatioCC4=common&aspectRatioType4=5%3A4&resolutionCC4=common&resolutionType4=HDplus";
+$setupPCS = "index.php?SCALE=18&numActiveMonitors=2&diagonal1=15&orientation1=landscape&aspectRatioType1=16%3A9&resolutionType1=FHD&diagonal2=19&orientation2=landscape&aspectRatioType2=5%3A4&resolutionType2=HDplus";
+
+$setupKV = "index.php?numActiveMonitors=4&diagonal1=17&orientation1=portrait&aspectRatioType1=5%3A4&resolutionType1=HDplus&diagonal2=34&orientation2=landscape&aspectRatioType2=21%3A9&resolutionType2=FHD&diagonal3=27&orientation3=landscape&aspectRatioType3=16%3A9&resolutionType3=FHD&diagonal4=17&orientation4=portrait&aspectRatioType4=5%3A4&resolutionType4=HDplus";
 
 $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 
@@ -142,18 +144,14 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 		<meta name="keywords" content="monitor calculator, monitor, calculator, monitor planning tool, kevin vandy, multi-monitor, PPI, resolution">
 		<meta name="description" content="The Multi-Monitor Planning tool is for planning your multi-monitor setup. Check your aspect ratios, resolutions, width, height, and PPI! You can even drag monitors around to see how they fit together">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="800px, user-scalable=yes">
 		<link rel="stylesheet" type="text/css" href="../normalize.css">
 		<link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
-		<link rel="stylesheet" type="text/css" href="mmpt.min.css">
-		<!-- Refers to minified version, change to mmpt.css during deveopment -->
+		<link rel="stylesheet" type="text/css" href="mmpt.min.css"><!-- Refers to minified version, change to mmpt.css during deveopment -->
 		<script src="jquery-3.3.1.min.js"></script>
-		<script src="jquery-ui.min.js"></script>
-		<!-- For making dragging monitors possible -->
-		<script src="jquery.ui.touch-punch.min.js"></script>
-		<!-- For making dragging monitors work on mobile -->
-		<script src="mmpt.min.js" defer></script>
-		<!-- Refers to minified version, change to mmpt.js during development -->
+		<script src="jquery-ui.min.js"></script><!-- For making dragging monitors possible -->
+		<script src="jquery.ui.touch-punch.min.js"></script><!-- For making dragging monitors work on mobile -->
+		<script src="mmpt.min.js" defer></script><!-- Refers to minified version, change to mmpt.js during development -->
 		<link rel="shortcut icon" href="../favicon.ico">
 	</head>
 
@@ -176,8 +174,10 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 				<select name="prebuiltSetups" onChange="window.location.href=this.value">
 					<option value="index.php">Choose a Prebuilt Setup</option>
 					<optgroup label="Popular">
+						<option value="<?php echo $setupBS ?>">Common Business Setup</option>
 						<option value="<?php echo $setupCD ?>">1080p Dual Monitors</option>
 						<option value="<?php echo $setupGD ?>">1440p Dual Monitors</option>
+
 
 					</optgroup>
 					<optgroup label="Specific">

@@ -42,6 +42,7 @@ footer {
 	padding: 40px;
 	margin: 40px;
 	border-top: dashed 1px #000;
+	width: 99%;
 }
 
 h1 {
@@ -82,6 +83,10 @@ button {
 	font-family: Arial, sans-serif;
 	font-weight: bold;
 	z-index: 3;
+	font-size: 1em;
+	height: 2.3em;
+	padding: 8px;
+	margin-top: 3px;
 }
 
 select {
@@ -280,19 +285,6 @@ input[type="range"] {
 	border-bottom: dashed darkred 2px;
 }
 
-#addMonitor,
-#removeMonitor,
-#zoomIn,
-#zoomOut,
-#undo,
-#startover,
-#print {
-	font-size: 1em;
-	height: 2.3em;
-	padding: 8px;
-	margin-top: 3px;
-}
-
 #zoomIn:hover {
 	cursor: zoom-in;
 }
@@ -357,18 +349,44 @@ input[type="submit"] {
 	text-align: left;
 }
 
-@media only screen and (max-width: 768px) {
-	main {
-		max-width: 760px;
+/*@media only screen and (max-width: 768px) {
+	body,main {
+		max-width: 768px;
+		width: 99%;
 	}
 	#buttons {
-		max-width: 760px;
+		max-width: 750px;
+		width: 100%;
+		font-size: 1em;
+
+	}
+	button {
+		font-size: .9em;
+		padding: 2px;
+		margin: 0px;
+	}
+	h1 {
+		font-size: 1.4em;
+	}
+	h2 {
+		font-size: 1.2em;
+	}
+	h3 {
+		font-size:  1.1em;
+	}
+	h4 {
+		font-size:  1em;
+	}
+	#save {
+		width: 90%;
+	}
+	#analysis {
+		width: 90%;
 	}
 }
 
 @media only screen and (max-width: 480px) {
-	/*body, main {
-		max-width: 480px;
+	body, main {
 		width: 100%;
 		font-size: 1.1em;
 	}
@@ -381,9 +399,9 @@ input[type="submit"] {
 	}
 	button {
 		display: block;
-		padding: 2px;
+		padding: 0px;
 		margin: 5px auto;
-		width: 30%;
+		width: 50%;
 		text-align: center;
 
 	}
@@ -391,28 +409,19 @@ input[type="submit"] {
 		margin: auto;
 		text-align: center;
 	}
+	.monitorBox {
+
+		margin: 0px;
+		padding: 0px;
+	}
 	#save {
-		width: 90%;
+		width: 99%;
 	}
 	#analysis {
-		width: 90%;
+		width: 99%;
 	}
 
-	h1 {
-		font-size: 1.5em;
-	}
-	h2 {
-		font-size: 1.2em;
-	}
-	h3 {
-		1.1em;
-	}
-	h4 {
-		1em;
-	}
-	}*/
-
-}
+}*/
 
 
 @media print {
