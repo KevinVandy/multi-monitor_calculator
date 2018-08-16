@@ -146,7 +146,6 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 		<meta charset="utf-8" />
 		<meta name="viewport" content="device-width, user-scalable=yes">
 		<link rel="stylesheet" type="text/css" href="../normalize.css">
-		<link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="mmpt.min.css"><!-- Refers to minified version, change to mmpt.css during deveopment -->
 		<script src="jquery-3.3.1.min.js"></script>
 		<script src="jquery-ui.min.js"></script><!-- For making dragging monitors possible -->
