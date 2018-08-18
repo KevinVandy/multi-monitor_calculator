@@ -27,11 +27,7 @@ a:visited {
 }
 
 body {
-	/*background-image: url("../images/gaming-pattern.png");
-	background-repeat: repeat;*/
-	/*background-image: linear-gradient(#fff, #fff);*/
-	margin-left: 0px;
-	margin-right: 0px;
+	margin: auto;
 	font-family: monospace;
 	text-align: center;
 	min-width: 720px;
@@ -39,12 +35,37 @@ body {
 }
 
 main {
-	margin: 0px;
+	margin: auto;
+}
+
+nav {
+	background-color: #222;
+	color: white;
+	padding: 5px;
+	width: 100%;
+}
+
+nav a {
+	text-align: left;
+	margin-left: auto;
+	color: white;
+}
+
+nav a:hover {
+	color: white;
+}
+
+nav a:visited {
+	color: white;
+}
+
+nav a:active {
+	color: white;
 }
 
 footer {
 	padding: 40px;
-	margin: 40px;
+	margin: 10px auto;
 	border-top: dashed 1px #000;
 	width: 80%;
 }

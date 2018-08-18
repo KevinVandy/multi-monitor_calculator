@@ -144,8 +144,8 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 		<meta name="keywords" content="monitor calculator, monitor, calculator, monitor planning tool, kevin vandy, multi-monitor, PPI, resolution">
 		<meta name="description" content="The Multi-Monitor Planning tool is for planning your multi-monitor setup. Check your aspect ratios, resolutions, width, height, and PPI! You can even drag monitors around to see how they fit together">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="device-width, user-scalable=yes">
-		<link rel="stylesheet" type="text/css" href="../normalize.css">
+		<meta name="viewport" content="width=device-width, user-scalable=yes">
+		<link rel="stylesheet" type="text/css" href="../normalize.min.css">
 		<link rel="stylesheet" type="text/css" href="mmpt.min.css"><!-- Refers to minified version, change to mmpt.css during deveopment -->
 		<script src="jquery-3.3.1.min.js"></script>
 		<script src="jquery-ui.min.js"></script><!-- For making dragging monitors possible -->
@@ -155,6 +155,10 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 	</head>
 
 	<body>
+		<nav>
+			<a href="../index.html">KevinVandy.com</a>
+			<ul></ul>
+		</nav>
 		<header>
 			<h1>Multi-Monitor Planning Tool</h1>
 			<h2>A tool for planning your multi-monitor setup.</h2>
@@ -316,7 +320,7 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 								<th>Custom: </th>
 								<td><input type="radio" name="resolutionCC<?php echo $i ?>" id="customResolution<?php echo $i ?>" value="custom" <?php if($customResolution[$i]) echo htmlspecialchars( "checked") ?>></td>
 								<td>
-									<input type="number" id="horRes<?php echo $i ?>" value="<?php echo $horizontalResolution[$i] ?>">x<input type="number" id="verRes<?php echo $i ?>" value="<?php echo $verticalResolution[$i] ?>">
+									<input type="number" name="horRes<?php echo $i ?>" id="horRes<?php echo $i ?>" value="<?php echo $horizontalResolution[$i] ?>">x<input type="number" name="verRes<?php echo $i ?>" id="verRes<?php echo $i ?>" value="<?php echo $verticalResolution[$i] ?>">
 								</td>
 							</tr>
 						</table>
@@ -435,8 +439,7 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 						</table>
 					</div>
 				</section>
-				<?php } ?>
-				<!-- End of For Loop to make all monitors divs -->
+				<?php } ?><!-- End of For Loop to make all monitors sections -->
 				<section class="searchEngine">
 					<table>
 						<tr>
@@ -470,10 +473,11 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 				<section id="save">
 					<h4>Want to save this setup for later or share your setup with a friend?</h4>
 					<ul>
-						<li>Click the "<em>Save This Setup</em>" Button</li>
-						<li>Wait for the Page to Reload</li>
+						<li>Click the "<strong><em>Save This Setup</em></strong>" Button</li>
+						<li>Wait for the Page to Reload.</li>
 						<li>Then either Copy the URL, Bookmarkmark the URL, or Share the URL (It's a very long URL!)</li>
 						<li>With this Custom URL, All of your Options will be Saved!</li>
+						<li><em>WARNING: If you dragged the monitors around, their position will not be saved.</em></li>
 					</ul>
 				</section>
 				<input type="submit" value="Save This Setup">
