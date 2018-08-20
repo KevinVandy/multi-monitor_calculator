@@ -181,7 +181,7 @@ function calculateAspectRatio(i) {
 	var aspectRatio = getAspectRatio(i);
 	if (aspectRatio === "detect") {
 		var theta = calculateTheta(i);
-			 if (theta > 0.784 && theta < 0.787) aspectRatio = "1:1"; //the small ranges give a 3-10 pixel buffer
+		if (theta > 0.784 && theta < 0.787) aspectRatio = "1:1"; //the small ranges give a 3-10 pixel buffer
 		else if ((theta > 0.673 && theta < 0.676) || (theta > 0.894 && theta < 0.898)) aspectRatio = "5:4";
 		else if ((theta > 0.642 && theta < 0.645) || (theta > 0.925 && theta < 0.929)) aspectRatio = "4:3";
 		else if ((theta > 0.587 && theta < 0.590) || (theta > 0.980 && theta < 0.984)) aspectRatio = "3:2";
@@ -215,11 +215,22 @@ function drawMonitorPageLoad(i) {
 	var pixHeight = SCALE * calculateHeight(i) * unitValue;
 	var pixWidth = SCALE * calculateWidth(i) * unitValue;
 	var pixBezel = SCALE * bezelWidth * unitValue / Math.sqrt(2);
-	monitor.animate({
-		width: pixWidth + "px",
-		height: pixHeight + "px",
-		borderWidth: pixBezel + "px"
-	}, 1);
+	if (i != 1) {
+		monitor.animate({
+			width: pixWidth + "px",
+			height: pixHeight + "px",
+			borderWidth: pixBezel + "px",
+			marginRight: pixBezel + "px",
+			marginLeft: pixBezel + "px"
+		}, 1);
+	} else {
+		monitor.animate({
+			width: pixWidth + "px",
+			height: pixHeight + "px",
+			borderWidth: pixBezel + "px",
+			marginRight: pixBezel + "px",
+		}, 1);
+	}
 }
 // Calculates height in pixels, updates size of monitor, applies it to the css to draw the monitor in its new size with animation
 function drawMonitor(i) {
@@ -230,11 +241,22 @@ function drawMonitor(i) {
 		var pixHeight = SCALE * calculateHeight(i) * unitValue;
 		var pixWidth = SCALE * calculateWidth(i) * unitValue;
 		var pixBezel = SCALE * bezelWidth * unitValue / Math.sqrt(2);
-		monitor.finish().animate({
-			width: pixWidth + "px",
-			height: pixHeight + "px",
-			borderWidth: pixBezel + "px"
-		}, 400);
+		if (i != 1) {
+			monitor.animate({
+				width: pixWidth + "px",
+				height: pixHeight + "px",
+				borderWidth: pixBezel + "px",
+				marginRight: pixBezel + "px",
+				marginLeft: pixBezel + "px"
+			}, 1);
+		} else {
+			monitor.animate({
+				width: pixWidth + "px",
+				height: pixHeight + "px",
+				borderWidth: pixBezel + "px",
+				marginRight: pixBezel + "px"
+			}, 1);
+		}
 	}
 	$("#bezelValue" + i).html(bezelWidth.toFixed(2) + "\"");
 }
@@ -407,7 +429,7 @@ function displayTotalArea() { //Display the total area (screen real estate) of a
 
 function updateResolution(i) { //updates the values for the resolution based on the aspect ratio and resolution type
 	var resolutionType = getResolutionType(i);
-	if(resolutionType != "custom") { //skips this function if custom because nothing will be accomplished
+	if (resolutionType != "custom") { //skips this function if custom because nothing will be accomplished
 		var ratio = calculateAspectRatio(i);
 		var x, y;
 
@@ -477,8 +499,7 @@ function updateResolution(i) { //updates the values for the resolution based on 
 				x = 10240;
 				y = 4320;
 			}
-		}
-		else if (ratio === "16:9") {
+		} else if (ratio === "16:9") {
 			if (resolutionType === "VGA") {
 				x = 1024;
 				y = 600;
@@ -510,8 +531,7 @@ function updateResolution(i) { //updates the values for the resolution based on 
 				x = 7860;
 				y = 4320;
 			}
-		}
-		else if (ratio === "16:10") {
+		} else if (ratio === "16:10") {
 			if (resolutionType === "VGA") {
 				x = 1024;
 				y = 640;
@@ -543,8 +563,7 @@ function updateResolution(i) { //updates the values for the resolution based on 
 				x = 7680;
 				y = 4800;
 			}
-		}
-		else if (ratio === "4:3") {
+		} else if (ratio === "4:3") {
 			if (resolutionType === "VGA") {
 				x = 800;
 				y = 600;
@@ -576,8 +595,7 @@ function updateResolution(i) { //updates the values for the resolution based on 
 				x = 6400;
 				y = 4800;
 			}
-		}
-		else if (ratio === "5:4") {
+		} else if (ratio === "5:4") {
 			if (resolutionType === "VGA") {
 				x = 750;
 				y = 600;
@@ -733,7 +751,9 @@ $(document).ready(function () { //page load function
 	}
 
 	//makes monitors draggable
-	$(".monitor").draggable({snap: true});
+	$(".monitor").draggable({
+		snap: true
+	});
 
 	// sets up events to detect changes of the input, and then trigger the updateOutput() function
 	$("input[type=radio]").change(function () {
