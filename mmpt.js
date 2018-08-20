@@ -190,7 +190,8 @@ function calculateAspectRatio(i) {
 		else if ((theta > 0.511 && theta < 0.514) || (theta > 1.056 && theta < 1.056)) aspectRatio = "16:9";
 		else if ((theta > 0.462 && theta < 0.465) || (theta > 1.105 && theta < 1.109)) aspectRatio = "2:1";
 		else if ((theta > 0.398 && theta < 0.406) || (theta > 1.164 && theta < 1.173)) aspectRatio = "21:9";
-		else if ((theta > 0.273 && theta < 0.276) || (theta > 1.294 && theta < 1.298)) aspectRatio = "32:9";
+		else if ((theta > 0.300 && theta < 0.304) || (theta > 1.265 && theta < 1.270)) aspectRatio = "32:10";
+		else if ((theta > 0.273 && theta < 0.276) || (theta > 1.295 && theta < 1.301)) aspectRatio = "32:9";
 		else aspectRatio = "Unknown";
 	}
 	return aspectRatio;
