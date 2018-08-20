@@ -248,14 +248,14 @@ function drawMonitor(i) {
 				borderWidth: pixBezel + "px",
 				marginRight: pixBezel + "px",
 				marginLeft: pixBezel + "px"
-			}, 1);
+			}, 400);
 		} else {
 			monitor.animate({
 				width: pixWidth + "px",
 				height: pixHeight + "px",
 				borderWidth: pixBezel + "px",
 				marginRight: pixBezel + "px"
-			}, 1);
+			}, 400);
 		}
 	}
 	$("#bezelValue" + i).html(bezelWidth.toFixed(2) + "\"");
