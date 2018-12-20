@@ -183,7 +183,17 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 
 <body>
     <nav>
-        <ul>
+        <ul class="navLeftGroup">
+            <li class="dropdown-trigger"><a href="https://www.kevinvandy.com" id="logo"><img src="https://www.kevinvandy.com/images/favicon-144.png"><span>Home</span></a>
+                <ul class="dropdown-items">
+                    <li><a href="https://kevinvandy.com/">Home</a></li>
+                    <li><a href="https://kevinvandy.com/pc_planning_tool/">PC Planning Tool</a></li>
+                    <li><a href="https://kevinvandy.com/multi-monitor_planning_tool/">Multi-Monitor Planning Tool</a></li>
+                    <li><a href="https://www.youtube.com/kevinvandytech" target="_blank">My YouTube Channel</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="navRightGroup">
             <li>
                 <a href="https://www.kevinvandy.com/pc_planning_tool/">Check Out The Full PC Planning Tool</a>
             </li>
