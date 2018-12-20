@@ -279,6 +279,74 @@ input[type="range"] {
 	margin-top: 20px;
 }
 
+tooltip {
+    position: relative;
+    display: inline-block;
+    color: skyblue;
+    font-weight: bold;
+    font-size: 16pt;
+    font-family: 'Arial Black';
+    height: 20pt;
+    cursor: help;
+    z-index: 3;
+}
+
+tooltip tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: #222;
+    color: skyblue;
+    text-align: justify;
+    padding: 10px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 3;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -200px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 14pt;
+    font-family: Calibri, Arial;
+    line-height: 1.5em;
+    white-space: normal;
+}
+
+tooltiptext a,
+tooltiptext a:link,
+tooltiptext a:visited {
+    color: white;
+    transition: color .3s;
+}
+
+tooltip tooltiptext a:hover {
+    color: red;
+}
+
+tooltip tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 60%;
+    margin-left: -5px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+    z-index: 3;
+}
+
+tooltip:hover tooltiptext,
+tooltip:active tooltiptext {
+    visibility: visible;
+    opacity: .9;
+    z-index: 3;
+}
+
+tooltip:hover tooltiptext:hover,
+tooltiptext:active {
+    opacity: 1;
+}
+
 .noscriptmsg {
 	color: darkred;
 	font-size: 2em;
