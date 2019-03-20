@@ -6,14 +6,7 @@ View the new official beta at: https://www.kevinvandy.com/multi-monitor_planning
 View the old original alpha at: http://monitorplannerbeta.atwebpages.com/ (for legacy)
 
 
-# Next Planned Features That Will be Done Shortly
-
-Prebuilt setups from dropdown menu for inspiration (Using a get request link for each one), 
-
-
 # Small Planned Features:
-
-More tooltips for necessary things,
 
 Add more set-up analysis stats, 
 
@@ -24,13 +17,11 @@ Add a copy URL button to make saving a link to your setup easier
 
 # BIG GOALS:
 
-Design Overhaul to look more modern
+Depriciate most of the jQuery stuff and just use vanilla javascript,
 
 Optimize better for mobile (viewport css),
 
 Have better support for mixing english and metric units,
-
-Improve Loading Time, make more efficient,
 
 Remember monitor placement if they were dragged in a saved setup
 
