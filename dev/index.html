@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords" content="multi-monitor, calculator, monitor, monitor calculator, planning, tool, kevin vandy, PPI, resolution" />
+    <meta name="description" content="The Multi-Monitor Calculator is for planning your multi-monitor setup. Check your aspect ratios, resolutions, width, height, and PPI! You can even drag monitors around to see how they fit together" />
+    <title>Multi-Monitor Calculator</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <script src="jquery.ui.touch-punch.min.js"></script>
+    <script src="main.js"></script>
+    <script src="monitor.js" defer></script>
+    <script src="calculate.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Multi-Monitor Calculator</h1>
+      <h2>A tool for planning your multi-monitor setup.</h2>
+    </header>
+    <main>
+      <section id="prebuiltSetupsSection">
+        <label>Pre-built setups</label>
+        <select id="prebuiltSetups"></select>
+      </section>
+      <section id="buttonsSection">
+        <button id="addMonitor">Add Monitor</button>
+        <button id="removeMonitor">Remove Monitor</button>
+        <button id="zoomIn">Zoom In</button>
+        <button id="zoomOut">Zoom Out</button>
+        <button id="startover" onClick="location.reload(true);" title="Undo the changes you have made since loading the page">
+          Start Over
+        </button>
+        <button id="print" onClick="window.print();">Print</button>
+      </section>
+      <section id="monitorsSection"></section>
+      <!-- Make all the monitors in a javascript for loop -->
+      <script>
+        const monitorsArea = document.getElementById("monitorsSection");
+        monitorsArea.innerHTML = "";
+        for (let i = 1; i <= numMonitors; i++) {
+          monitorsArea.innerHTML +=
+            /*html*/
+            `
+            <!--Monitor ${i} -->
+            <div class="monitorBox" id="monitorBox${i}">
+              <div class="monitor ui-widget-content" id="monitor${i}">
+                <p>${i}</p>
+              </div>
+              <div class="monitorOptions">
+                <h3>Size</h3>
+                <table>
+                  <tr>
+                    <th>Diagonal:</th>
+                    <td>
+                      <input type="number" name="diagonal${i}" id="diagonal${i}">
+                      <div class="tooltip">?<div class="tooltiptext">${tooltips["diagonal"]}</div></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Units:</th>
+                    <td>
+                      <input type="radio" name="units${i}" value="in" checked><label>in</label>
+                      <input type="radio" name="units${i}" value="cm"><label>cm</label>
+                      <div class="tooltip">?<div class="tooltiptext">${tooltips["units"]}</div></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Bezel Width:</th>
+                    <td>
+                      <input type="range" name="bezelWidth${i}" min="0.0" max ="2" value="1" step="0.25" data-show-value="true">
+                      <span id="bezelValue${i}"></span>
+                      <div class="tooltip">?<div class="tooltiptext">${tooltips["bezelWidth"]}</div></div>
+                    </td> 
+                  </tr>
+                </table>
+              </div>
+              <div class="monitorOptions">
+                <h3>Orientation<div class="tooltip">?<div class="tooltiptext">${tooltips["orientation"]}</div><div></h3>
+                <table>
+                  <tr>
+                    <td>
+                      <input type="radio" name="orientation${i}" value="landscape" checked><label>Landscape</label>
+                      <input type="radio" name="portrait${i}" value="portrait" checked><label>Portrait</label>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="monitorOptions">
+                <h3>Aspect Ratio<div class="tooltip">?<div class="tooltiptext">${tooltips["aspectRatio"]}</div><div></h3>
+                <table>
+                  <tr>
+                    <td>
+                      <select name="aspectRatioType${i}" id="aspectRatioChoices${i}">
+                        <option value="detect">Auto Detect</option>
+                        <optgroup label="Tall">
+                          <option value="5:4">5:4</option>
+                          <option value="4:3">4:3</option>
+                        </optgroup>
+                        <optgroup label="Wide">
+                          <option value="16:10">16:10</option>
+                          <option value="16:9">16:9</option>
+                        </optgroup>
+                        <optgroup label="Ultrawide">
+                          <option value="21:9">21:9</option>
+                          <option value="32:9">32:9</option>
+                        </optgroup>
+                      </select>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="monitorOptions">
+                <h3>Resolution<div class="tooltip">?<div class="tooltiptext">${tooltips["resolution"]}</div><div></h3>
+                <table>
+                  <tr>
+                    <td>
+                      <select name="resolutionType">
+                        <option value="custom">Custom</option>
+                        <option value="VGA">VGA ~600i</option>
+                        <option value="HD">HD ~768p</option>
+                        <option value="HD+">HD+ ~900p</option>
+                        <option value="FHD">FHD ~1080p</option>
+                        <option value="FHD+">FHD+ ~1200p</option>
+                        <option value="QHD">QHD ~1440p</option>
+                        <option value="QHD+">QHD+ ~1600p</option>
+                        <option value="4K">4K ~2160p</option>
+                        <option value="5K">5K ~2880p</option>
+                        <option value="8K">8K ~4320p</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="number" name="horRes${i}" id="horRes${i}"> x <input type="number" name="verRes${i}" id="verRes${i}">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <h3>More Specs <span class="toggle">+</span></h3>
+              <div class="extraSpecs">
+                <h4>Ports</h4>
+                <table>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="vga${i}" value="VGA"><label>VGA</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="dvi${i}" value="DVI"><label>DVI</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="hdmi${i}" value="HDMI"><label>HDMI</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <input type="checkbox" name="displayPort${i}" value="DisplayPort"><label>Display Port</label>
+                    </td>
+                    <td colspan="1">
+                      <input type="checkbox" name="usbC${i}" value="usbC"><label>USB C</label>
+                    </td>
+                  </tr>
+                </table>
+                <h4>Features</h4>
+                <table>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="hdr${i}" value="HDR"><label>HDR</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="srgb${i}" value="sRGB"><label>sRGB</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="curved${i}" value="Curved"><label>Curved</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="touch${i}" value="Touch"><label>Touch</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="webcam${i}" value="Webcam"><label>Webcam</label>
+                    </td>
+                    <td>
+                      <input type="checkbox" name="speakers${i}" value="Speakers"><label>Speakers</label>
+                    </td>
+                  </tr>
+                </table>
+                <table>
+                  <tr>
+                    <th>Display Type:</th>
+                    <td>
+                      <select name="displayType${i}">
+                        <option value="any">Any</option>
+                        <option value="TN">TN</option>
+                        <option value="VA">VA</option>
+                        <option value="LCD">LCD</option>
+                        <option value="IPS">IPS</option>
+                        <option value="OLED">OLED</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Sync Type:</th>
+                    <td>
+                      <select name="syncType${i}">
+                        <option value="any">Any</option>
+                        <option value="none">None</option>
+                        <option value="G-Sync">G-Sync</option>
+                        <option value="FreeSync">FreeSync</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Refresh Rate:</th>
+                    <td>
+                      <input type="number" name="refreshRate${i}" min="0" max="9999" step="1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Response Time</th>
+                    <td>
+                      <input type="number" name="responseTime${i}" min="0" max="99" step="1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Brand:</th>
+                    <td>
+                      <input type="text" name="brand${i}">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          `;
+        }
+      </script>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "tooltips": {
+    "diagonal": {
+      "text": "The diagonal length of the screen. Typical values are 17, 19, 22, 24, 27, 29, 34, 38, 49 etc."
+    },
+    "units": {
+      "text": "You can change the units from imperial to metric."
+    },
+    "bezelWidth": {
+      "text": "The width of the border around the screen."
+    },
+    "orientation": {
+      "text": "You can preview what tilting the monitor sideways will look like."
+    },
+    "aspectRatio": {
+      "text": "The ratio between the number of horizontal pixels to the number of vertical pixels. 16:9 is the most common aspect ratio."
+    },
+    "resolution": {
+      "text": "The pixel layout that the monitor has. The higher the resolution, the sharper and better the image quality will be, though a high resolution is not the only factor in how good a monitor will look."
+    }
+  }
+}

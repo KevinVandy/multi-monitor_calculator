@@ -4,135 +4,231 @@
 
 //load values from get request (bookmark url) if this was a saved setup, else set default value
 $temp = filter_input(INPUT_GET, 'SCALE');
-if($temp != NULL && $temp > 2 && $temp < 50) $SCALE = $temp;
-else $SCALE = 14;
+if ($temp != null && $temp > 2 && $temp < 50) {
+    $SCALE = $temp;
+} else {
+    $SCALE = 14;
+}
 
 $temp = filter_input(INPUT_GET, 'maxNumMonitors');
-if($temp != NULL && $temp <= 16) $maxNumMonitors = $temp;
-else $maxNumMonitors = 9;
+if ($temp != null && $temp <= 16) {
+    $maxNumMonitors = $temp;
+} else {
+    $maxNumMonitors = 9;
+}
 
 $temp = filter_input(INPUT_GET, 'numActiveMonitors');
-if($temp != NULL && $temp > 0 && $temp <= $maxNumMonitors) $numActiveMonitors = $temp;
-else $numActiveMonitors = 2;
+if ($temp != null && $temp > 0 && $temp <= $maxNumMonitors) {
+    $numActiveMonitors = $temp;
+} else {
+    $numActiveMonitors = 2;
+}
 
 $temp = filter_input(INPUT_GET, 'searchEngine');
-if($temp != null && ($temp === "google" || $temp === "bing" || $temp === "duckduckgo")) $searchEngine = $temp;
-else $searchEngine = "google";
+if ($temp != null && ($temp === "google" || $temp === "bing" || $temp === "duckduckgo")) {
+    $searchEngine = $temp;
+} else {
+    $searchEngine = "google";
+}
 
 //NOTICE!!! THESE ARRAYS START AT 1 INSTEAD OF 0 TO AVOID CONFUSION BELOW WHEN REFERENCED... OR TO MAKE MORE CONFUSION... now no [$i-1] is needed, just [$i]
-for($i = 1; $i <= $maxNumMonitors; $i++)
-{
-	$temp = filter_input(INPUT_GET, 'diagonal' . $i);
-	if($temp != NULL && $temp > 0 && $temp < 200) $diagonal[$i] = $temp;
-	else $diagonal[$i] = 24;
+for ($i = 1; $i <= $maxNumMonitors; $i++) {
+    $temp = filter_input(INPUT_GET, 'diagonal' . $i);
+    if ($temp != null && $temp > 0 && $temp < 200) {
+        $diagonal[$i] = $temp;
+    } else {
+        $diagonal[$i] = 24;
+    }
 
-	$temp = filter_input(INPUT_GET, 'units' . $i);
-	if($temp != NULL && ($temp === "in" || $temp === "cm")) $unitType[$i] = $temp;
-	else $unitType[$i] = "in";
+    $temp = filter_input(INPUT_GET, 'units' . $i);
+    if ($temp != null && ($temp === "in" || $temp === "cm")) {
+        $unitType[$i] = $temp;
+    } else {
+        $unitType[$i] = "in";
+    }
 
-	$temp = filter_input(INPUT_GET, 'bezelWidth' . $i);
-	if($temp != NULL && $temp >= 0 && $temp < 5) $bezelWidth[$i] = $temp;
-	else $bezelWidth[$i] = 1;
+    $temp = filter_input(INPUT_GET, 'bezelWidth' . $i);
+    if ($temp != null && $temp >= 0 && $temp < 5) {
+        $bezelWidth[$i] = $temp;
+    } else {
+        $bezelWidth[$i] = 1;
+    }
 
-	$temp = filter_input(INPUT_GET, 'orientation' . $i);
-	if($temp != NULL && ($temp === "landscape" || $temp === "portrait")) $orientation[$i] = $temp;
-	else $orientation[$i] = "landscape";
+    $temp = filter_input(INPUT_GET, 'orientation' . $i);
+    if ($temp != null && ($temp === "landscape" || $temp === "portrait")) {
+        $orientation[$i] = $temp;
+    } else {
+        $orientation[$i] = "landscape";
+    }
 
-	$temp = filter_input(INPUT_GET, 'aspectRatioCC' . $i);
-	if($temp != NULL && $temp === "custom") $customAspectRatio[$i] = TRUE;
-	else $customAspectRatio[$i] = FALSE;
+    $temp = filter_input(INPUT_GET, 'aspectRatioCC' . $i);
+    if ($temp != null && $temp === "custom") {
+        $customAspectRatio[$i] = true;
+    } else {
+        $customAspectRatio[$i] = false;
+    }
 
-	$temp = filter_input(INPUT_GET, 'aspectRatioType' . $i);
-	if($temp != NULL) $aspectRatioType[$i] = $temp;
-	else $aspectRatioType[$i] = "16:9";
+    $temp = filter_input(INPUT_GET, 'aspectRatioType' . $i);
+    if ($temp != null) {
+        $aspectRatioType[$i] = $temp;
+    } else {
+        $aspectRatioType[$i] = "16:9";
+    }
 
-	$temp = filter_input(INPUT_GET, 'resolutionCC' . $i);
-	if($temp != NULL && $temp === "custom") $customResolution[$i] = TRUE;
-	else $customResolution[$i] = FALSE;
+    $temp = filter_input(INPUT_GET, 'resolutionCC' . $i);
+    if ($temp != null && $temp === "custom") {
+        $customResolution[$i] = true;
+    } else {
+        $customResolution[$i] = false;
+    }
 
-	$temp = filter_input(INPUT_GET, 'resolutionType' . $i);
-	if($temp != NULL) $resolutionType[$i] = $temp;
-	else $resolutionType[$i] = "FHD";
+    $temp = filter_input(INPUT_GET, 'resolutionType' . $i);
+    if ($temp != null) {
+        $resolutionType[$i] = $temp;
+    } else {
+        $resolutionType[$i] = "FHD";
+    }
 
-	$temp = filter_input(INPUT_GET, 'horRes' . $i);
-	if($temp != NULL && $temp > 0 && $temp < 1000000) $horizontalResolution[$i] = $temp;
-	else $horizontalResolution[$i] = 1920;
+    $temp = filter_input(INPUT_GET, 'horRes' . $i);
+    if ($temp != null && $temp > 0 && $temp < 1000000) {
+        $horizontalResolution[$i] = $temp;
+    } else {
+        $horizontalResolution[$i] = 1920;
+    }
 
-	$temp = filter_input(INPUT_GET, 'verRes' . $i);
-	if($temp != NULL && $temp > 0 && $temp < 1000000) $verticalResolution[$i] = $temp;
-	else $verticalResolution[$i] = 1080;
+    $temp = filter_input(INPUT_GET, 'verRes' . $i);
+    if ($temp != null && $temp > 0 && $temp < 1000000) {
+        $verticalResolution[$i] = $temp;
+    } else {
+        $verticalResolution[$i] = 1080;
+    }
 
     $temp = filter_input(INPUT_GET, 'vga' . $i);
-	if($temp != null) $vga[$i] = $temp;
-	else $vga[$i] = FALSE;
+    if ($temp != null) {
+        $vga[$i] = $temp;
+    } else {
+        $vga[$i] = false;
+    }
 
     $temp = filter_input(INPUT_GET, 'dvi' . $i);
-	if($temp != null) $dvi[$i] = $temp;
-	else $dvi[$i] = FALSE;
+    if ($temp != null) {
+        $dvi[$i] = $temp;
+    } else {
+        $dvi[$i] = false;
+    }
 
     $temp = filter_input(INPUT_GET, 'hdmi' . $i);
-	if($temp != null) $hdmi[$i] = $temp;
-	else $hdmi[$i] = FALSE;
+    if ($temp != null) {
+        $hdmi[$i] = $temp;
+    } else {
+        $hdmi[$i] = false;
+    }
 
     $temp = filter_input(INPUT_GET, 'displayPort' . $i);
-	if($temp != null) $displayPort[$i] = $temp;
-	else $displayPort[$i] = FALSE;
+    if ($temp != null) {
+        $displayPort[$i] = $temp;
+    } else {
+        $displayPort[$i] = false;
+    }
 
     $temp = filter_input(INPUT_GET, 'usbC' . $i);
-	if($temp != null) $usbC[$i] = $temp;
-	else $usbC[$i] = FALSE;
+    if ($temp != null) {
+        $usbC[$i] = $temp;
+    } else {
+        $usbC[$i] = false;
+    }
 
-	$temp = filter_input(INPUT_GET, 'hdr' . $i);
-	if($temp != null) $hdr[$i] = $temp;
-	else $hdr[$i] = FALSE;
+    $temp = filter_input(INPUT_GET, 'hdr' . $i);
+    if ($temp != null) {
+        $hdr[$i] = $temp;
+    } else {
+        $hdr[$i] = false;
+    }
 
-	$temp = filter_input(INPUT_GET, 'srgb' . $i);
-	if($temp != null) $srgb[$i] = $temp;
-	else $srgb[$i] = FALSE;
+    $temp = filter_input(INPUT_GET, 'srgb' . $i);
+    if ($temp != null) {
+        $srgb[$i] = $temp;
+    } else {
+        $srgb[$i] = false;
+    }
 
-	$temp = filter_input(INPUT_GET, 'curved' . $i);
-	if($temp != null) $curved[$i] = $temp;
-	else $curved[$i] = FALSE;
+    $temp = filter_input(INPUT_GET, 'curved' . $i);
+    if ($temp != null) {
+        $curved[$i] = $temp;
+    } else {
+        $curved[$i] = false;
+    }
 
-	$temp = filter_input(INPUT_GET, 'touch' . $i);
-	if($temp != null) $touch[$i] = $temp;
-	else $touch[$i] = FALSE;
+    $temp = filter_input(INPUT_GET, 'touch' . $i);
+    if ($temp != null) {
+        $touch[$i] = $temp;
+    } else {
+        $touch[$i] = false;
+    }
 
-	$temp = filter_input(INPUT_GET, 'webcam' . $i);
-	if($temp != null) $webcam[$i] = $temp;
-	else $webcam[$i] = FALSE;
+    $temp = filter_input(INPUT_GET, 'webcam' . $i);
+    if ($temp != null) {
+        $webcam[$i] = $temp;
+    } else {
+        $webcam[$i] = false;
+    }
 
-	$temp = filter_input(INPUT_GET, 'speakers' . $i);
-	if($temp != null) $speakers[$i] = $temp;
-	else $speakers[$i] = FALSE;
+    $temp = filter_input(INPUT_GET, 'speakers' . $i);
+    if ($temp != null) {
+        $speakers[$i] = $temp;
+    } else {
+        $speakers[$i] = false;
+    }
 
-	$temp = filter_input(INPUT_GET, 'displayType' . $i);
-	if($temp != null) $displayType[$i] = $temp;
-	else $displayType[$i] = "any";
+    $temp = filter_input(INPUT_GET, 'displayType' . $i);
+    if ($temp != null) {
+        $displayType[$i] = $temp;
+    } else {
+        $displayType[$i] = "any";
+    }
 
-	$temp = filter_input(INPUT_GET, 'syncType' . $i);
-	if($temp != null) $syncType[$i] = $temp;
-	else $syncType[$i] = "any";
+    $temp = filter_input(INPUT_GET, 'syncType' . $i);
+    if ($temp != null) {
+        $syncType[$i] = $temp;
+    } else {
+        $syncType[$i] = "any";
+    }
 
-	$temp = filter_input(INPUT_GET, 'refreshRate' . $i);
-	if($temp != null) $refreshRate[$i] = $temp;
-	else $refreshRate[$i] = "any";
+    $temp = filter_input(INPUT_GET, 'refreshRate' . $i);
+    if ($temp != null) {
+        $refreshRate[$i] = $temp;
+    } else {
+        $refreshRate[$i] = "any";
+    }
 
-	$temp = filter_input(INPUT_GET, 'responseTime' . $i);
-	if($temp != null) $responseTime[$i] = $temp;
-	else $responseTime[$i] = NULL;
+    $temp = filter_input(INPUT_GET, 'responseTime' . $i);
+    if ($temp != null) {
+        $responseTime[$i] = $temp;
+    } else {
+        $responseTime[$i] = null;
+    }
 
-	$temp = filter_input(INPUT_GET, 'brand' . $i);
-	if($temp != null) $brand[$i] = $temp;
-	else $brand[$i] = "";
+    $temp = filter_input(INPUT_GET, 'brand' . $i);
+    if ($temp != null) {
+        $brand[$i] = $temp;
+    } else {
+        $brand[$i] = "";
+    }
 
     $temp = filter_input(INPUT_GET, 'model' . $i);
-    if($temp != null) $model[$i] = $temp;
-    else $model[$i] = "";
+    if ($temp != null) {
+        $model[$i] = $temp;
+    } else {
+        $model[$i] = "";
+    }
 
     $temp = filter_input(INPUT_GET, 'cost' . $i);
-    if($temp != null) $cost[$i] = $temp;
-    else $cost[$i] = NULL;
+    if ($temp != null) {
+        $cost[$i] = $temp;
+    } else {
+        $cost[$i] = null;
+    }
+
 }
 
 $setupCD = "index.php?numActiveMonitors=2&diagonal1=24&orientation1=landscape&aspectRatioType1=16%3A9&resolutionType1=FHD&diagonal2=24&orientation2=landscape&aspectRatioType2=16%3A9&resolutionType2=FHD";
@@ -169,26 +265,32 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
 <head>
     <title>Multi-Monitor Planning Tool</title>
     <meta name="title" content="Multi-Monitor Calculator Tool">
-    <meta name="keywords" content="monitor calculator, monitor, calculator, monitor planning tool, kevin vandy, multi-monitor, PPI, resolution">
-    <meta name="description" content="The Multi-Monitor Calculator is for planning your multi-monitor setup. Check your aspect ratios, resolutions, width, height, and PPI! You can even drag monitors around to see how they fit together">
+    <meta name="keywords"
+          content="monitor calculator, monitor, calculator, monitor planning tool, kevin vandy, multi-monitor, PPI, resolution">
+    <meta name="description"
+          content="The Multi-Monitor Calculator is for planning your multi-monitor setup. Check your aspect ratios, resolutions, width, height, and PPI! You can even drag monitors around to see how they fit together">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=yes">
-    <link rel="stylesheet" type="text/css" href="css/mmpt.min.css"><!-- Refers to minified version, change to mmpt.css during deveopment -->
+    <link rel="stylesheet" type="text/css" href="css/mmpt.min.css">
+    <!-- Refers to minified version, change to mmpt.css during deveopment -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-ui.min.js"></script><!-- For making dragging monitors possible -->
     <script src="js/jquery.ui.touch-punch.min.js"></script><!-- For making dragging monitors work on mobile -->
-    <script src="js/mmpt.min.js" defer></script><!-- Refers to minified version, change to mmpt.js during development -->
+    <script src="js/mmpt.min.js" defer></script>
+    <!-- Refers to minified version, change to mmpt.js during development -->
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 
 <body>
     <nav>
         <ul class="navLeftGroup">
-            <li class="dropdown-trigger"><a href="https://www.kevinvandy.com" id="logo"><img src="https://www.kevinvandy.com/images/favicon-144.png"><span>Home</span></a>
+            <li class="dropdown-trigger"><a href="https://www.kevinvandy.com" id="logo"><img
+                         src="https://www.kevinvandy.com/images/favicon-144.png"><span>Home</span></a>
                 <ul class="dropdown-items">
                     <li><a href="https://kevinvandy.com/">Home</a></li>
                     <li><a href="https://kevinvandy.com/pc_planning_tool/">PC Planning Tool</a></li>
-                    <li><a href="https://kevinvandy.com/multi-monitor_planning_tool/">Multi-Monitor Planning Tool</a></li>
+                    <li><a href="https://kevinvandy.com/multi-monitor_planning_tool/">Multi-Monitor Planning Tool</a>
+                    </li>
                     <li><a href="https://www.youtube.com/kevinvandytech" target="_blank">My YouTube Channel</a></li>
                 </ul>
             </li>
@@ -205,16 +307,17 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
     </header>
     <noscript>
         <style type="text/css">
-            main {
-                display: none;
-            }
+        main {
+            display: none;
+        }
 
-            /* Stops the main part of page that runs on javascript from showing if javascript is disabled */
-
+        /* Stops the main part of page that runs on javascript from showing if javascript is disabled */
         </style>
         <div class="noscriptmsg">
-            This tool runs on javascript.<br>Please enable scripting in your browser settings<br>or consider trying another web browser.<br><br>
-            Need to see the source code? <a href="https://github.com/KevinVandy/multi-monitor_planning_tool.git">View it on Github</a>.
+            This tool runs on javascript.<br>Please enable scripting in your browser settings<br>or consider trying
+            another web browser.<br><br>
+            Need to see the source code? <a href="https://github.com/KevinVandy/multi-monitor_planning_tool.git">View it
+                on Github</a>.
         </div>
     </noscript>
     <main>
@@ -249,8 +352,10 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
             <button id="removeMonitor">Remove Monitor</button>
             <button id="zoomIn">Zoom In</button>
             <button id="zoomOut">Zoom Out</button>
-            <button id="undo" onClick="location.reload(true);" title="Undo the changes you have made since loading the page">Undo</button>
-            <a href="index.php"><button id="startover" title="Start Over with the Default values">Start Over</button></a>
+            <button id="undo" onClick="location.reload(true);"
+                    title="Undo the changes you have made since loading the page">Undo</button>
+            <a href="index.php"><button id="startover" title="Start Over with the Default values">Start
+                    Over</button></a>
             <!--The true parameter forces to reload from server instead of cache, makes it work in firefox-->
             <button id="print" onClick="window.print();">Print</button><br>
             <p id="areaTip" title="May not work in Edge">Drag Down for more Area</p>
@@ -258,9 +363,10 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
         <form action="index.php" method="get" id="monitorOptionsArea">
             <input type="hidden" name="SCALE" id="SCALE" value="<?php echo $SCALE ?>">
             <input type="hidden" name="maxNumMonitors" id="maxNumMonitors" value="<?php echo $maxNumMonitors ?>">
-            <input type="hidden" name="numActiveMonitors" id="numActiveMonitors" value="<?php echo $numActiveMonitors ?>">
+            <input type="hidden" name="numActiveMonitors" id="numActiveMonitors"
+                   value="<?php echo $numActiveMonitors ?>">
             <!-- Start of For Loop to make all monitors divs -->
-            <?php for($i = 1; $i <= $maxNumMonitors; $i++){ ?>
+            <?php for ($i = 1; $i <= $maxNumMonitors; $i++) {?>
             <!--Monitor <?php echo $i ?>-->
             <section class="monitorBox" id="monitorBox<?php echo $i ?>">
                 <div class="monitor" id="monitor<?php echo $i ?>" class="ui-widget-content">
@@ -274,10 +380,12 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                         <tr>
                             <th>Diagonal:</th>
                             <td>
-                                <input type="number" name="diagonal<?php echo $i ?>" id="diagonal<?php echo $i ?>" value="<?php echo $diagonal[$i] ?>">
+                                <input type="number" name="diagonal<?php echo $i ?>" id="diagonal<?php echo $i ?>"
+                                       value="<?php echo $diagonal[$i] ?>">
                                 <tooltip>?
                                     <tooltiptext>
-                                        The diagonal length of the screen. Typical values are 17, 19, 22, 24, 27, 29, 34, 38, 49 etc.
+                                        The diagonal length of the screen. Typical values are 17, 19, 22, 24, 27, 29,
+                                        34, 38, 49 etc.
                                     </tooltiptext>
                                 </tooltip>
                             </td>
@@ -285,8 +393,14 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                         <tr>
                             <th>Units:</th>
                             <td>
-                                <input type="radio" name="units<?php echo $i ?>" value="in" <?php if($unitType[$i]=="in" ) echo htmlspecialchars( "checked" ) ?>>in
-                                <input type="radio" name="units<?php echo $i ?>" value="cm" <?php if($unitType[$i]=="cm" ) echo htmlspecialchars( "checked" ) ?>>cm
+                                <input type="radio" name="units<?php echo $i ?>" value="in" <?php if ($unitType[$i] == "in") {
+    echo htmlspecialchars("checked");
+}
+    ?>>in
+                                <input type="radio" name="units<?php echo $i ?>" value="cm" <?php if ($unitType[$i] == "cm") {
+        echo htmlspecialchars("checked");
+    }
+    ?>>cm
                                 <tooltip>?
                                     <tooltiptext>
                                         You can change the units from imperial to metric.
@@ -297,7 +411,8 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                         <tr>
                             <th>Bezel Width: </th>
                             <td>
-                                <input type="range" min="0.0" max="2" value="<?php echo $bezelWidth[$i] ?>" step="0.25" data-show-value="true" name="bezelWidth<?php echo $i ?>">
+                                <input type="range" min="0.0" max="2" value="<?php echo $bezelWidth[$i] ?>" step="0.25"
+                                       data-show-value="true" name="bezelWidth<?php echo $i ?>">
                                 <span id="bezelValue<?php echo $i ?>">
                                     <?php echo $bezelWidth[$i] ?>"</span>
                                 <tooltip>?
@@ -321,8 +436,16 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                     </h3>
                     <table>
                         <tr>
-                            <td><input type="radio" name="orientation<?php echo $i ?>" value="landscape" <?php if($orientation[$i]=="landscape" ) echo htmlspecialchars( "checked" ) ?>>Landscape</td>
-                            <td><input type="radio" name="orientation<?php echo $i ?>" value="portrait" <?php if($orientation[$i]=="portrait" ) echo htmlspecialchars( "checked" ) ?>>Portrait</td>
+                            <td><input type="radio" name="orientation<?php echo $i ?>" value="landscape" <?php if ($orientation[$i] == "landscape") {
+        echo htmlspecialchars("checked");
+    }
+    ?>>Landscape
+                            </td>
+                            <td><input type="radio" name="orientation<?php echo $i ?>" value="portrait" <?php if ($orientation[$i] == "portrait") {
+        echo htmlspecialchars("checked");
+    }
+    ?>>Portrait
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -332,40 +455,79 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                         Aspect Ratio
                         <tooltip>?
                             <tooltiptext>
-                                The ratio between the number of horizontal pixels to the number of vertical pixels. 16:9 is the most common aspect ratio.
+                                The ratio between the number of horizontal pixels to the number of vertical pixels. 16:9
+                                is the most common aspect ratio.
                             </tooltiptext>
                         </tooltip>
                     </h3>
                     <table>
                         <tr>
                             <th>Common: </th>
-                            <td><input type="radio" name="aspectRatioCC<?php echo $i ?>" id="commonAspectRatio<?php echo $i ?>" value="common" <?php if(!$customAspectRatio[$i]) echo htmlspecialchars( "checked" ) ?>></td>
+                            <td><input type="radio" name="aspectRatioCC<?php echo $i ?>"
+                                       id="commonAspectRatio<?php echo $i ?>" value="common" <?php if (!$customAspectRatio[$i]) {
+        echo htmlspecialchars("checked");
+    }
+    ?>></td>
                             <td>
                                 <select name="aspectRatioType<?php echo $i ?>" id="aspectRatioChoices<?php echo $i ?>">
-                                    <option value="detect" <?php if($aspectRatioType[$i]=="detect" ) echo htmlspecialchars("selected") ?>>Detect</option>
+                                    <option value="detect" <?php if ($aspectRatioType[$i] == "detect") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        Detect</option>
                                     <optgroup label="Tall">
-                                        <option value="5:4" <?php if($aspectRatioType[$i]=="5:4" ) echo htmlspecialchars("selected") ?>>5:4</option>
-                                        <option value="4:3" <?php if($aspectRatioType[$i]=="4:3" ) echo htmlspecialchars("selected") ?>>4:3</option>
+                                        <option value="5:4" <?php if ($aspectRatioType[$i] == "5:4") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                            5:4</option>
+                                        <option value="4:3" <?php if ($aspectRatioType[$i] == "4:3") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                            4:3</option>
                                     </optgroup>
                                     <optgroup label="Wide">
-                                        <option value="16:10" <?php if($aspectRatioType[$i]=="16:10" ) echo htmlspecialchars("selected") ?>>16:10</option>
-                                        <option value="16:9" <?php if($aspectRatioType[$i]=="16:9" ) echo htmlspecialchars("selected") ?>>16:9</option>
+                                        <option value="16:10" <?php if ($aspectRatioType[$i] == "16:10") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                            16:10</option>
+                                        <option value="16:9" <?php if ($aspectRatioType[$i] == "16:9") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                            16:9</option>
                                     </optgroup>
                                     <optgroup label="Ultrawide">
-                                        <option value="21:9" <?php if($aspectRatioType[$i]=="21:9" ) echo htmlspecialchars("selected") ?>>21:9</option>
-                                        <option value="32:9" <?php if($aspectRatioType[$i]=="32:9" ) echo htmlspecialchars("selected") ?>>32:9</option>
+                                        <option value="21:9" <?php if ($aspectRatioType[$i] == "21:9") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                            21:9</option>
+                                        <option value="32:9" <?php if ($aspectRatioType[$i] == "32:9") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                            32:9</option>
                                     </optgroup>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <th>Custom:</th>
-                            <td><input type="radio" name="aspectRatioCC<?php echo $i ?>" id="customAspectRatio<?php echo $i ?>" value="custom" <?php if($customAspectRatio[$i]) echo htmlspecialchars( "checked" ) ?>></td>
+                            <td><input type="radio" name="aspectRatioCC<?php echo $i ?>"
+                                       id="customAspectRatio<?php echo $i ?>" value="custom" <?php if ($customAspectRatio[$i]) {
+        echo htmlspecialchars("checked");
+    }
+    ?>></td>
                             <td>
                                 Detect Ratio
                                 <tooltip>?
                                     <tooltiptext>
-                                        If the aspect ratio of your monitor is not listed in the dropdown box, you can have this tool automatically detect the aspect ratio after you type in a custom resolution in the resolution area.
+                                        If the aspect ratio of your monitor is not listed in the dropdown box, you can
+                                        have this tool automatically detect the aspect ratio after you type in a custom
+                                        resolution in the resolution area.
                                     </tooltiptext>
                                 </tooltip>
                             </td>
@@ -378,35 +540,91 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                         Resolution
                         <tooltip>?
                             <tooltiptext>
-                                The pixel layout that the monitor has. The higher the resolution, the sharper and better the image quality will be, though a high resolution is not the only factor in how good a monitor will look.
+                                The pixel layout that the monitor has. The higher the resolution, the sharper and better
+                                the image quality will be, though a high resolution is not the only factor in how good a
+                                monitor will look.
                             </tooltiptext>
                         </tooltip>
                     </h3>
                     <table>
                         <tr>
                             <th>Common: </th>
-                            <td><input type="radio" name="resolutionCC<?php echo $i ?>" id="commonResolution<?php echo $i ?>" value="common" <?php if(!$customResolution[$i]) echo htmlspecialchars( "checked" ) ?>></td>
+                            <td><input type="radio" name="resolutionCC<?php echo $i ?>"
+                                       id="commonResolution<?php echo $i ?>" value="common" <?php if (!$customResolution[$i]) {
+        echo htmlspecialchars("checked");
+    }
+    ?>></td>
                             <td>
                                 <select name="resolutionType<?php echo $i ?>" id="resolutionChoices<?php echo $i ?>">
-                                    <option value="custom" <?php if($resolutionType[$i]=="custom" ) echo htmlspecialchars("selected") ?> id="customResolutionChoice">Custom</option>
-                                    <option value="VGA" <?php if($resolutionType[$i]=="VGA" ) echo htmlspecialchars("selected") ?>>SVGA ~600i</option>
-                                    <option value="HD" <?php if($resolutionType[$i]=="HD" ) echo htmlspecialchars("selected") ?>>HD ~768p</option>
-                                    <option value="HDplus" <?php if($resolutionType[$i]=="HDplus" ) echo htmlspecialchars("selected") ?>>HD+ ~900p</option>
-                                    <option value="FHD" <?php if($resolutionType[$i]=="FHD" ) echo htmlspecialchars("selected") ?>>FHD ~1080p</option>
-                                    <option value="FHDplus" <?php if($resolutionType[$i]=="FHDplus" ) echo htmlspecialchars("selected") ?>>FHD+ ~1200p</option>
-                                    <option value="QHD" <?php if($resolutionType[$i]=="QHD" ) echo htmlspecialchars("selected") ?>>QHD ~1440p</option>
-                                    <option value="QHDplus" <?php if($resolutionType[$i]=="QHDplus" ) echo htmlspecialchars("selected") ?>>QHD+ ~1600p</option>
-                                    <option value="4K" <?php if($resolutionType[$i]=="4K" ) echo htmlspecialchars("selected") ?>>4K ~2160p</option>
-                                    <option value="5K" <?php if($resolutionType[$i]=="5K" ) echo htmlspecialchars("selected") ?>>5K ~2880p</option>
-                                    <option value="8K" <?php if($resolutionType[$i]=="8K" ) echo htmlspecialchars("selected") ?>>8K ~4320p</option>
+                                    <option value="custom" <?php if ($resolutionType[$i] == "custom") {
+        echo htmlspecialchars("selected");
+    }
+    ?> id="customResolutionChoice">Custom</option>
+                                    <option value="VGA" <?php if ($resolutionType[$i] == "VGA") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        SVGA ~600i</option>
+                                    <option value="HD" <?php if ($resolutionType[$i] == "HD") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>HD
+                                        ~768p</option>
+                                    <option value="HDplus" <?php if ($resolutionType[$i] == "HDplus") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        HD+ ~900p</option>
+                                    <option value="FHD" <?php if ($resolutionType[$i] == "FHD") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        FHD ~1080p</option>
+                                    <option value="FHDplus" <?php if ($resolutionType[$i] == "FHDplus") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        FHD+ ~1200p</option>
+                                    <option value="QHD" <?php if ($resolutionType[$i] == "QHD") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        QHD ~1440p</option>
+                                    <option value="QHDplus" <?php if ($resolutionType[$i] == "QHDplus") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        QHD+ ~1600p</option>
+                                    <option value="4K" <?php if ($resolutionType[$i] == "4K") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>4K
+                                        ~2160p</option>
+                                    <option value="5K" <?php if ($resolutionType[$i] == "5K") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>5K
+                                        ~2880p</option>
+                                    <option value="8K" <?php if ($resolutionType[$i] == "8K") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>8K
+                                        ~4320p</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <th>Custom: </th>
-                            <td><input type="radio" name="resolutionCC<?php echo $i ?>" id="customResolution<?php echo $i ?>" value="custom" <?php if($customResolution[$i]) echo htmlspecialchars( "checked" ) ?>></td>
+                            <td><input type="radio" name="resolutionCC<?php echo $i ?>"
+                                       id="customResolution<?php echo $i ?>" value="custom" <?php if ($customResolution[$i]) {
+        echo htmlspecialchars("checked");
+    }
+    ?>></td>
                             <td>
-                                <input type="number" name="horRes<?php echo $i ?>" id="horRes<?php echo $i ?>" value="<?php echo $horizontalResolution[$i] ?>">x<input type="number" name="verRes<?php echo $i ?>" id="verRes<?php echo $i ?>" value="<?php echo $verticalResolution[$i] ?>">
+                                <input type="number" name="horRes<?php echo $i ?>" id="horRes<?php echo $i ?>"
+                                       value="<?php echo $horizontalResolution[$i] ?>">x<input type="number"
+                                       name="verRes<?php echo $i ?>" id="verRes<?php echo $i ?>"
+                                       value="<?php echo $verticalResolution[$i] ?>">
                             </td>
                         </tr>
                     </table>
@@ -419,15 +637,32 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                     <table>
                         <tr>
                             <td>
-                                <input type="checkbox" name="vga<?php echo htmlspecialchars($i) ?>" value="VGA" <?php if($vga[$i]=="VGA" ) echo htmlspecialchars("checked"); ?>><label>VGA</label>
-                                <input type="checkbox" name="dvi<?php echo htmlspecialchars($i) ?>" value="DVI" <?php if($dvi[$i]=="DVI" ) echo htmlspecialchars("checked"); ?>><label>DVI</label>
-                                <input type="checkbox" name="hdmi<?php echo htmlspecialchars($i) ?>" value="HDMI" <?php if($hdmi[$i]=="HDMI" ) echo htmlspecialchars("checked"); ?>><label>HDMI</label>
+                                <input type="checkbox" name="vga<?php echo htmlspecialchars($i) ?>" value="VGA" <?php if ($vga[$i] == "VGA") {
+        echo htmlspecialchars("checked");
+    }
+    ?>><label>VGA</label>
+                                <input type="checkbox" name="dvi<?php echo htmlspecialchars($i) ?>" value="DVI" <?php if ($dvi[$i] == "DVI") {
+        echo htmlspecialchars("checked");
+    }
+    ?>><label>DVI</label>
+                                <input type="checkbox" name="hdmi<?php echo htmlspecialchars($i) ?>" value="HDMI" <?php if ($hdmi[$i] == "HDMI") {
+        echo htmlspecialchars("checked");
+    }
+    ?>><label>HDMI</label>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="checkbox" name="displayPort<?php echo htmlspecialchars($i) ?>" value="DisplayPort" <?php if($displayPort[$i]=="DisplayPort" ) echo htmlspecialchars("checked"); ?>><label>Display Port</label>
-                                <input type="checkbox" name="usbC<?php echo htmlspecialchars($i) ?>" value="USB-C" <?php if($usbC[$i]=="USB-C" ) echo htmlspecialchars("checked"); ?>><label>USB-C</label>
+                                <input type="checkbox" name="displayPort<?php echo htmlspecialchars($i) ?>"
+                                       value="DisplayPort" <?php if ($displayPort[$i] == "DisplayPort") {
+        echo htmlspecialchars("checked");
+    }
+    ?>><label>Display
+                                    Port</label>
+                                <input type="checkbox" name="usbC<?php echo htmlspecialchars($i) ?>" value="USB-C" <?php if ($usbC[$i] == "USB-C") {
+        echo htmlspecialchars("checked");
+    }
+    ?>><label>USB-C</label>
                             </td>
                         </tr>
                     </table>
@@ -435,26 +670,40 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                     <table>
                         <tr>
                             <td>
-                                <input type="checkbox" name="hdr<?php echo $i ?>" value="HDR" <?php if($hdr[$i]) echo htmlspecialchars( "checked" ) ?>>HDR
+                                <input type="checkbox" name="hdr<?php echo $i ?>" value="HDR" <?php if ($hdr[$i]) {
+        echo htmlspecialchars("checked");
+    }
+    ?>>HDR
                                 <tooltip>?
                                     <tooltiptext>
-                                        HDR, or High Dynamic Range, is a feature that makes the contrast between the whitest whites and blackest backs more apparent on screen. This will make light and dark images/videos/games look better.
+                                        HDR, or High Dynamic Range, is a feature that makes the contrast between the
+                                        whitest whites and blackest backs more apparent on screen. This will make light
+                                        and dark images/videos/games look better.
                                     </tooltiptext>
                                 </tooltip>
                             </td>
                             <td>
-                                <input type="checkbox" name="srgb<?php echo $i ?>" value="sRGB" <?php if($srgb[$i]) echo htmlspecialchars( "checked" ) ?>>sRGB
+                                <input type="checkbox" name="srgb<?php echo $i ?>" value="sRGB" <?php if ($srgb[$i]) {
+        echo htmlspecialchars("checked");
+    }
+    ?>>sRGB
                                 <tooltip>?
                                     <tooltiptext>
-                                        A monitor with a high sRGB value is more color accurate than the avergae monitor. Look for sRGB 99%.
+                                        A monitor with a high sRGB value is more color accurate than the avergae
+                                        monitor. Look for sRGB 99%.
                                     </tooltiptext>
                                 </tooltip>
                             </td>
                             <td>
-                                <input type="checkbox" name="curved<?php echo $i ?>" value="Curved" <?php if($curved[$i]) echo htmlspecialchars( "checked" ) ?>>Curved
+                                <input type="checkbox" name="curved<?php echo $i ?>" value="Curved" <?php if ($curved[$i]) {
+        echo htmlspecialchars("checked");
+    }
+    ?>>Curved
                                 <tooltip>?
                                     <tooltiptext>
-                                        Some large or wide monitors can be curved to reduce the distortion effect when a user is close to the monitor. However, distortion may be increased for people looking at a curved monitor from far away.
+                                        Some large or wide monitors can be curved to reduce the distortion effect when a
+                                        user is close to the monitor. However, distortion may be increased for people
+                                        looking at a curved monitor from far away.
                                     </tooltiptext>
                                 </tooltip>
                             </td>
@@ -462,7 +711,10 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                         </tr>
                         <tr>
                             <td>
-                                <input type="checkbox" name="touch<?php echo $i ?>" value="Touch" <?php if($touch[$i]) echo htmlspecialchars( "checked" ) ?>>Touch
+                                <input type="checkbox" name="touch<?php echo $i ?>" value="Touch" <?php if ($touch[$i]) {
+        echo htmlspecialchars("checked");
+    }
+    ?>>Touch
                                 <tooltip>?
                                     <tooltiptext>
                                         Indicate if this monitor has a touch screen.
@@ -470,7 +722,10 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                                 </tooltip>
                             </td>
                             <td>
-                                <input type="checkbox" name="webcam<?php echo $i ?>" value="Webcam" <?php if($webcam[$i]) echo htmlspecialchars( "checked" ) ?>>Webcam
+                                <input type="checkbox" name="webcam<?php echo $i ?>" value="Webcam" <?php if ($webcam[$i]) {
+        echo htmlspecialchars("checked");
+    }
+    ?>>Webcam
                                 <tooltip>?
                                     <tooltiptext>
                                         Indicate if this monitor has a camera.
@@ -478,7 +733,10 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                                 </tooltip>
                             </td>
                             <td>
-                                <input type="checkbox" name="speakers<?php echo $i ?>" value="Speakers" <?php if($speakers[$i]) echo htmlspecialchars( "checked" ) ?>>Speakers
+                                <input type="checkbox" name="speakers<?php echo $i ?>" value="Speakers" <?php if ($speakers[$i]) {
+        echo htmlspecialchars("checked");
+    }
+    ?>>Speakers
                                 <tooltip>?
                                     <tooltiptext>
                                         Indicate if this monitor has a built in speakers.
@@ -492,16 +750,42 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                             <th>Display Type: </th>
                             <td>
                                 <select name="displayType<?php echo $i ?>">
-                                    <option value="any" <?php if($displayType[$i]=="any" ) echo htmlspecialchars("selected") ?>>Any</option>
-                                    <option value="TN" <?php if($displayType[$i]=="TN" ) echo htmlspecialchars("selected") ?>>TN Panel</option>
-                                    <option value="VA" <?php if($displayType[$i]=="VA" ) echo htmlspecialchars("selected") ?>>VA Panel</option>
-                                    <option value="LCD" <?php if($displayType[$i]=="LCD" ) echo htmlspecialchars("selected") ?>>LCD</option>
-                                    <option value="IPS" <?php if($displayType[$i]=="IPS" ) echo htmlspecialchars("selected") ?>>IPS</option>
-                                    <option value="OLED" <?php if($displayType[$i]=="OLED" ) echo htmlspecialchars("selected") ?>>OLED</option>
+                                    <option value="any" <?php if ($displayType[$i] == "any") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>Any
+                                    </option>
+                                    <option value="TN" <?php if ($displayType[$i] == "TN") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>TN
+                                        Panel</option>
+                                    <option value="VA" <?php if ($displayType[$i] == "VA") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>VA
+                                        Panel</option>
+                                    <option value="LCD" <?php if ($displayType[$i] == "LCD") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>LCD
+                                    </option>
+                                    <option value="IPS" <?php if ($displayType[$i] == "IPS") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>IPS
+                                    </option>
+                                    <option value="OLED" <?php if ($displayType[$i] == "OLED") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        OLED</option>
                                 </select>
                                 <tooltip>?
                                     <tooltiptext>
-                                        The type of technology that drives the panel. TN panels are known for high refresh rates, while IPS panels are known for their brightness and color accuracy. VA panels are somewhere in the middle.
+                                        The type of technology that drives the panel. TN panels are known for high
+                                        refresh rates, while IPS panels are known for their brightness and color
+                                        accuracy. VA panels are somewhere in the middle.
                                     </tooltiptext>
                                 </tooltip>
                             </td>
@@ -510,14 +794,32 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                             <th>Sync Type: </th>
                             <td>
                                 <select name="syncType<?php echo $i ?>">
-                                    <option value="any" <?php if($syncType[$i]=="any" ) echo htmlspecialchars("selected") ?>>Any</option>
-                                    <option value="none" <?php if($syncType[$i]=="none" ) echo htmlspecialchars("selected") ?>>None</option>
-                                    <option value="G-Sync" <?php if($syncType[$i]=="G-Sync" ) echo htmlspecialchars("selected") ?>>G-Sync</option>
-                                    <option value="FreeSync" <?php if($syncType[$i]=="FreeSync" ) echo htmlspecialchars("selected") ?>>FreeSync</option>
+                                    <option value="any" <?php if ($syncType[$i] == "any") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>Any
+                                    </option>
+                                    <option value="none" <?php if ($syncType[$i] == "none") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>None
+                                    </option>
+                                    <option value="G-Sync" <?php if ($syncType[$i] == "G-Sync") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        G-Sync</option>
+                                    <option value="FreeSync" <?php if ($syncType[$i] == "FreeSync") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        FreeSync</option>
                                 </select>
                                 <tooltip>?
                                     <tooltiptext>
-                                        Some gaming monitors come with adaptive sync which will vary the framerate of the monitor based on how well the graphics card is able to render the game. This gets rid of the need for V-Sync.
+                                        Some gaming monitors come with adaptive sync which will vary the framerate of
+                                        the monitor based on how well the graphics card is able to render the game. This
+                                        gets rid of the need for V-Sync.
                                     </tooltiptext>
                                 </tooltip>
                             </td>
@@ -526,20 +828,61 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                             <th>Refresh Rate: </th>
                             <td>
                                 <select name="refreshRate<?php echo $i ?>">
-                                    <option value="any" <?php if($refreshRate[$i]=="any" ) echo htmlspecialchars("selected") ?>>Any</option>
-                                    <option value="30Hz" <?php if($refreshRate[$i]=="30Hz" ) echo htmlspecialchars("selected") ?>>30Hz</option>
-                                    <option value="45Hz" <?php if($refreshRate[$i]=="45Hz" ) echo htmlspecialchars("selected") ?>>45Hz</option>
-                                    <option value="60Hz" <?php if($refreshRate[$i]=="60Hz" ) echo htmlspecialchars("selected") ?>>60Hz</option>
-                                    <option value="75Hz" <?php if($refreshRate[$i]=="75Hz" ) echo htmlspecialchars("selected") ?>>75Hz</option>
-                                    <option value="90Hz" <?php if($refreshRate[$i]=="90Hz" ) echo htmlspecialchars("selected") ?>>90Hz</option>
-                                    <option value="100Hz" <?php if($refreshRate[$i]=="100Hz" ) echo htmlspecialchars("selected") ?>>100Hz</option>
-                                    <option value="120Hz" <?php if($refreshRate[$i]=="120Hz" ) echo htmlspecialchars("selected") ?>>120Hz</option>
-                                    <option value="144Hz" <?php if($refreshRate[$i]=="144Hz" ) echo htmlspecialchars("selected") ?>>144Hz</option>
-                                    <option value="240Hz" <?php if($refreshRate[$i]=="240Hz" ) echo htmlspecialchars("selected") ?>>240Hz</option>
+                                    <option value="any" <?php if ($refreshRate[$i] == "any") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>Any
+                                    </option>
+                                    <option value="30Hz" <?php if ($refreshRate[$i] == "30Hz") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        30Hz</option>
+                                    <option value="45Hz" <?php if ($refreshRate[$i] == "45Hz") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        45Hz</option>
+                                    <option value="60Hz" <?php if ($refreshRate[$i] == "60Hz") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        60Hz</option>
+                                    <option value="75Hz" <?php if ($refreshRate[$i] == "75Hz") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        75Hz</option>
+                                    <option value="90Hz" <?php if ($refreshRate[$i] == "90Hz") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        90Hz</option>
+                                    <option value="100Hz" <?php if ($refreshRate[$i] == "100Hz") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        100Hz</option>
+                                    <option value="120Hz" <?php if ($refreshRate[$i] == "120Hz") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        120Hz</option>
+                                    <option value="144Hz" <?php if ($refreshRate[$i] == "144Hz") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        144Hz</option>
+                                    <option value="240Hz" <?php if ($refreshRate[$i] == "240Hz") {
+        echo htmlspecialchars("selected");
+    }
+    ?>>
+                                        240Hz</option>
                                 </select>
                                 <tooltip>?
                                     <tooltiptext>
-                                        How fast the monitor refreshes itself. Also known as FPS or frames per second. A higher refresh rate will make movement look smoother.
+                                        How fast the monitor refreshes itself. Also known as FPS or frames per second. A
+                                        higher refresh rate will make movement look smoother.
                                     </tooltiptext>
                                 </tooltip>
                             </td>
@@ -547,10 +890,12 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                         <tr>
                             <th>Response Time: </th>
                             <td>
-                                <input type="number" name="responseTime<?php echo $i ?>" value="<?php echo $responseTime[$i] ?>">ms
+                                <input type="number" name="responseTime<?php echo $i ?>"
+                                       value="<?php echo $responseTime[$i] ?>">ms
                                 <tooltip>?
                                     <tooltiptext>
-                                        How fast the pixels can change color. This is NOT the same as Input Lag. A poor response time can result in ghosting.
+                                        How fast the pixels can change color. This is NOT the same as Input Lag. A poor
+                                        response time can result in ghosting.
                                     </tooltiptext>
                                 </tooltip>
                             </td>
@@ -613,16 +958,28 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
                     </table>
                 </div>
             </section>
-            <?php } ?>
+            <?php }?>
             <!-- End of For Loop to make all monitors sections -->
             <section class="searchEngine">
                 <table>
                     <tr>
                         <th>Change Search Engine: </th>
                         <td><select name="searchEngine">
-                                <option value="google" <?php if($searchEngine=="google" ) echo htmlspecialchars("selected") ?>>Google</option>
-                                <option value="bing" <?php if($searchEngine=="bing" ) echo htmlspecialchars("selected") ?>>Bing</option>
-                                <option value="duckduckgo" <?php if($searchEngine=="duckduckgo" ) echo htmlspecialchars("selected") ?>>Duck Duck Go</option>
+                                <option value="google" <?php if ($searchEngine == "google") {
+    echo htmlspecialchars("selected");
+}
+?>>Google
+                                </option>
+                                <option value="bing" <?php if ($searchEngine == "bing") {
+    echo htmlspecialchars("selected");
+}
+?>>Bing
+                                </option>
+                                <option value="duckduckgo" <?php if ($searchEngine == "duckduckgo") {
+    echo htmlspecialchars("selected");
+}
+?>>Duck
+                                    Duck Go</option>
                             </select>
                         </td>
                     </tr>
@@ -660,8 +1017,12 @@ $setup16Monitors = "index.php?maxNumMonitors=16&numActiveMonitors=16";
     </main>
     <footer>
         <p>A Kevin Vandy Project <img src="favicon.ico" width="16" height="16" alt="logo"></p>
-        <p>View on this project on <a href="https://github.com/KevinVandy/multi-monitor_planning_tool" target="_blank">GitHub</a> or <a href="https://gitlab.com/KevinVandy/multi-monitor_planning_tool" target="_blank"> GitLab</a></p>
-        <p>Submit bug reports or feature requests on the <a href="https://github.com/KevinVandy/multi-monitor_planning_tool/issues" target="_blank">GitHub Issues Tab</a></p>
+        <p>View on this project on <a href="https://github.com/KevinVandy/multi-monitor_planning_tool"
+               target="_blank">GitHub</a> or <a href="https://gitlab.com/KevinVandy/multi-monitor_planning_tool"
+               target="_blank"> GitLab</a></p>
+        <p>Submit bug reports or feature requests on the <a
+               href="https://github.com/KevinVandy/multi-monitor_planning_tool/issues" target="_blank">GitHub Issues
+                Tab</a></p>
     </footer>
 </body>
 
