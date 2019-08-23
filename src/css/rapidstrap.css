@@ -112,7 +112,7 @@ nav li, .navbar li, .navbar-fixed li {
   display: inline;
 }
 
-nav a, .navbar a, .navbar-fixed a {
+nav, nav a, .navbar a, .navbar-fixed a {
   color: var(--white-color);
   font-size: 1.2em;
   padding: 0 0.5rem;
@@ -503,7 +503,7 @@ input[type='submit'], input[type='reset'], input[type='button'], button {
   border: var(--primary-color-light) var(--default-border-width) solid;
 }
 
-.b-secondary, .border-secondary{
+.b-secondary, .border-secondary {
   border: var(--secondary-color) var(--default-border-width) solid;
 }
 
@@ -558,59 +558,59 @@ sub, sup {
   margin-bottom: 1rem;
 }
 
-.text-2rem, .t-2rem  {
+.text-2rem, .t-2rem {
   font-size: 2rem;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
-.text-3rem , .t-3rem {
+.text-3rem, .t-3rem {
   font-size: 3rem;
   line-height: 1.3;
   margin-bottom: 1rem;
 }
 
-.text-4rem , .t-4rem {
+.text-4rem, .t-4rem {
   font-size: 4rem;
   line-height: 1.4;
   margin-bottom: 1rem;
 }
 
-.text-5rem, .t-5rem  {
+.text-5rem, .t-5rem {
   font-size: 5rem;
   line-height: 1.4;
   margin-bottom: 1rem;
 }
 
-.text-lead, .t-lead  {
+.text-lead, .t-lead {
   font-size: 1.2em;
   margin-bottom: 1rem;
   font-weight: bold;
 }
 
-.text-center, .t-center  {
+.text-center, .t-center {
   text-align: center;
 }
 
-.text-right, .t-right  {
+.text-right, .t-right {
   text-align: right;
 }
 
-.text-left, .t-left  {
+.text-left, .t-left {
   text-align: left;
 }
 
-.text-primary , .t-primary {
+.text-primary, .t-primary {
   color: var(--primary-color);
   transition: color var(--fast-transition);
 }
 
-.text-primary-light, .t-primary-light  {
+.text-primary-light, .t-primary-light {
   color: var(--primary-color-light);
   transition: color var(--fast-transition);
 }
 
-.text-secondary, .t-secondary  {
+.text-secondary, .t-secondary {
   color: var(--secondary-color);
   transition: color var(--fast-transition);
 }
