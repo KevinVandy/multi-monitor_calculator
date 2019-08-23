@@ -16,9 +16,11 @@
   --slow-transition: 1s;
   --medium-transition: 0.5s;
   --fast-transition: 0.2s;
-  --navbar-default-height: 50px;
-  --sidebar-default-width: 200px;
-  --footer-default-height: 200px;
+  --default-navbar-height: 50px;
+  --default-sidebar-width: 200px;
+  --default-footer-height: 200px;
+  --default-border-width: 2px;
+  --default-line-height: 1.5;
 }
 
 /* Normalize */
@@ -34,15 +36,16 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   height: 100%;
-  line-height: 1.5;
+  line-height: var(--default-line-height);
   position: relative;
 }
 
 /* Uncomment right or left margin if sidebar present */
+
 main {
   min-height: 500px;
-  margin-left: var(--sidebar-default-width);
-  /* margin-right: var(--sidebar-default-width); */
+  margin-left: var(--default-sidebar-width);
+  /* margin-right: var(--default-sidebar-width); */
   overflow: hidden;
 }
 
@@ -123,7 +126,7 @@ nav a:hover, .navbar a:hover, .navbar-fixed:hover {
   align-items: center;
   background-color: var(--primary-color);
   display: flex;
-  height: var(--navbar-default-height);
+  height: var(--default-navbar-height);
   justify-content: space-between;
   padding: 0.7rem 2rem;
   width: 100%;
@@ -136,7 +139,7 @@ nav a:hover, .navbar a:hover, .navbar-fixed:hover {
 }
 
 .navbar-spacer {
-  height: var(--navbar-default-height);
+  height: var(--default-navbar-height);
   margin-bottom: 0px;
   opacity: 0;
   width: 100%;
@@ -150,9 +153,9 @@ nav a:hover, .navbar a:hover, .navbar-fixed:hover {
   min-height: 100px;
   overflow-x: hidden;
   padding: 1rem 0.5rem;
-  top: var(--navbar-default-height);
+  top: var(--default-navbar-height);
   bottom: 0;
-  width: var(--sidebar-default-width);
+  width: var(--default-sidebar-width);
   z-index: 1;
 }
 
@@ -169,7 +172,7 @@ nav a:hover, .navbar a:hover, .navbar-fixed:hover {
 .sidebar-left-spacer, .sidebar-right-spacer {
   height: 100%;
   position: relative;
-  width: var(--sidebar-default-width);
+  width: var(--default-sidebar-width);
   z-index: 0;
 }
 
@@ -184,10 +187,10 @@ header {
 
 footer {
   background-color: #232323;
-  /* margin-left: var(--sidebar-default-width); uncomment if left sidebar */
-  /* margin-right: var(--sidebar-default-width); uncomment if left sidebar */
+  /* margin-left: var(--default-sidebar-width); uncomment if left sidebar */
+  /* margin-right: var(--default-sidebar-width); uncomment if left sidebar */
   margin-top: 10rem;
-  min-height: var(--footer-default-height);
+  min-height: var(--default-footer-height);
   padding: 1rem;
   width: 100%;
   z-index: 2;
@@ -200,7 +203,7 @@ footer {
   border-radius: 3px;
   box-shadow: var(--light-color) 2px 2px 16px;
   width: 80%;
-  min-width: 400px;
+  min-width: 330px;
   max-width: 1600px;
   padding: 3rem;
   margin: 3rem auto;
@@ -389,7 +392,7 @@ footer {
 }
 
 .btn-white {
-  border: #444 solid 2px;
+  border: var(--dark-color) solid 2px;
 }
 
 input, button, select {
@@ -486,6 +489,56 @@ input[type='submit'], input[type='reset'], input[type='button'], button {
 
 /* UTILITIES */
 
+/* Borders */
+
+.b-none, .border-none, .no-border {
+  border: none
+}
+
+.b-primary, .border-primary {
+  border: var(--primary-color) var(--default-border-width) solid;
+}
+
+.b-primary-light, .border-primary-light {
+  border: var(--primary-color-light) var(--default-border-width) solid;
+}
+
+.b-secondary, .border-secondary{
+  border: var(--secondary-color) var(--default-border-width) solid;
+}
+
+.b-secondary-light, .border-secondary-light {
+  border: var(--secondary-color-light) var(--default-border-width) solid;
+}
+
+.b-success, .border-success {
+  border: var(--success-color) var(--default-border-width) solid;
+}
+
+.b-warning, .border-warning {
+  border: var(--warning-color) var(--default-border-width) solid;
+}
+
+.b-danger, .border-danger {
+  border: var(--danger-color) var(--default-border-width) solid;
+}
+
+.b-dark, .border-dark {
+  border: var(--dark-color) var(--default-border-width) solid;
+}
+
+.b-medium, .border-medium {
+  border: var(--medium-color) var(--default-border-width) solid;
+}
+
+.b-light, .border-light {
+  border: var(--dark-light) var(--default-border-width) solid;
+}
+
+.b-white, .border-white {
+  border: var(--dark-color) var(--default-border-width) solid;
+}
+
 /* Text */
 
 h1, h2, h3, h4, h5, h6 {
@@ -499,100 +552,100 @@ sub, sup {
   padding: 2px;
 }
 
-.text-1rem {
+.text-1rem, .t-1rem {
   font-size: 1rem;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
-.text-2rem {
+.text-2rem, .t-2rem  {
   font-size: 2rem;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
-.text-3rem {
+.text-3rem , .t-3rem {
   font-size: 3rem;
   line-height: 1.3;
   margin-bottom: 1rem;
 }
 
-.text-4rem {
+.text-4rem , .t-4rem {
   font-size: 4rem;
   line-height: 1.4;
   margin-bottom: 1rem;
 }
 
-.text-5rem {
+.text-5rem, .t-5rem  {
   font-size: 5rem;
   line-height: 1.4;
   margin-bottom: 1rem;
 }
 
-.text-lead {
+.text-lead, .t-lead  {
   font-size: 1.2em;
   margin-bottom: 1rem;
   font-weight: bold;
 }
 
-.text-center {
+.text-center, .t-center  {
   text-align: center;
 }
 
-.text-right {
+.text-right, .t-right  {
   text-align: right;
 }
 
-.text-left {
+.text-left, .t-left  {
   text-align: left;
 }
 
-.text-primary {
+.text-primary , .t-primary {
   color: var(--primary-color);
   transition: color var(--fast-transition);
 }
 
-.text-primary-light {
+.text-primary-light, .t-primary-light  {
   color: var(--primary-color-light);
   transition: color var(--fast-transition);
 }
 
-.text-secondary {
+.text-secondary, .t-secondary  {
   color: var(--secondary-color);
   transition: color var(--fast-transition);
 }
 
-.text-secondary-light {
+.text-secondary-light, .t-secondary-light {
   color: var(--secondary-color-light);
   transition: color var(--fast-transition);
 }
 
-.text-dark {
+.text-dark, .t-dark {
   color: var(--dark-color);
   transition: color var(--fast-transition);
 }
 
-.text-medium {
+.text-medium, .t-dark {
   color: var(--medium-color);
   transition: color var(--fast-transition);
 }
 
-.text-light {
+.text-light, .t-light {
   color: var(--light-color);
   transition: color var(--fast-transition);
 }
 
-.text-success {
+.text-success, .t-sucess {
   color: var(--success-color);
   transition: color var(--fast-transition);
 }
 
-.text-danger {
+.text-danger, .t-danger {
   color: var(--danger-color);
   transition: color var(--fast-transition);
 }
 
-.text-required {
+.text-required, .t-required {
   display: inline;
   color: var(--danger-color);
   font-weight: bold;

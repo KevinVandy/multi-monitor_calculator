@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MonitorOptions: React.FC = () => {
+const Home = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const MonitorOptions: React.FC = () => {
   )
 }
 
-export default MonitorOptions
+export default Home

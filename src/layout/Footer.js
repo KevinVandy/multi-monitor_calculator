@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MonitorStats: React.FC = () => {
+const Footer = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const MonitorStats: React.FC = () => {
   )
 }
 
-export default MonitorStats
+export default Footer

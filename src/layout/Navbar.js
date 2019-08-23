@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Monitor: React.FC = () => {
+const Navbar = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Monitor: React.FC = () => {
   )
 }
 
-export default Monitor
+export default Navbar

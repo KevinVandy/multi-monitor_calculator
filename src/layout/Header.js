@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MonitorsArea: React.FC = () => {
+const Header = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const MonitorsArea: React.FC = () => {
   )
 }
 
-export default MonitorsArea
+export default Header
