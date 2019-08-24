@@ -1,6 +1,9 @@
 import React from 'react'
+import { identifier } from '@babel/types';
 
-const Monitor = () => {
+const Monitor = (props) => {
+  const {width, height} = props;
+
   return (
     <div>
       

@@ -15,8 +15,7 @@ const Navbar = () => {
       </nav>
       <div className="navbar-spacer"></div>
     </>
+  );
+};
 
-  )
-}
-
-export default Navbar
+export default Navbar;

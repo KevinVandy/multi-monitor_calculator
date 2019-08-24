@@ -1,0 +1,84 @@
+[
+  {
+    "id": 1,
+    "options": {
+      "basic": {
+        "diagonal": 27,
+        "bezelWidth": 1,
+        "orientatin": "landscape",
+        "aspectRatio": "16:9",
+        "resolution": {
+          "horRes": 1920,
+          "verRes": 1080
+        }
+      },
+      "advanced": {
+        "displayType": "",
+        "syncType": "",
+        "refreshRate": 60,
+        "responseTime": null,
+        "features": {
+          "hdr": false,
+          "srgb": false,
+          "curved": false,
+          "webcam": false,
+          "touch": false,
+          "speakers": false
+        },
+        "ports": {
+          "hdmi": false,
+          "displayPort": false,
+          "usbc": false,
+          "vga": false,
+          "dvi": false
+        },
+        "sellerInfo": {
+          "brand": "",
+          "price": 0,
+          "link": ""
+        }
+      }
+    }
+  },
+  {
+    "id": 2,
+    "options": {
+      "basic": {
+        "diagonal": 27,
+        "bezelWidth": 1,
+        "orientatin": "landscape",
+        "aspectRatio": "16:9",
+        "resolution": {
+          "horRes": 1920,
+          "verRes": 1080
+        }
+      },
+      "advanced": {
+        "displayType": "",
+        "syncType": "",
+        "refreshRate": 60,
+        "responseTime": null,
+        "features": {
+          "hdr": false,
+          "srgb": false,
+          "curved": false,
+          "webcam": false,
+          "touch": false,
+          "speakers": false
+        },
+        "ports": {
+          "hdmi": false,
+          "displayPort": false,
+          "usbc": false,
+          "vga": false,
+          "dvi": false
+        },
+        "sellerInfo": {
+          "brand": "",
+          "price": 0,
+          "link": ""
+        }
+      }
+    }
+  }
+]

@@ -44,7 +44,7 @@ body {
 
 main {
   min-height: 500px;
-  margin-left: var(--default-sidebar-width);
+  /* margin-left: var(--default-sidebar-width); */
   /* margin-right: var(--default-sidebar-width); */
   overflow: hidden;
 }
@@ -112,7 +112,7 @@ nav li, .navbar li, .navbar-fixed li {
   display: inline;
 }
 
-nav, nav a, .navbar a, .navbar-fixed a {
+nav a, .navbar a, .navbar-fixed a {
   color: var(--white-color);
   font-size: 1.2em;
   padding: 0 0.5rem;
@@ -440,11 +440,8 @@ input[type='submit'], input[type='reset'], input[type='button'], button {
   .grid-2 {
     grid-template-columns: 1fr;
   }
-  .grid-3 {
+  .grid-3, .grid-4 {
     grid-template-columns: repeat(2, 1fr);
-  }
-  .grid-4 {
-    grid-template-columns: repeat(3, 1fr);
   }
   .grid-5 {
     grid-template-columns: repeat(4, 1fr);
@@ -470,8 +467,27 @@ input[type='submit'], input[type='reset'], input[type='button'], button {
   .grid-6, .grid-7 {
     grid-template-columns: repeat(3, 1fr);
   }
-  .grid-8, .grid-9, .grid-10 {
+  .grid-8, .grid-9 {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .grid-10 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .navbar-fixed {
+    position: relative;
+  }
+  nav, .navbar, .navbar-fixed {
+    height: auto;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+  }
+  nav ul, .navbar ul, .navbar-fixed ul {
+    display: block;
   }
 }
 
@@ -523,7 +539,7 @@ input[type='submit'], input[type='reset'], input[type='button'], button {
   border: var(--danger-color) var(--default-border-width) solid;
 }
 
-.b-dark, .border-dark {
+.b-dark, .border-dark, .b {
   border: var(--dark-color) var(--default-border-width) solid;
 }
 

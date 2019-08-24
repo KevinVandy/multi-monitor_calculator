@@ -1,0 +1,9 @@
+.monitor {
+	border: 5px solid #aaa;
+	background-image: radial-gradient(#444, #111);
+	margin-bottom: 10px;
+	margin-top: 10px;
+	z-index: 1;
+	display: table;
+	padding: 0px;
+}
