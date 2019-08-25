@@ -5,7 +5,7 @@
       "basic": {
         "diagonal": 27,
         "bezelWidth": 1,
-        "orientatin": "landscape",
+        "orientation": "landscape",
         "aspectRatio": "16:9",
         "resolution": {
           "horRes": 1920,

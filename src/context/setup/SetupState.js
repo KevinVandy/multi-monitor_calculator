@@ -6,8 +6,6 @@ import { SET_LOADING, LOAD_DEFAULT_SETUP } from '../types';
 
 const SetupState = (props) => {
 
-  console.log('hello');
-
   const initialState = {
     loading: false,
     monitors: []
@@ -21,14 +19,11 @@ const SetupState = (props) => {
   };
 
   const loadDefaultSetup = async () => {
-    console.log('loadDefaultSetup called');
     setLoading();
 
     const res = await Axios.get(
       '/defaultsetup.json'
     );
-
-    console.log("res" + res);
 
     dispatch({
       type: LOAD_DEFAULT_SETUP,

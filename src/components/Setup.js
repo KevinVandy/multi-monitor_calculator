@@ -1,33 +1,34 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import SetupContext from '../context/setup/SetupContext';
 import MonitorContainer from './MonitorContainer';
-import Spinner from './Spinner';
+//import Spinner from './Spinner';
+import monitors from '../context/setup/defaultsetup.json';
 
 const Setup = () => {
 
   const setupContext = useContext(SetupContext);
-  const { loading, monitors, loadDefaultSetup } = setupContext;
+  //const { loading, /*monitors, loadDefaultSetup */} = setupContext;
 
-  useEffect(() => {
-    console.log("useEffect");
-    return () => {
-      loadDefaultSetup();
-    };
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     loadDefaultSetup();
+  //   };
+  //   // eslint-disable-next-line
+  // }, []);
 
-
-  if (loading) {
+  // if (loading) {
+  //   return (
+  //     <Spinner />
+  //   );
+  // } else {
     return (
-      <Spinner />
+      <section className={"grid-" + monitors.length}>
+        {
+          monitors.map(monitor => <MonitorContainer monitor={monitor} key={monitor.id} />)
+        }
+      </section>
     );
-  } else {
-    return (
-      monitors.map(
-        monitor => <MonitorContainer monitor={monitor} key={monitor.id} />
-      )
-    );
-  }
+  // }
 
 };
 

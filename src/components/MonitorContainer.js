@@ -1,14 +1,15 @@
 import React from 'react';
+import Monitor from './Monitor';
+import MonitorOptions from './MonitorOptions';
+import MonitorStats from './MonitorStats';
 
-const MonitorContainer = (props) => {
-  const {id, options, stats } = props;
-  const {basic, advanced} = options;
-  const {diagonal, bezelWidth, orientation, aspectRatio, resolution } = basic;
-  const {horRes, vertRes} = resolution;
+const MonitorContainer = ({monitor}) => {
   return (
-    <div>
-      monitor: {id}
-    </div>
+    <section className="monitorContainer">
+      <Monitor monitor={monitor} />
+      <MonitorOptions monitor={monitor} />
+      <MonitorStats monitor={monitor} />
+    </section>
   );
 };
 
