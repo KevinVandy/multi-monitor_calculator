@@ -1,16 +1,20 @@
+main {
+  min-height: 1200px;
+}
+
 .monitorContainer {
   overflow: visible;
   z-index: 0;
 }
 
 .monitor {
-  border-style: solid;
-  border-color: #666;
+	display: table;
+	z-index: 1;
   background-image: radial-gradient(#444, #111);
+  border-color: #666;
+  border-style: solid;
   color: #fff;
   cursor: move;
-	z-index: 1;
-	display: table;
 }
 
 .monitor:active {
@@ -20,4 +24,9 @@
 
 .monitor:hover {
 	box-shadow: 8px 8px 20px #777;
+}
+
+label {
+  text-align: right;
+  margin-right: 0.5rem;
 }

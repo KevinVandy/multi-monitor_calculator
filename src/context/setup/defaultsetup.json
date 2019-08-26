@@ -8,6 +8,7 @@
         "orientation": "landscape",
         "aspectRatio": "16:9",
         "resolution": {
+          "type": "FHD",
           "horRes": 1920,
           "verRes": 1080
         }
@@ -49,6 +50,7 @@
         "orientatin": "landscape",
         "aspectRatio": "16:9",
         "resolution": {
+          "type": "FHD",
           "horRes": 1920,
           "verRes": 1080
         }
