@@ -3,12 +3,13 @@ import Monitor from './Monitor';
 import MonitorOptions from './MonitorOptions';
 import MonitorStats from './MonitorStats';
 
-const MonitorContainer = ({monitor}) => {
+const MonitorContainer = (props) => {
+
   return (
     <section className="monitorContainer">
-      <Monitor monitor={monitor} />
-      <MonitorOptions monitor={monitor} />
-      <MonitorStats monitor={monitor} />
+      <Monitor {...props} />
+      <MonitorOptions {...props} />
+      <MonitorStats {...props} />
     </section>
   );
 };

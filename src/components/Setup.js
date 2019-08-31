@@ -1,35 +1,71 @@
-import React, { useContext } from 'react';
-import SetupContext from '../context/setup/SetupContext';
+import React, { useState } from 'react';
 import MonitorContainer from './MonitorContainer';
-//import Spinner from './Spinner';
-import monitors from '../context/setup/defaultsetup.json';
+import defaultMonitors from '../context/setup/defaultsetup.json';
 
 const Setup = () => {
 
-  const setupContext = useContext(SetupContext);
-  //const { loading, /*monitors, loadDefaultSetup */} = setupContext;
+  const [monitors, setMonitors] = useState(defaultMonitors);
 
-  // useEffect(() => {
-  //   return () => {
-  //     loadDefaultSetup();
-  //   };
-  //   // eslint-disable-next-line
-  // }, []);
+  const onDiagonalChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.basic.diagonal = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
 
-  // if (loading) {
-  //   return (
-  //     <Spinner />
-  //   );
-  // } else {
-    return (
-      <section className={"grid-" + monitors.length}>
-        {
-          monitors.map(monitor => <MonitorContainer monitor={monitor} key={monitor.id} />)
-        }
-      </section>
-    );
-  // }
+  const onBezelWidthChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.basic.bezelWidth = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
 
+  const onOrientationChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.basic.orientation = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onAspectRatioChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.basic.aspectRatio = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onResolutionChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.basic.resolution.type = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onHorResChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.basic.resolution.horRes = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onVerResChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.basic.resolution.verRes = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  return (
+    <section className={"grid-" + monitors.length}>
+      {
+        monitors.map(monitor =>
+          <MonitorContainer
+            key={monitor.index}
+            monitor={monitor}
+            onDiagonalChange={onDiagonalChange}
+            onBezelWidthChange={onBezelWidthChange}
+            onOrientationChange={onOrientationChange}
+            onAspectRatioChange={onAspectRatioChange}
+            onResolutionChange={onResolutionChange}
+            onHorResChange={onHorResChange}
+            onVerResChange={onVerResChange}
+          />)
+      }
+    </section>
+  );
 };
 
 export default Setup;
