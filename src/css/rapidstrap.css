@@ -392,6 +392,9 @@ input[type='submit'], input[type='reset'], input[type='button'], button {
 	.grid-10 {
 		grid-template-columns: repeat(5, 1fr);
 	}
+	.navbar-spacer {
+		display: none;
+	}
 	.navbar-fixed {
 		position: relative;
 	}

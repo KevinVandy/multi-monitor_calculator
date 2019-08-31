@@ -3,7 +3,7 @@ import React from 'react';
 const MonitorOptions = ({ monitor, onDiagonalChange, onBezelWidthChange, onOrientationChange, onAspectRatioChange, onResolutionChange, onHorResChange, onVerResChange }) => {
 
   return (
-    
+
     <table className="m-auto">
       <tbody>
         <tr>
@@ -38,8 +38,8 @@ const MonitorOptions = ({ monitor, onDiagonalChange, onBezelWidthChange, onOrien
           </th>
           <td>
             <select onChange={onOrientationChange.bind(this, monitor.index)} value={monitor.options.basic.orientation} className="maxw-10rem t-center">
-              <option value="Landscape">Landscape</option>
-              <option value="Portrait">Portrait</option>
+              <option value="landscape">Landscape</option>
+              <option value="portrait">Portrait</option>
             </select>
           </td>
         </tr>
@@ -52,7 +52,6 @@ const MonitorOptions = ({ monitor, onDiagonalChange, onBezelWidthChange, onOrien
               <option value="custom">Custom</option>
               <optgroup label="Tall">
                 <option value="5:4">5:4</option>
-                <option value="4:3">4:3</option>
               </optgroup>
               <optgroup label="Wide">
                 <option value="16:10">16:10</option>
@@ -61,6 +60,14 @@ const MonitorOptions = ({ monitor, onDiagonalChange, onBezelWidthChange, onOrien
               <optgroup label="UltraWide">
                 <option value="21:9">21:9</option>
                 <option value="32:9">32:9</option>
+              </optgroup>
+              <optgroup>
+                <option value="1:1" hidden>1:1</option>
+                <option value="4:3" hidden>4:3</option>
+                <option value="3:2" hidden>3:2</option>
+                <option value="5:3" hidden>5:3</option>
+                <option value="2:1" hidden>2:1</option>
+                <option value="32:10" hidden>32:10</option>
               </optgroup>
             </select>
           </td>
@@ -85,7 +92,7 @@ const MonitorOptions = ({ monitor, onDiagonalChange, onBezelWidthChange, onOrien
               <option value="QHD+">QHD+ ~ 1600p</option>
               <option value="4K">4K ~ 2160p</option>
               <option value="5K">5K ~ 2880p</option>
-              <option value="6K">6K ~ 3,384</option>
+              <option value="6K">6K ~ 3384p</option>
               <option value="8K">8K ~ 4320p</option>
             </select>
           </td>

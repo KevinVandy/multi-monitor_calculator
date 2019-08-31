@@ -11,8 +11,8 @@ const Monitor = ({ monitor }) => {
   const BEZELWIDTH = parseFloat(monitor.options.basic.bezelWidth);
 
   const monitorStyle = {
-    width: `${WIDTH * SCALE}px`,
-    height: `${HEIGHT * SCALE}px`,
+    width: `${(ORIENTATION == 'landscape' ? WIDTH : HEIGHT) * SCALE}px`,
+    height: `${(ORIENTATION == 'landscape' ? HEIGHT : WIDTH) * SCALE}px`,
     borderWidth: `${BEZELWIDTH * SCALE / 2}px`
   };
 

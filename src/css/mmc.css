@@ -2,6 +2,12 @@ main {
   min-height: 1200px;
 }
 
+.setupContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .monitorContainer {
   overflow: visible;
   z-index: 0;
@@ -15,6 +21,7 @@ main {
   border-style: solid;
   color: #fff;
   cursor: move;
+  border-radius: 3px;
 }
 
 .monitor:active {
@@ -24,6 +31,10 @@ main {
 
 .monitor:hover {
 	box-shadow: 8px 8px 20px #777;
+}
+
+th {
+  text-align: right;
 }
 
 label {
