@@ -10,7 +10,9 @@ const Setup = () => {
 
   const onAdd = (e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate.push(defaultMonitor);
+    let newMonitor = JSON.parse(JSON.stringify(defaultMonitor));
+    newMonitor.index = monitors.length;
+    monitorsUpdate.push(newMonitor);
     setMonitors(monitorsUpdate);
   }
 
@@ -288,7 +290,9 @@ const Setup = () => {
 
   return (
     <>
-      <ButtonArea onAdd={onAdd} onRemove={onRemove} />
+      <ButtonArea
+        onAdd={onAdd}
+        onRemove={onRemove} />
       <section className="setupContainer">
         {
           monitors.map(monitor =>
@@ -302,7 +306,8 @@ const Setup = () => {
               onResolutionChange={onResolutionChange}
               onHorResChange={onHorResChange}
               onVerResChange={onVerResChange}
-            />)
+            />
+          )
         }
       </section>
     </>
