@@ -8,18 +8,28 @@ const Setup = () => {
   const [monitors, setMonitors] = useState([defaultMonitor]);
   const [scale, setScale] = useState(15);
 
-  const onAdd = (e) => {
-    const monitorsUpdate = [...monitors];
-    let newMonitor = JSON.parse(JSON.stringify(defaultMonitor));
-    newMonitor.index = monitors.length;
-    monitorsUpdate.push(newMonitor);
-    setMonitors(monitorsUpdate);
+  const onAdd = () => {
+    if (monitors.length < 9) {
+      const monitorsUpdate = [...monitors];
+      let newMonitor = JSON.parse(JSON.stringify(defaultMonitor));
+      newMonitor.index = monitors.length;
+      monitorsUpdate.push(newMonitor);
+      setMonitors(monitorsUpdate);
+    }
   }
 
-  const onRemove = (e) => {
+  const onRemove = () => {
     const monitorsUpdate = [...monitors];
     monitorsUpdate.pop();
     setMonitors(monitorsUpdate);
+  }
+
+  const onZoomIn = () => {
+    setScale(scale + 1);
+  }
+
+  const onZoomOut = () => {
+    setScale(scale - 1);
   }
 
   const onDiagonalChange = (index, e) => {
@@ -31,6 +41,12 @@ const Setup = () => {
   const onBezelWidthChange = (index, e) => {
     const monitorsUpdate = [...monitors];
     monitorsUpdate[index].options.basic.bezelWidth = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onBezelColorChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.basic.bezelColor = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
@@ -69,6 +85,114 @@ const Setup = () => {
     const monitorsUpdate = [...monitors];
     monitorsUpdate[index].options.basic.resolution.verRes = e.target.value;
     monitorsUpdate[index].options.basic.aspectRatio = calcAspectRatio(monitorsUpdate[index].options.basic.resolution.horRes, monitorsUpdate[index].options.basic.resolution.verRes);
+    setMonitors(monitorsUpdate);
+  }
+
+  const onDisplayTypeChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.displayType = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onSyncTypeChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.syncType = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onRefreshRateChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.refreshRate = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onResponseTimeChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.responseTime = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onHdrChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.features.hdr = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onSrgbChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.features.srgb = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onCurvedChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.features.curved = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onWebcamChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.features.webcam = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onTouchChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.features.touch = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onSpeakersChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.features.speakers = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onHdmiChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.ports.hdmi = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onDisplayPortChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.ports.displayPort = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onUsbcChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.ports.usbc = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onVgaChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.ports.vga = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onDviChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.ports.dvi = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onBrandChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.sellerInfo.brand = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onPriceChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.sellerInfo.price = e.target.value;
+    setMonitors(monitorsUpdate);
+  }
+
+  const onLinkChange = (index, e) => {
+    const monitorsUpdate = [...monitors];
+    monitorsUpdate[index].options.advanced.sellerInfo.link = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
@@ -292,20 +416,44 @@ const Setup = () => {
     <>
       <ButtonArea
         onAdd={onAdd}
-        onRemove={onRemove} />
+        onRemove={onRemove}
+        onZoomIn={onZoomIn}
+        onZoomOut={onZoomOut}
+        numMonitors={monitors.length}
+      />
       <section className="setupContainer">
         {
           monitors.map(monitor =>
             <MonitorContainer
               key={monitor.index}
               monitor={monitor}
+              scale={scale}
               onDiagonalChange={onDiagonalChange}
               onBezelWidthChange={onBezelWidthChange}
+              onBezelColorChange={onBezelColorChange}
               onOrientationChange={onOrientationChange}
               onAspectRatioChange={onAspectRatioChange}
               onResolutionChange={onResolutionChange}
               onHorResChange={onHorResChange}
               onVerResChange={onVerResChange}
+              onDisplayTypeChange={onDisplayTypeChange}
+              onSyncTypeChange={onSyncTypeChange}
+              onRefreshRateChange={onRefreshRateChange}
+              onResponseTimeChange={onResponseTimeChange}
+              onHdrChange={onHdrChange}
+              onSrgbChange={onSrgbChange}
+              onCurvedChange={onCurvedChange}
+              onWebcamChange={onWebcamChange}
+              onTouchChange={onTouchChange}
+              onSpeakersChange={onSpeakersChange}
+              onHdmiChange={onHdmiChange}
+              onDisplayPortChange={onDisplayPortChange}
+              onUsbcChange={onUsbcChange}
+              onVgaChange={onUsbcChange}
+              onDviChange={onDviChange}
+              onBrandChange={onBrandChange}
+              onPriceChange={onPriceChange}
+              onLinkChange={onLinkChange}
             />
           )
         }

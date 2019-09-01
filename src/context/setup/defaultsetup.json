@@ -4,6 +4,7 @@
     "basic": {
       "diagonal": 27,
       "bezelWidth": 1,
+      "bezelColor": "#666666",
       "orientation": "landscape",
       "aspectRatio": "16:9",
       "resolution": {

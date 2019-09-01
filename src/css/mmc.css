@@ -6,22 +6,26 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 1rem;
+  width: 100%;
 }
 
 .monitorContainer {
   overflow: visible;
   z-index: 0;
+  margin: 0.5rem;
 }
 
 .monitor {
 	display: table;
-	z-index: 1;
   background-image: radial-gradient(#444, #111);
-  border-color: #666;
+  border-radius: 3px;
   border-style: solid;
   color: #fff;
   cursor: move;
-  border-radius: 3px;
+  transition: all 0.4s ease;
+  transition-property: width, height, border;
+  z-index: 1;
 }
 
 .monitor:active {
@@ -33,11 +37,14 @@ main {
 	box-shadow: 8px 8px 20px #777;
 }
 
-th {
+label {
+  display: block;
+  padding-right: 0.5rem;
   text-align: right;
+  width: 100%;
 }
 
-label {
-  text-align: right;
-  margin-right: 0.5rem;
+input, select {
+  margin: 0.5rem auto;
+  text-align: center;
 }
