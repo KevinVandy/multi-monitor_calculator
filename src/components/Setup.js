@@ -114,67 +114,67 @@ const Setup = () => {
 
   const onHdrChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.hdr = e.target.value;
+    monitorsUpdate[index].options.advanced.features.hdr = !monitorsUpdate[index].options.advanced.features.hdr;
     setMonitors(monitorsUpdate);
   }
 
   const onSrgbChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.srgb = e.target.value;
+    monitorsUpdate[index].options.advanced.features.srgb = !monitorsUpdate[index].options.advanced.features.srgb;
     setMonitors(monitorsUpdate);
   }
 
   const onCurvedChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.curved = e.target.value;
+    monitorsUpdate[index].options.advanced.features.curved = !monitorsUpdate[index].options.advanced.features.curved;
     setMonitors(monitorsUpdate);
   }
 
   const onWebcamChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.webcam = e.target.value;
+    monitorsUpdate[index].options.advanced.features.webcam = !monitorsUpdate[index].options.advanced.features.webcam;
     setMonitors(monitorsUpdate);
   }
 
   const onTouchChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.touch = e.target.value;
+    monitorsUpdate[index].options.advanced.features.touch = !monitorsUpdate[index].options.advanced.features.touch;
     setMonitors(monitorsUpdate);
   }
 
   const onSpeakersChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.speakers = e.target.value;
+    monitorsUpdate[index].options.advanced.features.speakers = !monitorsUpdate[index].options.advanced.features.speakers ;
     setMonitors(monitorsUpdate);
   }
 
   const onHdmiChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.ports.hdmi = e.target.value;
+    monitorsUpdate[index].options.advanced.ports.hdmi = !monitorsUpdate[index].options.advanced.ports.hdmi;
     setMonitors(monitorsUpdate);
   }
 
   const onDisplayPortChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.ports.displayPort = e.target.value;
+    monitorsUpdate[index].options.advanced.ports.displayPort = !monitorsUpdate[index].options.advanced.ports.displayPort;
     setMonitors(monitorsUpdate);
   }
 
   const onUsbcChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.ports.usbc = e.target.value;
+    monitorsUpdate[index].options.advanced.ports.usbc = !monitorsUpdate[index].options.advanced.ports.usbc;
     setMonitors(monitorsUpdate);
   }
 
   const onVgaChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.ports.vga = e.target.value;
+    monitorsUpdate[index].options.advanced.ports.vga = !monitorsUpdate[index].options.advanced.ports.vga;
     setMonitors(monitorsUpdate);
   }
 
   const onDviChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.ports.dvi = e.target.value;
+    monitorsUpdate[index].options.advanced.ports.dvi = !monitorsUpdate[index].options.advanced.ports.dvi;
     setMonitors(monitorsUpdate);
   }
 
@@ -449,7 +449,7 @@ const Setup = () => {
               onHdmiChange={onHdmiChange}
               onDisplayPortChange={onDisplayPortChange}
               onUsbcChange={onUsbcChange}
-              onVgaChange={onUsbcChange}
+              onVgaChange={onVgaChange}
               onDviChange={onDviChange}
               onBrandChange={onBrandChange}
               onPriceChange={onPriceChange}

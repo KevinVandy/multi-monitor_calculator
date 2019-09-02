@@ -17,7 +17,7 @@
       "displayType": "",
       "syncType": "",
       "refreshRate": 60,
-      "responseTime": null,
+      "responseTime": "",
       "features": {
         "hdr": false,
         "srgb": false,

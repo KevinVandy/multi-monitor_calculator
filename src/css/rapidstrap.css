@@ -78,6 +78,7 @@ img {
 .table {
 	display: table;
 	margin: auto;
+	border-collapse: collapse;
 }
 
 .rel {
@@ -98,6 +99,12 @@ img {
 
 .float-left {
 	float: left;
+}
+
+.nowrap{
+	flex-wrap: none;
+	white-space: nowrap;
+	
 }
 
 nav ul, .navbar ul, .navbar-fixed ul {

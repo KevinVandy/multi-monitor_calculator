@@ -16,7 +16,7 @@ const Monitor = ({ monitor, scale }) => {
   const monitorStyle = {
     width: `${(ORIENTATION === 'landscape' ? WIDTH : HEIGHT) * SCALE}px`,
     height: `${(ORIENTATION === 'landscape' ? HEIGHT : WIDTH) * SCALE}px`,
-    borderWidth: `${BEZELWIDTH * SCALE / 2}px`,
+    borderWidth: `${BEZELWIDTH * SCALE / 2 }px`,
     borderColor: BEZELCOLOR
   };
 

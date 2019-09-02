@@ -48,3 +48,7 @@ input, select {
   margin: 0.5rem auto;
   text-align: center;
 }
+
+input[type="checkbox"] {
+  margin-left: 1rem;
+}
