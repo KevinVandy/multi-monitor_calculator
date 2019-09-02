@@ -395,7 +395,6 @@ footer {
 }
 
 input, button, select {
-	display: block;
 	font-size: 1.2rem;
 }
 
@@ -405,7 +404,6 @@ input[type='text'], input[type='email'], input[type='tel'], input[type='password
 	max-width: 25rem;
 	min-width: 3rem;
 	padding: 0.2em;
-	width: 100%;
 }
 
 input[type='date'], input[type='month'], input[type='week'], [type='datetime-local'], [type='time'], input[type='number'] {
@@ -414,7 +412,6 @@ input[type='date'], input[type='month'], input[type='week'], [type='datetime-loc
 	max-width: 15rem;
 	min-width: 3rem;
 	padding: 0.3em;
-	width: 100%;
 }
 
 input[type='checkbox'], input[type='radio'] {
@@ -560,6 +557,7 @@ input[type='submit'], input[type='reset'], input[type='button'], button {
 
 h1, h2, h3, h4, h5, h6 {
 	padding: 1rem;
+	text-align: center;
 	text-transform: capitalize;
 	width: 100%;
 }
@@ -1775,8 +1773,16 @@ sub, sup {
 	max-width: 300px;
 }
 
+.maxw-350px {
+	max-width: 350px;
+}
+
 .maxw-400px {
 	max-width: 400px;
+}
+
+.maxw-450px {
+	max-width: 450px;
 }
 
 .maxw-500px {

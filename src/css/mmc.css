@@ -14,6 +14,7 @@ main {
   overflow: visible;
   z-index: 0;
   margin: 0.5rem;
+  border: 1px solid black;
 }
 
 .monitor {
@@ -37,18 +38,25 @@ main {
 	box-shadow: 8px 8px 20px #777;
 }
 
-label {
-  display: block;
-  padding-right: 0.5rem;
-  text-align: right;
+.monitorOptions {
+  border: 1px solid red;
+  grid-template-columns: repeat(1, 1fr);
+  margin: auto;
   width: 100%;
+}
+
+label {
+  display: inline-block;
+  padding-right: 0.5rem;
+  min-width: 110px;
+  border: 1px solid yellow;
+  text-align: right;
 }
 
 input, select {
   margin: 0.5rem auto;
-  text-align: center;
+  text-align: left;
 }
 
 input[type="checkbox"] {
-  margin-left: 1rem;
 }
