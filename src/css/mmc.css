@@ -60,3 +60,11 @@ input, select {
 
 input[type="checkbox"] {
 }
+
+.link {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  margin: auto;
+  
+}

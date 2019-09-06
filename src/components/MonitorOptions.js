@@ -48,14 +48,14 @@ const MonitorOptions = ({
       <div id="aspectRatioOptions" className="text-center">
         <p>
           <label>Orientation:</label>
-          <select onChange={onOrientationChange.bind(this, monitor.index)} value={monitor.options.basic.orientation} className="w-8rem t-center">
+          <select onChange={onOrientationChange.bind(this, monitor.index)} value={monitor.options.basic.orientation} className="w-10rem t-center">
             <option value="landscape">Landscape</option>
             <option value="portrait">Portrait</option>
           </select>
         </p>
         <p>
           <label>Aspect Ratio:</label>
-          <select onChange={onAspectRatioChange.bind(this, monitor.index)} value={monitor.options.basic.aspectRatio} className="w-8rem t-center">
+          <select onChange={onAspectRatioChange.bind(this, monitor.index)} value={monitor.options.basic.aspectRatio} className="w-10rem t-center">
             <option value="custom">Custom</option>
             <optgroup label="Tall">
               <option value="5:4">5:4</option>
@@ -83,7 +83,7 @@ const MonitorOptions = ({
       <div id="resolutionOptions" className="text-center">
         <p>
           <label>Preset:</label>
-          <select onChange={onResolutionChange.bind(this, monitor.index)} value={monitor.options.basic.resolution.type} className="maxw-10rem">
+          <select onChange={onResolutionChange.bind(this, monitor.index)} value={monitor.options.basic.resolution.type} className="w-10rem">
             <option value="custom">Custom</option>
             <option value="SVGA">SVGA ~ 600i</option>
             <option value="HD">HD ~ 768p</option>
@@ -188,7 +188,7 @@ const MonitorOptions = ({
       <div id="sellerInfoOptions" className="text-center">
         <p>
           <label>Brand:</label>
-          <input onChange={onBrandChange.bind(this, monitor.index)} value={monitor.options.advanced.sellerInfo.brand} type="text" name="brand" />
+          <input onChange={onBrandChange.bind(this, monitor.index)} value={monitor.options.advanced.sellerInfo.brand} type="text" name="brand" className="w-10rem" />
         </p>
         <p>
           <label>Price:</label>
@@ -198,7 +198,7 @@ const MonitorOptions = ({
         <p>
           <label>Link:</label>
           <input onChange={onLinkChange.bind(this, monitor.index)} value={monitor.options.advanced.sellerInfo.link} type="url" name="link" />
-          <a href={monitor.options.advanced.sellerInfo.link} target="_blank" rel="noopener noreferrer" className="text-center block">
+          <a href={monitor.options.advanced.sellerInfo.link} target="_blank" rel="noopener noreferrer" className="text-center block w-10rem link">
             {monitor.options.advanced.sellerInfo.link.replace('https://', '').replace('http://', '').replace('www.', '').replace('www', '').substring(0, 30)} {monitor.options.advanced.sellerInfo.link.length > 30 ? <span>...</span> : <></>}
           </a>
         </p>
