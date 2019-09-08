@@ -7,6 +7,13 @@ const Setup = () => {
 
   const [monitors, setMonitors] = useState([defaultMonitor]);
   const [scale, setScale] = useState(15);
+  const [hideSizeOptions, setHideSizeOptions] = useState(false);
+  const [hideBezelOptions, setHideBezelOptions] = useState(false);
+  const [hideAspectRatioOptions, setHideAspectRatioOptions] = useState(false);
+  const [hideResolutionOptions, setHideResolutionOptions] = useState(true);
+  const [hideFeatureOptions, setHideFeatureOptions] = useState(true);
+  const [hidePortOptions, setHidePortOptions] = useState(true);
+  const [hideSellerInfoOptions, setHideSellerInfoOptions] = useState(true);
 
   const onAdd = () => {
     if (monitors.length < 9) {
@@ -195,6 +202,35 @@ const Setup = () => {
     monitorsUpdate[index].sellerInfo.link = e.target.value;
     setMonitors(monitorsUpdate);
   }
+
+  const onToggleSizeOptions = (e) => {
+    setHideSizeOptions(!hideSizeOptions);
+  };
+
+  const onToggleBezelOptions = (e) => {
+    setHideBezelOptions(!hideBezelOptions);
+  };
+
+  const onToggleAspectRatioOptions = (e) => {
+    setHideAspectRatioOptions(!hideAspectRatioOptions);
+  };
+
+  const onToggleResolutionOptions = (e) => {
+    setHideResolutionOptions(!hideResolutionOptions);
+  };
+
+  const onToggleFeatureOptions = (e) => {
+    setHideFeatureOptions(!hideFeatureOptions);
+  };
+
+  const onTogglePortOptions = (e) => {
+    setHidePortOptions(!hidePortOptions);
+  };
+
+  const onToggleSellerInfoOptions = (e) => {
+    setHideSellerInfoOptions(!hideSellerInfoOptions);
+  };
+
 
   const calcAspectRatio = (horRes, verRes) => {
     const theta = Math.atan(verRes / horRes);
@@ -428,6 +464,13 @@ const Setup = () => {
               key={monitor.index}
               monitor={monitor}
               scale={scale}
+              hideSizeOptions={hideSizeOptions}
+              hideBezelOptions={hideBezelOptions}
+              hideAspectRatioOptions={hideAspectRatioOptions}
+              hideResolutionOptions={hideResolutionOptions}
+              hideFeatureOptions={hideFeatureOptions}
+              hidePortOptions={hidePortOptions}
+              hideSellerInfoOptions={hideSellerInfoOptions}
               onDiagonalChange={onDiagonalChange}
               onBezelWidthChange={onBezelWidthChange}
               onBezelColorChange={onBezelColorChange}
@@ -454,6 +497,13 @@ const Setup = () => {
               onBrandChange={onBrandChange}
               onPriceChange={onPriceChange}
               onLinkChange={onLinkChange}
+              onToggleSizeOptions={onToggleSizeOptions}
+              onToggleBezelOptions={onToggleBezelOptions}
+              onToggleAspectRatioOptions={onToggleAspectRatioOptions}
+              onToggleResolutionOptions={onToggleResolutionOptions}
+              onToggleFeatureOptions={onToggleFeatureOptions}
+              onTogglePortOptions={onTogglePortOptions}
+              onToggleSellerInfoOptions={onToggleSellerInfoOptions}
             />
           )
         }

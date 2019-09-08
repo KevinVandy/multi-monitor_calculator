@@ -1,5 +1,4 @@
 import React from 'react';
-import Draggable from 'react-draggable';
 
 const Monitor = ({ monitor, scale }) => {
 
@@ -12,7 +11,6 @@ const Monitor = ({ monitor, scale }) => {
   const WIDTH = parseFloat(monitor.diagonal) * Math.cos(THETA) + BEZELWIDTH;
   const HEIGHT = parseFloat(monitor.diagonal) * Math.sin(THETA) + BEZELWIDTH;
 
-
   const monitorStyle = {
     width: `${(ORIENTATION === 'landscape' ? WIDTH : HEIGHT) * SCALE}px`,
     height: `${(ORIENTATION === 'landscape' ? HEIGHT : WIDTH) * SCALE}px`,
@@ -21,13 +19,11 @@ const Monitor = ({ monitor, scale }) => {
   };
 
   return (
-    <Draggable>
-      <div className="monitor m-auto" style={monitorStyle}>
-        <div className="text-right p">
-          {INDEX}
-        </div>
-      </div>
-    </Draggable>
+    <div className="monitor m-auto" style={monitorStyle}>
+      <p>
+        {INDEX + 1}
+      </p>
+    </div>
   );
 };
 

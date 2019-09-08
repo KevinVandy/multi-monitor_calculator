@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SlideDown } from 'react-slidedown';
 import "react-slidedown/lib/slidedown.css";
 
 const MonitorOptions = ({
   monitor,
+  hideSizeOptions,
+  hideBezelOptions,
+  hideAspectRatioOptions,
+  hideResolutionOptions,
+  hideFeatureOptions,
+  hidePortOptions,
+  hideSellerInfoOptions,
   onDiagonalChange,
   onBezelWidthChange,
   onBezelColorChange,
@@ -29,60 +36,43 @@ const MonitorOptions = ({
   onDviChange,
   onBrandChange,
   onPriceChange,
-  onLinkChange
+  onLinkChange,
+  onToggleSizeOptions,
+  onToggleBezelOptions,
+  onToggleAspectRatioOptions,
+  onToggleResolutionOptions,
+  onToggleFeatureOptions,
+  onTogglePortOptions,
+  onToggleSellerInfoOptions
 }) => {
-
-  const [hideSizeOptions, setHideSizeOptions] = useState(false);
-  const [hideBezelOptions, setHideBezelOptions] = useState(false);
-  const [hideAspectRatioOptions, setHideAspectRatioOptions] = useState(false);
-  const [hideResolutionOptions, setHideResolutionOptions] = useState(false);
-  const [hideFeatureOptions, setHideFeatureOptions] = useState(true);
-  const [hidePortOptions, setHidePortOptions] = useState(true);
-  const [hideSellerInfoOptions, setHideSellerInfoOptions] = useState(true);
-
-  const onToggleSizeOptions = (e) => {
-    setHideSizeOptions(!hideSizeOptions);
-  };
-
-  const onToggleBezelOptions = (e) => {
-    setHideBezelOptions(!hideBezelOptions);
-  };
-
-  const onToggleAspectRatioOptions = (e) => {
-    setHideAspectRatioOptions(!hideAspectRatioOptions);
-  };
-
-  const onToggleResolutionOptions = (e) => {
-    setHideResolutionOptions(!hideResolutionOptions);
-  };
-
-  const onToggleFeatureOptions = (e) => {
-    setHideFeatureOptions(!hideFeatureOptions);
-  };
-
-  const onTogglePortOptions = (e) => {
-    setHidePortOptions(!hidePortOptions);
-  };
-
-  const onToggleSellerInfoOptions = (e) => {
-    setHideSellerInfoOptions(!hideSellerInfoOptions);
-  };
 
   return (
     <div className="monitorOptions maxw-450px">
-      <h3>Size<span onClick={onToggleSizeOptions} className="toggleButton">{hideSizeOptions ? "+" : "-"}</span></h3>
+      <hr />
+      <h3>Size<span onClick={onToggleSizeOptions} className="toggleButton">{hideSizeOptions ? "▲" : "▼"}</span></h3>
       <SlideDown
         closed={hideSizeOptions}
         transitionOnAppear={false}
         className={'my-dropdown-slidedown'}>
         <div id="sizeOptions" className="text-center">
           <p>
-            <input onChange={onDiagonalChange.bind(this, monitor.index)} value={monitor.diagonal} type="number" min="1" max="100" step="1" name="diagonal" className="maxw-3rem t-center inline" /><span> "</span>
+            <input onChange={onDiagonalChange.bind(this, monitor.index)} value={monitor.diagonal} type="number" min="1" max="100" step="1" name="diagonal" list="sizes" className="maxw-3rem t-center inline" /><span> "</span>
+            <datalist id="sizes">
+              <option value="17"/>
+              <option value="19"/>
+              <option value="21"/>
+              <option value="22"/>
+              <option value="24"/>
+              <option value="27"/>
+              <option value="30"/>
+              <option value="32"/>
+              <option value="34"/>
+            </datalist>
           </p>
         </div>
       </SlideDown>
       <hr />
-      <h3>Bezel<span onClick={onToggleBezelOptions} className="toggleButton">{hideBezelOptions ? "+" : "-"}</span></h3>
+      <h3>Bezel<span onClick={onToggleBezelOptions} className="toggleButton">{hideBezelOptions ? "▲" : "▼"}</span></h3>
       <SlideDown
         closed={hideBezelOptions}
         transitionOnAppear={false}
@@ -95,7 +85,7 @@ const MonitorOptions = ({
         </div>
       </SlideDown>
       <hr />
-      <h3>Aspect Ratio<span onClick={onToggleAspectRatioOptions} className="toggleButton">{hideAspectRatioOptions ? "+" : "-"}</span></h3>
+      <h3>Aspect Ratio<span onClick={onToggleAspectRatioOptions} className="toggleButton">{hideAspectRatioOptions ? "▲" : "▼"}</span></h3>
       <SlideDown
         closed={hideAspectRatioOptions}
         transitionOnAppear={false}
@@ -134,7 +124,7 @@ const MonitorOptions = ({
         </div>
       </SlideDown>
       <hr />
-      <h3>Resolution<span onClick={onToggleResolutionOptions} className="toggleButton">{hideResolutionOptions ? "+" : "-"}</span></h3>
+      <h3>Resolution<span onClick={onToggleResolutionOptions} className="toggleButton">{hideResolutionOptions ? "▲" : "▼"}</span></h3>
       <SlideDown
         closed={hideResolutionOptions}
         transitionOnAppear={false}
@@ -163,7 +153,7 @@ const MonitorOptions = ({
         </div>
       </SlideDown>
       <hr />
-      <h3>Features<span onClick={onToggleFeatureOptions} className="toggleButton">{hideFeatureOptions ? "+" : "-"}</span></h3>
+      <h3>Features<span onClick={onToggleFeatureOptions} className="toggleButton">{hideFeatureOptions ? "▲" : "▼"}</span></h3>
       <SlideDown
         closed={hideFeatureOptions}
         transitionOnAppear={false}
@@ -198,7 +188,7 @@ const MonitorOptions = ({
             <input onChange={onResponseTimeChange.bind(this, monitor.index)} value={monitor.responseTime} type="number" step="1" min="1" max="50" className="w-8rem inline" />
             <span>ms</span>
           </p>
-          <div id="featureChecks" className="grid-3-f text-left px-3rem">
+          <div id="featureChecks" className="grid-3-f text-left px-1rem">
             <p className="nowrap">
               <input onChange={onHdrChange.bind(this, monitor.index)} type="checkbox" name="hdr" checked={monitor.features.hdr} />
               <label className="text-left">HDR</label>
@@ -227,12 +217,12 @@ const MonitorOptions = ({
         </div>
       </SlideDown>
       <hr />
-      <h3>Ports<span onClick={onTogglePortOptions} className="toggleButton">{hidePortOptions ? "+" : "-"}</span></h3>
+      <h3>Ports<span onClick={onTogglePortOptions} className="toggleButton">{hidePortOptions ? "▲" : "▼"}</span></h3>
       <SlideDown
         closed={hidePortOptions}
         transitionOnAppear={false}
         className={'my-dropdown-slidedown'}>
-        <div id="portOptions" className="grid-3-f px-3rem">
+        <div id="portOptions" className="grid-3-f px-1rem">
           <p className="nowrap">
             <input onChange={onHdmiChange.bind(this, monitor.index)} type="checkbox" name="hdmi" checked={monitor.features.hdmi} />
             <label className="text-left">HDMI</label>
@@ -256,7 +246,7 @@ const MonitorOptions = ({
         </div>
       </SlideDown>
       <hr />
-      <h3>Seller Info<span onClick={onToggleSellerInfoOptions} className="toggleButton">{hideSellerInfoOptions ? "+" : "-"}</span></h3>
+      <h3>Seller Info<span onClick={onToggleSellerInfoOptions} className="toggleButton">{hideSellerInfoOptions ? "▲" : "▼"}</span></h3>
       <SlideDown
         closed={hideSellerInfoOptions}
         transitionOnAppear={false}
@@ -280,6 +270,7 @@ const MonitorOptions = ({
           </p>
         </div>
       </SlideDown>
+      <hr />
     </div>
   );
 };

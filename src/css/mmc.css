@@ -1,3 +1,7 @@
+body {
+  /* background-image: url('../images/circuits.jpg'); */
+}
+
 main {
   min-height: 1800px;
 }
@@ -11,10 +15,10 @@ main {
 }
 
 .monitorContainer {
+  margin: 0.5rem auto;
+  max-width: 360px;
   overflow: visible;
   z-index: 0;
-  margin: 0.5rem;
-  border: 1px solid black;
 }
 
 .monitor {
@@ -29,6 +33,15 @@ main {
   z-index: 1;
 }
 
+.monitor p {
+  color: #fff;
+  display: table-cell;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+}
+
 .monitor:active {
   box-shadow: 8px 8px 20px #777;
   z-index: 2;
@@ -39,10 +52,9 @@ main {
 }
 
 .monitorOptions {
-  border: 1px solid red;
   grid-template-columns: repeat(1, 1fr);
   margin: auto;
-  width: 100%;
+  width: 360px;
 }
 
 #sizeOptions label, #aspectRatioOptions label, #resolutionOptions label, #featureOptions label, #sellerInfoOptions label {
@@ -55,7 +67,7 @@ main {
 #featureChecks label, #portChecks label {
   display: inline-block;
   padding-right: 0.5rem;
-  min-width: 80px;
+  min-width: 75px;
   text-align: left;
 }
 
@@ -77,13 +89,29 @@ input[type="checkbox"] {}
   color: blue;
   cursor: pointer;
   display: inline;
-  font-size: 2rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  margin: -0.7rem 0 0 1rem;
-  position: absolute;
+  margin-left: 0.5rem;
 }
 
 .react-slidedown {
   transition-duration: 400ms;
-  transition-timing-function: ease;
+  transition-timing-function: ease-in-out;
+}
+
+.monitorStats {
+  width: 360px;
+}
+
+.monitorStats th {
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+.monitorStats td {
+  text-align: left;
+}
+
+.handle {
+  cursor: move;
 }
