@@ -34,165 +34,165 @@ const Setup = () => {
 
   const onDiagonalChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.basic.diagonal = e.target.value;
+    monitorsUpdate[index].diagonal = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
   const onBezelWidthChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.basic.bezelWidth = e.target.value;
+    monitorsUpdate[index].bezelWidth = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
   const onBezelColorChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.basic.bezelColor = e.target.value;
+    monitorsUpdate[index].bezelColor = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
   const onOrientationChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.basic.orientation = e.target.value;
+    monitorsUpdate[index].orientation = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
   const onAspectRatioChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.basic.aspectRatio = e.target.value;
-    const [horRes, verRes] = calcResolution(monitorsUpdate[index].options.basic.resolution.type, monitorsUpdate[index].options.basic.aspectRatio);
-    monitorsUpdate[index].options.basic.resolution.horRes = horRes;
-    monitorsUpdate[index].options.basic.resolution.verRes = verRes;
+    monitorsUpdate[index].aspectRatio = e.target.value;
+    const [horRes, verRes] = calcResolution(monitorsUpdate[index].resolution.type, monitorsUpdate[index].aspectRatio);
+    monitorsUpdate[index].resolution.horRes = horRes;
+    monitorsUpdate[index].resolution.verRes = verRes;
     setMonitors(monitorsUpdate);
   }
 
   const onResolutionChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.basic.resolution.type = e.target.value;
-    const [horRes, verRes] = calcResolution(monitorsUpdate[index].options.basic.resolution.type, monitorsUpdate[index].options.basic.aspectRatio);
-    monitorsUpdate[index].options.basic.resolution.horRes = horRes;
-    monitorsUpdate[index].options.basic.resolution.verRes = verRes;
+    monitorsUpdate[index].resolution.type = e.target.value;
+    const [horRes, verRes] = calcResolution(monitorsUpdate[index].resolution.type, monitorsUpdate[index].aspectRatio);
+    monitorsUpdate[index].resolution.horRes = horRes;
+    monitorsUpdate[index].resolution.verRes = verRes;
     setMonitors(monitorsUpdate);
   }
 
   const onHorResChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.basic.resolution.horRes = e.target.value;
-    monitorsUpdate[index].options.basic.aspectRatio = calcAspectRatio(monitorsUpdate[index].options.basic.resolution.horRes, monitorsUpdate[index].options.basic.resolution.verRes);
+    monitorsUpdate[index].resolution.horRes = e.target.value;
+    monitorsUpdate[index].aspectRatio = calcAspectRatio(monitorsUpdate[index].resolution.horRes, monitorsUpdate[index].resolution.verRes);
     setMonitors(monitorsUpdate);
   }
 
   const onVerResChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.basic.resolution.verRes = e.target.value;
-    monitorsUpdate[index].options.basic.aspectRatio = calcAspectRatio(monitorsUpdate[index].options.basic.resolution.horRes, monitorsUpdate[index].options.basic.resolution.verRes);
+    monitorsUpdate[index].resolution.verRes = e.target.value;
+    monitorsUpdate[index].aspectRatio = calcAspectRatio(monitorsUpdate[index].resolution.horRes, monitorsUpdate[index].resolution.verRes);
     setMonitors(monitorsUpdate);
   }
 
   const onDisplayTypeChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.displayType = e.target.value;
+    monitorsUpdate[index].displayType = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
   const onSyncTypeChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.syncType = e.target.value;
+    monitorsUpdate[index].syncType = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
   const onRefreshRateChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.refreshRate = e.target.value;
+    monitorsUpdate[index].refreshRate = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
   const onResponseTimeChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.responseTime = e.target.value;
+    monitorsUpdate[index].responseTime = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
   const onHdrChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.hdr = !monitorsUpdate[index].options.advanced.features.hdr;
+    monitorsUpdate[index].features.hdr = !monitorsUpdate[index].features.hdr;
     setMonitors(monitorsUpdate);
   }
 
   const onSrgbChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.srgb = !monitorsUpdate[index].options.advanced.features.srgb;
+    monitorsUpdate[index].features.srgb = !monitorsUpdate[index].features.srgb;
     setMonitors(monitorsUpdate);
   }
 
   const onCurvedChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.curved = !monitorsUpdate[index].options.advanced.features.curved;
+    monitorsUpdate[index].features.curved = !monitorsUpdate[index].features.curved;
     setMonitors(monitorsUpdate);
   }
 
   const onWebcamChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.webcam = !monitorsUpdate[index].options.advanced.features.webcam;
+    monitorsUpdate[index].features.webcam = !monitorsUpdate[index].features.webcam;
     setMonitors(monitorsUpdate);
   }
 
   const onTouchChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.touch = !monitorsUpdate[index].options.advanced.features.touch;
+    monitorsUpdate[index].features.touch = !monitorsUpdate[index].features.touch;
     setMonitors(monitorsUpdate);
   }
 
   const onSpeakersChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.features.speakers = !monitorsUpdate[index].options.advanced.features.speakers ;
+    monitorsUpdate[index].features.speakers = !monitorsUpdate[index].features.speakers ;
     setMonitors(monitorsUpdate);
   }
 
   const onHdmiChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.ports.hdmi = !monitorsUpdate[index].options.advanced.ports.hdmi;
+    monitorsUpdate[index].ports.hdmi = !monitorsUpdate[index].ports.hdmi;
     setMonitors(monitorsUpdate);
   }
 
   const onDisplayPortChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.ports.displayPort = !monitorsUpdate[index].options.advanced.ports.displayPort;
+    monitorsUpdate[index].ports.displayPort = !monitorsUpdate[index].ports.displayPort;
     setMonitors(monitorsUpdate);
   }
 
   const onUsbcChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.ports.usbc = !monitorsUpdate[index].options.advanced.ports.usbc;
+    monitorsUpdate[index].ports.usbc = !monitorsUpdate[index].ports.usbc;
     setMonitors(monitorsUpdate);
   }
 
   const onVgaChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.ports.vga = !monitorsUpdate[index].options.advanced.ports.vga;
+    monitorsUpdate[index].ports.vga = !monitorsUpdate[index].ports.vga;
     setMonitors(monitorsUpdate);
   }
 
   const onDviChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.ports.dvi = !monitorsUpdate[index].options.advanced.ports.dvi;
+    monitorsUpdate[index].ports.dvi = !monitorsUpdate[index].ports.dvi;
     setMonitors(monitorsUpdate);
   }
 
   const onBrandChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.sellerInfo.brand = e.target.value;
+    monitorsUpdate[index].sellerInfo.brand = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
   const onPriceChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.sellerInfo.price = e.target.value;
+    monitorsUpdate[index].sellerInfo.price = e.target.value;
     setMonitors(monitorsUpdate);
   }
 
   const onLinkChange = (index, e) => {
     const monitorsUpdate = [...monitors];
-    monitorsUpdate[index].options.advanced.sellerInfo.link = e.target.value;
+    monitorsUpdate[index].sellerInfo.link = e.target.value;
     setMonitors(monitorsUpdate);
   }
 

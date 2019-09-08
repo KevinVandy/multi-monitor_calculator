@@ -18,7 +18,7 @@ main {
 }
 
 .monitor {
-	display: table;
+  display: table;
   background-image: radial-gradient(#444, #111);
   border-radius: 3px;
   border-style: solid;
@@ -30,12 +30,12 @@ main {
 }
 
 .monitor:active {
-	box-shadow: 8px 8px 20px #777;
-	z-index: 2;
+  box-shadow: 8px 8px 20px #777;
+  z-index: 2;
 }
 
 .monitor:hover {
-	box-shadow: 8px 8px 20px #777;
+  box-shadow: 8px 8px 20px #777;
 }
 
 .monitorOptions {
@@ -45,12 +45,18 @@ main {
   width: 100%;
 }
 
-label {
+#sizeOptions label, #aspectRatioOptions label, #resolutionOptions label, #featureOptions label, #sellerInfoOptions label {
   display: inline-block;
   padding-right: 0.5rem;
-  min-width: 110px;
-  border: 1px solid yellow;
+  min-width: 150px;
   text-align: right;
+}
+
+#featureChecks label, #portChecks label {
+  display: inline-block;
+  padding-right: 0.5rem;
+  min-width: 80px;
+  text-align: left;
 }
 
 input, select {
@@ -58,13 +64,11 @@ input, select {
   text-align: left;
 }
 
-input[type="checkbox"] {
-}
+input[type="checkbox"] {}
 
 .link {
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: center;
   margin: auto;
-  
 }

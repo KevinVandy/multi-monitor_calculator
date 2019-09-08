@@ -5,12 +5,12 @@ const Monitor = ({ monitor, scale }) => {
 
   const INDEX = monitor.index;
   const SCALE = scale;
-  const ORIENTATION = monitor.options.basic.orientation;
-  const THETA = Math.atan(parseFloat(monitor.options.basic.resolution.verRes) / parseFloat(monitor.options.basic.resolution.horRes));
-  const BEZELWIDTH = parseFloat(monitor.options.basic.bezelWidth);
-  const BEZELCOLOR = monitor.options.basic.bezelColor;
-  const WIDTH = parseFloat(monitor.options.basic.diagonal) * Math.cos(THETA) + BEZELWIDTH;
-  const HEIGHT = parseFloat(monitor.options.basic.diagonal) * Math.sin(THETA) + BEZELWIDTH;
+  const ORIENTATION = monitor.orientation;
+  const THETA = Math.atan(parseFloat(monitor.resolution.verRes) / parseFloat(monitor.resolution.horRes));
+  const BEZELWIDTH = parseFloat(monitor.bezelWidth);
+  const BEZELCOLOR = monitor.bezelColor;
+  const WIDTH = parseFloat(monitor.diagonal) * Math.cos(THETA) + BEZELWIDTH;
+  const HEIGHT = parseFloat(monitor.diagonal) * Math.sin(THETA) + BEZELWIDTH;
 
 
   const monitorStyle = {
