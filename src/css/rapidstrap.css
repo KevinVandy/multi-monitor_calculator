@@ -133,7 +133,7 @@ nav a:hover, .navbar a:hover, .navbar-fixed:hover {
 	justify-content: space-between;
 	padding: 0.7rem 2rem;
 	width: 100%;
-	z-index: 1;
+	z-index: 5;
 }
 
 .navbar:hover, .navbar-fixed:hover, .sidebar-left:hover, .sidebar-left-fixed:hover, .sidebar-right:hover, .sidebar-right-fixed:hover {

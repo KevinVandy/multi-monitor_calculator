@@ -1,5 +1,5 @@
 main {
-  min-height: 1200px;
+  min-height: 1800px;
 }
 
 .setupContainer {
@@ -71,4 +71,19 @@ input[type="checkbox"] {}
   white-space: nowrap;
   text-align: center;
   margin: auto;
+}
+
+.toggleButton {
+  color: blue;
+  cursor: pointer;
+  display: inline;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: -0.7rem 0 0 1rem;
+  position: absolute;
+}
+
+.react-slidedown {
+  transition-duration: 400ms;
+  transition-timing-function: ease;
 }
