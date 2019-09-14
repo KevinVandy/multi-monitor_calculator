@@ -30,7 +30,7 @@ const MonitorStats = ({ monitor }) => {
         </tr>
         <tr>
           <th>Bezel Width:</th>
-          <td>{monitor.bezelWidth.toFixed(2)}"</td>
+          <td>{parseFloat(monitor.bezelWidth).toFixed(2)}"</td>
         </tr>
         <tr>
           <th>Physical Width:</th>
