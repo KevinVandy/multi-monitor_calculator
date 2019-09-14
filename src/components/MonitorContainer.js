@@ -23,14 +23,14 @@ const MonitorContainer = (props) => {
     <section className="monitorContainer">
       <Draggable>
         <div>
-           <Monitor {...props} />
+          <Monitor {...props} />
         </div>
       </Draggable>
       <Draggable
         handle=".handle"
       >
-        <div>
-          <div className="handle w-100per h-20px bg-medium m"></div>
+        <div className="bg-white b-dark">
+          <div className="handle w-100per t-center h-20px bg-medium my-1rem"></div>
           <button
             onClick={onToggleOptions}
             className="btn-dark w-100per">

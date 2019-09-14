@@ -7,17 +7,17 @@ main {
 }
 
 .setupContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  margin: auto;
+  text-align: center;
   padding: 1rem;
-  width: 100%;
 }
 
 .monitorContainer {
-  margin: 0.5rem auto;
+  display: inline-block;
+  margin: 0.5rem;
   max-width: 360px;
   overflow: visible;
+  text-align: center;
   z-index: 0;
 }
 
