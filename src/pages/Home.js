@@ -1,13 +1,11 @@
 import React from 'react';
-import Header from '../layout/Header';
-import Setup from '../components/Setup';
+import { MonitorSetup } from '../components/MonitorSetup';
 
 const Home = () => {
   return (
-    <main>
-      <Header />
-      <Setup />
-    </main>
+    <div style={{ minHeight: '2000px' }}>
+      <MonitorSetup />
+    </div>
   );
 };
 

@@ -1,30 +1,57 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import Draggable from 'react-draggable';
+import { Fade } from '@material-ui/core';
 
-const Monitor = ({ monitor, scale }) => {
+export const Monitor = ({ monitor, scale }) => {
+  const theta = useMemo(
+    () => Math.atan(monitor.resolution.vertical / monitor.resolution.horizontal),
+    [monitor.resolution.vertical, monitor.resolution.horizontal]
+  );
 
-  const INDEX = monitor.index;
-  const SCALE = scale;
-  const ORIENTATION = monitor.orientation;
-  const THETA = Math.atan(parseFloat(monitor.resolution.verRes) / parseFloat(monitor.resolution.horRes));
-  const BEZELWIDTH = parseFloat(monitor.bezelWidth);
-  const BEZELCOLOR = monitor.bezelColor;
-  const WIDTH = parseFloat(monitor.diagonal) * Math.cos(THETA) + BEZELWIDTH;
-  const HEIGHT = parseFloat(monitor.diagonal) * Math.sin(THETA) + BEZELWIDTH;
+  const [width, height] = useMemo(
+    () => [
+      scale *
+        (monitor.diagonal *
+          (monitor.orientation === 'landscape' ? Math.cos(theta) : Math.sin(theta))),
+      scale *
+        (monitor.diagonal *
+          (monitor.orientation === 'landscape' ? Math.sin(theta) : Math.cos(theta)))
+    ],
+    [monitor.diagonal, monitor.orientation, scale, theta]
+  );
 
-  const monitorStyle = {
-    width: `${(ORIENTATION === 'landscape' ? WIDTH : HEIGHT) * SCALE}px`,
-    height: `${(ORIENTATION === 'landscape' ? HEIGHT : WIDTH) * SCALE}px`,
-    borderWidth: `${BEZELWIDTH * SCALE / 2 }px`,
-    borderColor: BEZELCOLOR
-  };
+  const bezelWidth = useMemo(() => (monitor.bezelWidth * scale) / 2, [
+    monitor.bezelWidth,
+    scale
+  ]);
 
   return (
-    <div className="monitor m-auto" style={monitorStyle}>
-      <p>
-        {INDEX + 1}
-      </p>
-    </div>
+    <Draggable>
+      <Fade timeout={500} in={monitor.visible}>
+        <span>
+          <div
+            style={{
+              alignContent: 'center',
+              backgroundImage: 'radial-gradient(#444, #111)',
+              borderColor: monitor.bezelColor,
+              borderRadius: '3px',
+              borderStyle: 'solid',
+              borderWidth: `${bezelWidth}px`,
+              color: '#fff',
+              cursor: 'move',
+              display: 'grid',
+              justifyContent: 'center',
+              height: `${height}px`,
+              margin: '1rem 2px',
+              transition: 'all 500ms ease',
+              transitionProperty: 'height, width, border',
+              width: `${width}px`
+            }}
+          >
+            <span>{monitor.index + 1}</span>
+          </div>
+        </span>
+      </Fade>
+    </Draggable>
   );
 };
-
-export default Monitor;
