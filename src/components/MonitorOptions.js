@@ -32,13 +32,19 @@ const MonitorOptionsGrid2 = styled('div')({
   display: 'grid',
   gridGap: '1rem',
   gridTemplateColumns: '10rem 10rem',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  padding: '0.5rem 0'
 });
 
 const MonitorField = styled(TextField)({});
 
-export const MonitorOptions = ({ monitors, index, setMonitors }) => {
-  const [expanded, setExpanded] = useState(false);
+export const MonitorOptions = ({
+  expanded,
+  index,
+  monitors,
+  setExpanded,
+  setMonitors
+}) => {
   const [resolutionStandard, setResolutionStandard] = useState(() =>
     calcResolutionStandard(monitors[index].resolution.vertical)
   );
@@ -261,7 +267,7 @@ export const MonitorOptions = ({ monitors, index, setMonitors }) => {
               type="color"
               variant="outlined"
               value={monitors[index].bezelColor}
-            /> 
+            />
           </MonitorOptionsGrid2>
         </Collapse>
       </MonitorOptionsCard>

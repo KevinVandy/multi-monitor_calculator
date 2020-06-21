@@ -28,8 +28,8 @@ export const calcResolutionStandard = (verRes) => {
   if (verRes > 4300) return '8K';
   if (verRes > 2800) return '5K';
   if (verRes > 2100) return '4K';
-  if (verRes > 2100) return 'QHD+';
-  if (verRes > 1500) return 'QHD';
+  if (verRes > 1500) return 'QHD+';
+  if (verRes > 1400) return 'QHD';
   if (verRes > 1100) return 'FHD+';
   if (verRes > 1000) return 'FHD';
   if (verRes > 800) return 'HD+';
@@ -126,15 +126,15 @@ export const calcResolution = (aspectRatio, resolutionStandard) => {
     },
     '2:1': {
       VGA: [1200, 600],
-      HD: [768 * 2, 768],
-      'HD+': [1800 * 2, 900],
+      HD: [1536, 768],
+      'HD+': [3600, 900],
       FHD: [2160, 1080],
       'FHD+': [2400, 1200],
-      QHD: [1440 * 2, 1440],
+      QHD: [2880, 1440],
       'QHD+': [3200, 1600],
-      '4K': [2160 * 2, 2160],
-      '5K': [2880 * 2, 2880],
-      '8K': [4096, 4320],
+      '4K': [4320, 2160],
+      '5K': [5760, 2880],
+      '8K': [8640, 4320],
     },
   };
   return resolutionStandards[aspectRatio]?.[resolutionStandard];

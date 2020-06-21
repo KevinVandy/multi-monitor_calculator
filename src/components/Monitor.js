@@ -34,7 +34,7 @@ export const Monitor = ({ monitor, scale }) => {
               alignContent: 'center',
               backgroundImage: 'radial-gradient(#444, #111)',
               borderColor: monitor.bezelColor,
-              borderRadius: '3px',
+              borderRadius: `${0.1875 * scale}px`,
               borderStyle: 'solid',
               borderWidth: `${bezelWidth}px`,
               color: '#fff',

@@ -11,8 +11,8 @@
     "horizontal": 1920,
     "vertical": 1080
   },
-  "displayType": "",
-  "syncType": "",
+  "displayType": "any",
+  "syncType": "any",
   "refreshRate": 60,
   "responseTime": "",
   "visible": true,

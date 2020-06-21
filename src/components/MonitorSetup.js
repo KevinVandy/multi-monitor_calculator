@@ -18,7 +18,10 @@ const FabGrid = styled('div')({
 
 export const MonitorSetup = () => {
   const [monitors, setMonitors] = useState(
-    () => JSON.parse(window.localStorage.getItem('monitors')) ?? [{ ...defaultMonitor }]
+    () =>
+      JSON.parse(window.localStorage.getItem('monitors')) ?? [
+        JSON.parse(JSON.stringify(defaultMonitor))
+      ]
   );
   const [scale, setScale] = useState(
     () => JSON.parse(window.localStorage.getItem('scale')) ?? 16
@@ -49,7 +52,11 @@ export const MonitorSetup = () => {
 
   const handleAddMonitor = () => {
     if (monitors.length >= 9) return;
-    monitors.push({ ...defaultMonitor, index: monitors.length, visible: true });
+    monitors.push({
+      ...JSON.parse(JSON.stringify(defaultMonitor)),
+      index: monitors.length,
+      visible: true
+    });
     setMonitors([...monitors]);
   };
 
@@ -67,7 +74,7 @@ export const MonitorSetup = () => {
     <div>
       <FabGrid>
         <span />
-         <Tooltip arrow placement="left" title="Reset">
+        <Tooltip arrow placement="left" title="Reset">
           <Fab onClick={handleResetMonitors} color="secondary">
             <ResetIcon />
           </Fab>
@@ -91,7 +98,7 @@ export const MonitorSetup = () => {
           <Fab onClick={handleZoomIn} color="secondary">
             <ZoomInIcon />
           </Fab>
-        </Tooltip> 
+        </Tooltip>
         <span />
       </FabGrid>
       <MonitorsArea monitors={monitors} scale={scale} setMonitors={setMonitors} />
