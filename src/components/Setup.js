@@ -1,8 +1,8 @@
 import React from 'react';
 import { useMonitors, useSetMonitors } from '../context/MonitorsContext';
 import { useScale, useSetScale } from '../context/ScaleContext';
-import { MonitorsArea } from '../components/MonitorsArea';
-import { MonitorOptionsArea } from '../components/MonitorOptionsArea';
+import { MonitorsArea } from './MonitorsArea';
+import { MonitorOptionsArea } from './MonitorOptionsArea';
 import { Fab, styled, Tooltip } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -18,7 +18,7 @@ const FabGrid = styled('div')({
   width: '100%'
 });
 
-export const MonitorSetup = () => {
+export const Setup = () => {
   const monitors = useMonitors();
   const setMonitors = useSetMonitors();
   const scale = useScale();
@@ -36,7 +36,7 @@ export const MonitorSetup = () => {
     setTimeout(() => {
       monitors.pop();
       setMonitors([...monitors]);
-    }, 500);
+    }, 300);
   };
 
   const handleAddMonitor = () => {

@@ -27,7 +27,7 @@ export const Monitor = ({ monitor }) => {
 
   return (
     <Draggable>
-      <Fade timeout={500} in={monitor.visible}>
+      <Fade timeout={300} in={monitor.visible}>
         <span>
           <div
             style={{
@@ -43,7 +43,7 @@ export const Monitor = ({ monitor }) => {
               justifyContent: 'center',
               height: `${height}px`,
               margin: '1rem 2px',
-              transition: 'all 500ms ease',
+              transition: 'all 300ms ease',
               transitionProperty: 'height, width, border',
               width: `${width}px`
             }}

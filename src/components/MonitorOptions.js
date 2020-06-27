@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Card,
   Collapse,
@@ -17,6 +17,7 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { useSetMonitor } from '../context/MonitorsContext';
+import { MonitorStats } from './MonitorStats';
 
 const MonitorOptionsCard = styled(Card)({
   padding: '2rem 1rem',
@@ -37,10 +38,10 @@ const MonitorOptionsGrid2 = styled('div')({
   padding: '0.5rem 0'
 });
 
-const MonitorField = styled(TextField)({});
-
-export const MonitorOptions = ({ setExpanded, index, expanded, monitor }) => {
+export const MonitorOptions = ({ index, monitor }) => {
   const setMonitor = useSetMonitor();
+  const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
+  const [showMonitorStats, setShowMonitorStats] = useState(true);
 
   const handleOrientationChange = (e) => {
     monitor.orientation = e.target.value;
@@ -110,18 +111,18 @@ export const MonitorOptions = ({ setExpanded, index, expanded, monitor }) => {
   };
 
   return (
-    <Fade timeout={500} in={monitor.visible}>
+    <Fade timeout={300} in={monitor.visible}>
       <MonitorOptionsCard>
         <MonitorTitle>Monitor {index + 1}</MonitorTitle>
         <MonitorOptionsGrid2>
-          <MonitorField
+          <TextField
             label="Diagonal"
             onChange={handleDiagonalChange}
             type="number"
             variant="outlined"
             value={monitor.diagonal}
           />
-          <MonitorField
+          <TextField
             label="Orientation"
             onChange={handleOrientationChange}
             select
@@ -130,8 +131,8 @@ export const MonitorOptions = ({ setExpanded, index, expanded, monitor }) => {
           >
             <MenuItem value="landscape">Landscape</MenuItem>
             <MenuItem value="portrait">Portrait</MenuItem>
-          </MonitorField>
-          <MonitorField
+          </TextField>
+          <TextField
             label="Aspect Ratio"
             onChange={handleAspectRatioChange}
             select
@@ -160,8 +161,8 @@ export const MonitorOptions = ({ setExpanded, index, expanded, monitor }) => {
               <b>5:4</b>
             </MenuItem>
             <MenuItem value="1:1">1:1</MenuItem>
-          </MonitorField>
-          <MonitorField
+          </TextField>
+          <TextField
             label="Resolution Standard"
             onChange={handleResolutionStandardChange}
             select
@@ -189,31 +190,34 @@ export const MonitorOptions = ({ setExpanded, index, expanded, monitor }) => {
             </MenuItem>
             <MenuItem value="5K">5K</MenuItem>
             <MenuItem value="8K">8K</MenuItem>
-          </MonitorField>
+          </TextField>
         </MonitorOptionsGrid2>
         <div style={{ width: '100%', textAlign: 'center' }}>
           Show Advanced Options
-          <IconButton edge="end" onClick={() => setExpanded(!expanded)}>
-            {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          <IconButton
+            edge="end"
+            onClick={() => setShowAdvancedOptions(!showAdvancedOptions)}
+          >
+            {showAdvancedOptions ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </IconButton>
         </div>
-        <Collapse in={expanded} timeout={500}>
+        <Collapse in={showAdvancedOptions} timeout={300}>
           <MonitorOptionsGrid2>
-            <MonitorField
+            <TextField
               label="Horizontal Resolution"
               onChange={handleHorizontalResolutionChange}
               type="number"
               variant="outlined"
               value={monitor.resolution.horizontal}
             />
-            <MonitorField
+            <TextField
               label="Vertical Resolution"
               onChange={handleVerticallResolutionChange}
               type="number"
               variant="outlined"
               value={monitor.resolution.vertical}
             />
-            <MonitorField
+            <TextField
               label="Display Type"
               onChange={handleDisplayTypeChange}
               select
@@ -225,8 +229,8 @@ export const MonitorOptions = ({ setExpanded, index, expanded, monitor }) => {
               <MenuItem value="TN">TN</MenuItem>
               <MenuItem value="VA">VA</MenuItem>
               <MenuItem value="OLED">OLED</MenuItem>
-            </MonitorField>
-            <MonitorField
+            </TextField>
+            <TextField
               label="Sync Type"
               onChange={handleSyncTypeChange}
               select
@@ -237,8 +241,8 @@ export const MonitorOptions = ({ setExpanded, index, expanded, monitor }) => {
               <MenuItem value="none">None</MenuItem>
               <MenuItem value="G-Sync">G-Sync</MenuItem>
               <MenuItem value="FreeSync">FreeSync</MenuItem>
-            </MonitorField>
-            <MonitorField
+            </TextField>
+            <TextField
               label="Bezel Width"
               inputProps={{ max: '2', min: '0.0', step: '0.25' }}
               name="bezelWidth"
@@ -248,7 +252,7 @@ export const MonitorOptions = ({ setExpanded, index, expanded, monitor }) => {
               value={monitor.bezelWidth}
               variant="outlined"
             />
-            <MonitorField
+            <TextField
               label="Bezel Color"
               onChange={handleBezelColorChange}
               type="color"
@@ -256,6 +260,15 @@ export const MonitorOptions = ({ setExpanded, index, expanded, monitor }) => {
               value={monitor.bezelColor}
             />
           </MonitorOptionsGrid2>
+        </Collapse>
+        <div style={{ width: '100%', textAlign: 'center' }}>
+          Show Stats
+          <IconButton edge="end" onClick={() => setShowMonitorStats(!showMonitorStats)}>
+            {showMonitorStats ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </IconButton>
+        </div>
+        <Collapse in={showMonitorStats} timeout={300}>
+          <MonitorStats monitor={monitor} />
         </Collapse>
       </MonitorOptionsCard>
     </Fade>
