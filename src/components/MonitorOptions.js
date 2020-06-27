@@ -16,6 +16,7 @@ import {
 } from '../util/calc.util';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import { useMonitors, useSetMonitors } from '../context/MonitorsContext';
 
 const MonitorOptionsCard = styled(Card)({
   padding: '2rem 1rem',
@@ -38,13 +39,9 @@ const MonitorOptionsGrid2 = styled('div')({
 
 const MonitorField = styled(TextField)({});
 
-export const MonitorOptions = ({
-  expanded,
-  index,
-  monitors,
-  setExpanded,
-  setMonitors
-}) => {
+export const MonitorOptions = ({ expanded, index, setExpanded }) => {
+  const monitors = useMonitors();
+  const setMonitors = useSetMonitors();
   const [resolutionStandard, setResolutionStandard] = useState(() =>
     calcResolutionStandard(monitors[index].resolution.vertical)
   );

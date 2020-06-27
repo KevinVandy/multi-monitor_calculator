@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react';
 import Draggable from 'react-draggable';
 import { Fade } from '@material-ui/core';
+import { useScale } from '../context/ScaleContext';
 
-export const Monitor = ({ monitor, scale }) => {
+export const Monitor = ({ monitor }) => {
+  const scale = useScale();
   const theta = useMemo(
     () => Math.atan(monitor.resolution.vertical / monitor.resolution.horizontal),
     [monitor.resolution.vertical, monitor.resolution.horizontal]
   );
-
   const [width, height] = useMemo(
     () => [
       scale *
@@ -19,7 +20,6 @@ export const Monitor = ({ monitor, scale }) => {
     ],
     [monitor.diagonal, monitor.orientation, scale, theta]
   );
-
   const bezelWidth = useMemo(() => (monitor.bezelWidth * scale) / 2, [
     monitor.bezelWidth,
     scale

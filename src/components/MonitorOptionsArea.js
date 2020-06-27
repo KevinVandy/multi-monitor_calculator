@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from '@material-ui/core';
 import { MonitorOptions } from './MonitorOptions';
+import { useMonitors } from '../context/MonitorsContext';
 
 const MonitorOptionsAreaCard = styled('div')({
   margin: '2rem auto',
@@ -11,7 +12,8 @@ const MonitorOptionsAreaCard = styled('div')({
   flexFlow: 'wrap'
 });
 
-export const MonitorOptionsArea = ({ monitors, setMonitors }) => {
+export const MonitorOptionsArea = () => {
+  const monitors = useMonitors();
   const [expanded, setExpanded] = useState(false);
   return (
     <MonitorOptionsAreaCard>
@@ -20,9 +22,7 @@ export const MonitorOptionsArea = ({ monitors, setMonitors }) => {
           expanded={expanded}
           index={i}
           key={i}
-          monitors={monitors}
           setExpanded={setExpanded}
-          setMonitors={setMonitors}
         />
       ))}
     </MonitorOptionsAreaCard>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Card, styled } from '@material-ui/core';
 import { Monitor } from './Monitor';
+import { useMonitors } from '../context/MonitorsContext';
+import { useScale } from '../context/ScaleContext';
 
 const MonitorsAreaCard = styled(Card)({
   display: 'flex',
@@ -13,13 +15,15 @@ const MonitorsAreaCard = styled(Card)({
   resize: 'vertical',
 });
 
-export const MonitorsArea = ({ monitors, scale }) => {
+export const MonitorsArea = () => {
+  const monitors = useMonitors();
+  const scale = useScale();
   const [deskWidth, setDeskWidth] = useState(6);
 
   return (
     <MonitorsAreaCard style={{width: `${deskWidth * 12 * scale}px`}} variant="outlined">
       {monitors.map((monitor, i) => (
-        <Monitor key={i} monitor={monitor} scale={scale} />
+        <Monitor key={i} monitor={monitor} />
       ))}
     </MonitorsAreaCard>
   );

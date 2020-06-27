@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useMonitors, useSetMonitors } from '../context/MonitorsContext';
+import { useScale, useSetScale } from '../context/ScaleContext';
 import { MonitorsArea } from '../components/MonitorsArea';
 import { MonitorOptionsArea } from '../components/MonitorOptionsArea';
 import { Fab, styled, Tooltip } from '@material-ui/core';
@@ -17,23 +19,10 @@ const FabGrid = styled('div')({
 });
 
 export const MonitorSetup = () => {
-  const [monitors, setMonitors] = useState(
-    () =>
-      JSON.parse(window.localStorage.getItem('monitors')) ?? [
-        JSON.parse(JSON.stringify(defaultMonitor))
-      ]
-  );
-  const [scale, setScale] = useState(
-    () => JSON.parse(window.localStorage.getItem('scale')) ?? 16
-  );
-
-  useEffect(() => {
-    window.localStorage.setItem('monitors', JSON.stringify(monitors));
-  }, [monitors]);
-
-  useEffect(() => {
-    window.localStorage.setItem('scale', scale);
-  }, [scale]);
+  const monitors = useMonitors();
+  const setMonitors = useSetMonitors();
+  const scale = useScale();
+  const setScale = useSetScale();
 
   const handleResetMonitors = () => {
     setMonitors([{ ...defaultMonitor }]);
@@ -101,8 +90,8 @@ export const MonitorSetup = () => {
         </Tooltip>
         <span />
       </FabGrid>
-      <MonitorsArea monitors={monitors} scale={scale} setMonitors={setMonitors} />
-      <MonitorOptionsArea monitors={monitors} setMonitors={setMonitors} />
+      <MonitorsArea />
+      <MonitorOptionsArea />
     </div>
   );
 };

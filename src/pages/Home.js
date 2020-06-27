@@ -1,11 +1,15 @@
 import React from 'react';
 import { MonitorSetup } from '../components/MonitorSetup';
+import { MonitorsProvider } from '../context/MonitorsContext';
+import { ScaleProvider } from '../context/ScaleContext';
 
 const Home = () => {
   return (
-    <div style={{ minHeight: '2000px' }}>
-      <MonitorSetup />
-    </div>
+    <MonitorsProvider>
+      <ScaleProvider>
+        <MonitorSetup />
+      </ScaleProvider>
+    </MonitorsProvider>
   );
 };
 
