@@ -3,6 +3,7 @@ import defaultMonitor from '../util/defaultMonitor.json';
 
 const MonitorsContext = createContext();
 const SetMonitorsContext = createContext();
+const SetMonitorContext = createContext();
 
 export const useMonitors = () => {
   return useContext(MonitorsContext);
@@ -10,6 +11,10 @@ export const useMonitors = () => {
 
 export const useSetMonitors = () => {
   return useContext(SetMonitorsContext);
+};
+
+export const useSetMonitor = () => {
+  return useContext(SetMonitorContext);
 };
 
 export const MonitorsProvider = ({ children }) => {
@@ -20,6 +25,11 @@ export const MonitorsProvider = ({ children }) => {
       ]
   );
 
+  const setMonitor = (newMonitor, index) => {
+    monitors[index] = newMonitor;
+    setMonitors([...monitors]);
+  };
+
   useEffect(() => {
     window.localStorage.setItem('monitors', JSON.stringify(monitors));
   }, [monitors]);
@@ -27,7 +37,9 @@ export const MonitorsProvider = ({ children }) => {
   return (
     <MonitorsContext.Provider value={monitors}>
       <SetMonitorsContext.Provider value={setMonitors}>
-        {children}
+        <SetMonitorContext.Provider value={setMonitor}>
+          {children}
+        </SetMonitorContext.Provider>
       </SetMonitorsContext.Provider>
     </MonitorsContext.Provider>
   );

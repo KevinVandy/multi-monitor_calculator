@@ -22,6 +22,7 @@ export const MonitorOptionsArea = () => {
           expanded={expanded}
           index={i}
           key={i}
+          monitor={monitor}
           setExpanded={setExpanded}
         />
       ))}

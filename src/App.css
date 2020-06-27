@@ -6,4 +6,5 @@
 
 body {
   background-image: linear-gradient(#fdfdfd, #ddd);
+  min-height: 100vh;
 }
