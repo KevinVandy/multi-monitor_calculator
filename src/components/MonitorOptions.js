@@ -16,8 +16,8 @@ import {
 } from '../util/calc.util';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { useMonitors } from '../context/MonitorsContext';
 import { MonitorStats } from './MonitorStats';
+import { useSetup } from '../context/SetupContext';
 
 const MonitorOptionsCard = styled(Card)({
   padding: '2rem 1rem',
@@ -39,7 +39,7 @@ const MonitorOptionsGrid2 = styled('div')({
 });
 
 export const MonitorOptions = ({ index, monitor }) => {
-  const { setMonitor } = useMonitors();
+  const { setMonitor } = useSetup();
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
   const [showMonitorStats, setShowMonitorStats] = useState(false);
 

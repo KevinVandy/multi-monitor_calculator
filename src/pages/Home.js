@@ -1,15 +1,12 @@
 import React from 'react';
 import { Setup } from '../components/Setup';
-import { MonitorsProvider } from '../context/MonitorsContext';
-import { ScaleProvider } from '../context/ScaleContext';
+import { SetupProvider } from '../context/SetupContext';
 
 const Home = () => {
   return (
-    <MonitorsProvider>
-      <ScaleProvider>
-        <Setup />
-      </ScaleProvider>
-    </MonitorsProvider>
+    <SetupProvider>
+      <Setup />
+    </SetupProvider>
   );
 };
 

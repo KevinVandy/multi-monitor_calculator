@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@material-ui/core';
 import { MonitorOptions } from './MonitorOptions';
-import { useMonitors } from '../context/MonitorsContext';
+import { useSetup } from '../context/SetupContext';
 
 const MonitorOptionsAreaCard = styled('div')({
   margin: '2rem auto',
@@ -14,7 +14,7 @@ const MonitorOptionsAreaCard = styled('div')({
 });
 
 export const MonitorOptionsArea = () => {
-  const { monitors } = useMonitors();
+  const { monitors } = useSetup();
   return (
     <MonitorOptionsAreaCard>
       {monitors.map((monitor, i) => (

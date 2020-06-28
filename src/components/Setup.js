@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { useMonitors } from '../context/MonitorsContext';
-import { useScale } from '../context/ScaleContext';
+import React from 'react';
 import { MonitorsArea } from './MonitorsArea';
 import { MonitorOptionsArea } from './MonitorOptionsArea';
 import { Fab, styled, Tooltip, Slider, Typography, Card } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ResetIcon from '@material-ui/icons/SettingsBackupRestore';
-import defaultMonitor from '../util/defaultMonitor.json';
+import defaultSetup from '../util/defaultSetup.json';
+import { useSetup } from '../context/SetupContext';
 
 const FabGrid = styled('div')({
   display: 'grid',
@@ -28,13 +27,12 @@ const SettingsPanel = styled(Card)({
 });
 
 export const Setup = () => {
-  const { monitors, setMonitors } = useMonitors();
-  const { scale, setScale } = useScale();
-  const [deskWidth, setDeskWidth] = useState(6);
+  const { deskWidth, monitors, scale, setDeskWidth, setMonitors, setScale } = useSetup();
 
   const handleResetMonitors = () => {
-    setMonitors([{ ...defaultMonitor }]);
+    setMonitors([{ ...defaultSetup.monitors[0] }]);
     setScale(16);
+    setDeskWidth(6);
   };
 
   const handleRemoveMonitor = () => {
@@ -50,7 +48,7 @@ export const Setup = () => {
   const handleAddMonitor = () => {
     if (monitors.length >= 9) return;
     monitors.push({
-      ...JSON.parse(JSON.stringify(defaultMonitor)),
+      ...JSON.parse(JSON.stringify(defaultSetup.monitors[0])),
       index: monitors.length,
       visible: true
     });

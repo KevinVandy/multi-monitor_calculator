@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import Draggable from 'react-draggable';
 import { Fade, Tooltip } from '@material-ui/core';
-import { useScale } from '../context/ScaleContext';
 import { calcTheta, calcScreenWidth, calcScreenHeight } from '../util/calc.util';
 import { MonitorStats } from './MonitorStats';
+import { useSetup } from '../context/SetupContext';
 
 export const Monitor = ({ monitor }) => {
-  const { scale } = useScale();
+  const { scale } = useSetup();
   const theta = useMemo(
     () => calcTheta(monitor.resolution.horizontal, monitor.resolution.vertical),
     [monitor.resolution.horizontal, monitor.resolution.vertical]

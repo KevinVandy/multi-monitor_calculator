@@ -1,13 +1,10 @@
 import React from 'react';
 import { Card } from '@material-ui/core';
 import { Monitor } from './Monitor';
-import { useMonitors } from '../context/MonitorsContext';
-import { useScale } from '../context/ScaleContext';
+import { useSetup } from '../context/SetupContext';
 
 export const MonitorsArea = ({ deskWidth }) => {
-  const { monitors } = useMonitors();
-  const { scale } = useScale();
-
+  const {  monitors, scale } = useSetup();
   return (
     <Card
       style={{
