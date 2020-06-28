@@ -14,15 +14,11 @@ const MonitorOptionsAreaCard = styled('div')({
 });
 
 export const MonitorOptionsArea = () => {
-  const monitors = useMonitors();
+  const { monitors } = useMonitors();
   return (
     <MonitorOptionsAreaCard>
       {monitors.map((monitor, i) => (
-        <MonitorOptions
-          index={i}
-          key={i}
-          monitor={monitor}
-        />
+        <MonitorOptions index={i} key={i} monitor={monitor} />
       ))}
     </MonitorOptionsAreaCard>
   );

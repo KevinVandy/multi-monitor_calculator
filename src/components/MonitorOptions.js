@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   Collapse,
@@ -16,7 +16,7 @@ import {
 } from '../util/calc.util';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { useSetMonitor } from '../context/MonitorsContext';
+import { useMonitors } from '../context/MonitorsContext';
 import { MonitorStats } from './MonitorStats';
 
 const MonitorOptionsCard = styled(Card)({
@@ -39,9 +39,9 @@ const MonitorOptionsGrid2 = styled('div')({
 });
 
 export const MonitorOptions = ({ index, monitor }) => {
-  const setMonitor = useSetMonitor();
+  const { setMonitor } = useMonitors();
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
-  const [showMonitorStats, setShowMonitorStats] = useState(true);
+  const [showMonitorStats, setShowMonitorStats] = useState(false);
 
   const handleOrientationChange = (e) => {
     monitor.orientation = e.target.value;

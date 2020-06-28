@@ -1,44 +1,51 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Table, TableBody, TableRow, TableCell, styled } from '@material-ui/core';
+import { calcTheta, calcScreenWidth, calcScreenHeight, calcPPI } from '../util/calc.util';
 
-const commonTableCellStyles = {
-  border: 'none',
-  height: '2rem',
-  padding: 0,
-  lineHeight: '2rem'
-};
-
-const TableHeadCell = styled(TableCell)({
-  ...commonTableCellStyles,
-  textAlign: 'right',
-  paddingRight: '1rem',
-  fontWeight: '600'
-});
-
-const TableDataCell = styled(TableCell)({
-  ...commonTableCellStyles,
-  textAlign: 'left',
-});
-
-export const MonitorStats = ({ monitor }) => {
-  const THETA = Math.atan(
-    parseFloat(monitor.resolution.vertical) / parseFloat(monitor.resolution.horizontal)
-  );
-
+export const MonitorStats = ({ monitor, fontColor }) => {
   const diagonal = parseFloat(monitor.diagonal);
-  const screenWidth =
-    monitor.diagonal *
-    (monitor.orientation === 'landscape' ? Math.cos(THETA) : Math.sin(THETA));
-  const screenHeight =
-    monitor.diagonal *
-    (monitor.orientation === 'landscape' ? Math.sin(THETA) : Math.cos(THETA));
+  const theta = useMemo(
+    () => calcTheta(monitor.resolution.horizontal, monitor.resolution.vertical),
+    [monitor.resolution.horizontal, monitor.resolution.vertical]
+  );
+  const [screenWidth, screenHeight] = useMemo(
+    () => [
+      calcScreenWidth(diagonal, monitor.orientation, theta),
+      calcScreenHeight(diagonal, monitor.orientation, theta)
+    ],
+    [diagonal, monitor.orientation, theta]
+  );
   const physicalWidth = screenWidth + monitor.bezelWidth * 2;
   const physicalHeight = screenHeight + monitor.bezelWidth * 2;
   const screenArea = screenWidth * screenHeight;
-  const numPixels = monitor.resolution.horizontal * monitor.resolution.vertical;
-  const ppi =
-    (monitor.resolution.vertical + monitor.resolution.horizontal) /
-    (screenHeight + screenWidth);
+  const numPixels =
+    parseInt(monitor.resolution.horizontal) * parseInt(monitor.resolution.vertical);
+  const ppi = calcPPI(
+    monitor.resolution.horizontal,
+    monitor.resolution.vertical,
+    screenHeight,
+    screenWidth
+  );
+
+  const commonTableCellStyles = {
+    border: 'none',
+    height: '2rem',
+    padding: 0,
+    fontSize: '1rem',
+    color: fontColor
+  };
+
+  const TableHeadCell = styled(TableCell)({
+    ...commonTableCellStyles,
+    textAlign: 'right',
+    paddingRight: '1rem',
+    fontWeight: '600'
+  });
+
+  const TableDataCell = styled(TableCell)({
+    ...commonTableCellStyles,
+    textAlign: 'left'
+  });
 
   return (
     <Table>

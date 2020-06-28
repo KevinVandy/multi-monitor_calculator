@@ -1,14 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const ScaleContext = createContext();
-const SetScaleContext = createContext();
 
 export const useScale = () => {
   return useContext(ScaleContext);
-};
-
-export const useSetScale = () => {
-  return useContext(SetScaleContext);
 };
 
 export const ScaleProvider = ({ children }) => {
@@ -21,8 +16,6 @@ export const ScaleProvider = ({ children }) => {
   }, [scale]);
 
   return (
-    <ScaleContext.Provider value={scale}>
-      <SetScaleContext.Provider value={setScale}>{children}</SetScaleContext.Provider>
-    </ScaleContext.Provider>
+    <ScaleContext.Provider value={{ scale, setScale }}>{children}</ScaleContext.Provider>
   );
 };

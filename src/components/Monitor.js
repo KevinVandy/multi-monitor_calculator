@@ -1,22 +1,20 @@
 import React, { useMemo } from 'react';
 import Draggable from 'react-draggable';
-import { Fade } from '@material-ui/core';
+import { Fade, Tooltip } from '@material-ui/core';
 import { useScale } from '../context/ScaleContext';
+import { calcTheta, calcScreenWidth, calcScreenHeight } from '../util/calc.util';
+import { MonitorStats } from './MonitorStats';
 
 export const Monitor = ({ monitor }) => {
-  const scale = useScale();
+  const { scale } = useScale();
   const theta = useMemo(
-    () => Math.atan(monitor.resolution.vertical / monitor.resolution.horizontal),
-    [monitor.resolution.vertical, monitor.resolution.horizontal]
+    () => calcTheta(monitor.resolution.horizontal, monitor.resolution.vertical),
+    [monitor.resolution.horizontal, monitor.resolution.vertical]
   );
   const [width, height] = useMemo(
     () => [
-      scale *
-        (monitor.diagonal *
-          (monitor.orientation === 'landscape' ? Math.cos(theta) : Math.sin(theta))),
-      scale *
-        (monitor.diagonal *
-          (monitor.orientation === 'landscape' ? Math.sin(theta) : Math.cos(theta)))
+      scale * calcScreenWidth(monitor.diagonal, monitor.orientation, theta),
+      scale * calcScreenHeight(monitor.diagonal, monitor.orientation, theta)
     ],
     [monitor.diagonal, monitor.orientation, scale, theta]
   );
@@ -28,7 +26,7 @@ export const Monitor = ({ monitor }) => {
   return (
     <Draggable>
       <Fade timeout={300} in={monitor.visible}>
-        <span>
+        <div style={{ margin: '1rem 2px', height: `${height + bezelWidth * 2}px` }}>
           <div
             style={{
               alignContent: 'center',
@@ -42,15 +40,21 @@ export const Monitor = ({ monitor }) => {
               display: 'grid',
               justifyContent: 'center',
               height: `${height}px`,
-              margin: '1rem 2px',
               transition: 'all 300ms ease',
               transitionProperty: 'height, width, border',
               width: `${width}px`
             }}
           >
-            <span>{monitor.index + 1}</span>
+            <Tooltip
+              title={<MonitorStats monitor={monitor} fontColor="#fff" />}
+              enterDelay={500}
+              TransitionComponent={Fade}
+              TransitionProps={{ timeout: 500 }}
+            >
+              <div style={{cursor: 'help'}} >{monitor.index + 1}</div>
+            </Tooltip>
           </div>
-        </span>
+        </div>
       </Fade>
     </Draggable>
   );

@@ -12,16 +12,16 @@ const MonitorsAreaCard = styled(Card)({
   minHeight: '20rem',
   minWidth: '480px',
   overflow: 'auto',
-  resize: 'vertical',
+  resize: 'vertical'
 });
 
 export const MonitorsArea = () => {
-  const monitors = useMonitors();
-  const scale = useScale();
+  const { monitors } = useMonitors();
+  const { scale } = useScale();
   const [deskWidth, setDeskWidth] = useState(6);
 
   return (
-    <MonitorsAreaCard style={{width: `${deskWidth * 12 * scale}px`}} variant="outlined">
+    <MonitorsAreaCard style={{ width: `${deskWidth * 12 * scale}px` }} variant="outlined">
       {monitors.map((monitor, i) => (
         <Monitor key={i} monitor={monitor} />
       ))}

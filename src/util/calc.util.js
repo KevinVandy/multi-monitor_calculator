@@ -50,7 +50,7 @@ export const calcResolution = (aspectRatio, resolutionStandard) => {
       'QHD+': [5690, 1600],
       '4K': [7860, 2160],
       '5K': [10240, 2880],
-      '8K': [15720, 4320],
+      '8K': [15720, 4320]
     },
     '21:9': {
       VGA: [1420, 600],
@@ -62,7 +62,7 @@ export const calcResolution = (aspectRatio, resolutionStandard) => {
       'QHD+': [3840, 1600],
       '4K': [5120, 2160],
       '5K': [6720, 2880],
-      '8K': [10240, 4320],
+      '8K': [10240, 4320]
     },
     '16:9': {
       VGA: [1024, 600],
@@ -74,7 +74,7 @@ export const calcResolution = (aspectRatio, resolutionStandard) => {
       'QHD+': [2844, 1600],
       '4K': [3840, 2160],
       '5K': [5120, 2880],
-      '8K': [7860, 4320],
+      '8K': [7860, 4320]
     },
     '16:10': {
       VGA: [1024, 640],
@@ -86,7 +86,7 @@ export const calcResolution = (aspectRatio, resolutionStandard) => {
       'QHD+': [2560, 1600],
       '4K': [3840, 2400],
       '5K': [5120, 3200],
-      '8K': [7680, 4800],
+      '8K': [7680, 4800]
     },
     '4:3': {
       VGA: [800, 600],
@@ -98,7 +98,7 @@ export const calcResolution = (aspectRatio, resolutionStandard) => {
       'QHD+': [2133, 1600],
       '4K': [2800, 2100],
       '5K': [4096, 3072],
-      '8K': [6400, 4800],
+      '8K': [6400, 4800]
     },
     '5:4': {
       VGA: [750, 600],
@@ -110,7 +110,7 @@ export const calcResolution = (aspectRatio, resolutionStandard) => {
       'QHD+': [2000, 1600],
       '4K': [2560, 2048],
       '5K': [3600, 2880],
-      '8K': [5120, 4096],
+      '8K': [5120, 4096]
     },
     '1:1': {
       VGA: [600, 600],
@@ -122,7 +122,7 @@ export const calcResolution = (aspectRatio, resolutionStandard) => {
       'QHD+': [1600, 1600],
       '4K': [2048, 2048],
       '5K': [2880, 2880],
-      '8K': [4096, 4096],
+      '8K': [4096, 4096]
     },
     '2:1': {
       VGA: [1200, 600],
@@ -134,8 +134,24 @@ export const calcResolution = (aspectRatio, resolutionStandard) => {
       'QHD+': [3200, 1600],
       '4K': [4320, 2160],
       '5K': [5760, 2880],
-      '8K': [8640, 4320],
-    },
+      '8K': [8640, 4320]
+    }
   };
   return resolutionStandards[aspectRatio]?.[resolutionStandard];
+};
+
+export const calcTheta = (horRes, verRes) => {
+  return Math.atan(verRes / horRes);
+};
+
+export const calcScreenWidth = (diagonal, orientation, theta) => {
+  return diagonal * (orientation === 'landscape' ? Math.cos(theta) : Math.sin(theta));
+};
+
+export const calcScreenHeight = (diagonal, orientation, theta) => {
+  return diagonal * (orientation === 'landscape' ? Math.sin(theta) : Math.cos(theta));
+};
+
+export const calcPPI = (horRes, verRes, screenWidth, screenHeight) => {
+  return (horRes + verRes) / (screenWidth + screenHeight);
 };

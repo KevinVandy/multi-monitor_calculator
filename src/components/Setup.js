@@ -1,6 +1,6 @@
 import React from 'react';
-import { useMonitors, useSetMonitors } from '../context/MonitorsContext';
-import { useScale, useSetScale } from '../context/ScaleContext';
+import { useMonitors } from '../context/MonitorsContext';
+import { useScale } from '../context/ScaleContext';
 import { MonitorsArea } from './MonitorsArea';
 import { MonitorOptionsArea } from './MonitorOptionsArea';
 import { Fab, styled, Tooltip } from '@material-ui/core';
@@ -19,10 +19,8 @@ const FabGrid = styled('div')({
 });
 
 export const Setup = () => {
-  const monitors = useMonitors();
-  const setMonitors = useSetMonitors();
-  const scale = useScale();
-  const setScale = useSetScale();
+  const { monitors, setMonitors } = useMonitors();
+  const { scale, setScale } = useScale();
 
   const handleResetMonitors = () => {
     setMonitors([{ ...defaultMonitor }]);

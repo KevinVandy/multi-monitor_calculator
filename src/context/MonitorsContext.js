@@ -2,19 +2,9 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import defaultMonitor from '../util/defaultMonitor.json';
 
 const MonitorsContext = createContext();
-const SetMonitorsContext = createContext();
-const SetMonitorContext = createContext();
 
 export const useMonitors = () => {
   return useContext(MonitorsContext);
-};
-
-export const useSetMonitors = () => {
-  return useContext(SetMonitorsContext);
-};
-
-export const useSetMonitor = () => {
-  return useContext(SetMonitorContext);
 };
 
 export const MonitorsProvider = ({ children }) => {
@@ -35,12 +25,8 @@ export const MonitorsProvider = ({ children }) => {
   }, [monitors]);
 
   return (
-    <MonitorsContext.Provider value={monitors}>
-      <SetMonitorsContext.Provider value={setMonitors}>
-        <SetMonitorContext.Provider value={setMonitor}>
-          {children}
-        </SetMonitorContext.Provider>
-      </SetMonitorsContext.Provider>
+    <MonitorsContext.Provider value={{ monitors, setMonitors, setMonitor }}>
+      {children}
     </MonitorsContext.Provider>
   );
 };
