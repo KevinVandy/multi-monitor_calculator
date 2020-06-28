@@ -1,13 +1,12 @@
 import React from 'react';
-import Header from '../layout/Header';
-import Setup from '../components/Setup';
+import { Setup } from '../components/Setup';
+import { SetupProvider } from '../context/SetupContext';
 
 const Home = () => {
   return (
-    <main>
-      <Header />
+    <SetupProvider>
       <Setup />
-    </main>
+    </SetupProvider>
   );
 };
 

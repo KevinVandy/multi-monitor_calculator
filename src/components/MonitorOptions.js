@@ -1,278 +1,304 @@
-import React from 'react';
-import { SlideDown } from 'react-slidedown';
-import "react-slidedown/lib/slidedown.css";
+import React, { useState } from 'react';
+import {
+  Card,
+  Collapse,
+  Fade,
+  IconButton,
+  ListSubheader,
+  MenuItem,
+  TextField,
+  styled
+} from '@material-ui/core';
+import {
+  calcResolution,
+  calcAspectRatio,
+  calcResolutionStandard
+} from '../util/calc.util';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import { MonitorStats } from './MonitorStats';
+import { useSetup } from '../context/SetupContext';
 
-const MonitorOptions = ({
-  monitor,
-  hideSizeOptions,
-  hideBezelOptions,
-  hideAspectRatioOptions,
-  hideResolutionOptions,
-  hideFeatureOptions,
-  hidePortOptions,
-  hideSellerInfoOptions,
-  onDiagonalChange,
-  onBezelWidthChange,
-  onBezelColorChange,
-  onOrientationChange,
-  onAspectRatioChange,
-  onResolutionChange,
-  onHorResChange,
-  onVerResChange,
-  onDisplayTypeChange,
-  onSyncTypeChange,
-  onRefreshRateChange,
-  onResponseTimeChange,
-  onHdrChange,
-  onSrgbChange,
-  onCurvedChange,
-  onWebcamChange,
-  onTouchChange,
-  onSpeakersChange,
-  onHdmiChange,
-  onDisplayPortChange,
-  onUsbcChange,
-  onVgaChange,
-  onDviChange,
-  onBrandChange,
-  onPriceChange,
-  onLinkChange,
-  onToggleSizeOptions,
-  onToggleBezelOptions,
-  onToggleAspectRatioOptions,
-  onToggleResolutionOptions,
-  onToggleFeatureOptions,
-  onTogglePortOptions,
-  onToggleSellerInfoOptions
-}) => {
+const MonitorOptionsCard = styled(Card)({
+  padding: '2rem 1rem',
+  margin: '0.5rem',
+  width: '22rem'
+});
+
+const MonitorTitle = styled('h3')({
+  textAlign: 'center',
+  paddingBottom: '1rem'
+});
+
+const MonitorOptionsGrid2 = styled('div')({
+  display: 'grid',
+  gridGap: '1rem',
+  gridTemplateColumns: '10rem 10rem',
+  justifyContent: 'center',
+  padding: '0.5rem 0'
+});
+
+export const MonitorOptions = ({ index, monitor }) => {
+  const { setMonitor } = useSetup();
+  const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
+  const [showMonitorStats, setShowMonitorStats] = useState(false);
+
+  const handleDiagonalChange = (e) => {
+    monitor.diagonal = parseInt(e.target.value);
+    setMonitor(monitor, index);
+  };
+
+  const handleOrientationChange = (e) => {
+    monitor.orientation = e.target.value;
+    setMonitor(monitor, index);
+  };
+
+  const handleAspectRatioChange = (e) => {
+    monitor.aspectRatio = e.target.value;
+    [monitor.resolution.horizontal, monitor.resolution.vertical] = calcResolution(
+      monitor.aspectRatio,
+      monitor.resolution.standard
+    ) ?? [monitor.resolution.horizontal, monitor.resolution.vertical];
+    setMonitor(monitor, index);
+  };
+
+  const handleResolutionStandardChange = (e) => {
+    monitor.resolution.standard = e.target.value;
+    [monitor.resolution.horizontal, monitor.resolution.vertical] = calcResolution(
+      monitor.aspectRatio,
+      e.target.value
+    ) ?? [monitor.resolution.horizontal, monitor.resolution.vertical];
+    setMonitor(monitor, index);
+  };
+
+  const handleHorizontalResolutionChange = (e) => {
+    monitor.resolution.horizontal = parseInt(e.target.value);
+    monitor.aspectRatio = calcAspectRatio(
+      monitor.resolution.horizontal,
+      monitor.resolution.vertical
+    );
+    setMonitor(monitor, index);
+  };
+
+  const handleVerticallResolutionChange = (e) => {
+    monitor.resolution.vertical = parseInt(e.target.value);
+    monitor.aspectRatio = calcAspectRatio(
+      monitor.resolution.horizontal,
+      monitor.resolution.vertical
+    );
+    monitor.resolution.standard = calcResolutionStandard(monitor.resolution.vertical);
+    setMonitor(monitor, index);
+  };
+
+  const handleRefreshRateChange = (e) => {
+    monitor.refreshRate = parseInt(e.target.value);
+    setMonitor(monitor, index);
+  };
+
+  const handleResponseTimeChange = (e) => {
+    monitor.responseTime = parseInt(e.target.value);
+    setMonitor(monitor, index);
+  };
+
+  const handleDisplayTypeChange = (e) => {
+    monitor.displayType = e.target.value;
+    setMonitor(monitor, index);
+  };
+
+  const handleSyncTypeChange = (e) => {
+    monitor.syncType = e.target.value;
+    setMonitor(monitor, index);
+  };
+
+  const handleBezelWidthChange = (e) => {
+    monitor.bezelWidth = parseFloat(e.target.value);
+    setMonitor(monitor, index);
+  };
+
+  const handleBezelColorChange = (e) => {
+    monitor.bezelColor = e.target.value;
+    setMonitor(monitor, index);
+  };
 
   return (
-    <div className="monitorOptions maxw-450px">
-      <hr />
-      <h3>Size<span onClick={onToggleSizeOptions} className="toggleButton">{hideSizeOptions ? "▲" : "▼"}</span></h3>
-      <SlideDown
-        closed={hideSizeOptions}
-        transitionOnAppear={false}
-        className={'my-dropdown-slidedown'}>
-        <div id="sizeOptions" className="text-center">
-          <p>
-            <input onChange={onDiagonalChange.bind(this, monitor.index)} value={monitor.diagonal} type="number" min="1" max="100" step="1" name="diagonal" list="sizes" className="maxw-3rem t-center inline" /><span> "</span>
-            <datalist id="sizes">
-              <option value="17"/>
-              <option value="19"/>
-              <option value="21"/>
-              <option value="22"/>
-              <option value="24"/>
-              <option value="27"/>
-              <option value="30"/>
-              <option value="32"/>
-              <option value="34"/>
-            </datalist>
-          </p>
+    <Fade timeout={300} in={monitor.visible}>
+      <MonitorOptionsCard>
+        <MonitorTitle>Monitor {index + 1}</MonitorTitle>
+        <MonitorOptionsGrid2>
+          <TextField
+            label="Diagonal"
+            onChange={handleDiagonalChange}
+            type="number"
+            variant="outlined"
+            value={monitor.diagonal}
+          />
+          <TextField
+            label="Orientation"
+            onChange={handleOrientationChange}
+            select
+            value={monitor.orientation}
+            variant="outlined"
+          >
+            <MenuItem value="landscape">Landscape</MenuItem>
+            <MenuItem value="portrait">Portrait</MenuItem>
+          </TextField>
+          <TextField
+            label="Aspect Ratio"
+            onChange={handleAspectRatioChange}
+            select
+            value={monitor.aspectRatio}
+            variant="outlined"
+          >
+            <MenuItem value="" style={{ display: 'none' }}>
+              Custom
+            </MenuItem>
+            <ListSubheader>Wide</ListSubheader>
+            <MenuItem value="16:9">
+              <b>16:9</b>
+            </MenuItem>
+            <MenuItem value="16:10">
+              <b>16:10</b>
+            </MenuItem>
+            <ListSubheader>UltraWide</ListSubheader>
+            <MenuItem value="21:9">
+              <b>21:9</b>
+            </MenuItem>
+            <MenuItem value="32:9">32:9</MenuItem>
+            <ListSubheader>Other</ListSubheader>
+            <MenuItem value="2:1">2:1</MenuItem>
+            <MenuItem value="4:3">4:3</MenuItem>
+            <MenuItem value="5:4">
+              <b>5:4</b>
+            </MenuItem>
+            <MenuItem value="1:1">1:1</MenuItem>
+          </TextField>
+          <TextField
+            label="Resolution Standard"
+            onChange={handleResolutionStandardChange}
+            select
+            value={monitor.resolution.standard}
+            variant="outlined"
+          >
+            <MenuItem value="POTATO" style={{ display: 'none' }}>
+              Potato
+            </MenuItem>
+            <MenuItem value="VGA">VGA</MenuItem>
+            <MenuItem value="HD">
+              <b>HD</b>
+            </MenuItem>
+            <MenuItem value="HD+">HD+</MenuItem>
+            <MenuItem value="FHD">
+              <b>FHD</b>
+            </MenuItem>
+            <MenuItem value="FHD+">FHD+</MenuItem>
+            <MenuItem value="QHD">
+              <b>QHD</b>
+            </MenuItem>
+            <MenuItem value="QHD+">QHD+</MenuItem>
+            <MenuItem value="4K">
+              <b>4K</b>
+            </MenuItem>
+            <MenuItem value="5K">5K</MenuItem>
+            <MenuItem value="8K">8K</MenuItem>
+          </TextField>
+        </MonitorOptionsGrid2>
+        <div style={{ width: '100%', textAlign: 'center' }}>
+          Show Advanced Options
+          <IconButton
+            edge="end"
+            onClick={() => setShowAdvancedOptions(!showAdvancedOptions)}
+          >
+            {showAdvancedOptions ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </IconButton>
         </div>
-      </SlideDown>
-      <hr />
-      <h3>Bezel<span onClick={onToggleBezelOptions} className="toggleButton">{hideBezelOptions ? "▲" : "▼"}</span></h3>
-      <SlideDown
-        closed={hideBezelOptions}
-        transitionOnAppear={false}
-        className={'my-dropdown-slidedown'}>
-        <div id="bezelOptions" className="text-center">
-          <p>
-            <input onChange={onBezelWidthChange.bind(this, monitor.index)} value={monitor.bezelWidth} type="range" min="0.0" max="2" step="0.25" name="bezelWidth" className="maxw-10rem t-center inline m" title={monitor.bezelWidth} />
-            <input onChange={onBezelColorChange.bind(this, monitor.index)} value={monitor.bezelColor} type="color" className="maxw-2rem inline m" />
-          </p>
+        <Collapse in={showAdvancedOptions} timeout={300}>
+          <MonitorOptionsGrid2>
+            <TextField
+              inputProps={{ max: '20000', min: '2', step: '1' }}
+              label="Horizontal Resolution"
+              onChange={handleHorizontalResolutionChange}
+              type="number"
+              value={monitor.resolution.horizontal}
+              variant="outlined"
+            />
+            <TextField
+              inputProps={{ max: '20000', min: '2', step: '1' }}
+              label="Vertical Resolution"
+              onChange={handleVerticallResolutionChange}
+              type="number"
+              value={monitor.resolution.vertical}
+              variant="outlined"
+            />
+            <TextField
+              inputProps={{ max: '20000', min: '0', step: '1' }}
+              label="Refresh Rate"
+              onChange={handleRefreshRateChange}
+              type="number"
+              value={monitor.refreshRate}
+              variant="outlined"
+            />
+            <TextField
+              inputProps={{ max: '100', min: '0', step: '1' }}
+              label="Response Time"
+              onChange={handleResponseTimeChange}
+              type="number"
+              value={monitor.responseTime}
+              variant="outlined"
+            />
+            <TextField
+              label="Display Type"
+              onChange={handleDisplayTypeChange}
+              select
+              value={monitor.displayType}
+              variant="outlined"
+            >
+              <MenuItem value="any">Any</MenuItem>
+              <MenuItem value="IPS">IPS</MenuItem>
+              <MenuItem value="TN">TN</MenuItem>
+              <MenuItem value="VA">VA</MenuItem>
+              <MenuItem value="OLED">OLED</MenuItem>
+            </TextField>
+            <TextField
+              label="Sync Type"
+              onChange={handleSyncTypeChange}
+              select
+              value={monitor.syncType}
+              variant="outlined"
+            >
+              <MenuItem value="any">Any</MenuItem>
+              <MenuItem value="none">None</MenuItem>
+              <MenuItem value="G-Sync">G-Sync</MenuItem>
+              <MenuItem value="FreeSync">FreeSync</MenuItem>
+            </TextField>
+            <TextField
+              label="Bezel Width"
+              inputProps={{ max: '2', min: '0.0', step: '0.25' }}
+              name="bezelWidth"
+              onChange={handleBezelWidthChange}
+              title={`${monitor.bezelWidth}"`}
+              type="range"
+              value={monitor.bezelWidth}
+              variant="outlined"
+            />
+            <TextField
+              label="Bezel Color"
+              onChange={handleBezelColorChange}
+              type="color"
+              variant="outlined"
+              value={monitor.bezelColor}
+            />
+          </MonitorOptionsGrid2>
+        </Collapse>
+        <div style={{ width: '100%', textAlign: 'center' }}>
+          Show Stats
+          <IconButton edge="end" onClick={() => setShowMonitorStats(!showMonitorStats)}>
+            {showMonitorStats ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </IconButton>
         </div>
-      </SlideDown>
-      <hr />
-      <h3>Aspect Ratio<span onClick={onToggleAspectRatioOptions} className="toggleButton">{hideAspectRatioOptions ? "▲" : "▼"}</span></h3>
-      <SlideDown
-        closed={hideAspectRatioOptions}
-        transitionOnAppear={false}
-        className={'my-dropdown-slidedown'}>
-        <div id="aspectRatioOptions" className="text-center">
-          <p>
-            <select onChange={onAspectRatioChange.bind(this, monitor.index)} value={monitor.aspectRatio} className="w-10rem t-center">
-              <option value="custom">Custom</option>
-              <optgroup label="Tall">
-                <option value="5:4">5:4</option>
-              </optgroup>
-              <optgroup label="Wide">
-                <option value="16:10">16:10</option>
-                <option value="16:9">16:9</option>
-              </optgroup>
-              <optgroup label="UltraWide">
-                <option value="21:9">21:9</option>
-                <option value="32:9">32:9</option>
-              </optgroup>
-              <optgroup label="Others Detected">
-                <option value="1:1" hidden>1:1</option>
-                <option value="4:3" hidden>4:3</option>
-                <option value="3:2" hidden>3:2</option>
-                <option value="5:3" hidden>5:3</option>
-                <option value="2:1" hidden>2:1</option>
-                <option value="32:10" hidden>32:10</option>
-              </optgroup>
-            </select>
-          </p>
-          <p>
-            <select onChange={onOrientationChange.bind(this, monitor.index)} value={monitor.orientation} className="w-10rem t-center">
-              <option value="landscape">Landscape</option>
-              <option value="portrait">Portrait</option>
-            </select>
-          </p>
-        </div>
-      </SlideDown>
-      <hr />
-      <h3>Resolution<span onClick={onToggleResolutionOptions} className="toggleButton">{hideResolutionOptions ? "▲" : "▼"}</span></h3>
-      <SlideDown
-        closed={hideResolutionOptions}
-        transitionOnAppear={false}
-        className={'my-dropdown-slidedown'}>
-        <div id="resolutionOptions" className="text-center">
-          <p>
-            <select onChange={onResolutionChange.bind(this, monitor.index)} value={monitor.resolution.type} className="w-10rem">
-              <option value="custom">Custom</option>
-              <option value="SVGA">SVGA ~ 600i</option>
-              <option value="HD">HD ~ 768p</option>
-              <option value="FHD">FHD ~ 1080p</option>
-              <option value="FHD+">FHD+ ~ 1200p</option>
-              <option value="QHD">QHD ~ 1440p</option>
-              <option value="QHD+">QHD+ ~ 1600p</option>
-              <option value="4K">4K ~ 2160p</option>
-              <option value="5K">5K ~ 2880p</option>
-              <option value="6K">6K ~ 3384p</option>
-              <option value="8K">8K ~ 4320p</option>
-            </select>
-          </p>
-          <p>
-            <input onChange={onHorResChange.bind(this, monitor.index)} value={monitor.resolution.horRes} type="number" className="w-5rem" />
-            <span className="p">X</span>
-            <input onChange={onVerResChange.bind(this, monitor.index)} value={monitor.resolution.verRes} type="number" className="w-5rem" />
-          </p>
-        </div>
-      </SlideDown>
-      <hr />
-      <h3>Features<span onClick={onToggleFeatureOptions} className="toggleButton">{hideFeatureOptions ? "▲" : "▼"}</span></h3>
-      <SlideDown
-        closed={hideFeatureOptions}
-        transitionOnAppear={false}
-        className={'my-dropdown-slidedown'}>
-        <div id="featureOptions" className="text-center">
-          <p>
-            <label>Display Type:</label>
-            <select onChange={onDisplayTypeChange.bind(this, monitor.index)} value={monitor.displayType} className="w-8rem">
-              <option value="" defaultValue>Any</option>
-              <option value="ips">IPS</option>
-              <option value="tn">TN</option>
-              <option value="va">VA</option>
-              <option value="oled">OLED</option>
-            </select>
-          </p>
-          <p>
-            <label>Sync Type:</label>
-            <select onChange={onSyncTypeChange.bind(this, monitor.index)} value={monitor.syncType} className="w-8rem">
-              <option value="" defaultValue>Any</option>
-              <option value="none">None</option>
-              <option value="g-sync">G-Sync</option>
-              <option value="freesync">FreeSync</option>
-            </select>
-          </p>
-          <p>
-            <label>Refresh Rate:</label>
-            <input onChange={onRefreshRateChange.bind(this, monitor.index)} value={monitor.refreshRate} type="number" step="5" min="30" max="1000" className="w-8rem inline" />
-            <span>Hz</span>
-          </p>
-          <p>
-            <label>Response Time:</label>
-            <input onChange={onResponseTimeChange.bind(this, monitor.index)} value={monitor.responseTime} type="number" step="1" min="1" max="50" className="w-8rem inline" />
-            <span>ms</span>
-          </p>
-          <div id="featureChecks" className="grid-3-f text-left px-1rem">
-            <p className="nowrap">
-              <input onChange={onHdrChange.bind(this, monitor.index)} type="checkbox" name="hdr" checked={monitor.features.hdr} />
-              <label className="text-left">HDR</label>
-            </p>
-            <p className="nowrap">
-              <input onChange={onSrgbChange.bind(this, monitor.index)} type="checkbox" name="srgb" checked={monitor.features.srgb} />
-              <label className="text-left">sRGB</label>
-            </p>
-            <p className="nowrap">
-              <input onChange={onCurvedChange.bind(this, monitor.index)} type="checkbox" name="curved" checked={monitor.features.curved} />
-              <label className="text-left">Curved</label>
-            </p>
-            <p className="nowrap">
-              <input onChange={onWebcamChange.bind(this, monitor.index)} type="checkbox" name="webcam" checked={monitor.features.webcam} />
-              <label className="text-left">Webcam</label>
-            </p>
-            <p className="nowrap">
-              <input onChange={onTouchChange.bind(this, monitor.index)} type="checkbox" name="touch" checked={monitor.features.touch} />
-              <label className="text-left">Touch</label>
-            </p>
-            <p className="nowrap">
-              <input onChange={onSpeakersChange.bind(this, monitor.index)} type="checkbox" name="speakers" checked={monitor.features.speakers} />
-              <label className="text-left">Speakers</label>
-            </p>
-          </div>
-        </div>
-      </SlideDown>
-      <hr />
-      <h3>Ports<span onClick={onTogglePortOptions} className="toggleButton">{hidePortOptions ? "▲" : "▼"}</span></h3>
-      <SlideDown
-        closed={hidePortOptions}
-        transitionOnAppear={false}
-        className={'my-dropdown-slidedown'}>
-        <div id="portOptions" className="grid-3-f px-1rem">
-          <p className="nowrap">
-            <input onChange={onHdmiChange.bind(this, monitor.index)} type="checkbox" name="hdmi" checked={monitor.features.hdmi} />
-            <label className="text-left">HDMI</label>
-          </p>
-          <p className="nowrap">
-            <input onChange={onDisplayPortChange.bind(this, monitor.index)} type="checkbox" name="displayPort" checked={monitor.features.displayPort} />
-            <label className="text-left">Display Port</label>
-          </p>
-          <p className="nowrap">
-            <input onChange={onDviChange.bind(this, monitor.index)} type="checkbox" name="dvi" checked={monitor.features.dvi} />
-            <label className="text-left">DVI</label>
-          </p>
-          <p className="nowrap">
-            <input onChange={onVgaChange.bind(this, monitor.index)} type="checkbox" name="vga" checked={monitor.features.vga} />
-            <label className="text-left">VGA</label>
-          </p>
-          <p className="nowrap">
-            <input onChange={onUsbcChange.bind(this, monitor.index)} type="checkbox" name="usbc" checked={monitor.features.usbc} />
-            <label className="text-left">USB Type-C</label>
-          </p>
-        </div>
-      </SlideDown>
-      <hr />
-      <h3>Seller Info<span onClick={onToggleSellerInfoOptions} className="toggleButton">{hideSellerInfoOptions ? "▲" : "▼"}</span></h3>
-      <SlideDown
-        closed={hideSellerInfoOptions}
-        transitionOnAppear={false}
-        className={'my-dropdown-slidedown'}>
-        <div id="sellerInfoOptions" className="text-center">
-          <p>
-            <label>Brand:</label>
-            <input onChange={onBrandChange.bind(this, monitor.index)} value={monitor.sellerInfo.brand} type="text" name="brand" className="w-10rem" />
-          </p>
-          <p>
-            <label>Price:</label>
-            <span>$</span>
-            <input onChange={onPriceChange.bind(this, monitor.index)} value={monitor.sellerInfo.price} type="number" name="price" step="0.01" min="0" max="999999" className="w-9rem" />
-          </p>
-          <p>
-            <label>Link:</label>
-            <input onChange={onLinkChange.bind(this, monitor.index)} value={monitor.sellerInfo.link} type="url" name="link" className="w-10rem" />
-            <a href={monitor.sellerInfo.link} target="_blank" rel="noopener noreferrer" className="text-center block w-10rem link">
-              {monitor.sellerInfo.link.replace('https://', '').replace('http://', '').replace('www.', '').replace('www', '').substring(0, 30)} {monitor.sellerInfo.link.length > 30 ? <span>...</span> : <></>}
-            </a>
-          </p>
-        </div>
-      </SlideDown>
-      <hr />
-    </div>
+        <Collapse in={showMonitorStats} timeout={300}>
+          <MonitorStats monitor={monitor} />
+        </Collapse>
+      </MonitorOptionsCard>
+    </Fade>
   );
 };
-
-export default MonitorOptions;

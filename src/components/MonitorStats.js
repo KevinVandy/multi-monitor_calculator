@@ -1,68 +1,104 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { Table, TableBody, TableRow, TableCell, styled } from '@material-ui/core';
+import { calcTheta, calcScreenWidth, calcScreenHeight, calcPPI } from '../util/calc.util';
 
-const MonitorStats = ({ monitor }) => {
-
-  const THETA = Math.atan(parseFloat(monitor.resolution.verRes) / parseFloat(monitor.resolution.horRes));
-
+export const MonitorStats = ({ monitor, fontColor }) => {
   const diagonal = parseFloat(monitor.diagonal);
-  const screenWidth = monitor.diagonal * (monitor.orientation === "landscape" ? Math.cos(THETA) : Math.sin(THETA));
-  const screenHeight = monitor.diagonal * (monitor.orientation === "landscape" ? Math.sin(THETA) : Math.cos(THETA));
+  const theta = useMemo(
+    () => calcTheta(monitor.resolution.horizontal, monitor.resolution.vertical),
+    [monitor.resolution.horizontal, monitor.resolution.vertical]
+  );
+  const [screenWidth, screenHeight] = useMemo(
+    () => [
+      calcScreenWidth(diagonal, monitor.orientation, theta),
+      calcScreenHeight(diagonal, monitor.orientation, theta)
+    ],
+    [diagonal, monitor.orientation, theta]
+  );
   const physicalWidth = screenWidth + monitor.bezelWidth * 2;
   const physicalHeight = screenHeight + monitor.bezelWidth * 2;
   const screenArea = screenWidth * screenHeight;
-  const numPixels = monitor.resolution.horRes * monitor.resolution.verRes;
-  const ppi = (monitor.resolution.verRes + monitor.resolution.horRes) / (screenHeight + screenWidth);
+  const numPixels =
+    parseInt(monitor.resolution.horizontal) * parseInt(monitor.resolution.vertical);
+  const ppi = calcPPI(
+    monitor.resolution.horizontal,
+    monitor.resolution.vertical,
+    screenHeight,
+    screenWidth
+  );
+
+  const commonTableCellStyles = {
+    border: 'none',
+    height: '2rem',
+    padding: 0,
+    fontSize: '1rem',
+    color: fontColor
+  };
+
+  const TableHeadCell = styled(TableCell)({
+    ...commonTableCellStyles,
+    textAlign: 'right',
+    paddingRight: '1rem',
+    fontWeight: '500'
+  });
+
+  const TableDataCell = styled(TableCell)({
+    ...commonTableCellStyles,
+    textAlign: 'left'
+  });
 
   return (
-    <table className="monitorStats all-center">
-      <tbody>
-        <tr>
-          <th>Screen Diagonal:</th>
-          <td>{diagonal.toFixed(1)}"</td>
-        </tr>
-        <tr>
-          <th>Screen Width:</th>
-          <td>{screenWidth.toFixed(1)}"</td>
-        </tr>
-        <tr>
-          <th>Screen Height:</th>
-          <td>{screenHeight.toFixed(1)}"</td>
-        </tr>
-        <tr>
-          <th>Bezel Width:</th>
-          <td>{parseFloat(monitor.bezelWidth).toFixed(2)}"</td>
-        </tr>
-        <tr>
-          <th>Physical Width:</th>
-          <td>{physicalWidth.toFixed(1)}"</td>
-        </tr>
-        <tr>
-          <th>Physical Height:</th>
-          <td>{physicalHeight.toFixed(1)}"</td>
-        </tr>
-        <tr>
-          <th>Screen Area:</th>
-          <td>{screenArea.toFixed(0)}"<sup>2</sup></td>
-        </tr>
-        <tr>
-          <th>Aspect Ratio:</th>
-          <td>{monitor.aspectRatio}</td>
-        </tr>
-        <tr>
-          <th>Resolution:</th>
-          <td>{monitor.resolution.horRes} x {monitor.resolution.verRes}</td>
-        </tr>
-        <tr>
-          <th>Number Pixels:</th>
-          <td>{numPixels.toLocaleString()}</td>
-        </tr>
-        <tr>
-          <th>Pixels Per Inch (PPI):</th>
-          <td>{ppi.toFixed(1)}</td>
-        </tr>
-      </tbody>
-    </table>
+    <Table>
+      <TableBody>
+        <TableRow>
+          <TableHeadCell component="th">Screen Diagonal:</TableHeadCell>
+          <TableDataCell>{diagonal.toFixed(1)}"</TableDataCell>
+        </TableRow>
+        <TableRow>
+          <TableHeadCell component="th">Screen Width:</TableHeadCell>
+          <TableDataCell>{screenWidth.toFixed(1)}"</TableDataCell>
+        </TableRow>
+        <TableRow>
+          <TableHeadCell component="th">Screen Height:</TableHeadCell>
+          <TableDataCell>{screenHeight.toFixed(1)}"</TableDataCell>
+        </TableRow>
+        <TableRow>
+          <TableHeadCell component="th">Bezel Width:</TableHeadCell>
+          <TableDataCell>{parseFloat(monitor.bezelWidth).toFixed(2)}"</TableDataCell>
+        </TableRow>
+        <TableRow>
+          <TableHeadCell component="th">Physical Width:</TableHeadCell>
+          <TableDataCell>{physicalWidth.toFixed(1)}"</TableDataCell>
+        </TableRow>
+        <TableRow>
+          <TableHeadCell component="th">Physical Height:</TableHeadCell>
+          <TableDataCell>{physicalHeight.toFixed(1)}"</TableDataCell>
+        </TableRow>
+        <TableRow>
+          <TableHeadCell component="th">Screen Area:</TableHeadCell>
+          <TableDataCell>
+            {screenArea.toFixed(0)}"<sup>2</sup>
+          </TableDataCell>
+        </TableRow>
+        <TableRow>
+          <TableHeadCell component="th">Aspect Ratio:</TableHeadCell>
+          <TableDataCell>{monitor.aspectRatio}</TableDataCell>
+        </TableRow>
+        <TableRow>
+          <TableHeadCell component="th">Resolution:</TableHeadCell>
+          <TableDataCell>
+            {monitor.resolution.horizontal} x {monitor.resolution.vertical}
+          </TableDataCell>
+        </TableRow>
+        <TableRow>
+          <TableHeadCell component="th">Number Pixels:</TableHeadCell>
+          <TableDataCell>{numPixels.toLocaleString()}</TableDataCell>
+        </TableRow>
+        <TableRow>
+          <TableHeadCell component="th">Pixels Per Inch (PPI):</TableHeadCell>
+          <TableDataCell>{ppi.toFixed(1)}</TableDataCell>
+        </TableRow>
+      </TableBody>
+    </Table>
   );
 };
-
-export default MonitorStats;

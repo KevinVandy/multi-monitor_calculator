@@ -1,2 +1,0 @@
-export const SET_LOADING = 'SET_LOADING';
-export const LOAD_DEFAULT_SETUP = 'LOAD_DEFAULT_SETUP';
