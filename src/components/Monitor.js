@@ -51,7 +51,7 @@ export const Monitor = ({ monitor }) => {
               TransitionComponent={Fade}
               TransitionProps={{ timeout: 500 }}
             >
-              <div style={{cursor: 'help'}} >{monitor.index + 1}</div>
+              <div style={{ cursor: 'help' }}>{monitor.index + 1}</div>
             </Tooltip>
           </div>
         </div>

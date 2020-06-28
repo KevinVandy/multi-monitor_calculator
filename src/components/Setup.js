@@ -23,7 +23,7 @@ const SettingsPanel = styled(Card)({
   padding: '1.5rem',
   position: 'absolute',
   top: '5rem',
-  right: '3rem',
+  right: '1rem',
   zIndex: '2'
 });
 

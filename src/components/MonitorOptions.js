@@ -43,6 +43,11 @@ export const MonitorOptions = ({ index, monitor }) => {
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
   const [showMonitorStats, setShowMonitorStats] = useState(false);
 
+  const handleDiagonalChange = (e) => {
+    monitor.diagonal = parseInt(e.target.value);
+    setMonitor(monitor, index);
+  };
+
   const handleOrientationChange = (e) => {
     monitor.orientation = e.target.value;
     setMonitor(monitor, index);
@@ -54,11 +59,6 @@ export const MonitorOptions = ({ index, monitor }) => {
       monitor.aspectRatio,
       monitor.resolution.standard
     ) ?? [monitor.resolution.horizontal, monitor.resolution.vertical];
-    setMonitor(monitor, index);
-  };
-
-  const handleDiagonalChange = (e) => {
-    monitor.diagonal = parseInt(e.target.value);
     setMonitor(monitor, index);
   };
 
@@ -90,13 +90,13 @@ export const MonitorOptions = ({ index, monitor }) => {
     setMonitor(monitor, index);
   };
 
-  const handleBezelWidthChange = (e) => {
-    monitor.bezelWidth = parseFloat(e.target.value);
+  const handleRefreshRateChange = (e) => {
+    monitor.refreshRate = parseInt(e.target.value);
     setMonitor(monitor, index);
   };
 
-  const handleBezelColorChange = (e) => {
-    monitor.bezelColor = e.target.value;
+  const handleResponseTimeChange = (e) => {
+    monitor.responseTime = parseInt(e.target.value);
     setMonitor(monitor, index);
   };
 
@@ -107,6 +107,16 @@ export const MonitorOptions = ({ index, monitor }) => {
 
   const handleSyncTypeChange = (e) => {
     monitor.syncType = e.target.value;
+    setMonitor(monitor, index);
+  };
+
+  const handleBezelWidthChange = (e) => {
+    monitor.bezelWidth = parseFloat(e.target.value);
+    setMonitor(monitor, index);
+  };
+
+  const handleBezelColorChange = (e) => {
+    monitor.bezelColor = e.target.value;
     setMonitor(monitor, index);
   };
 
@@ -204,18 +214,36 @@ export const MonitorOptions = ({ index, monitor }) => {
         <Collapse in={showAdvancedOptions} timeout={300}>
           <MonitorOptionsGrid2>
             <TextField
+              inputProps={{ max: '20000', min: '2', step: '1' }}
               label="Horizontal Resolution"
               onChange={handleHorizontalResolutionChange}
               type="number"
-              variant="outlined"
               value={monitor.resolution.horizontal}
+              variant="outlined"
             />
             <TextField
+              inputProps={{ max: '20000', min: '2', step: '1' }}
               label="Vertical Resolution"
               onChange={handleVerticallResolutionChange}
               type="number"
-              variant="outlined"
               value={monitor.resolution.vertical}
+              variant="outlined"
+            />
+            <TextField
+              inputProps={{ max: '20000', min: '0', step: '1' }}
+              label="Refresh Rate"
+              onChange={handleRefreshRateChange}
+              type="number"
+              value={monitor.refreshRate}
+              variant="outlined"
+            />
+            <TextField
+              inputProps={{ max: '100', min: '0', step: '1' }}
+              label="Response Time"
+              onChange={handleResponseTimeChange}
+              type="number"
+              value={monitor.responseTime}
+              variant="outlined"
             />
             <TextField
               label="Display Type"
