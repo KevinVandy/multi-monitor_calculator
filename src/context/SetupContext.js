@@ -14,8 +14,8 @@ export const useSetup = () => {
   return useContext(SetupContext);
 };
 
-const saveSetup = (setup) => {
-  window.localStorage.setItem('setup', JSON.stringify(setup));
+const saveSetup = (newSetup) => {
+  window.localStorage.setItem('setup', JSON.stringify(newSetup));
 };
 
 export const SetupProvider = ({ children }) => {
@@ -28,7 +28,7 @@ export const SetupProvider = ({ children }) => {
   const [deskWidth, setDeskWidth] = useState(() => setup.deskWidth);
   const [monitors, setMonitors] = useState(() => setup.monitors);
   const delayedSave = useCallback(
-    _.debounce((s) => saveSetup(s), 2000),
+    _.debounce((newSetup) => saveSetup(newSetup), 2000),
     []
   );
 

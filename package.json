@@ -1,6 +1,7 @@
 {
   "name": "multimonitorcalculator",
   "version": "0.1.0",
+  "license": "GNU General Public License",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
