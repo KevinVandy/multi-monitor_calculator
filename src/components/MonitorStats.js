@@ -39,7 +39,7 @@ export const MonitorStats = ({ monitor, fontColor }) => {
     ...commonTableCellStyles,
     textAlign: 'right',
     paddingRight: '1rem',
-    fontWeight: '600'
+    fontWeight: '500'
   });
 
   const TableDataCell = styled(TableCell)({

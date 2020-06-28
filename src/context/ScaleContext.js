@@ -7,8 +7,8 @@ export const useScale = () => {
 };
 
 export const ScaleProvider = ({ children }) => {
-  const [scale, setScale] = useState(
-    () => JSON.parse(window.localStorage.getItem('scale')) ?? 16
+  const [scale, setScale] = useState(() =>
+    parseInt(JSON.parse(window.localStorage.getItem('scale')) ?? 16)
   );
 
   useEffect(() => {

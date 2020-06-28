@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
-import { Card, styled } from '@material-ui/core';
+import React from 'react';
+import { Card } from '@material-ui/core';
 import { Monitor } from './Monitor';
 import { useMonitors } from '../context/MonitorsContext';
 import { useScale } from '../context/ScaleContext';
 
-const MonitorsAreaCard = styled(Card)({
-  display: 'flex',
-  justifyContent: 'center',
-  margin: '2rem auto',
-  maxHeight: '40rem',
-  minHeight: '20rem',
-  minWidth: '480px',
-  overflow: 'auto',
-  resize: 'vertical'
-});
-
-export const MonitorsArea = () => {
+export const MonitorsArea = ({ deskWidth }) => {
   const { monitors } = useMonitors();
   const { scale } = useScale();
-  const [deskWidth, setDeskWidth] = useState(6);
 
   return (
-    <MonitorsAreaCard style={{ width: `${deskWidth * 12 * scale}px` }} variant="outlined">
+    <Card
+      style={{
+        width: `${deskWidth * 12 * scale}px`,
+        minHeight: `${scale + 5}rem`,
+        display: 'flex',
+        justifyContent: 'center',
+        margin: '2rem auto',
+        maxHeight: '50rem',
+        overflow: 'auto',
+        resize: 'vertical',
+        transition: 'all 300ms ease',
+        transitionProperty: 'height, width'
+      }}
+      variant="outlined"
+    >
       {monitors.map((monitor, i) => (
         <Monitor key={i} monitor={monitor} />
       ))}
-    </MonitorsAreaCard>
+    </Card>
   );
 };
