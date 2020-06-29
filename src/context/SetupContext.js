@@ -3,7 +3,8 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useState
+  useState,
+  useRef
 } from 'react';
 import _ from 'lodash';
 import defaultSetup from '../util/defaultSetup.json';
@@ -19,16 +20,25 @@ const saveSetup = (newSetup) => {
 };
 
 export const SetupProvider = ({ children }) => {
-  const [setup] = useState(
-    () =>
-      JSON.parse(window.localStorage.getItem('setup')) ??
+  const { current: setup } = useRef(
+    JSON.parse(window.localStorage.getItem('setup')) ??
       JSON.parse(JSON.stringify(defaultSetup))
   );
-  const [scale, setScale] = useState(() => setup.scale);
-  const [deskWidth, setDeskWidth] = useState(() => setup.deskWidth);
+  const [scale, setScaleState] = useState(() => setup.scale);
+  const [deskWidth, setDeskWidthState] = useState(() => setup.deskWidth);
   const [monitors, setMonitors] = useState(() => setup.monitors);
   const delayedSave = useCallback(
     _.debounce((newSetup) => saveSetup(newSetup), 2000),
+    []
+  );
+
+  const setScale = useCallback(
+    _.debounce((newScale) => setScaleState(newScale), 10),
+    []
+  );
+
+  const setDeskWidth = useCallback(
+    _.debounce((newDeskWidth) => setDeskWidthState(newDeskWidth), 10),
     []
   );
 

@@ -3,8 +3,8 @@ import { Card } from '@material-ui/core';
 import { Monitor } from './Monitor';
 import { useSetup } from '../context/SetupContext';
 
-export const MonitorsArea = ({ deskWidth }) => {
-  const {  monitors, scale } = useSetup();
+export const MonitorsArea = () => {
+  const {  monitors, scale, deskWidth } = useSetup();
   return (
     <Card
       style={{
