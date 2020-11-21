@@ -5,12 +5,14 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import ResetIcon from '@material-ui/icons/SettingsBackupRestore';
 import defaultSetup from '../util/defaultSetup.json';
 import { useSetup } from '../context/SetupContext';
+import { SettingsPanel } from './SettingsPanel';
 
 const FabGrid = styled('div')({
   display: 'grid',
-  gridTemplateColumns: 'auto 3rem 3rem 3rem auto',
+  gridTemplateColumns: '3rem 3rem 3rem 12rem',
   gridGap: '2rem',
-  width: '100%'
+  width: '100%',
+  justifyContent: 'center'
 });
 
 export const ButtonsArea = () => {
@@ -44,7 +46,6 @@ export const ButtonsArea = () => {
   
   return (
     <FabGrid>
-      <span />
       <Tooltip arrow placement="left" title="Reset">
         <Fab onClick={handleResetMonitors} color="secondary">
           <ResetIcon />
@@ -60,7 +61,7 @@ export const ButtonsArea = () => {
           <AddIcon />
         </Fab>
       </Tooltip>
-      <span />
+      <SettingsPanel />
     </FabGrid>
   );
 };

@@ -7,7 +7,7 @@ import { ButtonsArea } from './ButtonsArea';
 export const Setup = () => {
   return (
     <>
-      <SettingsPanel />
+      
       <ButtonsArea />
       <MonitorsArea />
       <MonitorOptionsArea />
