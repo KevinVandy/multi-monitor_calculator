@@ -16,7 +16,7 @@ export const MonitorsArea = () => {
         maxHeight: '50rem',
         overflow: 'auto',
         resize: 'vertical',
-        transition: 'all 300ms ease',
+        transition: 'all 200ms ease',
         transitionProperty: 'height, width'
       }}
       variant="outlined"
