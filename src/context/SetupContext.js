@@ -29,16 +29,19 @@ export const SetupProvider = ({ children }) => {
   const [monitors, setMonitors] = useState(() => setup.monitors);
   const delayedSave = useCallback(
     _.debounce((newSetup) => saveSetup(newSetup), 2000),
+    // eslint-disable-next-line
     []
   );
 
   const setScale = useCallback(
     _.debounce((newScale) => setScaleState(newScale), 10),
+    // eslint-disable-next-line
     []
   );
 
   const setDeskWidth = useCallback(
     _.debounce((newDeskWidth) => setDeskWidthState(newDeskWidth), 10),
+    // eslint-disable-next-line
     []
   );
 
