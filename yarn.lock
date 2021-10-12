@@ -52,6 +52,11 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz#87de7af9c231826fdd68ac7258f77c429e0e5fcf"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
+"@iarna/toml@^2.2.5":
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
+  integrity sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==
+
 "@material/animation@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@material/animation/-/animation-11.0.0.tgz#d17935fc2d29f8d10f3f884783e35426de8a6adc"
@@ -814,6 +819,14 @@
     "@smui/common" "^5.0.0-beta.7"
     svelte2tsx "^0.4.6"
 
+"@sveltejs/adapter-netlify@^1.0.0-next.32":
+  version "1.0.0-next.32"
+  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-netlify/-/adapter-netlify-1.0.0-next.32.tgz#fe177483365cf87cc132c8cc175df3ceb2cd91f4"
+  integrity sha512-nJIn806J1p5+YwwYN6EzSslAENfEuSuoNcRJZZsoI/PRJDjgpUJm3Y58iL0ZbaLEMS6iGyMFz2jjXAAUefpGHQ==
+  dependencies:
+    "@iarna/toml" "^2.2.5"
+    esbuild "^0.13.3"
+
 "@sveltejs/kit@next":
   version "1.0.0-next.180"
   resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.180.tgz#b8bc465ad6f117b666a6e86e30f9c65c0676c9d6"
@@ -1264,7 +1277,7 @@ esbuild-windows-arm64@0.13.4:
   resolved "https://registry.yarnpkg.com/esbuild-windows-arm64/-/esbuild-windows-arm64-0.13.4.tgz#fb239532f07b764d158f4cc787178ef4c6fadb5c"
   integrity sha512-vA6GLvptgftRcDcWngD5cMlL4f4LbL8JjU2UMT9yJ0MT5ra6hdZNFWnOeOoEtY4GtJ6OjZ0i+81sTqhAB0fMkg==
 
-esbuild@^0.13.2:
+esbuild@^0.13.2, esbuild@^0.13.3:
   version "0.13.4"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.13.4.tgz#ce2deb56c4fb360938311cbfc67f8e467bb6841b"
   integrity sha512-wMA5eUwpavTBiNl+It6j8OQuKVh69l6z4DKDLzoTIqC+gChnPpcmqdA8WNHptUHRnfyML+mKEQPlW7Mybj8gHg==
