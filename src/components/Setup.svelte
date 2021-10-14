@@ -9,24 +9,29 @@
   import CommandButtons from './CommandButtons.svelte';
   import Desk from './Desk.svelte';
   import MonitorOptionsArea from './MonitorOptionsArea.svelte';
+  import type { ISetup } from 'src/utils/interfaces';
 
   onMount(() => {
-    monitors.set(
-      JSON.parse(localStorage.getItem('monitors')) ?? [getNewMonitor()]
+    const storedSetup: ISetup | null = JSON.parse(
+      localStorage.getItem('setup')
     );
-    deskWidth.set(JSON.parse(localStorage.getItem('deskWidth')) ?? 6);
-    scale.set(JSON.parse(localStorage.getItem('scale')) ?? 16);
+    if (storedSetup) {
+      monitors.set(storedSetup.monitors ?? [getNewMonitor()]);
+      deskWidth.set(storedSetup.deskWidth ?? 6);
+      scale.set(storedSetup.scale ?? 16);
+    }
   });
 
-  afterUpdate(() => {
-    monitors.subscribe((ms) =>
-      localStorage.setItem('monitors', JSON.stringify(ms))
-    );
-    deskWidth.subscribe((dw) =>
-      localStorage.setItem('deskWidth', JSON.stringify(dw))
-    );
-    scale.subscribe((s) => localStorage.setItem('scale', JSON.stringify(s)));
-  });
+  afterUpdate(() =>
+    localStorage.setItem(
+      'setup',
+      JSON.stringify({
+        scale: $scale,
+        deskWidth: $deskWidth,
+        monitors: $monitors
+      })
+    )
+  );
 </script>
 
 <CommandButtons />
