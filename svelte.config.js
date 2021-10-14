@@ -1,13 +1,16 @@
 import preprocess from 'svelte-preprocess';
-import netlify from '@sveltejs/adapter-netlify';
+import adapter from '@sveltejs/adapter-netlify';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  preprocess: preprocess(),
-  kit: {
-    target: '#svelte',
-    adapter: netlify()
-  }
+	// Consult https://github.com/sveltejs/svelte-preprocess
+	// for more information about preprocessors
+	preprocess: preprocess(),
+
+	kit: {
+		adapter: adapter(),
+		target: '#svelte'
+	}
 };
 
 export default config;
