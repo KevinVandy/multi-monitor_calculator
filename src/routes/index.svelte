@@ -9,11 +9,6 @@
 </main>
 
 <style>
-  h1,
-  h2 {
-    text-align: center;
-  }
-
   main {
     background-image: linear-gradient(#fff, #ccc);
     min-height: calc(100vh - 100px);

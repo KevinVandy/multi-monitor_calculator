@@ -14,9 +14,11 @@
   },
   "devDependencies": {
     "@smui/card": "^5.0.0-beta.7",
+    "@smui/checkbox": "^5.0.0-beta.7",
     "@smui/data-table": "^5.0.0-beta.7",
     "@smui/dialog": "^5.0.0-beta.7",
     "@smui/fab": "^5.0.0-beta.7",
+    "@smui/form-field": "^5.0.0-beta.7",
     "@smui/select": "^5.0.0-beta.7",
     "@smui/slider": "^5.0.0-beta.7",
     "@smui/textfield": "^5.0.0-beta.7",

@@ -16,6 +16,8 @@
   import BezelWidthField from './fields/BezelWidthField.svelte';
   import BezelColorField from './fields/BezelColorField.svelte';
   import MonitorStats from './MonitorStats.svelte';
+  import PortFields from './fields/PortFields.svelte';
+import FeatureFields from './fields/FeatureFields.svelte';
 
   export let monitor: IMonitor;
   export let advancedOptionsOpen: boolean;
@@ -44,15 +46,19 @@
   </h4>
   {#if advancedOptionsOpen}
     <div transition:slide={{ duration: 300 }}>
-      <Content class="options-grid">
-        <HorizontalResolutionField {monitor} />
-        <VerticalResolutionField {monitor} />
-        <RefreshRateField {monitor} />
-        <ResponseTimeField {monitor} />
-        <DisplayTypeField {monitor} />
-        <SyncTypeField {monitor} />
-        <BezelWidthField {monitor} />
-        <BezelColorField {monitor} />
+      <Content>
+        <div class="options-grid">
+          <HorizontalResolutionField {monitor} />
+          <VerticalResolutionField {monitor} />
+          <RefreshRateField {monitor} />
+          <ResponseTimeField {monitor} />
+          <DisplayTypeField {monitor} />
+          <SyncTypeField {monitor} />
+          <BezelWidthField {monitor} />
+          <BezelColorField {monitor} />
+        </div>
+        <PortFields {monitor} />
+        <FeatureFields {monitor} />
       </Content>
     </div>
   {/if}
