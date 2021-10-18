@@ -13,6 +13,7 @@
     "smui-theme": "smui-theme compile static/smui.css -i src/theme"
   },
   "devDependencies": {
+    "@material/typography": "^13.0.0",
     "@smui/card": "^5.0.0-beta.7",
     "@smui/checkbox": "^5.0.0-beta.7",
     "@smui/data-table": "^5.0.0-beta.7",

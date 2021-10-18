@@ -21,12 +21,12 @@
       "responseTime": "",
       "visible": true,
       "features": {
-        "hdr": false,
-        "srgb": false,
         "curved": false,
-        "webcam": false,
+        "hdr": false,
+        "speakers": false,
+        "srgb": false,
         "touch": false,
-        "speakers": false
+        "webcam": false
       },
       "ports": {
         "displayPort": false,

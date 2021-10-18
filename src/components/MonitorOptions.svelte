@@ -17,7 +17,7 @@
   import BezelColorField from './fields/BezelColorField.svelte';
   import MonitorStats from './MonitorStats.svelte';
   import PortFields from './fields/PortFields.svelte';
-import FeatureFields from './fields/FeatureFields.svelte';
+  import FeatureFields from './fields/FeatureFields.svelte';
 
   export let monitor: IMonitor;
   export let advancedOptionsOpen: boolean;
@@ -25,7 +25,7 @@ import FeatureFields from './fields/FeatureFields.svelte';
 </script>
 
 <Card class="monitor-options-card">
-  <h3 class="monitor-title">Monitor {monitor.index + 1}</h3>
+  <h3>Monitor {monitor.index + 1}</h3>
   <Content class="options-grid">
     <DiagonalField {monitor} />
     <OrientationField {monitor} />
@@ -92,17 +92,11 @@ import FeatureFields from './fields/FeatureFields.svelte';
     z-index: 1;
   }
 
-  .monitor-title {
-    text-align: center;
-    padding-bottom: 1rem;
-  }
-
   :global(.options-grid) {
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: 10rem 10rem;
     justify-content: center;
-    padding: 0.5rem 0;
   }
 
   .advanced-options-toggle {
