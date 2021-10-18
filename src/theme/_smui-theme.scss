@@ -13,8 +13,20 @@
 
 @use '@material/typography/index' as typography;
 
-html {
+html,
+body {
   @include typography.typography('body1');
+  background-color: theme.$surface;
+  color: theme.$on-surface;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #40b3ff;
+}
+a:visited {
+  color: color.scale(#40b3ff, $lightness: -35%);
 }
 
 h1 {
@@ -65,17 +77,24 @@ h6 {
   margin: 0.25rem auto;
 }
 
-html,
-body {
-  background-color: theme.$surface;
-  color: theme.$on-surface;
-  margin: 0;
-  padding: 0;
+caption {
+  @include typography.typography('caption');
 }
 
-a {
-  color: #40b3ff;
+code,
+pre {
+  font-family: 'Roboto Mono', monospace;
 }
-a:visited {
-  color: color.scale(#40b3ff, $lightness: -35%);
+
+small {
+  font-size: 0.9em;
+}
+
+big {
+  font-size: 1.1em;
+}
+
+b,
+strong {
+  font-weight: bold;
 }
