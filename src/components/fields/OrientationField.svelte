@@ -11,6 +11,6 @@
   on:MDCSelect:change={() => monitors.set($monitors)}
   variant="filled"
 >
-  <Option value="landscape">Landscape</Option>
-  <Option value="portrait">Portrait</Option>
+  <Option value="l">Landscape</Option>
+  <Option value="p">Portrait</Option>
 </Select>

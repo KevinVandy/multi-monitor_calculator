@@ -4,25 +4,11 @@
   "deskHeight": 2,
   "monitors": [
     {
-      "offsetX": 0,
-      "offsetY": 0,
       "aspectRatio": "16:9",
       "bezelColor": "#666666",
       "bezelWidth": 1,
       "diagonal": 27,
-      "id": "asdf",
-      "index": 0,
-      "orientation": "landscape",
-      "resolution": {
-        "standard": "FHD",
-        "horizontal": 1920,
-        "vertical": 1080
-      },
       "displayType": "any",
-      "syncType": "any",
-      "refreshRate": 60,
-      "responseTime": "",
-      "visible": true,
       "features": {
         "curved": false,
         "hdr": false,
@@ -31,13 +17,23 @@
         "touch": false,
         "webcam": false
       },
+      "id": "asdf",
+      "index": 0,
+      "offsetX": 0,
+      "offsetY": 0,
+      "orientation": "l",
       "ports": {
         "displayPort": false,
         "dvi": false,
         "hdmi": false,
         "usbc": false,
         "vga": false
-      }
+      },
+      "refreshRate": 60,
+      "resolution": { "standard": "FHD", "horizontal": 1920, "vertical": 1080 },
+      "responseTime": null,
+      "syncType": "any",
+      "visible": true
     }
   ]
 }

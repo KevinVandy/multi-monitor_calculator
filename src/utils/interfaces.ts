@@ -16,11 +16,11 @@ export interface IMonitor {
   index: number;
   offsetX: number;
   offsetY: number;
-  orientation: 'landscape' | 'portrait';
+  orientation: 'l' | 'p';
   ports: IPorts;
   refreshRate: number;
   resolution: IResolution;
-  responseTime: string;
+  responseTime: number | null;
   syncType: string;
   visible: boolean;
 }

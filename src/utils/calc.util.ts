@@ -149,21 +149,21 @@ export const calcTheta = (horRes: number, verRes: number): number => {
 
 export const calcScreenWidth = (
   diagonal: number,
-  orientation: 'landscape' | 'portrait',
+  orientation: 'l' | 'p',
   theta: number
 ): number => {
   return (
-    diagonal * (orientation === 'landscape' ? Math.cos(theta) : Math.sin(theta))
+    diagonal * (orientation === 'l' ? Math.cos(theta) : Math.sin(theta))
   );
 };
 
 export const calcScreenHeight = (
   diagonal: number,
-  orientation: 'landscape' | 'portrait',
+  orientation: 'l' | 'p',
   theta: number
 ): number => {
   return (
-    diagonal * (orientation === 'landscape' ? Math.sin(theta) : Math.cos(theta))
+    diagonal * (orientation === 'l' ? Math.sin(theta) : Math.cos(theta))
   );
 };
 

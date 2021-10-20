@@ -1,5 +1,7 @@
 <script lang="ts">
+  import queryString from 'query-string';
   import {
+    deskHeight,
     deskWidth,
     getNewMonitor,
     monitors,
@@ -10,18 +12,45 @@
   import CommandButtons from './CommandButtons.svelte';
   import Desk from './Desk.svelte';
   import MonitorOptionsArea from './MonitorOptionsArea.svelte';
-  import type { ISetup } from 'src/utils/interfaces';
+  import type { IMonitor, ISetup } from 'src/utils/interfaces';
 
   let loading = true;
 
   onMount(() => {
-    const storedSetup: ISetup | null = JSON.parse(
-      localStorage.getItem('setup')
-    );
-    if (storedSetup) {
-      monitors.set(storedSetup.monitors ?? [getNewMonitor()]);
-      deskWidth.set(storedSetup.deskWidth ?? 6);
-      scale.set(storedSetup.scale ?? 16);
+    const urlSetup = queryString.parse(location.search);
+    if (Object.keys(urlSetup).length > 0) {
+      const parsedMonitors: IMonitor[] = [];
+      let i = 0;
+      while (urlSetup[`a${i}`] && i < 10) {
+        parsedMonitors.push({
+          ...getNewMonitor(i),
+          aspectRatio: urlSetup[`a${i}`].toString(),
+          diagonal: +urlSetup[`d${i}`],
+          refreshRate: +urlSetup[`r${i}`],
+          responseTime: +urlSetup[`t${i}`],
+          resolution: {
+            horizontal: +urlSetup[`h${i}`],
+            standard: urlSetup[`s${i}`].toString(),
+            vertical: +urlSetup[`v${i}`]
+          },
+          offsetX: +urlSetup[`x${i}`],
+          offsetY: +urlSetup[`y${i}`],
+          orientation: urlSetup[`o${i}`].toString() as 'l' | 'p'
+        });
+        i++;
+      }
+      monitors.set(parsedMonitors);
+      const newUrl = `${location.origin}${location.pathname}`;
+      window.history.replaceState({ path: newUrl }, undefined, newUrl);
+    } else {
+      const storedSetup: ISetup | null = JSON.parse(
+        localStorage.getItem('setup')
+      );
+      if (storedSetup) {
+        monitors.set(storedSetup.monitors ?? [getNewMonitor()]);
+        deskWidth.set(storedSetup.deskWidth ?? 6);
+        scale.set(storedSetup.scale ?? 16);
+      }
     }
     loading = false;
   });
@@ -30,9 +59,10 @@
     localStorage.setItem(
       'setup',
       JSON.stringify({
-        scale: $scale,
+        deskHeight: $deskHeight,
         deskWidth: $deskWidth,
-        monitors: $monitors
+        monitors: $monitors,
+        scale: $scale
       })
     )
   );
