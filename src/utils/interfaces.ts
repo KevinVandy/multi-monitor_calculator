@@ -1,5 +1,6 @@
 export interface ISetup {
   deskWidth: number;
+  deskHeight: number;
   monitors: IMonitor[];
   scale: number;
 }
@@ -13,20 +14,15 @@ export interface IMonitor {
   features: IFeatures;
   id: string;
   index: number;
+  offsetX: number;
+  offsetY: number;
   orientation: 'landscape' | 'portrait';
   ports: IPorts;
   refreshRate: number;
   resolution: IResolution;
   responseTime: string;
-  sellerInfo: ISellerInfo;
   syncType: string;
   visible: boolean;
-}
-
-export interface ISellerInfo {
-  brand: string;
-  link: string;
-  price: number;
 }
 
 export interface IPorts {

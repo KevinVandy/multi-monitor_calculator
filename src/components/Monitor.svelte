@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { scale } from '../stores/SetupStore';
+  import { monitors, scale } from '../stores/SetupStore';
   import {
     calcScreenHeight,
     calcScreenWidth,
@@ -23,7 +23,18 @@
   $: bezelWidth = (monitor.bezelWidth * $scale) / 2;
 </script>
 
-<div use:draggable>
+<div
+  use:draggable={{
+    bounds: 'main',
+    defaultPosition: { x: monitor.offsetX, y: monitor.offsetY }
+  }}
+  on:svelte-drag:end={(e) =>
+    monitors.update((ms) => {
+      ms[monitor.index].offsetX = e.detail.offsetX;
+      ms[monitor.index].offsetY = e.detail.offsetY;
+      return ms;
+    })}
+>
   <div
     class="monitor-screen"
     style="--monitorBorderRadius:{0.1875 *

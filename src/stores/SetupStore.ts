@@ -9,4 +9,5 @@ export const getNewMonitor = (index = 0): IMonitor => ({
 
 export const scale = writable<number>(16);
 export const deskWidth = writable<number>(6);
+export const deskHeight = writable<number>(3);
 export const monitors = writable<IMonitor[]>([getNewMonitor()]);

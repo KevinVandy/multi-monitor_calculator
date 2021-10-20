@@ -1,8 +1,11 @@
 {
   "scale": 16,
   "deskWidth": 6,
+  "deskHeight": 2,
   "monitors": [
     {
+      "offsetX": 0,
+      "offsetY": 0,
       "aspectRatio": "16:9",
       "bezelColor": "#666666",
       "bezelWidth": 1,
@@ -34,11 +37,6 @@
         "hdmi": false,
         "usbc": false,
         "vga": false
-      },
-      "sellerInfo": {
-        "brand": "",
-        "link": "",
-        "price": 0
       }
     }
   ]

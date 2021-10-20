@@ -3,6 +3,7 @@
   import Button from '@smui/button';
   import DeskWidthField from './fields/DeskWidthField.svelte';
   import ScaleField from './fields/ScaleField.svelte';
+import DeskHeightField from './fields/DeskHeightField.svelte';
 
   export let settingsDialogOpen = false;
 </script>
@@ -13,6 +14,7 @@
     <div class="content-grid">
       <ScaleField />
       <DeskWidthField />
+      <DeskHeightField />
     </div>
   </Content>
   <Actions>

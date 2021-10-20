@@ -4,12 +4,14 @@
     monitors,
     scale,
     deskWidth,
-    getNewMonitor
+    getNewMonitor,
+    deskHeight
   } from '../stores/SetupStore';
 
   const handleReset = () => {
     monitors.set([getNewMonitor()]);
     deskWidth.set(6);
+    deskHeight.set(2);
     scale.set(16);
   };
 
