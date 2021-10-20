@@ -33,6 +33,7 @@
     "eslint-plugin-svelte3": "^3.2.1",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
+    "query-string": "^7.0.1",
     "smui-theme": "^5.0.0-beta.7",
     "svelte": "^3.42.6",
     "svelte-check": "^2.2.6",
