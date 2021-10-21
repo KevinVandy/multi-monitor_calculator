@@ -3,7 +3,7 @@
   import MonitorOptions from './MonitorOptions.svelte';
 
   let advancedOptionsOpen: boolean = false;
-  let statsOpen: boolean = false;
+  let statsOpen: boolean = true;
 </script>
 
 <div>

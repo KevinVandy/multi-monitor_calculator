@@ -25,7 +25,13 @@
         parsedMonitors.push({
           ...getNewMonitor(i),
           aspectRatio: urlSetup[`a${i}`].toString(),
+          bezelColor: `#${urlSetup[`c${i}`].toString()}`,
+          bezelWidth: +urlSetup[`b${i}`],
           diagonal: +urlSetup[`d${i}`],
+          displayType: urlSetup[`p${i}`].toString(),
+          offsetX: +urlSetup[`x${i}`],
+          offsetY: +urlSetup[`y${i}`],
+          orientation: urlSetup[`o${i}`].toString() as 'l' | 'p',
           refreshRate: +urlSetup[`r${i}`],
           responseTime: +urlSetup[`t${i}`],
           resolution: {
@@ -33,9 +39,8 @@
             standard: urlSetup[`s${i}`].toString(),
             vertical: +urlSetup[`v${i}`]
           },
-          offsetX: +urlSetup[`x${i}`],
-          offsetY: +urlSetup[`y${i}`],
-          orientation: urlSetup[`o${i}`].toString() as 'l' | 'p'
+
+          syncType: urlSetup[`n${i}`].toString()
         });
         i++;
       }
@@ -47,8 +52,9 @@
         localStorage.getItem('setup')
       );
       if (storedSetup) {
-        monitors.set(storedSetup.monitors ?? [getNewMonitor()]);
+        deskHeight.set(storedSetup.deskHeight ?? 2);
         deskWidth.set(storedSetup.deskWidth ?? 6);
+        monitors.set(storedSetup.monitors ?? [getNewMonitor()]);
         scale.set(storedSetup.scale ?? 16);
       }
     }
@@ -70,8 +76,18 @@
 
 <CommandButtons />
 {#if loading}
-  <CircularProgress style="height: 32px; width: 32px;" indeterminate />
+  <div>
+    <CircularProgress style="height: 32px; width: 32px;" indeterminate />
+  </div>
 {:else}
   <Desk />
   <MonitorOptionsArea />
 {/if}
+
+<style>
+  div {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+  }
+</style>

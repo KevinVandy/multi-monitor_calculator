@@ -36,14 +36,18 @@
     });
   };
 
-  const handleGenerageLink = () => {
+  const handleGenerateLink = () => {
     const newSearchString = queryString.stringify(
       Object.assign(
         {},
         ...$monitors.map((m: IMonitor, i: number) => ({
           [`a${i}`]: m.aspectRatio,
+          [`b${i}`]: m.bezelWidth,
+          [`c${i}`]: m.bezelColor.substring(1),
           [`d${i}`]: m.diagonal,
+          [`p${i}`]: m.displayType,
           [`h${i}`]: m.resolution.horizontal,
+          [`n${i}`]: m.syncType,
           [`o${i}`]: m.orientation,
           [`r${i}`]: m.refreshRate,
           [`s${i}`]: m.resolution.standard,
@@ -81,7 +85,7 @@
     class="fab-button"
     extended
     color="primary"
-    on:click={handleGenerageLink}
+    on:click={handleGenerateLink}
   >
     <Icon class="material-icons">link</Icon>Generate Link
   </Fab>

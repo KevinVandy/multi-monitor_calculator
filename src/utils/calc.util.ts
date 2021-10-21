@@ -1,27 +1,27 @@
 export const calcAspectRatio = (horRes: number, verRes: number): string => {
   const theta = Math.atan(verRes / horRes);
   if (theta > 0.784 && theta < 0.787) return '1:1';
-  else if ((theta > 0.673 && theta < 0.676) || (theta > 0.894 && theta < 0.898))
+  if ((theta > 0.673 && theta < 0.676) || (theta > 0.894 && theta < 0.898))
     return '5:4';
-  else if ((theta > 0.642 && theta < 0.645) || (theta > 0.925 && theta < 0.929))
+  if ((theta > 0.642 && theta < 0.645) || (theta > 0.925 && theta < 0.929))
     return '4:3';
-  else if ((theta > 0.587 && theta < 0.59) || (theta > 0.98 && theta < 0.984))
+  if ((theta > 0.587 && theta < 0.59) || (theta > 0.98 && theta < 0.984))
     return '3:2';
-  else if ((theta > 0.557 && theta < 0.56) || (theta > 1.01 && theta < 1.014))
+  if ((theta > 0.557 && theta < 0.56) || (theta > 1.01 && theta < 1.014))
     return '16:10';
-  else if ((theta > 0.538 && theta < 0.542) || (theta > 1.028 && theta < 1.032))
+  if ((theta > 0.538 && theta < 0.542) || (theta > 1.028 && theta < 1.032))
     return '5:3';
-  else if ((theta > 0.511 && theta < 0.514) || (theta > 1.056 && theta < 1.056))
+  if ((theta > 0.511 && theta < 0.514) || (theta > 1.056 && theta < 1.056))
     return '16:9';
-  else if ((theta > 0.462 && theta < 0.465) || (theta > 1.105 && theta < 1.109))
+  if ((theta > 0.462 && theta < 0.465) || (theta > 1.105 && theta < 1.109))
     return '2:1';
-  else if ((theta > 0.398 && theta < 0.406) || (theta > 1.164 && theta < 1.173))
+  if ((theta > 0.398 && theta < 0.406) || (theta > 1.164 && theta < 1.173))
     return '21:9';
-  else if ((theta > 0.3 && theta < 0.304) || (theta > 1.265 && theta < 1.27))
+  if ((theta > 0.3 && theta < 0.304) || (theta > 1.265 && theta < 1.27))
     return '32:10';
-  else if ((theta > 0.273 && theta < 0.276) || (theta > 1.295 && theta < 1.301))
+  if ((theta > 0.273 && theta < 0.276) || (theta > 1.295 && theta < 1.301))
     return '32:9';
-  else return '';
+  return '';
 };
 
 export const calcResolutionStandard = (verRes: number): string => {
@@ -143,35 +143,26 @@ export const calcResolution = (
   return resolutionStandards[aspectRatio]?.[resolutionStandard];
 };
 
-export const calcTheta = (horRes: number, verRes: number): number => {
-  return Math.atan(verRes / horRes);
-};
+export const calcTheta = (horRes: number, verRes: number): number =>
+  Math.atan(verRes / horRes);
 
 export const calcScreenWidth = (
   diagonal: number,
   orientation: 'l' | 'p',
   theta: number
-): number => {
-  return (
-    diagonal * (orientation === 'l' ? Math.cos(theta) : Math.sin(theta))
-  );
-};
+): number =>
+  diagonal * (orientation === 'l' ? Math.cos(theta) : Math.sin(theta));
 
 export const calcScreenHeight = (
   diagonal: number,
   orientation: 'l' | 'p',
   theta: number
-): number => {
-  return (
-    diagonal * (orientation === 'l' ? Math.sin(theta) : Math.cos(theta))
-  );
-};
+): number =>
+  diagonal * (orientation === 'l' ? Math.sin(theta) : Math.cos(theta));
 
 export const calcPPI = (
   horRes: number,
   verRes: number,
   screenWidth: number,
   screenHeight: number
-): number => {
-  return (horRes + verRes) / (screenWidth + screenHeight);
-};
+): number => (horRes + verRes) / (screenWidth + screenHeight);

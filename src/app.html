@@ -1,25 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.png" />
+    <link
+      as="style"
+      rel="preload"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link
+      as="style"
+      rel="preload"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link
+      as="style"
+      rel="preload"
+      href="https://fonts.googleapis.com/css?family=Roboto+Mono"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <!--temp-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/svelte-material-ui@4.0.0/bare.min.css"
+    />
+    <!--temp-->
+    <link rel="stylesheet" href="/smui.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A Tool For Planning Your Mulit-Montitor Setup!"
+    />
+    <title>Multi-Monitor Calculator</title>
+    %svelte.head%
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="/favicon.png" />
-  <link as="style" rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    onload="this.onload=null;this.rel='stylesheet'" />
-  <link as="style" rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"
-    onload="this.onload=null;this.rel='stylesheet'" />
-  <link as="style" rel="preload" href="https://fonts.googleapis.com/css?family=Roboto+Mono"
-    onload="this.onload=null;this.rel='stylesheet'" />
-  <!-- SMUI Styles -->
-  <link rel="stylesheet" href="/smui.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A Tool For Planning Your Mulit-Montitor Setup!" />
-  <title>Multi-Monitor Calculator</title>
-  %svelte.head%
-</head>
-
-<body>
-  <div id="svelte">%svelte.body%</div>
-</body>
-
+  <body>
+    <div id="svelte">%svelte.body%</div>
+  </body>
 </html>
