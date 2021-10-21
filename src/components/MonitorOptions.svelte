@@ -2,7 +2,7 @@
   import type { IMonitor } from '../utils/interfaces';
   import Card, { Content } from '@smui/card';
   import IconButton from '@smui/icon-button';
-  import { slide } from 'svelte/transition';
+  import { fade, slide } from 'svelte/transition';
   import DiagonalField from './fields/DiagonalField.svelte';
   import OrientationField from './fields/OrientationField.svelte';
   import AspectRatioField from './fields/AspectRatioField.svelte';
@@ -24,64 +24,66 @@
   export let statsOpen: boolean;
 </script>
 
-<Card class="monitor-options-card">
-  <h3>Monitor {monitor.index + 1}</h3>
-  <Content class="options-grid">
-    <DiagonalField {monitor} />
-    <OrientationField {monitor} />
-    <AspectRatioField {monitor} />
-    <ResolutionStandardField {monitor} />
-  </Content>
-  <h4 class="advanced-options-toggle">
-    Show Advanced Options <IconButton
-      class="material-icons"
-      on:click={() => (advancedOptionsOpen = !advancedOptionsOpen)}
-    >
-      {#if advancedOptionsOpen}
-        expand_less
-      {:else}
-        expand_more
-      {/if}
-    </IconButton>
-  </h4>
-  {#if advancedOptionsOpen}
-    <div transition:slide={{ duration: 300 }}>
-      <Content>
-        <div class="options-grid">
-          <HorizontalResolutionField {monitor} />
-          <VerticalResolutionField {monitor} />
-          <RefreshRateField {monitor} />
-          <ResponseTimeField {monitor} />
-          <DisplayTypeField {monitor} />
-          <SyncTypeField {monitor} />
-          <BezelWidthField {monitor} />
-          <BezelColorField {monitor} />
-        </div>
-        <PortFields {monitor} />
-        <FeatureFields {monitor} />
-      </Content>
-    </div>
-  {/if}
-  <h4 class="advanced-options-toggle">
-    Show Stats <IconButton
-      class="material-icons"
-      on:click={() => (statsOpen = !statsOpen)}
-    >
-      {#if statsOpen}
-        expand_less
-      {:else}
-        expand_more
-      {/if}
-    </IconButton>
-  </h4>
-  {#if statsOpen}
-    <div transition:slide={{ duration: 300 }}>
-      <Content>
-        <MonitorStats {monitor} />
-      </Content>
-    </div>
-  {/if}
-</Card>
+<div transition:fade={{ duration: 200 }}>
+  <Card class="monitor-options-card">
+    <h3>Monitor {monitor.index + 1}</h3>
+    <Content class="options-grid">
+      <DiagonalField {monitor} />
+      <OrientationField {monitor} />
+      <AspectRatioField {monitor} />
+      <ResolutionStandardField {monitor} />
+    </Content>
+    <h4 class="advanced-options-toggle">
+      Show Advanced Options <IconButton
+        class="material-icons"
+        on:click={() => (advancedOptionsOpen = !advancedOptionsOpen)}
+      >
+        {#if advancedOptionsOpen}
+          expand_less
+        {:else}
+          expand_more
+        {/if}
+      </IconButton>
+    </h4>
+    {#if advancedOptionsOpen}
+      <div transition:slide={{ duration: 300 }}>
+        <Content>
+          <div class="options-grid">
+            <HorizontalResolutionField {monitor} />
+            <VerticalResolutionField {monitor} />
+            <RefreshRateField {monitor} />
+            <ResponseTimeField {monitor} />
+            <DisplayTypeField {monitor} />
+            <SyncTypeField {monitor} />
+            <BezelWidthField {monitor} />
+            <BezelColorField {monitor} />
+          </div>
+          <PortFields {monitor} />
+          <FeatureFields {monitor} />
+        </Content>
+      </div>
+    {/if}
+    <h4 class="advanced-options-toggle">
+      Show Stats <IconButton
+        class="material-icons"
+        on:click={() => (statsOpen = !statsOpen)}
+      >
+        {#if statsOpen}
+          expand_less
+        {:else}
+          expand_more
+        {/if}
+      </IconButton>
+    </h4>
+    {#if statsOpen}
+      <div transition:slide={{ duration: 300 }}>
+        <Content>
+          <MonitorStats {monitor} />
+        </Content>
+      </div>
+    {/if}
+  </Card>
+</div>
 
 <style>
   :global(.monitor-options-card) {

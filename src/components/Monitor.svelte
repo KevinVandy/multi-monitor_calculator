@@ -1,10 +1,7 @@
 <script lang="ts">
+  import { fade } from 'svelte/transition';
   import { monitors, scale } from '../stores/SetupStore';
-  import {
-    calcScreenHeight,
-    calcScreenWidth,
-    calcTheta
-  } from '../utils/calc';
+  import { calcScreenHeight, calcScreenWidth, calcTheta } from '../utils/calc';
   import { draggable } from 'svelte-drag';
   import Tooltip, { Wrapper, Content } from '@smui/tooltip';
   import type { IMonitor } from 'src/utils/interfaces';
@@ -24,6 +21,7 @@
 </script>
 
 <div
+  transition:fade={{duration: 200}}
   use:draggable={{
     bounds: 'main',
     defaultPosition: { x: monitor.offsetX, y: monitor.offsetY }
