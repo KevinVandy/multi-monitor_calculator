@@ -2,7 +2,7 @@
   import TextField from '@smui/textfield';
   import type { IMonitor } from '../../utils/interfaces';
   import { monitors } from '../../stores/SetupStore';
-  import { calcAspectRatio } from '../../utils/calc.util';
+  import { calcAspectRatio } from '../../utils/calc';
   export let monitor: IMonitor;
 </script>
 

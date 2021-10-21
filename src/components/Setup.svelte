@@ -12,46 +12,28 @@
   import CommandButtons from './CommandButtons.svelte';
   import Desk from './Desk.svelte';
   import MonitorOptionsArea from './MonitorOptionsArea.svelte';
-  import type { IMonitor, ISetup } from 'src/utils/interfaces';
+  import type { ISetup } from 'src/utils/interfaces';
+  import { parseSetupFromUrl } from '../utils/linkGenerator';
 
   let loading = true;
 
   onMount(() => {
-    const urlSetup = queryString.parse(location.search);
+    //check for setup in URL
+    const urlSetup = queryString.parse(location.search) as {
+      [x: string]: string | number;
+    };
     if (Object.keys(urlSetup).length > 0) {
-      const parsedMonitors: IMonitor[] = [];
-      let i = 0;
-      while (urlSetup[`a${i}`] && i < 10) {
-        parsedMonitors.push({
-          ...getNewMonitor(i),
-          aspectRatio: urlSetup[`a${i}`].toString(),
-          bezelColor: `#${urlSetup[`c${i}`].toString()}`,
-          bezelWidth: +urlSetup[`b${i}`],
-          diagonal: +urlSetup[`d${i}`],
-          displayType: urlSetup[`p${i}`].toString(),
-          offsetX: +urlSetup[`x${i}`],
-          offsetY: +urlSetup[`y${i}`],
-          orientation: urlSetup[`o${i}`].toString() as 'l' | 'p',
-          refreshRate: +urlSetup[`r${i}`],
-          responseTime: +urlSetup[`t${i}`],
-          resolution: {
-            horizontal: +urlSetup[`h${i}`],
-            standard: urlSetup[`s${i}`].toString(),
-            vertical: +urlSetup[`v${i}`]
-          },
-
-          syncType: urlSetup[`n${i}`].toString()
-        });
-        i++;
-      }
-      monitors.set(parsedMonitors);
+      //set setup store from url
+      monitors.set(parseSetupFromUrl(urlSetup));
       const newUrl = `${location.origin}${location.pathname}`;
       window.history.replaceState({ path: newUrl }, undefined, newUrl);
     } else {
+      //check for setup in local storage
       const storedSetup: ISetup | null = JSON.parse(
         localStorage.getItem('setup')
       );
       if (storedSetup) {
+        //set setup store from local storage
         deskHeight.set(storedSetup.deskHeight ?? 2);
         deskWidth.set(storedSetup.deskWidth ?? 6);
         monitors.set(storedSetup.monitors ?? [getNewMonitor()]);

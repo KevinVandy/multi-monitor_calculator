@@ -1,6 +1,6 @@
 <script lang="ts">
   import Select, { Option } from '@smui/select';
-  import { calcResolution } from '../../utils/calc.util';
+  import { calcResolution } from '../../utils/calc';
   import type { IMonitor } from '../../utils/interfaces';
   import { monitors } from '../../stores/SetupStore';
   export let monitor: IMonitor;

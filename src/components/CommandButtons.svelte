@@ -1,5 +1,4 @@
 <script lang="ts">
-  import queryString from 'query-string';
   import Fab, { Icon } from '@smui/fab';
   import IconButton from '@smui/icon-button';
   import Snackbar, {
@@ -14,7 +13,7 @@
     getNewMonitor,
     deskHeight
   } from '../stores/SetupStore';
-  import type { IMonitor } from 'src/utils/interfaces';
+  import { encodeSetupToUrl } from '../utils/linkGenerator';
 
   let copiedToClipboardSnackbar: SnackbarComponentDev;
 
@@ -37,27 +36,7 @@
   };
 
   const handleGenerateLink = () => {
-    const newSearchString = queryString.stringify(
-      Object.assign(
-        {},
-        ...$monitors.map((m: IMonitor, i: number) => ({
-          [`a${i}`]: m.aspectRatio,
-          [`b${i}`]: m.bezelWidth,
-          [`c${i}`]: m.bezelColor.substring(1),
-          [`d${i}`]: m.diagonal,
-          [`p${i}`]: m.displayType,
-          [`h${i}`]: m.resolution.horizontal,
-          [`n${i}`]: m.syncType,
-          [`o${i}`]: m.orientation,
-          [`r${i}`]: m.refreshRate,
-          [`s${i}`]: m.resolution.standard,
-          [`t${i}`]: m.responseTime,
-          [`v${i}`]: m.resolution.vertical,
-          [`x${i}`]: m.offsetX,
-          [`y${i}`]: m.offsetY
-        }))
-      )
-    );
+    const newSearchString = encodeSetupToUrl($monitors);
     const newUrl = `${location.origin}${location.pathname}?${newSearchString}`;
     window.history.replaceState({ path: newUrl }, undefined, newUrl);
     navigator.clipboard.writeText(location.href);
@@ -72,19 +51,26 @@
   </Fab>
   <Fab
     class="fab-button"
-    extended
     color="primary"
+    disabled={$monitors.length <= 0}
+    extended
     on:click={handleRemoveMonitor}
   >
     <Icon class="material-icons">remove</Icon>Remove
   </Fab>
-  <Fab class="fab-button" extended color="primary" on:click={handleAddMonitor}>
+  <Fab
+    class="fab-button"
+    color="primary"
+    disabled={$monitors.length >= 10}
+    extended
+    on:click={handleAddMonitor}
+  >
     <Icon class="material-icons">add</Icon>Add
   </Fab>
   <Fab
     class="fab-button"
-    extended
     color="primary"
+    extended
     on:click={handleGenerateLink}
   >
     <Icon class="material-icons">link</Icon>Generate Link

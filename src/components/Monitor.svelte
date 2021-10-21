@@ -4,7 +4,7 @@
     calcScreenHeight,
     calcScreenWidth,
     calcTheta
-  } from '../utils/calc.util';
+  } from '../utils/calc';
   import { draggable } from 'svelte-drag';
   import Tooltip, { Wrapper, Content } from '@smui/tooltip';
   import type { IMonitor } from 'src/utils/interfaces';

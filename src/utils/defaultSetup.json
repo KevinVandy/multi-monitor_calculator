@@ -5,7 +5,7 @@
   "monitors": [
     {
       "aspectRatio": "16:9",
-      "bezelColor": "#666",
+      "bezelColor": "#666666",
       "bezelWidth": 1,
       "diagonal": 27,
       "displayType": "any",

@@ -5,7 +5,7 @@
     calcScreenHeight,
     calcScreenWidth,
     calcTheta
-  } from '../utils/calc.util';
+  } from '../utils/calc';
   import type { IMonitor } from '../utils/interfaces';
   export let monitor: IMonitor;
 
