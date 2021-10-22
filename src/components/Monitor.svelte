@@ -40,7 +40,7 @@
   >
     <Wrapper rich>
       <div class="help">{monitor.index + 1}</div>
-      <Tooltip><Content><MonitorStats {monitor} /></Content></Tooltip>
+      <Tooltip persistent><Content><MonitorStats {monitor} /></Content></Tooltip>
     </Wrapper>
   </div>
 </div>
