@@ -89,6 +89,7 @@
     gap: 1rem;
     justify-content: center;
     padding: 1rem;
+    flex-wrap: wrap;
   }
 
   :global(.fab-button) {

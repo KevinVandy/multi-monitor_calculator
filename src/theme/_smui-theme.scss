@@ -104,3 +104,17 @@ a {
 a:visited {
   color: color.scale(#40b3ff, $lightness: -35%);
 }
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  right: 0;
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #666;
+  border-radius: 3px;
+}
