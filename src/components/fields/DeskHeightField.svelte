@@ -17,9 +17,9 @@
 
 <style>
   div {
-    background-color: whitesmoke;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
-    max-height: 55px;
+    background-color: var(--input-background-color);
+    border-bottom: 1px solid var(--input-label-color);
+    max-height: 75px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
   }
@@ -28,6 +28,6 @@
     display: block;
     width: 100%;
     transform: scale(0.75);
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--input-label-color);
   }
 </style>

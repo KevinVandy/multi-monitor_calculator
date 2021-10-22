@@ -1,8 +1,5 @@
 @use 'sass:color';
-
 @use '@material/theme/color-palette';
-
-// Svelte Colors! (Dark Theme)
 @use '@material/theme/index' as theme with
   (
     $primary: #ff3e00,
@@ -11,8 +8,12 @@
     $background: #000,
     $error: color-palette.$red-700
   );
-
 @use '@material/typography/index' as typography;
+
+:root {
+  --input-background-color: #2a2a2e;
+  --input-label-color: rgba(255, 255, 255, 0.6);
+}
 
 html,
 body {

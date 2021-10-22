@@ -10,7 +10,7 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "prepare": "npm run smui-theme-light && npm run smui-theme-dark",
-    "smui-theme-light": "smui-theme compile static/smui.css -i src/theme",
+    "smui-theme-light": "smui-theme compile static/smui.css -i src/theme/light",
     "smui-theme-dark": "smui-theme compile static/smui-dark.css -i src/theme/dark"
   },
   "devDependencies": {
