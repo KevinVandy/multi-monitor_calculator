@@ -92,7 +92,8 @@ export const encodeSetupToUrl = (monitors: IMonitor[]): string => {
             [`${ShortCode.verticalResolution}${i}`]: m.resolution.vertical
           }))
         )
-      ).filter(([key, value]) => {
+      ).filter(([key, value]: [string, number | string]) => {
+        if (!value) return false;
         if (
           key[0] === ShortCode.aspectRatio &&
           value === defaultMonitor.aspectRatio
@@ -153,7 +154,6 @@ export const encodeSetupToUrl = (monitors: IMonitor[]): string => {
           return false;
         return true;
       })
-    ),
-    { skipEmptyString: true, skipNull: true }
+    )
   );
 };
