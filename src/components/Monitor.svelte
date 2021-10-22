@@ -21,7 +21,7 @@
 </script>
 
 <div
-  transition:fade={{duration: 200}}
+  transition:fade={{ duration: 200 }}
   use:draggable={{
     bounds: 'main',
     defaultPosition: { x: monitor.offsetX, y: monitor.offsetY }
@@ -40,7 +40,8 @@
   >
     <Wrapper rich>
       <div class="help">{monitor.index + 1}</div>
-      <Tooltip persistent><Content><MonitorStats {monitor} /></Content></Tooltip>
+      <Tooltip persistent><Content><MonitorStats {monitor} /></Content></Tooltip
+      >
     </Wrapper>
   </div>
 </div>
