@@ -2,8 +2,8 @@
   import Setup from '../components/Setup.svelte';
 </script>
 
-<h1>Mulit-Montitor Calculator</h1>
-<h2>A Tool For Planning Your Mulit-Montitor Setup!</h2>
+<h1>Multi-Monitor Calculator</h1>
+<h2>A Tool For Planning Your Multi-Monitor Setup!</h2>
 <dark-mode-toggle appearance="toggle" dark="Dark" light="Light" permanent />
 
 <main>
