@@ -36,7 +36,9 @@
     style="--monitorBorderRadius:{0.1875 *
       $scale}px;--bezelColor:{monitor.bezelColor};--bezelWidth:{bezelWidth}px;--screenHeight:{height}px;--screenWidth:{width}px"
   >
-    {#if monitor.wallpaper && height && width}
+    {#if monitor.previewMode === 'off'}
+      <div>{monitor.index + 1}</div>
+    {:else if monitor.previewMode === 'wallpaper' && monitor.wallpaper && height && width}
       <img
         class="monitor-wallpaper"
         src={monitor.wallpaper}
@@ -73,7 +75,9 @@
 
   .monitor-wallpaper {
     height: var(--screenHeight);
-    width: var(--screenWidth);
     object-fit: cover;
+    transition-property: height, width, border;
+    transition: all 300ms ease;
+    width: var(--screenWidth);
   }
 </style>

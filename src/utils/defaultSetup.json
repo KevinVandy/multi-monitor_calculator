@@ -28,6 +28,7 @@
         "usbc": false,
         "vga": false
       },
+      "previewMode": "off",
       "refreshRate": 60,
       "resolution": { "standard": "FHD", "horizontal": 1920, "vertical": 1080 },
       "responseTime": null,

@@ -73,7 +73,7 @@
     extended
     on:click={handleGenerateLink}
   >
-    <Icon class="material-icons">link</Icon>Generate Link
+    <Icon class="material-icons">link</Icon>Share Link
   </Fab>
 </div>
 <Snackbar bind:this={copiedToClipboardSnackbar}>

@@ -19,6 +19,7 @@
   import PortFields from './fields/PortFields.svelte';
   import FeatureFields from './fields/FeatureFields.svelte';
   import WallpaperField from './fields/WallpaperField.svelte';
+  import MonitorPreviewField from './fields/MonitorPreviewField.svelte';
 
   export let monitor: IMonitor;
   export let advancedOptionsOpen: boolean;
@@ -28,27 +29,33 @@
 <div transition:fade={{ duration: 200 }}>
   <Card class="monitor-options-card">
     <h3>Monitor {monitor.index + 1}</h3>
-    <Content class="options-grid-2">
-      <DiagonalField {monitor} />
-      <OrientationField {monitor} />
-      <AspectRatioField {monitor} />
-      <ResolutionStandardField {monitor} />
-    </Content>
-    <h4 class="advanced-options-toggle">
-      Show Advanced Options <IconButton
-        class="material-icons"
-        on:click={() => (advancedOptionsOpen = !advancedOptionsOpen)}
-      >
-        {#if advancedOptionsOpen}
-          expand_less
-        {:else}
-          expand_more
-        {/if}
-      </IconButton>
-    </h4>
-    {#if advancedOptionsOpen}
-      <div transition:slide={{ duration: 300 }}>
-        <Content>
+    <Content>
+      <div class="options-grid-1">
+        <MonitorPreviewField {monitor} />
+      </div>
+      <div class="options-grid-2">
+        <DiagonalField {monitor} />
+        <OrientationField {monitor} />
+        <AspectRatioField {monitor} />
+        <ResolutionStandardField {monitor} />
+      </div>
+      <div class="options-grid-1">
+        <WallpaperField {monitor} />
+      </div>
+      <h4 class="advanced-options-toggle">
+        Show Advanced Options <IconButton
+          class="material-icons"
+          on:click={() => (advancedOptionsOpen = !advancedOptionsOpen)}
+        >
+          {#if advancedOptionsOpen}
+            expand_less
+          {:else}
+            expand_more
+          {/if}
+        </IconButton>
+      </h4>
+      {#if advancedOptionsOpen}
+        <div transition:slide={{ duration: 300 }}>
           <div class="options-grid-2">
             <HorizontalResolutionField {monitor} />
             <VerticalResolutionField {monitor} />
@@ -59,33 +66,28 @@
             <BezelWidthField {monitor} />
             <BezelColorField {monitor} />
           </div>
-          <div class="options-grid-1">
-            <WallpaperField {monitor} />
-          </div>
           <PortFields {monitor} />
           <FeatureFields {monitor} />
-        </Content>
-      </div>
-    {/if}
-    <h4 class="advanced-options-toggle">
-      Show Stats <IconButton
-        class="material-icons"
-        on:click={() => (statsOpen = !statsOpen)}
-      >
-        {#if statsOpen}
-          expand_less
-        {:else}
-          expand_more
-        {/if}
-      </IconButton>
-    </h4>
-    {#if statsOpen}
-      <div transition:slide={{ duration: 300 }}>
-        <Content>
+        </div>
+      {/if}
+      <h4 class="advanced-options-toggle">
+        Show Stats <IconButton
+          class="material-icons"
+          on:click={() => (statsOpen = !statsOpen)}
+        >
+          {#if statsOpen}
+            expand_less
+          {:else}
+            expand_more
+          {/if}
+        </IconButton>
+      </h4>
+      {#if statsOpen}
+        <div transition:slide={{ duration: 300 }}>
           <MonitorStats {monitor} />
-        </Content>
-      </div>
-    {/if}
+        </div>
+      {/if}
+    </Content>
   </Card>
 </div>
 
