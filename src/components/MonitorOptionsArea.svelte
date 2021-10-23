@@ -15,6 +15,7 @@
 <style>
   div {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     position: relative;
     z-index: 1;

@@ -6,7 +6,7 @@
     {
       "aspectRatio": "16:9",
       "bezelColor": "#666666",
-      "bezelWidth": 1,
+      "bezelWidth": 0.75,
       "diagonal": 27,
       "displayType": "any",
       "features": {

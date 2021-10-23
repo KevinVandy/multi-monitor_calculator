@@ -5,7 +5,7 @@
   import { monitors } from '../../stores/SetupStore';
   export let monitor: IMonitor;
 
-  let choices = ['off', 'wallpaper', 'movie', 'tv'];
+  let choices = ['off', 'wallpaper', 'movie', 'video'];
 </script>
 
 <div>
@@ -16,7 +16,7 @@
     segments={choices}
     singleSelect
   >
-    <Segment disabled={['movie', 'tv'].includes(segment)} {segment}>
+    <Segment disabled={['movie', 'video'].includes(segment)} {segment}>
       <Label>{segment}</Label>
     </Segment>
   </SegmentedButton>

@@ -8,8 +8,8 @@
   <Slider
     bind:value={$deskHeight}
     min={1}
-    max={6}
-    step={0.5}
+    max={5}
+    step={0.25}
     discrete
     id="deskHeightSlider"
   />
