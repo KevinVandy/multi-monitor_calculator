@@ -12,7 +12,6 @@ export interface IMonitor {
   diagonal: number;
   displayType: string;
   features: IFeatures;
-  id: string;
   index: number;
   offsetX: number;
   offsetY: number;
@@ -22,7 +21,7 @@ export interface IMonitor {
   resolution: IResolution;
   responseTime: number | null;
   syncType: string;
-  visible: boolean;
+  wallpaper: string | null;
 }
 
 export interface IPorts {

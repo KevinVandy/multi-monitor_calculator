@@ -18,6 +18,7 @@
   import MonitorStats from './MonitorStats.svelte';
   import PortFields from './fields/PortFields.svelte';
   import FeatureFields from './fields/FeatureFields.svelte';
+  import WallpaperField from './fields/WallpaperField.svelte';
 
   export let monitor: IMonitor;
   export let advancedOptionsOpen: boolean;
@@ -27,7 +28,7 @@
 <div transition:fade={{ duration: 200 }}>
   <Card class="monitor-options-card">
     <h3>Monitor {monitor.index + 1}</h3>
-    <Content class="options-grid">
+    <Content class="options-grid-2">
       <DiagonalField {monitor} />
       <OrientationField {monitor} />
       <AspectRatioField {monitor} />
@@ -48,7 +49,7 @@
     {#if advancedOptionsOpen}
       <div transition:slide={{ duration: 300 }}>
         <Content>
-          <div class="options-grid">
+          <div class="options-grid-2">
             <HorizontalResolutionField {monitor} />
             <VerticalResolutionField {monitor} />
             <RefreshRateField {monitor} />
@@ -57,6 +58,9 @@
             <SyncTypeField {monitor} />
             <BezelWidthField {monitor} />
             <BezelColorField {monitor} />
+          </div>
+          <div class="options-grid-1">
+            <WallpaperField {monitor} />
           </div>
           <PortFields {monitor} />
           <FeatureFields {monitor} />
@@ -89,15 +93,22 @@
   :global(.monitor-options-card) {
     padding: 1rem;
     margin: 0.5rem;
-    max-width: 24rem;
+    max-width: 25rem;
     position: relative;
     z-index: 1;
   }
 
-  :global(.options-grid) {
+  :global(.options-grid-1) {
     display: grid;
     grid-gap: 1rem;
-    grid-template-columns: 10rem 10rem;
+    grid-template-columns: 1fr;
+    margin: 1rem -1rem;
+  }
+
+  :global(.options-grid-2) {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 11rem 11rem;
     justify-content: center;
   }
 

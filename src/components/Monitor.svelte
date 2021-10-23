@@ -3,9 +3,7 @@
   import { monitors, scale } from '../stores/SetupStore';
   import { calcScreenHeight, calcScreenWidth, calcTheta } from '../utils/calc';
   import { draggable } from 'svelte-drag';
-  import Tooltip, { Wrapper, Content } from '@smui/tooltip';
   import type { IMonitor } from 'src/utils/interfaces';
-  import MonitorStats from './MonitorStats.svelte';
 
   export let monitor: IMonitor;
 
@@ -38,11 +36,16 @@
     style="--monitorBorderRadius:{0.1875 *
       $scale}px;--bezelColor:{monitor.bezelColor};--bezelWidth:{bezelWidth}px;--screenHeight:{height}px;--screenWidth:{width}px"
   >
-    <Wrapper rich>
-      <div class="help">{monitor.index + 1}</div>
-      <Tooltip persistent><Content><MonitorStats {monitor} /></Content></Tooltip
-      >
-    </Wrapper>
+    {#if monitor.wallpaper && height && width}
+      <img
+        class="monitor-wallpaper"
+        src={monitor.wallpaper}
+        style="--screenHeight:{height}px;--screenWidth:{width}px"
+        alt={monitor.wallpaper}
+      />
+    {:else}
+      <div>{monitor.index + 1}</div>
+    {/if}
   </div>
 </div>
 
@@ -68,7 +71,9 @@
     width: var(--screenWidth);
   }
 
-  .help {
-    cursor: help;
+  .monitor-wallpaper {
+    height: var(--screenHeight);
+    width: var(--screenWidth);
+    object-fit: cover;
   }
 </style>

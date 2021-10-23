@@ -11,9 +11,6 @@
 </main>
 
 <style>
-  :global(.dark-mode-toggle) {
-    text-align: center;
-  }
   dark-mode-toggle {
     right: 1rem;
     top: 1rem;

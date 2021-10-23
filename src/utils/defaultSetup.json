@@ -17,7 +17,6 @@
         "touch": false,
         "webcam": false
       },
-      "id": "asdf",
       "index": 0,
       "offsetX": 0,
       "offsetY": 0,
@@ -33,7 +32,7 @@
       "resolution": { "standard": "FHD", "horizontal": 1920, "vertical": 1080 },
       "responseTime": null,
       "syncType": "any",
-      "visible": true
+      "wallpaper": null
     }
   ]
 }

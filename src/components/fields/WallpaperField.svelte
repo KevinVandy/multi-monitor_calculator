@@ -7,11 +7,11 @@
 </script>
 
 <TextField
-  bind:value={monitor.diagonal}
-  label="Diagonal"
+  bind:value={monitor.wallpaper}
+  label="Wallpaper Link"
   on:change={() => monitors.set($monitors)}
-  required
   step="1"
-  type="number"
+  style="width:100%;"
+  type="text"
   variant="filled"
 />
