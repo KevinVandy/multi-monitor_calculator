@@ -13,6 +13,7 @@ export interface IMonitor {
   displayType: string;
   features: IFeatures;
   index: number;
+  name: string;
   offsetX: number;
   offsetY: number;
   orientation: 'l' | 'p';

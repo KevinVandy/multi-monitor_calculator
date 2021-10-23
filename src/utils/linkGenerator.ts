@@ -26,6 +26,7 @@ export const parseSetupFromUrl = (urlSetup: {
       displayType: String(
         urlSetup[`${ShortCode.displayType}${i}`] ?? parsedMonitor.displayType
       ),
+      name: String(urlSetup[`${ShortCode.name}${i}`] ?? parsedMonitor.name),
       offsetX: Number(
         urlSetup[`${ShortCode.offsetX}${i}`] ?? parsedMonitor.offsetX
       ),
@@ -82,6 +83,7 @@ export const encodeSetupToUrl = (monitors: IMonitor[]): string => {
             [`${ShortCode.diagonal}${i}`]: m.diagonal,
             [`${ShortCode.displayType}${i}`]: m.displayType,
             [`${ShortCode.horizontalResolution}${i}`]: m.resolution.horizontal,
+            [`${ShortCode.name}${i}`]: m.name,
             [`${ShortCode.offsetX}${i}`]: m.offsetX,
             [`${ShortCode.offsetY}${i}`]: m.offsetY,
             [`${ShortCode.orientation}${i}`]: m.orientation,
@@ -117,6 +119,8 @@ export const encodeSetupToUrl = (monitors: IMonitor[]): string => {
         )
           return false;
         if (key[0] === ShortCode.syncType && value === defaultMonitor.syncType)
+          return false;
+        if (key[0] === ShortCode.name && value === defaultMonitor.name)
           return false;
         if (
           key[0] === ShortCode.orientation &&

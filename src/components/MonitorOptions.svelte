@@ -20,6 +20,7 @@
   import FeatureFields from './fields/FeatureFields.svelte';
   import WallpaperField from './fields/WallpaperField.svelte';
   import MonitorPreviewField from './fields/MonitorPreviewField.svelte';
+  import MonitorNameField from './fields/MonitorNameField.svelte';
 
   export let monitor: IMonitor;
   export let advancedOptionsOpen: boolean;
@@ -28,7 +29,14 @@
 
 <div transition:fade={{ duration: 200 }}>
   <Card class="monitor-options-card">
-    <h3>Monitor {monitor.index + 1}</h3>
+    <h3>
+      {#if monitor.name}
+        {monitor.name}
+      {:else}
+        Monitor {monitor.index + 1}
+      {/if}
+      <MonitorNameField {monitor} />
+    </h3>
     <Content>
       <div class="options-grid-1">
         <MonitorPreviewField {monitor} />
@@ -43,15 +51,14 @@
         <WallpaperField {monitor} />
       </div>
       <h4 class="advanced-options-toggle">
-        Show Advanced Options <IconButton
+        {advancedOptionsOpen
+          ? 'Hide Advanced Options'
+          : 'Show Advanced Options'}
+        <IconButton
           class="material-icons"
           on:click={() => (advancedOptionsOpen = !advancedOptionsOpen)}
         >
-          {#if advancedOptionsOpen}
-            expand_less
-          {:else}
-            expand_more
-          {/if}
+          {advancedOptionsOpen ? 'expand_less' : 'expand_more'}
         </IconButton>
       </h4>
       {#if advancedOptionsOpen}
@@ -71,15 +78,12 @@
         </div>
       {/if}
       <h4 class="advanced-options-toggle">
-        Show Stats <IconButton
+        {statsOpen ? 'Hide Stats' : 'Show Stats'}
+        <IconButton
           class="material-icons"
           on:click={() => (statsOpen = !statsOpen)}
         >
-          {#if statsOpen}
-            expand_less
-          {:else}
-            expand_more
-          {/if}
+          {statsOpen ? 'expand_less' : 'expand_more'}
         </IconButton>
       </h4>
       {#if statsOpen}
@@ -92,6 +96,13 @@
 </div>
 
 <style>
+  h3 {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-left: 1rem;
+    width: 100%;
+  }
   :global(.monitor-options-card) {
     padding: 1rem;
     margin: 0.5rem;

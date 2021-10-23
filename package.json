@@ -24,6 +24,7 @@
     "@smui/dialog": "^5.0.0-beta.7",
     "@smui/fab": "^5.0.0-beta.7",
     "@smui/form-field": "^5.0.0-beta.7",
+    "@smui/menu-surface": "^5.0.0-beta.7",
     "@smui/segmented-button": "^5.0.0-beta.7",
     "@smui/select": "^5.0.0-beta.7",
     "@smui/slider": "^5.0.0-beta.7",

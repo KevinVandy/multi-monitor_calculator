@@ -18,13 +18,12 @@
   bind:value={monitor.wallpaper}
   label="Wallpaper Link"
   on:change={() => {
-    $monitors[monitor.index].previewMode = monitor.wallpaper
+    $monitors[monitor.index].previewMode = !!monitor.wallpaper
       ? 'wallpaper'
       : 'off';
     monitors.set($monitors);
   }}
   required={monitor.previewMode === 'wallpaper'}
-  step="1"
   style="width:100%;"
   type="url"
   validateOnValueChange
