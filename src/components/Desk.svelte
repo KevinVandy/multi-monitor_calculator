@@ -41,8 +41,8 @@
   }
 
   :global(.settings-toggle) {
+    bottom: 0.25rem;
     position: absolute;
-    right: .2rem;
-    bottom: .2rem;
+    right: 0.25rem;
   }
 </style>

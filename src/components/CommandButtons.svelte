@@ -31,6 +31,10 @@
   const handleRemoveMonitor = () => {
     monitors.update((ms) => {
       ms.pop();
+      if (ms.length === 1) {
+        ms[0].offsetX = 0;
+        ms[0].offsetY = 0;
+      }
       return ms;
     });
   };

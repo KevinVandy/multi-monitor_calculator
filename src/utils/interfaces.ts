@@ -19,6 +19,7 @@ export interface IMonitor {
   orientation: 'l' | 'p';
   ports: IPorts;
   previewMode: 'off' | 'wallpaper' | 'movie' | 'video';
+  productLink: string | null;
   refreshRate: number;
   resolution: IResolution;
   responseTime: number | null;

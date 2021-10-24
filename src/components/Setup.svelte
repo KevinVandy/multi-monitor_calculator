@@ -59,7 +59,7 @@
 <CommandButtons />
 {#if loading}
   <div>
-    <CircularProgress style="height: 32px; width: 32px;" indeterminate />
+    <CircularProgress style="height: 64px; width: 64px;" indeterminate />
   </div>
 {:else}
   <Desk />
@@ -71,5 +71,6 @@
     width: 100vw;
     display: flex;
     justify-content: center;
+    padding-top: 3rem;
   }
 </style>

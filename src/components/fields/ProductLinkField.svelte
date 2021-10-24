@@ -7,26 +7,20 @@
 
   export let monitor: IMonitor;
 
-  $: invalid = monitor.wallpaper && !urlRegex.test(monitor.wallpaper);
+  $: invalid = monitor.productLink && !urlRegex.test(monitor.productLink);
 </script>
 
 <TextField
   bind:invalid
-  bind:value={monitor.wallpaper}
-  label="Wallpaper Link"
-  on:change={() => {
-    $monitors[monitor.index].previewMode = urlRegex.test(monitor.wallpaper)
-      ? 'wallpaper'
-      : 'off';
-    monitors.set($monitors);
-  }}
-  required={monitor.previewMode === 'wallpaper'}
+  bind:value={monitor.productLink}
+  label="Product Link"
+  on:change={() => monitors.set($monitors)}
   style="width:100%;"
   type="url"
   validateOnValueChange
   variant="filled"
 >
   <HelperText persistent slot="helper" style="margin-top:-1rem;">
-    See how your favorite wallpapers look on this setup!
+    Save a link to where you can find this monitor.
   </HelperText>
 </TextField>

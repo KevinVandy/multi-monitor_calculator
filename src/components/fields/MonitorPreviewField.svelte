@@ -26,6 +26,5 @@
   div {
     display: flex;
     justify-content: center;
-    margin-top: -2rem;
   }
 </style>

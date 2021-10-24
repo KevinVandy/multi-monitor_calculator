@@ -2,6 +2,7 @@
   import type { IMonitor } from '../utils/interfaces';
   import Card, { Content } from '@smui/card';
   import IconButton from '@smui/icon-button';
+  import A from '@smui/common/elements/A.svelte';
   import { fade, slide } from 'svelte/transition';
   import DiagonalField from './fields/DiagonalField.svelte';
   import OrientationField from './fields/OrientationField.svelte';
@@ -21,6 +22,8 @@
   import WallpaperField from './fields/WallpaperField.svelte';
   import MonitorPreviewField from './fields/MonitorPreviewField.svelte';
   import MonitorNameField from './fields/MonitorNameField.svelte';
+  import ProductLinkField from './fields/ProductLinkField.svelte';
+  import { urlRegex } from '../utils/regex';
 
   export let monitor: IMonitor;
   export let advancedOptionsOpen: boolean;
@@ -38,6 +41,11 @@
       <MonitorNameField {monitor} />
     </h3>
     <Content>
+      {#if urlRegex.test(monitor.productLink) && monitor.productLink}
+        <A class="product-link" href={monitor.productLink} target="_blank">
+          {monitor.productLink}
+        </A>
+      {/if}
       <div class="options-grid-1">
         <MonitorPreviewField {monitor} />
       </div>
@@ -46,9 +54,6 @@
         <OrientationField {monitor} />
         <AspectRatioField {monitor} />
         <ResolutionStandardField {monitor} />
-      </div>
-      <div class="options-grid-1">
-        <WallpaperField {monitor} />
       </div>
       <h4 class="advanced-options-toggle">
         {advancedOptionsOpen
@@ -72,6 +77,10 @@
             <SyncTypeField {monitor} />
             <BezelWidthField {monitor} />
             <BezelColorField {monitor} />
+          </div>
+          <div class="options-grid-1">
+            <WallpaperField {monitor} />
+            <ProductLinkField {monitor} />
           </div>
           <PortFields {monitor} />
           <FeatureFields {monitor} />
@@ -102,11 +111,12 @@
     justify-content: center;
     padding-left: 1rem;
     width: 100%;
+    margin-bottom: -1rem;
   }
   :global(.monitor-options-card) {
     padding: 1rem;
     margin: 0.5rem;
-    max-width: 25rem;
+    max-width: 26rem;
     position: relative;
     z-index: 1;
   }
@@ -115,7 +125,7 @@
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: 1fr;
-    margin: 1rem -1rem;
+    margin: 1rem -0.5rem;
   }
 
   :global(.options-grid-2) {
@@ -131,5 +141,13 @@
     padding-left: 1rem;
     width: 100%;
     align-items: center;
+  }
+
+  :global(.product-link) {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 </style>

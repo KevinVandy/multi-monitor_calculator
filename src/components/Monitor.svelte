@@ -6,6 +6,7 @@
   import type { IMonitor } from 'src/utils/interfaces';
   import MoviePng from '../images/movie.png';
   import VideoPng from '../images/video.png';
+  import { urlRegex } from '../utils/regex';
 
   export let monitor: IMonitor;
 
@@ -49,12 +50,13 @@
           ? ' monitor-wallpaper'
           : 'monitor-content'}"
         src={monitor.previewMode === 'wallpaper'
-          ? monitor.wallpaper ?? 'https://wallpaperaccess.com/full/90278.jpg'
+          ? (urlRegex.test(monitor.wallpaper) && monitor.wallpaper) ||
+            'https://wallpaperaccess.com/full/90278.jpg'
           : monitor.previewMode === 'movie'
           ? MoviePng
           : VideoPng}
         style="--screenHeight:{height}px;--screenWidth:{width}px"
-        alt="Invalid Wallpaper Link"
+        alt="Could not fetch your wallpaper link"
       />
     {/if}
   </div>
