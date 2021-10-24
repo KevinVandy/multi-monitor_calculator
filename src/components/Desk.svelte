@@ -33,6 +33,7 @@
     justify-content: var(--desk-card-justify);
     margin: 2rem auto;
     max-height: 50rem;
+    max-width: calc(100vw - 1rem);
     min-height: var(--desk-card-minHeight);
     overflow: visible;
     padding: 1rem;
