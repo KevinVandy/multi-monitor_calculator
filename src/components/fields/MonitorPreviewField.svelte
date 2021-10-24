@@ -16,7 +16,7 @@
     segments={choices}
     singleSelect
   >
-    <Segment disabled={['movie', 'video'].includes(segment)} {segment}>
+    <Segment {segment}>
       <Label>{segment}</Label>
     </Segment>
   </SegmentedButton>
