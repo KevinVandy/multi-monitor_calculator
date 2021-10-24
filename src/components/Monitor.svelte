@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fade } from 'svelte/transition';
+  import { fade, blur } from 'svelte/transition';
   import { monitors, scale } from '../stores/SetupStore';
   import { calcScreenHeight, calcScreenWidth, calcTheta } from '../utils/calc';
   import { draggable } from 'svelte-drag';
@@ -39,9 +39,12 @@
       $scale}px;--bezelColor:{monitor.bezelColor};--bezelWidth:{bezelWidth}px;--screenHeight:{height}px;--screenWidth:{width}px"
   >
     {#if monitor.previewMode === 'off'}
-      <div>{monitor.index + 1}</div>
+      <div in:blur={{ duration: 500 }}>
+        {monitor.index + 1}
+      </div>
     {:else}
       <img
+        in:blur={{ duration: 500 }}
         class="monitor {monitor.previewMode === 'wallpaper'
           ? ' monitor-wallpaper'
           : 'monitor-content'}"
@@ -60,9 +63,10 @@
 <style>
   .monitor {
     height: var(--screenHeight);
-    width: var(--screenWidth);
+    min-width: var(--screenWidth);
     transition-property: height, width, border;
     transition: all 300ms ease;
+    width: var(--screenWidth);
   }
 
   .monitor-screen {
@@ -77,9 +81,7 @@
     display: grid;
     justify-content: center;
     margin: 1rem 2px;
-    position: relative;
     z-index: 99;
-    min-width: var(--screenWidth);
   }
 
   .monitor-wallpaper {
