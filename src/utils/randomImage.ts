@@ -1,12 +1,12 @@
-import MoviePng1 from '../images/movie1.png';
-import MoviePng2 from '../images/movie2.png';
-import MoviePng3 from '../images/movie3.png';
-import MoviePng4 from '../images/movie4.png';
-import MoviePng5 from '../images/movie5.png';
-import VideoPng1 from '../images/video1.png';
-import VideoPng2 from '../images/video2.png';
-import VideoPng3 from '../images/video3.png';
-import MsWordPng from '../images/msword.png';
+import MovieWebp1 from '../images/movie1.webp';
+import MovieWebp2 from '../images/movie2.webp';
+import MovieWebp3 from '../images/movie3.webp';
+import MovieWebp4 from '../images/movie4.webp';
+import MovieWebp5 from '../images/movie5.webp';
+import VideoWebp1 from '../images/video1.webp';
+import VideoWebp2 from '../images/video2.webp';
+import VideoWebp3 from '../images/video3.webp';
+import MsWordWebp from '../images/msword.webp';
 
 export const shuffleArray = (array: Array<unknown>): Array<unknown> => {
   let currentIndex = array.length,
@@ -23,13 +23,13 @@ export const shuffleArray = (array: Array<unknown>): Array<unknown> => {
 };
 
 export const movieImgs = shuffleArray([
-  MoviePng1,
-  MoviePng2,
-  MoviePng3,
-  MoviePng4,
-  MoviePng5
+  MovieWebp1,
+  MovieWebp2,
+  MovieWebp3,
+  MovieWebp4,
+  MovieWebp5
 ]) as string[];
 
-export const videoImgs = shuffleArray([VideoPng1, VideoPng2, VideoPng3]) as string[];
+export const videoImgs = shuffleArray([VideoWebp1, VideoWebp2, VideoWebp3]) as string[];
 
-export const docImgs = shuffleArray([MsWordPng]) as string[];
+export const docImgs = shuffleArray([MsWordWebp]) as string[];
