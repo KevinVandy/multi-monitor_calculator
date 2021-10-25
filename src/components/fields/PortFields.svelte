@@ -10,7 +10,8 @@
     dvi: 'DVI',
     hdmi: 'HDMI',
     usbc: 'USB-C',
-    vga: 'VGA'
+    vga: 'VGA',
+    proprietary: 'Proprietary'
   };
 </script>
 

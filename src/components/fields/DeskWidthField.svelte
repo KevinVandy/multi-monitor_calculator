@@ -26,7 +26,7 @@
   label {
     text-align: left;
     display: block;
-    width: 100%;
+    /* width: 100%; */
     transform: scale(0.75);
     color: var(--input-label-color);
   }

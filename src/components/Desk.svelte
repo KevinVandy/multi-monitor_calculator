@@ -2,15 +2,12 @@
   import Card from '@smui/card';
   import IconButton from '@smui/icon-button';
   import { deskWidth, scale, monitors, deskHeight } from '../stores/SetupStore';
-  import DeskSettingsDialog from './DeskSettingsDialog.svelte';
+  import DeskSizeDialog from './DeskSizeDialog.svelte';
   import Monitor from './Monitor.svelte';
-
-  let settingsDialogOpen = false;
 </script>
 
 <Card
-  --desk-card-height="{$deskHeight * 12}rem"
-  --desk-card-minHeight="{$scale + 5}rem"
+  --desk-card-height="{$deskHeight * 12 * $scale}px"
   --desk-card-width="{$deskWidth * 12 * $scale}px"
   --desk-card-justify={$monitors.length === 1 ? 'center' : 'flex-start'}
   class="desk-card"
@@ -18,12 +15,18 @@
   {#each $monitors as monitor}
     <Monitor {monitor} />
   {/each}
-  <IconButton
-    on:click={() => (settingsDialogOpen = true)}
-    class="material-icons settings-toggle">settings</IconButton
-  >
+  <div class="zoom-button-container">
+    <IconButton on:click={() => $scale > 1 && $scale--} class="material-icons">
+      zoom_out
+    </IconButton>
+    <IconButton on:click={() => $scale < 30 && $scale++} class="material-icons">
+      zoom_in
+    </IconButton>
+  </div>
+  <div class="desk-size-adjuster-container">
+    <DeskSizeDialog />
+  </div>
 </Card>
-<DeskSettingsDialog bind:settingsDialogOpen />
 
 <style>
   :global(.desk-card) {
@@ -32,18 +35,28 @@
     height: var(--desk-card-height);
     justify-content: var(--desk-card-justify);
     margin: 2rem auto;
-    max-height: 50rem;
     max-width: calc(100vw - 1rem);
-    min-height: var(--desk-card-minHeight);
+    min-height: 100px;
     overflow: visible;
     padding: 1rem;
-    resize: vertical;
+    resize: both;
+    transition-property: height, width;
+    transition: all 300ms ease;
     width: var(--desk-card-width);
   }
 
-  :global(.settings-toggle) {
+  .zoom-button-container {
     bottom: 0.25rem;
+    display: flex;
+    justify-content: center;
+    margin: auto;
     position: absolute;
+    width: 100%;
+  }
+
+  .desk-size-adjuster-container {
+    bottom: 0.25rem;
     right: 0.25rem;
+    position: absolute;
   }
 </style>

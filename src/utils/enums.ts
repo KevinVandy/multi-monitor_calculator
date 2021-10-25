@@ -5,7 +5,7 @@ export enum ShortCode {
   diagonal = 'd',
   displayType = 'p',
   horizontalResolution = 'h',
-  name= 'm',
+  name = 'm',
   offsetX = 'x',
   offsetY = 'y',
   orientation = 'o',

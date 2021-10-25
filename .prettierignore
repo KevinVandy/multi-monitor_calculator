@@ -1,0 +1,10 @@
+*.config.*
+*.toml
+.netlify
+.svelte-kit
+/static/*
+README.md
+build
+package-lock.json
+package.json
+yarn.lock

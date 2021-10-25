@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount } from 'svelte';
 
   export let query;
 
@@ -9,30 +9,30 @@
   let matches = false;
 
   onMount(() => {
-      wasMounted = true;
-      return () => {
-          removeActiveListener();
-      };
+    wasMounted = true;
+    return () => {
+      removeActiveListener();
+    };
   });
 
   $: {
-      if (wasMounted) {
-          removeActiveListener();
-          addNewListener(query);
-      }
+    if (wasMounted) {
+      removeActiveListener();
+      addNewListener(query);
+    }
   }
 
   function addNewListener(query) {
-      mql = window.matchMedia(query);
-      mqlListener = v => matches = v.matches;
-      mql.addListener(mqlListener);
-      matches = mql.matches;
+    mql = window.matchMedia(query);
+    mqlListener = (v) => (matches = v.matches);
+    mql.addListener(mqlListener);
+    matches = mql.matches;
   }
 
   function removeActiveListener() {
-      if (mql && mqlListener) {
-          mql.removeListener(mqlListener);
-      }
+    if (mql && mqlListener) {
+      mql.removeListener(mqlListener);
+    }
   }
 </script>
 

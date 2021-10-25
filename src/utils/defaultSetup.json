@@ -27,7 +27,8 @@
         "dvi": false,
         "hdmi": false,
         "usbc": false,
-        "vga": false
+        "vga": false,
+        "proprietary": false
       },
       "previewMode": "off",
       "productLink": "",

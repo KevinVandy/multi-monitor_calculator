@@ -19,7 +19,7 @@
 >
   edit
 </IconButton>
-<MenuSurface bind:this={surface} >
+<MenuSurface bind:this={surface}>
   <div>
     <TextField
       bind:value={monitor.name}
