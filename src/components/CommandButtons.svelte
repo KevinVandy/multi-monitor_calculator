@@ -1,8 +1,14 @@
 <script lang="ts">
   import Fab, { Icon } from '@smui/fab';
   import IconButton from '@smui/icon-button';
+  import Dialog, {
+    Content,
+    Actions as DialogActions,
+    Title
+  } from '@smui/dialog';
+  import Button from '@smui/button';
   import Snackbar, {
-    Actions,
+    Actions as SnackbarActions,
     Label,
     SnackbarComponentDev
   } from '@smui/snackbar';
@@ -16,6 +22,7 @@
   import { encodeSetupToUrl } from '../utils/linkGenerator';
 
   let copiedToClipboardSnackbar: SnackbarComponentDev;
+  let confirmResetDialogOpen = false;
 
   const handleReset = () => {
     monitors.set([getNewMonitor()]);
@@ -50,7 +57,12 @@
 </script>
 
 <div class="fab-grid">
-  <Fab class="fab-button" extended color="primary" on:click={handleReset}>
+  <Fab
+    class="fab-button"
+    extended
+    color="primary"
+    on:click={() => (confirmResetDialogOpen = true)}
+  >
     <Icon class="material-icons">undo</Icon>Reset
   </Fab>
   <Fab
@@ -80,11 +92,32 @@
     <Icon class="material-icons">link</Icon>Share Link
   </Fab>
 </div>
+
+<Dialog bind:open={confirmResetDialogOpen}>
+  <Title style="text-align: left;">Are you sure?</Title>
+  <Content>
+    <p>Are you sure you want to reset back to the default setup?</p>
+    <p>All progress will be lost!</p>
+  </Content>
+  <DialogActions>
+    <Button on:click={() => (confirmResetDialogOpen = false)}>No, Cancel</Button
+    >
+    <Button
+      on:click={() => {
+        handleReset();
+        confirmResetDialogOpen = false;
+      }}
+    >
+      Yes, Reset
+    </Button>
+  </DialogActions>
+</Dialog>
+
 <Snackbar bind:this={copiedToClipboardSnackbar}>
   <Label>URL Copied to Clipboard!</Label>
-  <Actions>
+  <SnackbarActions>
     <IconButton class="material-icons" title="Dismiss">close</IconButton>
-  </Actions>
+  </SnackbarActions>
 </Snackbar>
 
 <style>
@@ -97,6 +130,13 @@
   }
 
   :global(.fab-button) {
-    min-width: 8rem;
+    min-width: 7rem;
+  }
+
+  @media (max-width: 600px) {
+    .fab-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
   }
 </style>

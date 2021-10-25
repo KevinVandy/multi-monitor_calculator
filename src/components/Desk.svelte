@@ -38,7 +38,7 @@
     max-width: calc(100vw - 1rem);
     min-height: 100px;
     overflow: visible;
-    padding: 1rem;
+    padding: 3rem 1rem;
     resize: both;
     transition-property: height, width;
     transition: all 300ms ease;
@@ -46,7 +46,7 @@
   }
 
   .zoom-button-container {
-    bottom: 0.25rem;
+    top: 0.25rem;
     display: flex;
     justify-content: center;
     margin: auto;
@@ -58,5 +58,14 @@
     bottom: 0.25rem;
     right: 0.25rem;
     position: absolute;
+  }
+
+  @media (max-width: 600px) {
+    :global(.desk-card) {
+      padding: 1rem;
+    }
+    .zoom-button-container {
+      top: -3rem;
+    }
   }
 </style>

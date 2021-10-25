@@ -14,9 +14,12 @@
 </main>
 
 <style>
+  header {
+    padding-top: 1rem;
+  }
   dark-mode-toggle {
-    right: 1rem;
-    top: 1rem;
+    right: 0.5rem;
+    top: 0.5rem;
     position: absolute;
   }
 </style>

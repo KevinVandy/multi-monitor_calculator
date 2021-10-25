@@ -16,7 +16,7 @@
 </script>
 
 <MediaQuery query="(max-width: 960px)" let:matches>
-  {#if matches}
+  {#if matches && $monitors.length > 1}
     <TabBar {tabs} let:tab bind:active>
       <Tab {tab}>
         <Label>{tab}</Label>
