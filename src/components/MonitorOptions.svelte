@@ -116,7 +116,7 @@
   :global(.monitor-options-card) {
     padding: 1rem;
     margin: 0.5rem;
-    max-width: 26rem;
+    max-width: min(26rem, calc(100vw - 1rem));
     position: relative;
     z-index: 1;
   }
@@ -149,5 +149,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  @media (max-width: 420px) {
+    :global(.options-grid-2) {
+      grid-template-columns: 10rem 10rem;
+    }
   }
 </style>
