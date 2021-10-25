@@ -5,7 +5,7 @@
   import { monitors } from '../../stores/SetupStore';
   export let monitor: IMonitor;
 
-  let choices = ['off', 'wallpaper', 'movie', 'video'];
+  let choices = ['off', 'wallpaper', 'movie', 'tv', 'doc'];
 </script>
 
 <div>

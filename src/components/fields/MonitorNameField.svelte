@@ -1,5 +1,6 @@
 <script lang="ts">
   import IconButton from '@smui/icon-button';
+  import Tooltip, { Wrapper } from '@smui/tooltip';
   import MenuSurface, { MenuSurfaceComponentDev } from '@smui/menu-surface';
   import TextField from '@smui/textfield';
   import type { IMonitor } from '../../utils/interfaces';
@@ -10,15 +11,18 @@
   let surface: MenuSurfaceComponentDev;
 </script>
 
-<IconButton
-  class="material-icons"
-  on:click={function () {
-    surface.setOpen(true);
-    this.blur();
-  }}
->
-  edit
-</IconButton>
+<Wrapper>
+  <IconButton
+    class="material-icons"
+    on:click={function () {
+      surface.setOpen(true);
+      this.blur();
+    }}
+  >
+    edit
+  </IconButton>
+  <Tooltip>Rename this monitor to its product name or a nickname</Tooltip>
+</Wrapper>
 <MenuSurface bind:this={surface}>
   <div>
     <TextField
@@ -35,9 +39,15 @@
         }
       }}
     />
-    <IconButton class="material-icons" on:click={() => surface.setOpen(false)}>
-      save
-    </IconButton>
+    <Wrapper>
+      <IconButton
+        class="material-icons"
+        on:click={() => surface.setOpen(false)}
+      >
+        save
+      </IconButton>
+      <Tooltip>Save</Tooltip>
+    </Wrapper>
   </div>
 </MenuSurface>
 

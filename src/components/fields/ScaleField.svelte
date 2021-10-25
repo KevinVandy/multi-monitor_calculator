@@ -5,7 +5,7 @@
 
 <div>
   <label for="zoomSlider">Zoom</label>
-  <Slider bind:value={$scale} min={4} max={32} step={1} id="zoomSlider" />
+  <Slider bind:value={$scale} min={1} max={32} step={1} id="zoomSlider" />
 </div>
 
 <style>

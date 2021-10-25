@@ -4,9 +4,8 @@
   import { calcScreenHeight, calcScreenWidth, calcTheta } from '../utils/calc';
   import { draggable } from 'svelte-drag';
   import type { IMonitor } from 'src/utils/interfaces';
-  import MoviePng from '../images/movie.png';
-  import VideoPng from '../images/video.png';
   import { urlRegex } from '../utils/regex';
+  import { docImgs, movieImgs, videoImgs } from '../utils/randomImage';
 
   export let monitor: IMonitor;
 
@@ -53,8 +52,12 @@
           ? (urlRegex.test(monitor.wallpaper) && monitor.wallpaper) ||
             'https://wallpaperaccess.com/full/90278.jpg'
           : monitor.previewMode === 'movie'
-          ? MoviePng
-          : VideoPng}
+          ? movieImgs[Math.min(monitor.index, movieImgs.length - 1)]
+          : monitor.previewMode === 'tv'
+          ? videoImgs[Math.min(monitor.index, videoImgs.length - 1)]
+          : monitor.previewMode === 'doc'
+          ? docImgs[Math.min(monitor.index, docImgs.length - 1)]
+          : null}
         style="--screenHeight:{height}px;--screenWidth:{width}px"
         alt="Could not fetch your wallpaper link"
       />
@@ -93,5 +96,6 @@
   .monitor-content {
     object-fit: contain;
     background-color: #000;
+    filter: brightness(1.25);
   }
 </style>

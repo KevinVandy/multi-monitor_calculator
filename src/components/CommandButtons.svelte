@@ -1,5 +1,6 @@
 <script lang="ts">
   import Fab, { Icon } from '@smui/fab';
+  import Tooltip, { Wrapper } from '@smui/tooltip';
   import IconButton from '@smui/icon-button';
   import Dialog, {
     Content,
@@ -57,40 +58,52 @@
 </script>
 
 <div class="fab-grid">
-  <Fab
-    class="fab-button"
-    extended
-    color="primary"
-    on:click={() => (confirmResetDialogOpen = true)}
-  >
-    <Icon class="material-icons">undo</Icon>Reset
-  </Fab>
-  <Fab
-    class="fab-button"
-    color="primary"
-    disabled={$monitors.length <= 0}
-    extended
-    on:click={handleRemoveMonitor}
-  >
-    <Icon class="material-icons">remove</Icon>Remove
-  </Fab>
-  <Fab
-    class="fab-button"
-    color="primary"
-    disabled={$monitors.length >= 10}
-    extended
-    on:click={handleAddMonitor}
-  >
-    <Icon class="material-icons">add</Icon>Add
-  </Fab>
-  <Fab
-    class="fab-button"
-    color="primary"
-    extended
-    on:click={handleGenerateLink}
-  >
-    <Icon class="material-icons">link</Icon>Share Link
-  </Fab>
+  <Wrapper>
+    <Fab
+      class="fab-button"
+      extended
+      color="primary"
+      on:click={() => (confirmResetDialogOpen = true)}
+    >
+      <Icon class="material-icons">undo</Icon>Reset
+    </Fab>
+    <Tooltip>Reset Back To Default Setup</Tooltip>
+  </Wrapper>
+  <Wrapper>
+    <Fab
+      class="fab-button"
+      color="primary"
+      disabled={$monitors.length <= 0}
+      extended
+      on:click={handleRemoveMonitor}
+    >
+      <Icon class="material-icons">remove</Icon>Remove
+    </Fab>
+    <Tooltip>Remove Last Monitor</Tooltip>
+  </Wrapper>
+  <Wrapper>
+    <Fab
+      class="fab-button"
+      color="primary"
+      disabled={$monitors.length >= 10}
+      extended
+      on:click={handleAddMonitor}
+    >
+      <Icon class="material-icons">add</Icon>Add
+    </Fab>
+    <Tooltip>Add Another Monitor</Tooltip>
+  </Wrapper>
+  <Wrapper>
+    <Fab
+      class="fab-button"
+      color="primary"
+      extended
+      on:click={handleGenerateLink}
+    >
+      <Icon class="material-icons">link</Icon>Share Link
+    </Fab>
+    <Tooltip>Generate a link to this setup that you can use to send to your other devices or friends</Tooltip>
+  </Wrapper>
 </div>
 
 <Dialog bind:open={confirmResetDialogOpen}>

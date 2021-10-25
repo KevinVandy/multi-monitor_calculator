@@ -31,15 +31,15 @@
 <DataTable style="width: 100%;">
   <Body>
     <Row>
-      <Cell>Screen Diagonal:</Cell>
+      <Cell>Screen Diagonal</Cell>
       <Cell numeric>{diagonal.toFixed(1)}"</Cell>
     </Row>
     <Row>
-      <Cell>Screen Width:</Cell>
+      <Cell>Screen Width</Cell>
       <Cell numeric>{screenWidth.toFixed(1)}"</Cell>
     </Row>
     <Row>
-      <Cell>Screen Height:</Cell>
+      <Cell>Screen Height</Cell>
       <Cell numeric>{screenHeight.toFixed(1)}"</Cell>
     </Row>
     <Row>
@@ -69,7 +69,7 @@
       >
     </Row>
     <Row>
-      <Cell>Number Pixels:</Cell>
+      <Cell>Number Pixels</Cell>
       <Cell numeric>{numPixels.toLocaleString()}</Cell>
     </Row>
     <Row>

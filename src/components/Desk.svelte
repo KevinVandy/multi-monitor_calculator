@@ -1,6 +1,7 @@
 <script lang="ts">
   import Card from '@smui/card';
   import IconButton from '@smui/icon-button';
+  import Tooltip, { Wrapper } from '@smui/tooltip';
   import { deskWidth, scale, monitors, deskHeight } from '../stores/SetupStore';
   import DeskSizeDialog from './DeskSizeDialog.svelte';
   import Monitor from './Monitor.svelte';
@@ -16,15 +17,30 @@
     <Monitor {monitor} />
   {/each}
   <div class="zoom-button-container">
-    <IconButton on:click={() => $scale > 1 && $scale--} class="material-icons">
-      zoom_out
-    </IconButton>
-    <IconButton on:click={() => $scale < 30 && $scale++} class="material-icons">
-      zoom_in
-    </IconButton>
+    <Wrapper>
+      <IconButton
+        on:click={() => $scale > 1 && $scale--}
+        class="material-icons"
+      >
+        zoom_out
+      </IconButton>
+      <Tooltip>Zoom Out</Tooltip>
+    </Wrapper>
+    <Wrapper>
+      <IconButton
+        on:click={() => $scale < 32 && $scale++}
+        class="material-icons"
+      >
+        zoom_in
+      </IconButton>
+      <Tooltip>Zoom In</Tooltip>
+    </Wrapper>
   </div>
-  <div class="desk-size-adjuster-container">
-    <DeskSizeDialog />
+  <div class="desk-size-adjuster-container" title="Change Desk Width and Height">
+    <Wrapper>
+      <DeskSizeDialog />
+      <Tooltip>Change Desk Width and Height</Tooltip>
+    </Wrapper>
   </div>
 </Card>
 
