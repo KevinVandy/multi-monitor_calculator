@@ -5,6 +5,7 @@
     deskWidth,
     getNewMonitor,
     monitors,
+    preferredSearchEngine,
     scale
   } from '../stores/SetupStore';
   import { afterUpdate, onMount } from 'svelte';
@@ -35,6 +36,7 @@
       if (storedSetup) {
         //set setup store from local storage
         deskHeight.set(storedSetup.deskHeight ?? 2);
+        preferredSearchEngine.set(storedSetup.preferredSearchEngine ?? 'google');
         deskWidth.set(storedSetup.deskWidth ?? 6);
         monitors.set(storedSetup.monitors ?? [getNewMonitor()]);
         scale.set(storedSetup.scale ?? 16);
@@ -49,6 +51,7 @@
       JSON.stringify({
         deskHeight: $deskHeight,
         deskWidth: $deskWidth,
+        preferredSearchEngine: $preferredSearchEngine,
         monitors: $monitors,
         scale: $scale
       })
@@ -62,8 +65,10 @@
     <CircularProgress style="height: 64px; width: 64px;" indeterminate />
   </div>
 {:else}
-  <Desk />
-  <MonitorOptionsArea />
+  <section>
+    <Desk />
+    <MonitorOptionsArea />
+  </section>
 {/if}
 
 <style>
@@ -72,5 +77,9 @@
     display: flex;
     justify-content: center;
     padding-top: 3rem;
+  }
+
+  section {
+    padding-bottom: 30rem;
   }
 </style>

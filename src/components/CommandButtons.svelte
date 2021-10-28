@@ -102,7 +102,10 @@
     >
       <Icon class="material-icons">link</Icon>Share Link
     </Fab>
-    <Tooltip>Generate a link to this setup that you can use to send to your other devices or friends</Tooltip>
+    <Tooltip
+      >Generate a link to this setup that you can use to send to your other
+      devices or friends</Tooltip
+    >
   </Wrapper>
 </div>
 

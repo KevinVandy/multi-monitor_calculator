@@ -27,7 +27,7 @@
         menu
       </IconButton>
       <TopAppBarTitle style="display:flex;align-content:center;">
-        Your Setups
+        Setups
       </TopAppBarTitle>
     </Section>
     <Section align="end" toolbar>

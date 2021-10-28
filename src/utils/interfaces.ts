@@ -3,6 +3,7 @@ export interface ISetup {
   deskHeight: number;
   monitors: IMonitor[];
   scale: number;
+  preferredSearchEngine: SearchEngine;
 }
 
 export interface IMonitor {
@@ -49,3 +50,11 @@ export interface IResolution {
   horizontal: number;
   vertical: number;
 }
+
+export type SearchEngine =
+  | 'google'
+  | 'bing'
+  | 'duckduckgo'
+  | 'amazon'
+  | 'newegg'
+  | 'bestbuy';

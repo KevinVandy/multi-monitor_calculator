@@ -36,7 +36,10 @@
       <Tooltip>Zoom In</Tooltip>
     </Wrapper>
   </div>
-  <div class="desk-size-adjuster-container" title="Change Desk Width and Height">
+  <div
+    class="desk-size-adjuster-container"
+    title="Change Desk Width and Height"
+  >
     <Wrapper>
       <DeskSizeDialog />
       <Tooltip>Change Desk Width and Height</Tooltip>

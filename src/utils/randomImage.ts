@@ -30,6 +30,10 @@ export const movieImgs = shuffleArray([
   MovieWebp5
 ]) as string[];
 
-export const videoImgs = shuffleArray([VideoWebp1, VideoWebp2, VideoWebp3]) as string[];
+export const videoImgs = shuffleArray([
+  VideoWebp1,
+  VideoWebp2,
+  VideoWebp3
+]) as string[];
 
 export const docImgs = shuffleArray([MsWordWebp]) as string[];

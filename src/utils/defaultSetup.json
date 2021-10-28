@@ -1,6 +1,7 @@
 {
   "deskHeight": 2,
   "deskWidth": 6,
+  "preferredSearchEngine": "google",
   "scale": 16,
   "monitors": [
     {

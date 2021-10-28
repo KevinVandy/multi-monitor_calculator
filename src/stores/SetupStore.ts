@@ -1,4 +1,4 @@
-import type { IMonitor, ISetup } from 'src/utils/interfaces';
+import type { IMonitor, ISetup, SearchEngine } from 'src/utils/interfaces';
 import { writable } from 'svelte/store';
 import defaultSetup from '../utils/defaultSetup.json';
 
@@ -11,3 +11,4 @@ export const scale = writable<number>(16);
 export const deskWidth = writable<number>(6);
 export const deskHeight = writable<number>(2);
 export const monitors = writable<IMonitor[]>([getNewMonitor()]);
+export const preferredSearchEngine = writable<SearchEngine>('google');

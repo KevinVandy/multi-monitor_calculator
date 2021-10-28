@@ -44,6 +44,5 @@
     flex-wrap: wrap;
     justify-content: center;
     position: relative;
-    z-index: 1;
   }
 </style>

@@ -25,6 +25,7 @@
   import MonitorNameField from './fields/MonitorNameField.svelte';
   import ProductLinkField from './fields/ProductLinkField.svelte';
   import { urlRegex } from '../utils/regex';
+  import MonitorSearch from './MonitorSearch.svelte';
 
   export let monitor: IMonitor;
   export let advancedOptionsOpen: boolean;
@@ -101,6 +102,7 @@
           <MonitorStats {monitor} />
         </div>
       {/if}
+      <MonitorSearch {monitor} />
     </Content>
   </Card>
 </div>
@@ -119,7 +121,6 @@
     margin: 0.5rem;
     max-width: min(26rem, calc(100vw - 1rem));
     position: relative;
-    z-index: 1;
   }
 
   :global(.options-grid-1) {

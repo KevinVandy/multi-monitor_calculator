@@ -19,14 +19,14 @@
 html,
 body {
   @include typography.typography('body1');
-  background-color: #111;
+  background-color: #121212;
   color: theme.$on-surface;
   margin: 0;
   padding: 0;
 }
 
 main {
-  background-image: linear-gradient(#111, #000);
+  background-image: linear-gradient(#121212, #000);
   min-height: calc(100vh - 100px);
   padding-bottom: 100px;
 }

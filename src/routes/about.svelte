@@ -1,6 +1,6 @@
 <script lang="ts">
   import A from '@smui/common/elements/A.svelte';
-  import Paper, {Content} from '@smui/paper';
+  import Paper, { Content } from '@smui/paper';
 </script>
 
 <Paper class="about">
