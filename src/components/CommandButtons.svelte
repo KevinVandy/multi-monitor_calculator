@@ -18,7 +18,8 @@
     scale,
     deskWidth,
     getNewMonitor,
-    deskHeight
+    deskHeight,
+    parsedDefaultSetup
   } from '../stores/SetupStore';
   import { encodeSetupToUrl } from '../utils/linkGenerator';
 
@@ -27,9 +28,13 @@
 
   const handleReset = () => {
     monitors.set([getNewMonitor()]);
-    deskWidth.set(6);
-    deskHeight.set(2);
-    scale.set(16);
+    deskWidth.set(parsedDefaultSetup.deskWidth);
+    deskHeight.set(parsedDefaultSetup.deskHeight);
+    scale.set(
+      window.matchMedia('(max-width: 480px)').matches
+        ? Math.min($scale, 10)
+        : parsedDefaultSetup.scale
+    );
   };
 
   const handleAddMonitor = () => {
@@ -108,6 +113,20 @@
     >
   </Wrapper>
 </div>
+<div class="zoom-button-container">
+  <Wrapper>
+    <IconButton on:click={() => $scale > 1 && $scale--} class="material-icons">
+      zoom_out
+    </IconButton>
+    <Tooltip>Zoom Out</Tooltip>
+  </Wrapper>
+  <Wrapper>
+    <IconButton on:click={() => $scale < 32 && $scale++} class="material-icons">
+      zoom_in
+    </IconButton>
+    <Tooltip>Zoom In</Tooltip>
+  </Wrapper>
+</div>
 
 <Dialog bind:open={confirmResetDialogOpen}>
   <Title style="text-align: left;">Are you sure?</Title>
@@ -147,6 +166,13 @@
 
   :global(.fab-button) {
     min-width: 7rem;
+  }
+
+  .zoom-button-container {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
   }
 
   @media (max-width: 600px) {

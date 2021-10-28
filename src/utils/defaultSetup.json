@@ -1,6 +1,6 @@
 {
-  "deskHeight": 2,
-  "deskWidth": 6,
+  "deskHeight": 2.25,
+  "deskWidth": 5,
   "preferredSearchEngine": "google",
   "scale": 16,
   "monitors": [
@@ -31,7 +31,7 @@
         "vga": false,
         "proprietary": false
       },
-      "previewMode": "off",
+      "previewMode": null,
       "productLink": "",
       "refreshRate": 60,
       "resolution": { "standard": "FHD", "horizontal": 1920, "vertical": 1080 },

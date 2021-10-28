@@ -2,13 +2,21 @@ import type { IMonitor, ISetup, SearchEngine } from 'src/utils/interfaces';
 import { writable } from 'svelte/store';
 import defaultSetup from '../utils/defaultSetup.json';
 
+export const getNewSetup = (): ISetup => ({
+  ...JSON.parse(JSON.stringify(defaultSetup as ISetup))
+});
+
 export const getNewMonitor = (index = 0): IMonitor => ({
-  ...JSON.parse(JSON.stringify(defaultSetup as ISetup)).monitors[0],
+  ...getNewSetup().monitors[0],
   index: index
 });
 
-export const scale = writable<number>(16);
-export const deskWidth = writable<number>(6);
-export const deskHeight = writable<number>(2);
+export const parsedDefaultSetup = getNewSetup();
+
+export const scale = writable<number>(parsedDefaultSetup.scale);
+export const deskWidth = writable<number>(parsedDefaultSetup.deskWidth);
+export const deskHeight = writable<number>(parsedDefaultSetup.deskHeight);
 export const monitors = writable<IMonitor[]>([getNewMonitor()]);
-export const preferredSearchEngine = writable<SearchEngine>('google');
+export const preferredSearchEngine = writable<SearchEngine>(
+  parsedDefaultSetup.preferredSearchEngine
+);

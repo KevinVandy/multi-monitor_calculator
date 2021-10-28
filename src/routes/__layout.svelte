@@ -70,11 +70,17 @@
   }
 
   :global(.app-content) {
-    min-height: 101vh;
+    min-height: 120vh;
   }
 
   :global(.toolbar-link) {
     text-decoration: none;
     margin: 0 0.75rem;
+  }
+
+  @media(max-width: 600px) {
+    header {
+      padding-top: 5rem;
+    }
   }
 </style>

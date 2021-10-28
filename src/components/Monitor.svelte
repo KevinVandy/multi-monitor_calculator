@@ -38,7 +38,7 @@
     style="--monitorBorderRadius:{0.1875 *
       $scale}px;--bezelColor:{monitor.bezelColor};--bezelWidth:{bezelWidth}px;--screenHeight:{height}px;--screenWidth:{width}px"
   >
-    {#if monitor.previewMode === 'off'}
+    {#if !monitor.previewMode}
       <div in:blur={{ duration: 500 }}>
         {monitor.index + 1}
       </div>

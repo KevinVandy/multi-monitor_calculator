@@ -5,6 +5,7 @@
     deskWidth,
     getNewMonitor,
     monitors,
+    parsedDefaultSetup,
     preferredSearchEngine,
     scale
   } from '../stores/SetupStore';
@@ -35,13 +36,22 @@
       );
       if (storedSetup) {
         //set setup store from local storage
-        deskHeight.set(storedSetup.deskHeight ?? 2);
-        preferredSearchEngine.set(storedSetup.preferredSearchEngine ?? 'google');
-        deskWidth.set(storedSetup.deskWidth ?? 6);
+        deskHeight.set(storedSetup.deskHeight ?? parsedDefaultSetup.deskHeight);
+        preferredSearchEngine.set(
+          storedSetup.preferredSearchEngine ??
+            parsedDefaultSetup.preferredSearchEngine
+        );
+        deskWidth.set(storedSetup.deskWidth ?? parsedDefaultSetup.deskWidth);
         monitors.set(storedSetup.monitors ?? [getNewMonitor()]);
-        scale.set(storedSetup.scale ?? 16);
+        scale.set(storedSetup.scale ?? parsedDefaultSetup.scale);
       }
     }
+
+    //make scale more mobile friendly
+    if (window.matchMedia('(max-width: 480px)').matches) {
+      scale.set(Math.min($scale, 10));
+    }
+
     loading = false;
   });
 
@@ -80,6 +90,6 @@
   }
 
   section {
-    padding-bottom: 30rem;
+    padding-bottom: 20rem;
   }
 </style>

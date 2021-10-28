@@ -19,7 +19,7 @@ export interface IMonitor {
   offsetY: number;
   orientation: 'l' | 'p';
   ports: IPorts;
-  previewMode: 'off' | 'wallpaper' | 'movie' | 'tv' | 'doc';
+  previewMode:  'wallpaper' | 'movie' | 'tv' | 'doc' | null;
   productLink: string | null;
   refreshRate: number;
   resolution: IResolution;
