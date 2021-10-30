@@ -1,7 +1,8 @@
 {
   "deskHeight": 2.25,
   "deskWidth": 5,
-  "preferredSearchEngine": "google",
+  "id": null,
+  "lastOpened": null,
   "scale": 16,
   "monitors": [
     {

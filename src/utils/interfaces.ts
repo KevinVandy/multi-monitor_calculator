@@ -1,9 +1,18 @@
+export interface ISettings {
+  preferredSearchEngine: SearchEngine;
+}
+
+export interface ISetups {
+  [id: string]: ISetup;
+}
+
 export interface ISetup {
   deskWidth: number;
   deskHeight: number;
+  id: string | null;
+  lastOpened: Date | null;
   monitors: IMonitor[];
   scale: number;
-  preferredSearchEngine: SearchEngine;
 }
 
 export interface IMonitor {
@@ -19,7 +28,7 @@ export interface IMonitor {
   offsetY: number;
   orientation: 'l' | 'p';
   ports: IPorts;
-  previewMode:  'wallpaper' | 'movie' | 'tv' | 'doc' | null;
+  previewMode: 'wallpaper' | 'movie' | 'tv' | 'doc' | null;
   productLink: string | null;
   refreshRate: number;
   resolution: IResolution;

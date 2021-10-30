@@ -3,7 +3,7 @@
   import { monitors, scale } from '../stores/SetupStore';
   import { calcScreenHeight, calcScreenWidth, calcTheta } from '../utils/calc';
   import { draggable } from 'svelte-drag';
-  import type { IMonitor } from 'src/utils/interfaces';
+  import type { IMonitor } from '../utils/interfaces';
   import { urlRegex } from '../utils/regex';
   import { docImgs, movieImgs, videoImgs } from '../utils/randomImage';
 

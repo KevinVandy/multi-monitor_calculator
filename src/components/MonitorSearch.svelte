@@ -16,7 +16,7 @@
   import DuckDuckGoWebp from '../images/duckduckgo.webp';
   import GoogleWebp from '../images/google.webp';
   import NeweggWebp from '../images/newegg.webp';
-  import { preferredSearchEngine } from '../stores/SetupStore';
+  import { preferredSearchEngine } from '../stores/SettingsStore';
 
   export let monitor: IMonitor;
 
