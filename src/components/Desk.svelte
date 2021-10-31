@@ -36,7 +36,7 @@
     max-width: calc(100vw - 1rem);
     min-height: 100px;
     overflow: visible;
-    padding: 1rem;
+    padding: calc(var(--desk-card-height) * 0.1);
     resize: both;
     transition-property: height, width;
     transition: all 300ms ease;

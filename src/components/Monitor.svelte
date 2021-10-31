@@ -23,7 +23,7 @@
 <div
   transition:fade={{ duration: 200 }}
   use:draggable={{
-    bounds: 'main',
+    bounds: 'parent',
     defaultPosition: { x: monitor.offsetX, y: monitor.offsetY }
   }}
   on:svelte-drag:end={(e) =>
@@ -85,7 +85,7 @@
     cursor: move;
     display: grid;
     justify-content: center;
-    margin: 1rem 2px;
+    margin:2px;
     z-index: 99;
   }
 

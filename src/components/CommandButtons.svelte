@@ -19,7 +19,8 @@
     deskWidth,
     getNewMonitor,
     deskHeight,
-    parsedDefaultSetup
+    parsedDefaultSetup,
+    id
   } from '../stores/SetupStore';
   import { encodeSetupToUrl } from '../utils/linkGenerator';
 
@@ -53,7 +54,7 @@
   };
 
   const handleGenerateLink = () => {
-    const newSearchString = encodeSetupToUrl($monitors);
+    const newSearchString = encodeSetupToUrl($monitors, $scale, $id);
     const newUrl = `${location.origin}${location.pathname}?${newSearchString}`;
     window.history.replaceState({ path: newUrl }, undefined, newUrl);
     navigator.clipboard.writeText(location.href);

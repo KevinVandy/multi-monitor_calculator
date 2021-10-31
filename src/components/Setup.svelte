@@ -21,6 +21,30 @@
 
   let loading = true;
 
+  const loadSetup = (setup: ISetup) => {
+    deskHeight.set(setup.deskHeight);
+    deskWidth.set(setup.deskWidth);
+    id.set(setup.id);
+    lastOpened.set(setup.lastOpened);
+    monitors.set(setup.monitors);
+    scale.set(setup.scale);
+  };
+
+  const loadMostRecentSetup = (storedSetups: ISetups) => {
+    let mostRecentSetup: ISetup = storedSetups[$mostRecentSetupId];
+    if (!mostRecentSetup && Object.keys(storedSetups).length > 0) {
+      //sort setups by date and load most recent
+      const sortedSetups: ISetup[] = Object.values(storedSetups).sort(
+        (a: ISetup, b: ISetup) =>
+          new Date(a.lastOpened).getTime() - new Date(b.lastOpened).getTime()
+      );
+      mostRecentSetup = sortedSetups[0];
+    }
+    if (mostRecentSetup) {
+      loadSetup(mostRecentSetup);
+    }
+  };
+
   onMount(() => {
     //load settings from local storage
     const storedSettings: ISettings = JSON.parse(
@@ -40,7 +64,7 @@
     //load setups from local storage
     const storedSetups: ISetups = JSON.parse(localStorage.getItem('setups'));
     if (storedSetups) {
-      setups.set(storedSetups ?? {});
+      setups.set(storedSetups);
     }
 
     //check for setup in URL
@@ -48,27 +72,27 @@
       [key: string]: string | number;
     };
     if (Object.keys(urlSetup).length > 0) {
-      //set setup store from url
-      monitors.set(parseSetupFromUrl(urlSetup));
+      //parse a setup from url
+      const parsedSetup = parseSetupFromUrl(urlSetup);
+
+      //if setup from url already exists locally, just load from local
+      if (
+        storedSetups &&
+        Object.keys(storedSetups).includes(parsedSetup.parsedId)
+      ) {
+        loadSetup(storedSetups[parsedSetup.parsedId]);
+      } else {
+        //load setup from url
+        id.set(parsedSetup.parsedId);
+        monitors.set(parsedSetup.parsedMonitors);
+        scale.set(parsedSetup.parsedScale);
+      }
+      //remove params from url so they don't get read again on page reload
       const newUrl = `${location.origin}${location.pathname}`;
       window.history.replaceState({ path: newUrl }, undefined, newUrl);
     } else if (storedSetups) {
-      //load most recent setup as current setup
-      let mostRecentSetup: ISetup = storedSetups[$mostRecentSetupId];
-      if (!mostRecentSetup && Object.keys(storedSetups).length > 0) {
-        //sort setups by date and load most recent
-        const sortedSetups: ISetup[] = Object.values(storedSetups).sort(
-          (a: ISetup, b: ISetup) =>
-            new Date(a.lastOpened).getTime() - new Date(b.lastOpened).getTime()
-        );
-        mostRecentSetup = sortedSetups[0];
-      }
-      deskHeight.set(mostRecentSetup.deskHeight);
-      deskWidth.set(mostRecentSetup.deskWidth);
-      id.set(mostRecentSetup.id);
-      lastOpened.set(mostRecentSetup.lastOpened);
-      monitors.set(mostRecentSetup.monitors);
-      scale.set(mostRecentSetup.scale);
+      //load most recent setup from local storage
+      loadMostRecentSetup(storedSetups);
     }
 
     //make scale more mobile friendly

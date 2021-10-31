@@ -5,62 +5,64 @@ import queryString from 'query-string';
 
 export const parseSetupFromUrl = (urlSetup: {
   [x: string]: string | number;
-}): IMonitor[] => {
+}): { parsedMonitors: IMonitor[]; parsedScale: number; parsedId: string } => {
+  const parsedId = String(urlSetup[ShortCode.SETUP_ID]);
+  const parsedScale = +urlSetup[ShortCode.SCALE];
   const parsedMonitors: IMonitor[] = [];
   for (let i = 0; i < Math.min(+urlSetup?.num ?? 10, 10); i++) {
     const parsedMonitor: IMonitor = getNewMonitor(i);
     parsedMonitors.push({
       ...parsedMonitor,
       aspectRatio: String(
-        urlSetup[`${ShortCode.aspectRatio}${i}`] ?? parsedMonitor.aspectRatio
+        urlSetup[`${ShortCode.ASPECT_RATIO}${i}`] ?? parsedMonitor.aspectRatio
       ),
       bezelColor: String(
-        urlSetup[`${ShortCode.bezelColor}${i}`] ?? parsedMonitor.bezelColor
+        urlSetup[`${ShortCode.BEZEL_COLOR}${i}`] ?? parsedMonitor.bezelColor
       ),
       bezelWidth: Number(
-        urlSetup[`${ShortCode.bezelWidth}${i}`] ?? parsedMonitor.bezelWidth
+        urlSetup[`${ShortCode.BEZEL_WIDTH}${i}`] ?? parsedMonitor.bezelWidth
       ),
       diagonal: Number(
-        urlSetup[`${ShortCode.diagonal}${i}`] ?? parsedMonitor.diagonal
+        urlSetup[`${ShortCode.DIAGONAL}${i}`] ?? parsedMonitor.diagonal
       ),
       displayType: String(
-        urlSetup[`${ShortCode.displayType}${i}`] ?? parsedMonitor.displayType
+        urlSetup[`${ShortCode.DISPLAY_TYPE}${i}`] ?? parsedMonitor.displayType
       ),
-      name: String(urlSetup[`${ShortCode.name}${i}`] ?? parsedMonitor.name),
+      name: String(urlSetup[`${ShortCode.NAME}${i}`] ?? parsedMonitor.name),
       offsetX: Number(
-        urlSetup[`${ShortCode.offsetX}${i}`] ?? parsedMonitor.offsetX
+        urlSetup[`${ShortCode.OFFSET_X}${i}`] ?? parsedMonitor.offsetX
       ),
       offsetY: Number(
-        urlSetup[`${ShortCode.offsetY}${i}`] ?? parsedMonitor.offsetY
+        urlSetup[`${ShortCode.OFFSET_Y}${i}`] ?? parsedMonitor.offsetY
       ),
-      orientation: (urlSetup[`${ShortCode.orientation}${i}`] ??
+      orientation: (urlSetup[`${ShortCode.ORIENTATION}${i}`] ??
         parsedMonitor.orientation) as 'l' | 'p',
       refreshRate: Number(
-        urlSetup[`${ShortCode.refreshRate}${i}`] ?? parsedMonitor.refreshRate
+        urlSetup[`${ShortCode.REFRESH_RATE}${i}`] ?? parsedMonitor.refreshRate
       ),
       responseTime:
-        Number(urlSetup[`${ShortCode.responseTime}${i}`]) ??
+        Number(urlSetup[`${ShortCode.RESPONSE_TIME}${i}`]) ??
         parsedMonitor.responseTime,
       resolution: {
         horizontal: Number(
-          urlSetup[`${ShortCode.horizontalResolution}${i}`] ??
+          urlSetup[`${ShortCode.HORIZONTAL_RESOLUTION}${i}`] ??
             parsedMonitor.resolution.horizontal
         ),
         standard: String(
-          urlSetup[`${ShortCode.resolutionStandard}${i}`] ??
+          urlSetup[`${ShortCode.RESOLUTION_STANDARD}${i}`] ??
             parsedMonitor.resolution.standard
         ),
         vertical: Number(
-          urlSetup[`${ShortCode.verticalResolution}${i}`] ??
+          urlSetup[`${ShortCode.VERTICAL_RESOLUTION}${i}`] ??
             parsedMonitor.resolution.vertical
         )
       },
       syncType: String(
-        urlSetup[`${ShortCode.syncType}${i}`] ?? parsedMonitor.syncType
+        urlSetup[`${ShortCode.SYNC_TYPE}${i}`] ?? parsedMonitor.syncType
       )
     });
   }
-  return parsedMonitors;
+  return { parsedId, parsedMonitors, parsedScale };
 };
 
 /**
@@ -68,93 +70,101 @@ export const parseSetupFromUrl = (urlSetup: {
  * filter out default values since they are redundant info
  * encode as url params
  */
-export const encodeSetupToUrl = (monitors: IMonitor[]): string => {
+export const encodeSetupToUrl = (
+  monitors: IMonitor[],
+  scale: number,
+  id: string
+): string => {
   const defaultMonitor = getNewMonitor();
 
   return queryString.stringify(
     Object.fromEntries(
       Object.entries(
         Object.assign(
-          { num: monitors.length },
+          {
+            num: monitors.length,
+            [ShortCode.SCALE]: scale,
+            [ShortCode.SETUP_ID]: id
+          },
           ...monitors.map((m: IMonitor, i: number) => ({
-            [`${ShortCode.aspectRatio}${i}`]: m.aspectRatio,
-            [`${ShortCode.bezelColor}${i}`]: m.bezelColor,
-            [`${ShortCode.bezelWidth}${i}`]: m.bezelWidth,
-            [`${ShortCode.diagonal}${i}`]: m.diagonal,
-            [`${ShortCode.displayType}${i}`]: m.displayType,
-            [`${ShortCode.horizontalResolution}${i}`]: m.resolution.horizontal,
-            [`${ShortCode.name}${i}`]: m.name,
-            [`${ShortCode.offsetX}${i}`]: m.offsetX,
-            [`${ShortCode.offsetY}${i}`]: m.offsetY,
-            [`${ShortCode.orientation}${i}`]: m.orientation,
-            [`${ShortCode.refreshRate}${i}`]: m.refreshRate,
-            [`${ShortCode.resolutionStandard}${i}`]: m.resolution.standard,
-            [`${ShortCode.responseTime}${i}`]: m.responseTime,
-            [`${ShortCode.syncType}${i}`]: m.syncType,
-            [`${ShortCode.verticalResolution}${i}`]: m.resolution.vertical
+            [`${ShortCode.ASPECT_RATIO}${i}`]: m.aspectRatio,
+            [`${ShortCode.BEZEL_COLOR}${i}`]: m.bezelColor,
+            [`${ShortCode.BEZEL_WIDTH}${i}`]: m.bezelWidth,
+            [`${ShortCode.DIAGONAL}${i}`]: m.diagonal,
+            [`${ShortCode.DISPLAY_TYPE}${i}`]: m.displayType,
+            [`${ShortCode.HORIZONTAL_RESOLUTION}${i}`]: m.resolution.horizontal,
+            [`${ShortCode.NAME}${i}`]: m.name,
+            [`${ShortCode.OFFSET_X}${i}`]: m.offsetX,
+            [`${ShortCode.OFFSET_Y}${i}`]: m.offsetY,
+            [`${ShortCode.ORIENTATION}${i}`]: m.orientation,
+            [`${ShortCode.REFRESH_RATE}${i}`]: m.refreshRate,
+            [`${ShortCode.RESOLUTION_STANDARD}${i}`]: m.resolution.standard,
+            [`${ShortCode.RESPONSE_TIME}${i}`]: m.responseTime,
+            [`${ShortCode.SYNC_TYPE}${i}`]: m.syncType,
+            [`${ShortCode.VERTICAL_RESOLUTION}${i}`]: m.resolution.vertical
           }))
         )
       ).filter(([key, value]: [string, number | string]) => {
         if (!value) return false;
         if (
-          key[0] === ShortCode.aspectRatio &&
+          key[0] === ShortCode.ASPECT_RATIO &&
           value === defaultMonitor.aspectRatio
         )
           return false;
         if (
-          key[0] === ShortCode.bezelWidth &&
+          key[0] === ShortCode.BEZEL_WIDTH &&
           value === defaultMonitor.bezelWidth
         )
           return false;
         if (
-          key[0] === ShortCode.bezelColor &&
+          key[0] === ShortCode.BEZEL_COLOR &&
           value === defaultMonitor.bezelColor
         )
           return false;
-        if (key[0] === ShortCode.diagonal && value === defaultMonitor.diagonal)
+        if (key[0] === ShortCode.DIAGONAL && value === defaultMonitor.diagonal)
           return false;
         if (
-          key[0] === ShortCode.horizontalResolution &&
+          key[0] === ShortCode.HORIZONTAL_RESOLUTION &&
           value === defaultMonitor.resolution.horizontal
         )
           return false;
-        if (key[0] === ShortCode.syncType && value === defaultMonitor.syncType)
+        if (key[0] === ShortCode.SYNC_TYPE && value === defaultMonitor.syncType)
           return false;
-        if (key[0] === ShortCode.name && value === defaultMonitor.name)
+        if (key[0] === ShortCode.NAME && value === defaultMonitor.name)
           return false;
         if (
-          key[0] === ShortCode.orientation &&
+          key[0] === ShortCode.ORIENTATION &&
           value === defaultMonitor.orientation
         )
           return false;
         if (
-          key[0] === ShortCode.displayType &&
+          key[0] === ShortCode.DISPLAY_TYPE &&
           value === defaultMonitor.displayType
         )
           return false;
         if (
-          key[0] === ShortCode.refreshRate &&
+          key[0] === ShortCode.REFRESH_RATE &&
           value === defaultMonitor.refreshRate
         )
           return false;
         if (
-          key[0] === ShortCode.resolutionStandard &&
+          key[0] === ShortCode.RESOLUTION_STANDARD &&
           value === defaultMonitor.resolution.standard
         )
           return false;
         if (
-          key[0] === ShortCode.responseTime &&
+          key[0] === ShortCode.RESPONSE_TIME &&
           value === defaultMonitor.responseTime
         )
           return false;
         if (
-          key[0] === ShortCode.verticalResolution &&
+          key[0] === ShortCode.VERTICAL_RESOLUTION &&
           value === defaultMonitor.resolution.vertical
         )
           return false;
-        if (key[0] === ShortCode.offsetX && value === defaultMonitor.offsetX)
+        if (key[0] === ShortCode.OFFSET_X && value === defaultMonitor.offsetX)
           return false;
-        if (key[0] === ShortCode.offsetY && value === defaultMonitor.offsetY)
+        if (key[0] === ShortCode.OFFSET_Y && value === defaultMonitor.offsetY)
           return false;
         return true;
       })
