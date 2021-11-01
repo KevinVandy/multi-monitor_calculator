@@ -14,9 +14,9 @@
   import Button from '@smui/button';
   import A from '@smui/common/elements/A.svelte';
   import SetupsDrawer from '../components/SetupsDrawer.svelte';
-  import { createNewSetup, setups } from '../stores/SetupStore';
+  import { createNewSetup } from '../stores/SetupStore';
   import MediaQuery from '../utils/MediaQuery.svelte';
-  import Textfield from '@smui/textfield/Textfield.svelte';
+  import TextField from '@smui/textfield';
 
   let topAppBar: TopAppBarComponentDev;
   let drawerOpen: boolean = false;
@@ -80,7 +80,7 @@
   <Title style="text-align: left;">Create a new setup</Title>
   <DialogContent>
     <p>Your previously opened setup will be saved in the sidebar for later</p>
-    <Textfield
+    <TextField
       label="Setup Name"
       bind:value={newSetupName}
       variant="filled"
