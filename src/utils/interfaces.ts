@@ -12,6 +12,7 @@ export interface ISetup {
   id: string | null;
   lastOpened: Date | null;
   monitors: IMonitor[];
+  name: string;
   scale: number;
 }
 

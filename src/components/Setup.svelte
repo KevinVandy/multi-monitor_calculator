@@ -7,6 +7,7 @@
     lastOpened,
     monitors,
     mostRecentSetupId,
+    name,
     scale,
     setups
   } from '../stores/SetupStore';
@@ -119,6 +120,7 @@
       id: $id,
       lastOpened: new Date(),
       monitors: $monitors,
+      name: $name,
       scale: $scale
     };
 

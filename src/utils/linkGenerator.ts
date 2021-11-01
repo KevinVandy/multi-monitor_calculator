@@ -1,4 +1,4 @@
-import { getNewMonitor } from '../stores/SetupStore';
+import { getNewMonitor, parsedDefaultSetup } from '../stores/SetupStore';
 import { ShortCode } from './enums';
 import type { IMonitor } from './interfaces';
 import queryString from 'query-string';
@@ -106,6 +106,8 @@ export const encodeSetupToUrl = (
         )
       ).filter(([key, value]: [string, number | string]) => {
         if (!value) return false;
+        if (key[0] === ShortCode.SCALE && scale === parsedDefaultSetup.scale)
+          return false;
         if (
           key[0] === ShortCode.ASPECT_RATIO &&
           value === defaultMonitor.aspectRatio

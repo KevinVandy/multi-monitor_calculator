@@ -134,10 +134,12 @@
   <Content>
     <p>Are you sure you want to reset back to the default setup?</p>
     <p>All progress will be lost!</p>
+    <p>You can create a new setup instead by clicking the + button</p>
   </Content>
   <DialogActions>
-    <Button on:click={() => (confirmResetDialogOpen = false)}>No, Cancel</Button
-    >
+    <Button on:click={() => (confirmResetDialogOpen = false)}>
+      No, Cancel
+    </Button>
     <Button
       on:click={() => {
         handleReset();

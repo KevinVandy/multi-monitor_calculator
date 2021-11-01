@@ -17,7 +17,7 @@
   on:change={() => {
     $monitors[monitor.index].previewMode = urlRegex.test(monitor.wallpaper)
       ? 'wallpaper'
-      : 'off';
+      : null;
     monitors.set($monitors);
   }}
   required={monitor.previewMode === 'wallpaper'}
