@@ -1,8 +1,6 @@
 <script lang="ts">
   import Card from '@smui/card';
-  import Tooltip, { Wrapper } from '@smui/tooltip';
   import { deskWidth, scale, monitors, deskHeight } from '../stores/SetupStore';
-  import DeskSizeDialog from './dialogs/DeskSizeDialog.svelte';
   import Monitor from './Monitor.svelte';
 </script>
 
