@@ -9,10 +9,12 @@
   import A from '@smui/common/elements/A.svelte';
   import SetupsDrawer from './dialogs/SetupsDrawer.svelte';
   import CreateSetupDialog from './dialogs/CreateSetupDialog.svelte';
+  import SettingsDialog from './dialogs/SettingsDialog.svelte';
 
   let topAppBar: TopAppBarComponentDev;
   let drawerOpen: boolean = false;
   let createSetupDialogOpen: boolean = false;
+  let settingsDialogOpen: boolean = false;
 
   const handleCreateSetup = () => {
     createSetupDialogOpen = true;
@@ -23,7 +25,7 @@
   bind:this={topAppBar}
   color="secondary"
   dense
-  style="min-width:7rem;"
+  style="min-width:9.5rem;"
   variant="short"
 >
   <Row>
@@ -42,6 +44,13 @@
       >
         add
       </IconButton>
+      <IconButton
+        title="Settings"
+        class="material-icons"
+        on:click={() => (settingsDialogOpen = true)}
+      >
+        settings
+      </IconButton>
     </Section>
     <Section align="end" toolbar>
       <TopAppBarTitle style="dispay:flex;">
@@ -53,6 +62,7 @@
 </TopAppBar>
 <SetupsDrawer bind:drawerOpen onCreateNewSetup={handleCreateSetup} />
 <CreateSetupDialog bind:createSetupDialogOpen bind:drawerOpen />
+<SettingsDialog bind:settingsDialogOpen />
 
 <style>
   :global(.toolbar-link) {

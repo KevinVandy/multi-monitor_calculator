@@ -6,12 +6,16 @@
     id,
     loadSetup,
     monitors,
-    mostRecentSetupId,
+    currentSetupId,
     name,
     scale,
     setups
   } from '../stores/SetupStore';
-  import { preferredSearchEngine } from '../stores/SettingsStore';
+  import {
+    expandAdvancedOptionsByDefault,
+    expandStatsByDefault,
+    preferredSearchEngine
+  } from '../stores/SettingsStore';
   import { afterUpdate, onMount } from 'svelte';
   import CircularProgress from '@smui/circular-progress';
   import CommandButtons from './CommandButtons.svelte';
@@ -22,18 +26,18 @@
 
   let loading = true;
 
-  const loadMostRecentSetup = (storedSetups: ISetups) => {
-    let mostRecentSetup: ISetup = storedSetups[$mostRecentSetupId];
-    if (!mostRecentSetup && Object.keys(storedSetups).length > 0) {
+  const loadCurrentSetup = (storedSetups: ISetups) => {
+    let currentSetup: ISetup = storedSetups[$currentSetupId];
+    if (!currentSetup && Object.keys(storedSetups).length > 0) {
       //sort setups by date and load most recent
       const sortedSetups: ISetup[] = Object.values(storedSetups).sort(
         (a: ISetup, b: ISetup) =>
           new Date(a.lastOpened).getTime() - new Date(b.lastOpened).getTime()
       );
-      mostRecentSetup = sortedSetups[0];
+      currentSetup = sortedSetups[0];
     }
-    if (mostRecentSetup) {
-      loadSetup(mostRecentSetup);
+    if (currentSetup) {
+      loadSetup(currentSetup);
     }
   };
 
@@ -44,13 +48,17 @@
     );
     if (storedSettings) {
       preferredSearchEngine.set(storedSettings.preferredSearchEngine);
+      expandAdvancedOptionsByDefault.set(
+        storedSettings.expandAdvancedOptionsByDefault
+      );
+      expandStatsByDefault.set(storedSettings.expandStatsByDefault);
     }
 
     //load most recent setup id from local storage
     const storedSetupId: string | null =
-      localStorage.getItem('mostRecentSetupId');
+      localStorage.getItem('currentSetupId');
     if (storedSetupId) {
-      mostRecentSetupId.set(storedSetupId);
+      currentSetupId.set(storedSetupId);
     }
 
     //load setups from local storage
@@ -84,7 +92,7 @@
       window.history.replaceState({ path: newUrl }, undefined, newUrl);
     } else if (storedSetups) {
       //load most recent setup from local storage
-      loadMostRecentSetup(storedSetups);
+      loadCurrentSetup(storedSetups);
     }
 
     //make scale more mobile friendly
@@ -100,7 +108,9 @@
     localStorage.setItem(
       'settings',
       JSON.stringify({
-        preferredSearchEngine: $preferredSearchEngine
+        preferredSearchEngine: $preferredSearchEngine,
+        expandAdvancedOptionsByDefault: $expandAdvancedOptionsByDefault,
+        expandStatsByDefault: $expandStatsByDefault
       })
     );
 
@@ -119,7 +129,7 @@
     localStorage.setItem('setups', JSON.stringify($setups));
 
     //store current setup id as most recent setp
-    localStorage.setItem('mostRecentSetupId', $id);
+    localStorage.setItem('currentSetupId', $id);
   });
 </script>
 

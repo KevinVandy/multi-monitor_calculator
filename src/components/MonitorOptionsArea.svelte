@@ -4,12 +4,16 @@
   import MediaQuery from '../utils/MediaQuery.svelte';
   import { monitors } from '../stores/SetupStore';
   import MonitorOptions from './MonitorOptions.svelte';
+  import {
+    expandAdvancedOptionsByDefault,
+    expandStatsByDefault
+  } from '../stores/SettingsStore';
 
-  let advancedOptionsOpen: boolean = false;
-  let statsOpen: boolean = true;
-
+  $: advancedOptionsOpen = $expandAdvancedOptionsByDefault;
+  $: statsOpen = $expandStatsByDefault;
   $: tabs = $monitors.map((m) => `Monitor ${m.index + 1}`);
   let active = tabs?.[0] ?? 'Monitor 1';
+
   $: {
     if (!tabs.includes(active)) active = tabs[tabs.length - 1];
   }

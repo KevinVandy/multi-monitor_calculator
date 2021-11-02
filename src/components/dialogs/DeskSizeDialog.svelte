@@ -14,9 +14,9 @@
 </IconButton>
 
 <Dialog bind:open={settingsDialogOpen}>
-  <Title>Settings</Title>
+  <Title>Desk Settings</Title>
   <Content>
-    <div class="content-grid">
+    <div>
       <ScaleField />
       <DeskWidthField />
       <DeskHeightField />

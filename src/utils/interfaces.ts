@@ -1,5 +1,7 @@
 export interface ISettings {
-  preferredSearchEngine: SearchEngine;
+  preferredSearchEngine: string;
+  expandAdvancedOptionsByDefault: boolean;
+  expandStatsByDefault: boolean;
 }
 
 export interface ISetups {
@@ -60,11 +62,3 @@ export interface IResolution {
   horizontal: number;
   vertical: number;
 }
-
-export type SearchEngine =
-  | 'google'
-  | 'bing'
-  | 'duckduckgo'
-  | 'amazon'
-  | 'newegg'
-  | 'bestbuy';

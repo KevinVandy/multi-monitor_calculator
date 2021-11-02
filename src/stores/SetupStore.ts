@@ -16,7 +16,7 @@ export const getNewMonitor = (index = 0): IMonitor => ({
 
 export const parsedDefaultSetup = getNewSetup();
 
-export const mostRecentSetupId = writable(null);
+export const currentSetupId = writable(null);
 export const setups = writable<ISetups>({});
 export const deskHeight = writable<number>(parsedDefaultSetup.deskHeight);
 export const deskWidth = writable<number>(parsedDefaultSetup.deskWidth);

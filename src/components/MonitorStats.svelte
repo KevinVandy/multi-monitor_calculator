@@ -31,6 +31,24 @@
 <DataTable style="width: 100%;">
   <Body>
     <Row>
+      <Cell>Aspect Ratio</Cell>
+      <Cell numeric>{monitor.aspectRatio || 'unknown'}</Cell>
+    </Row>
+    <Row>
+      <Cell>Resolution</Cell>
+      <Cell numeric
+        >{monitor.resolution.horizontal} x {monitor.resolution.vertical}</Cell
+      >
+    </Row>
+    <Row>
+      <Cell>Number Pixels</Cell>
+      <Cell numeric>{numPixels.toLocaleString()}</Cell>
+    </Row>
+    <Row>
+      <Cell>Pixels Per Inch (PPI)</Cell>
+      <Cell numeric>{ppi.toFixed(1)}</Cell>
+    </Row>
+    <Row>
       <Cell>Screen Diagonal</Cell>
       <Cell numeric>{diagonal.toFixed(1)}"</Cell>
     </Row>
@@ -57,24 +75,6 @@
     <Row>
       <Cell>Screen Area</Cell>
       <Cell numeric>{screenArea.toFixed(1)}"<sup>2</sup></Cell>
-    </Row>
-    <Row>
-      <Cell>Aspect Ratio</Cell>
-      <Cell numeric>{monitor.aspectRatio || 'unknown'}</Cell>
-    </Row>
-    <Row>
-      <Cell>Resolution</Cell>
-      <Cell numeric
-        >{monitor.resolution.horizontal} x {monitor.resolution.vertical}</Cell
-      >
-    </Row>
-    <Row>
-      <Cell>Number Pixels</Cell>
-      <Cell numeric>{numPixels.toLocaleString()}</Cell>
-    </Row>
-    <Row>
-      <Cell>Pixels Per Inch (PPI)</Cell>
-      <Cell numeric>{ppi.toFixed(1)}</Cell>
     </Row>
   </Body>
 </DataTable>
