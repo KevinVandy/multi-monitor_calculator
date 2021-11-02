@@ -11,8 +11,8 @@
   export let confirmDeleteSetupDialogOpen = false;
   export let setupToDelete: ISetup | null = null;
 
-  const handleDeleteSetup = (setup: any) => {
-    delete $setups[setup.id];
+  const handleDeleteSetup = () => {
+    delete $setups[setupToDelete.id];
     setups.set($setups);
     loadSetup($setups[Object.keys($setups)[0]]);
   };
@@ -31,7 +31,7 @@
     </Button>
     <Button
       on:click={() => {
-        handleDeleteSetup(setupToDelete);
+        handleDeleteSetup();
         confirmDeleteSetupDialogOpen = false;
       }}
     >

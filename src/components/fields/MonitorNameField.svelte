@@ -5,8 +5,10 @@
   import TextField from '@smui/textfield';
   import type { IMonitor } from '../../utils/interfaces';
   import { monitors } from '../../stores/SetupStore';
+  import ConfirmDeleteMonitor from '../dialogs/ConfirmDeleteMonitor.svelte';
 
   export let monitor: IMonitor;
+  let confirmDeleteMonitorDialogOpen = false;
 
   let surface: MenuSurfaceComponentDev;
 </script>
@@ -22,6 +24,15 @@
     edit
   </IconButton>
   <Tooltip>Rename this monitor to its product name or a nickname</Tooltip>
+</Wrapper>
+<Wrapper>
+  <IconButton
+    class="material-icons"
+    on:click={() => (confirmDeleteMonitorDialogOpen = true)}
+  >
+    delete
+  </IconButton>
+  <Tooltip>Delete this monitor</Tooltip>
 </Wrapper>
 <MenuSurface bind:this={surface}>
   <div>
@@ -50,6 +61,10 @@
     </Wrapper>
   </div>
 </MenuSurface>
+<ConfirmDeleteMonitor
+  bind:confirmDeleteMonitorDialogOpen
+  bind:monitor
+/>
 
 <style>
   div {

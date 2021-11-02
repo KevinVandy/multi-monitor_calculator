@@ -7,7 +7,14 @@
     Label,
     SnackbarComponentDev
   } from '@smui/snackbar';
-  import { monitors, scale, getNewMonitor, id } from '../stores/SetupStore';
+  import {
+    monitors,
+    scale,
+    getNewMonitor,
+    id,
+    deskWidth,
+    deskHeight
+  } from '../stores/SetupStore';
   import { encodeSetupToUrl } from '../utils/linkGenerator';
   import ConfirmResetSetupDialog from './dialogs/ConfirmResetSetupDialog.svelte';
 
@@ -16,17 +23,6 @@
 
   const handleAddMonitor = () => {
     monitors.update((ms) => [...ms, getNewMonitor(ms.length)]);
-  };
-
-  const handleRemoveMonitor = () => {
-    monitors.update((ms) => {
-      ms.pop();
-      if (ms.length === 1) {
-        ms[0].offsetX = 0;
-        ms[0].offsetY = 0;
-      }
-      return ms;
-    });
   };
 
   const handleGenerateLink = () => {
@@ -55,23 +51,11 @@
     <Fab
       class="fab-button"
       color="primary"
-      disabled={$monitors.length <= 0}
-      extended
-      on:click={handleRemoveMonitor}
-    >
-      <Icon class="material-icons">remove</Icon>Remove
-    </Fab>
-    <Tooltip>Remove Last Monitor</Tooltip>
-  </Wrapper>
-  <Wrapper>
-    <Fab
-      class="fab-button"
-      color="primary"
       disabled={$monitors.length >= 10}
       extended
       on:click={handleAddMonitor}
     >
-      <Icon class="material-icons">add</Icon>Add
+      <Icon class="material-icons">add_to_queue</Icon>Add
     </Fab>
     <Tooltip>Add Another Monitor</Tooltip>
   </Wrapper>
@@ -92,16 +76,56 @@
 </div>
 <div class="zoom-button-container">
   <Wrapper>
-    <IconButton on:click={() => $scale > 1 && $scale--} class="material-icons">
-      zoom_out
-    </IconButton>
-    <Tooltip>Zoom Out</Tooltip>
+    <Fab color="secondary" on:click={() => $scale > 1 && $scale--}>
+      <Icon class="material-icons">zoom_out</Icon>
+    </Fab>
+    <Tooltip>Zoom out</Tooltip>
   </Wrapper>
   <Wrapper>
-    <IconButton on:click={() => $scale < 32 && $scale++} class="material-icons">
-      zoom_in
-    </IconButton>
-    <Tooltip>Zoom In</Tooltip>
+    <Fab color="secondary" on:click={() => $scale < 32 && $scale++}>
+      <Icon class="material-icons">zoom_in</Icon>
+    </Fab>
+    <Tooltip>Zoom in</Tooltip>
+  </Wrapper>
+  <Wrapper>
+    <Fab
+      color="secondary"
+      on:click={() => $deskWidth > 2 && ($deskWidth -= 0.5)}
+    >
+      <Icon class="material-icons" style="transform:rotate(90deg);">
+        unfold_less
+      </Icon>
+    </Fab>
+    <Tooltip>Decrease Available Desk Width</Tooltip>
+  </Wrapper>
+  <Wrapper>
+    <Fab
+      color="secondary"
+      on:click={() => $deskWidth < 12 && ($deskWidth += 0.5)}
+    >
+      <Icon class="material-icons" style="transform:rotate(90deg);">
+        unfold_more
+      </Icon>
+    </Fab>
+    <Tooltip>Increase Available Desk Width</Tooltip>
+  </Wrapper>
+  <Wrapper>
+    <Fab
+      color="secondary"
+      on:click={() => $deskHeight > 1 && ($deskHeight -= 0.25)}
+    >
+      <Icon class="material-icons">unfold_less</Icon>
+    </Fab>
+    <Tooltip>Decrease Available Desk Height</Tooltip>
+  </Wrapper>
+  <Wrapper>
+    <Fab
+      color="secondary"
+      on:click={() => $deskHeight < 6 && ($deskHeight += 0.25)}
+    >
+      <Icon class="material-icons">unfold_more</Icon>
+    </Fab>
+    <Tooltip>Increase Available Desk Height</Tooltip>
   </Wrapper>
 </div>
 
@@ -132,12 +156,18 @@
     justify-content: center;
     margin: auto;
     width: 100%;
+    gap: 1rem;
   }
 
   @media (max-width: 600px) {
     .fab-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .zoom-button-container {
+      gap: 0.5rem;
     }
   }
 </style>

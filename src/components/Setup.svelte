@@ -55,8 +55,7 @@
     }
 
     //load most recent setup id from local storage
-    const storedSetupId: string | null =
-      localStorage.getItem('currentSetupId');
+    const storedSetupId: string | null = localStorage.getItem('currentSetupId');
     if (storedSetupId) {
       currentSetupId.set(storedSetupId);
     }

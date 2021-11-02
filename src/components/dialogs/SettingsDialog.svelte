@@ -14,7 +14,13 @@
       <PreferredSearchEngineField />
       <ExpandedByDefaultFields />
       <span>
-        <dark-mode-toggle appearance="switch" permanent dark="Dark" light="Light" legend="Theme Switcher" />
+        <dark-mode-toggle
+          appearance="switch"
+          permanent
+          dark="Dark"
+          light="Light"
+          legend="Theme Switcher"
+        />
       </span>
     </div>
   </Content>

@@ -15,15 +15,6 @@
   {#each $monitors as monitor}
     <Monitor {monitor} />
   {/each}
-  <div
-    class="desk-size-adjuster-container"
-    title="Change Desk Width and Height"
-  >
-    <Wrapper>
-      <DeskSizeDialog />
-      <Tooltip>Change Desk Width and Height</Tooltip>
-    </Wrapper>
-  </div>
 </Card>
 
 <style>
@@ -41,12 +32,6 @@
     transition-property: height, width;
     transition: all 300ms ease;
     width: var(--desk-card-width);
-  }
-
-  .desk-size-adjuster-container {
-    bottom: 0.25rem;
-    right: 0.25rem;
-    position: absolute;
   }
 
   @media (max-width: 600px) {
