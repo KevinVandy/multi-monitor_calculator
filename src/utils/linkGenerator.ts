@@ -6,8 +6,8 @@ import queryString from 'query-string';
 export const parseSetupFromUrl = (urlSetup: {
   [x: string]: string | number;
 }): { parsedMonitors: IMonitor[]; parsedScale: number; parsedId: string } => {
-  const parsedId = String(urlSetup[ShortCode.SETUP_ID]);
-  const parsedScale = +urlSetup[ShortCode.SCALE];
+  const parsedId = String(urlSetup[ShortCode.SETUP_ID]) ?? null;
+  const parsedScale = +urlSetup[ShortCode.SCALE] || parsedDefaultSetup.scale;
   const parsedMonitors: IMonitor[] = [];
   for (let i = 0; i < Math.min(+urlSetup?.num ?? 10, 10); i++) {
     const parsedMonitor: IMonitor = getNewMonitor(i);
