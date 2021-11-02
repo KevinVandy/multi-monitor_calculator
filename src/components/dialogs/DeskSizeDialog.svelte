@@ -2,9 +2,9 @@
   import IconButton from '@smui/icon-button';
   import Dialog, { Title, Content, Actions } from '@smui/dialog';
   import Button from '@smui/button';
-  import DeskWidthField from './fields/DeskWidthField.svelte';
-  import ScaleField from './fields/ScaleField.svelte';
-  import DeskHeightField from './fields/DeskHeightField.svelte';
+  import DeskWidthField from '../fields/DeskWidthField.svelte';
+  import ScaleField from '../fields/ScaleField.svelte';
+  import DeskHeightField from '../fields/DeskHeightField.svelte';
 
   let settingsDialogOpen = false;
 </script>

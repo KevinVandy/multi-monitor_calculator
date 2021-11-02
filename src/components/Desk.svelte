@@ -2,11 +2,11 @@
   import Card from '@smui/card';
   import Tooltip, { Wrapper } from '@smui/tooltip';
   import { deskWidth, scale, monitors, deskHeight } from '../stores/SetupStore';
-  import DeskSizeDialog from './DeskSizeDialog.svelte';
+  import DeskSizeDialog from './dialogs/DeskSizeDialog.svelte';
   import Monitor from './Monitor.svelte';
 </script>
 
-<Card 
+<Card
   --desk-card-height="{$deskHeight * 12 * $scale}px"
   --desk-card-width="{$deskWidth * 12 * $scale}px"
   --desk-card-justify={$monitors.length === 1 ? 'center' : 'flex-start'}

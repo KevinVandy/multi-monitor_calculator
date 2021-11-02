@@ -2,7 +2,7 @@
 *.toml
 .netlify
 .svelte-kit
-/static/*
+/static
 README.md
 build
 package-lock.json

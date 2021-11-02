@@ -85,7 +85,7 @@
     cursor: move;
     display: grid;
     justify-content: center;
-    margin:2px;
+    margin: 2px;
     z-index: 99;
   }
 

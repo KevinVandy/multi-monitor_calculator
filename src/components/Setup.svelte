@@ -4,7 +4,7 @@
     deskHeight,
     deskWidth,
     id,
-    lastOpened,
+    loadSetup,
     monitors,
     mostRecentSetupId,
     name,
@@ -21,15 +21,6 @@
   import { parseSetupFromUrl } from '../utils/linkGenerator';
 
   let loading = true;
-
-  const loadSetup = (setup: ISetup) => {
-    deskHeight.set(setup.deskHeight);
-    deskWidth.set(setup.deskWidth);
-    id.set(setup.id);
-    lastOpened.set(setup.lastOpened);
-    monitors.set(setup.monitors);
-    scale.set(setup.scale);
-  };
 
   const loadMostRecentSetup = (storedSetups: ISetups) => {
     let mostRecentSetup: ISetup = storedSetups[$mostRecentSetupId];

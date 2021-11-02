@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { IMonitor } from '../utils/interfaces';
   import Card, { Content } from '@smui/card';
-  import Tooltip, { Wrapper } from '@smui/tooltip';
   import IconButton from '@smui/icon-button';
   import A from '@smui/common/elements/A.svelte';
   import { fade, slide } from 'svelte/transition';
