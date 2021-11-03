@@ -8,11 +8,11 @@
   import type { ISetup } from '../../utils/interfaces';
   import { loadSetup, setups } from '../../stores/SetupStore';
 
+  export let setup: ISetup | null = null;
   export let confirmDeleteSetupDialogOpen = false;
-  export let setupToDelete: ISetup | null = null;
 
   const handleDeleteSetup = () => {
-    delete $setups[setupToDelete.id];
+    delete $setups[setup.id];
     setups.set($setups);
     loadSetup($setups[Object.keys($setups)[0]]);
   };
@@ -22,7 +22,7 @@
   <Title style="text-align: left;">Are you sure?</Title>
   <DialogContent>
     <p>
-      Are you sure you want to delete setup <i>{setupToDelete?.name ?? ''}</i> ?
+      Are you sure you want to delete setup <i>{setup?.name ?? ''}</i> ?
     </p>
   </DialogContent>
   <DialogActions>

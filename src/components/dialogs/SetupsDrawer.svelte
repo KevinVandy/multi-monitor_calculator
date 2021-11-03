@@ -7,21 +7,25 @@
   } from '@smui/drawer';
   import IconButton from '@smui/icon-button';
   import List, { Item, Text, Graphic, Separator } from '@smui/list';
+  import Tooltip, { Wrapper } from '@smui/tooltip';
+  import type { ISetup } from 'src/utils/interfaces';
   import { id, loadSetup, setups } from '../../stores/SetupStore';
-  import type { ISetup } from '../../utils/interfaces';
   import ConfirmDeleteSetupDialog from './ConfirmDeleteSetupDialog.svelte';
 
   export let drawerOpen: boolean = false;
   export let onCreateNewSetup: any;
-
-  let confirmDeleteSetupDialogOpen = false;
   let setupToDelete: ISetup | null = null;
+  let confirmDeleteSetupDialogOpen: boolean = false;
 </script>
 
-<Drawer variant="modal" fixed bind:open={drawerOpen}>
+<Drawer style="width:300px;" variant="modal" fixed bind:open={drawerOpen}>
   <Header style="display: flex;align-items:flex-start;">
-    <DrawerTitle>Manage Setups</DrawerTitle>
-    <IconButton on:click={() => (drawerOpen = false)} class="material-icons">
+    <DrawerTitle style="text-align:left;margin:0;">Manage Setups</DrawerTitle>
+    <IconButton
+      style="position:absolute;top:4px;right:4px;"
+      on:click={() => (drawerOpen = false)}
+      class="material-icons"
+    >
       close
     </IconButton>
   </Header>
@@ -43,21 +47,26 @@
         >
           <Graphic class="material-icons">monitor</Graphic>
           <div class="setup-name">
-            <Text>{setup.name}</Text>
+            <Text>
+              {setup.name}
+            </Text>
             <Text>{setup.monitors.length} monitors</Text>
+            <Text>{new Date(setup?.lastOpened)?.toDateString()}</Text>
           </div>
-          <IconButton
-            disabled={Object.keys($setups).length <= 1}
-            on:click={(event) => {
-              event.stopPropagation();
-              setupToDelete = setup;
-              confirmDeleteSetupDialogOpen = true;
-            }}
-            class="material-icons"
-            title="Delete"
-          >
-            delete
-          </IconButton>
+          <Wrapper>
+            <IconButton
+              disabled={Object.keys($setups).length <= 1}
+              on:click={(event) => {
+                event.stopPropagation();
+                setupToDelete = setup;
+                confirmDeleteSetupDialogOpen = true;
+              }}
+              class="material-icons"
+            >
+              delete
+            </IconButton>
+            <Tooltip>Delete this setup</Tooltip>
+          </Wrapper>
         </Item>
       {/each}
     </List>
@@ -68,7 +77,7 @@
 
 <ConfirmDeleteSetupDialog
   bind:confirmDeleteSetupDialogOpen
-  bind:setupToDelete
+  bind:setup={setupToDelete}
 />
 
 <style>
@@ -77,7 +86,7 @@
   }
 
   .setup-name {
-    width: 8rem;
+    width: 10rem;
     display: flex;
     flex-direction: column;
     white-space: nowrap;

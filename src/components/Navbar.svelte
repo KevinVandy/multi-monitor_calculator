@@ -38,18 +38,18 @@
         menu
       </IconButton>
       <IconButton
-        title="Create New Setup"
-        class="material-icons"
-        on:click={handleCreateSetup}
-      >
-        add
-      </IconButton>
-      <IconButton
         title="Settings"
         class="material-icons"
         on:click={() => (settingsDialogOpen = true)}
       >
         settings
+      </IconButton>
+      <IconButton
+        title="Create New Setup"
+        class="material-icons"
+        on:click={handleCreateSetup}
+      >
+        add
       </IconButton>
     </Section>
     <Section align="end" toolbar>

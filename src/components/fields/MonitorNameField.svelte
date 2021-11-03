@@ -9,7 +9,6 @@
 
   export let monitor: IMonitor;
   let confirmDeleteMonitorDialogOpen = false;
-
   let surface: MenuSurfaceComponentDev;
 </script>
 
