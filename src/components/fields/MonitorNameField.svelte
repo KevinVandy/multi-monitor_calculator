@@ -60,10 +60,7 @@
     </Wrapper>
   </div>
 </MenuSurface>
-<ConfirmDeleteMonitor
-  bind:confirmDeleteMonitorDialogOpen
-  bind:monitor
-/>
+<ConfirmDeleteMonitor bind:confirmDeleteMonitorDialogOpen bind:monitor />
 
 <style>
   div {
