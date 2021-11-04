@@ -3,11 +3,7 @@
   import Button from '@smui/button';
   import { afterUpdate } from 'svelte';
   import { encodeSetupToUrl } from '../../utils/linkGenerator';
-  import {
-    monitors,
-    scale,
-    id,
-  } from '../../stores/SetupStore';
+  import { monitors, scale, id } from '../../stores/SetupStore';
   import SetupNameField from '../fields/SetupNameField.svelte';
   import SetupDescriptionField from '../fields/SetupDescriptionField.svelte';
 
@@ -48,6 +44,7 @@
   <Dialog bind:open={setupSubmissionDialogOpen}>
     <Title>Submit Your Setup</Title>
     <Content>
+      <input type="hidden" name="form-name" value="setup-submission" />
       <input type="hidden" name="submissionLink" value={submissionLink} />
       <div>
         <SetupNameField />
