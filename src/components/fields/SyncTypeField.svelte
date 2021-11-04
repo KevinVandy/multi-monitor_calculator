@@ -8,6 +8,7 @@
 <Select
   bind:value={monitor.syncType}
   label="Sync Type"
+  input$name={`syncType${monitor.index}`}
   on:MDCSelect:change={() => monitors.set($monitors)}
   variant="filled"
 >

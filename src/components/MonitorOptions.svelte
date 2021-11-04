@@ -25,6 +25,7 @@
   import ProductLinkField from './fields/ProductLinkField.svelte';
   import { urlRegex } from '../utils/regex';
   import MonitorSearch from './MonitorSearch.svelte';
+  import MonitorNotesField from './fields/MonitorNotesField.svelte';
 
   export let monitor: IMonitor;
   export let advancedOptionsOpen: boolean;
@@ -83,6 +84,7 @@
             <WallpaperField {monitor} />
             <ProductLinkField {monitor} />
           </div>
+          <MonitorNotesField {monitor} />
           <PortFields {monitor} />
           <FeatureFields {monitor} />
         </div>

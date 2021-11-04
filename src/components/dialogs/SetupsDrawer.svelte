@@ -11,11 +11,13 @@
   import type { ISetup } from 'src/utils/interfaces';
   import { id, loadSetup, setups } from '../../stores/SetupStore';
   import ConfirmDeleteSetupDialog from './ConfirmDeleteSetupDialog.svelte';
+  import SetupEditDialog from './SetupEditDialog.svelte';
 
   export let drawerOpen: boolean = false;
   export let onCreateNewSetup: any;
   let setupToDelete: ISetup | null = null;
   let confirmDeleteSetupDialogOpen: boolean = false;
+  let setupEditDialogOpen = false;
 </script>
 
 <Drawer style="width:300px;" variant="modal" fixed bind:open={drawerOpen}>
@@ -31,7 +33,11 @@
   </Header>
   <Content>
     <List>
-      <Item on:click={() => onCreateNewSetup()}>
+      <Item on:click={() => (setupEditDialogOpen = true)}>
+        <Graphic class="material-icons">edit</Graphic>
+        <Text>Edit Current Setup</Text>
+      </Item>
+      <Item on:click={onCreateNewSetup}>
         <Graphic class="material-icons">add</Graphic>
         <Text>Create New Setup</Text>
       </Item>
@@ -79,6 +85,8 @@
   bind:confirmDeleteSetupDialogOpen
   bind:setup={setupToDelete}
 />
+
+<SetupEditDialog bind:setupEditDialogOpen />
 
 <style>
   :global(.setup-item) {

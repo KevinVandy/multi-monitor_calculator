@@ -9,8 +9,9 @@ export interface ISetups {
 }
 
 export interface ISetup {
-  deskWidth: number;
+  description: string;
   deskHeight: number;
+  deskWidth: number;
   id: string | null;
   lastOpened: Date | null;
   monitors: IMonitor[];
@@ -27,6 +28,7 @@ export interface IMonitor {
   features: IFeatures;
   index: number;
   name: string;
+  notes: string;
   offsetX: number;
   offsetY: number;
   orientation: 'l' | 'p';

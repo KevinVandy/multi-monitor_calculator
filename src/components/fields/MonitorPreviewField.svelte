@@ -19,9 +19,10 @@
 <div class="container">
   <FormField align="end">
     <Switch
-      on:change={handlePreviewModeSwitchChange}
       checked={!!monitor.previewMode}
       color="primary"
+      input$name={`monitorPreview${monitor.index}`}
+      on:change={handlePreviewModeSwitchChange}
     />
     <span slot="label">Display Preview</span>
   </FormField>

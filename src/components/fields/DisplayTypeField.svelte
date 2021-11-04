@@ -8,6 +8,7 @@
 <Select
   bind:value={monitor.displayType}
   label="Display Type"
+  input$name={`displayType${monitor.index}`}
   on:MDCSelect:change={() => monitors.set($monitors)}
   variant="filled"
 >

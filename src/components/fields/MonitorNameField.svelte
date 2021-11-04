@@ -38,6 +38,7 @@
     <TextField
       bind:value={monitor.name}
       label="Monitor Name"
+      input$name={`monitorName${monitor.index}`}
       on:change={() => monitors.set($monitors)}
       style="width:100%;"
       type="text"

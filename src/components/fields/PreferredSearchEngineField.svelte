@@ -7,6 +7,7 @@
 <Select
   bind:value={$preferredSearchEngine}
   label="Preferred Search Engine"
+  input$name="preferredSearchEngine"
   variant="filled"
 >
   {#each [...Object.values(searchOptions.searchEngine), ...Object.values(searchOptions.store)] as searchEngine}

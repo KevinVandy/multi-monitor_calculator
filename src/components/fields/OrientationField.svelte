@@ -8,6 +8,7 @@
 <Select
   bind:value={monitor.orientation}
   label="Orientation"
+  input$name={`orientation${monitor.index}`}
   on:MDCSelect:change={() => monitors.set($monitors)}
   variant="filled"
 >

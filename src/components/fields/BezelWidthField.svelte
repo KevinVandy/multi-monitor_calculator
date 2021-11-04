@@ -7,15 +7,16 @@
 </script>
 
 <div>
-  <label for="bezelWidthSlider">Bezel Width</label>
+  <label for={`bezelWidthSlider${monitor.index}`}>Bezel Width</label>
   <Slider
     bind:value={monitor.bezelWidth}
     min={0}
-    max={2}
+    max={3}
+    input$name={`bezelWidthSlider${monitor.index}`}
     on:MDCSlider:change={() => monitors.set($monitors)}
     step={0.25}
     discrete
-    id="bezelWidthSlider"
+    id={`bezelWidthSlider${monitor.index}`}
   />
 </div>
 

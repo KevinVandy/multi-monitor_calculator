@@ -9,10 +9,11 @@
 <TextField
   bind:value={monitor.refreshRate}
   label="Refresh Rate"
-  max="1000"
-  min="0"
+  input$max="1000"
+  input$min="0"
+  input$name={`refreshRate${monitor.index}`}
   on:change={() => monitors.set($monitors)}
-  step="1"
+  input$step="1"
   type="number"
   variant="filled"
 />

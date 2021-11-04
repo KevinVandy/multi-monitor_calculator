@@ -10,9 +10,10 @@
 <TextField
   bind:value={monitor.resolution.horizontal}
   label="Horizontal Resolution"
-  max="20000"
-  min="2"
-  step="1"
+  input$max="20000"
+  input$min="2"
+  input$name={`horizontalResolution${monitor.index}`}
+  input$step="1"
   on:change={() => {
     monitor.aspectRatio = calcAspectRatio(
       monitor.resolution.horizontal,

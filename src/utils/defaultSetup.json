@@ -1,4 +1,5 @@
 {
+  "description": "",
   "deskHeight": 2.25,
   "deskWidth": 5,
   "id": null,
@@ -22,6 +23,7 @@
       },
       "index": 0,
       "name": "",
+      "notes": "",
       "offsetX": 0,
       "offsetY": 0,
       "orientation": "l",

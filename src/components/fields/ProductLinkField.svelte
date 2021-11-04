@@ -14,6 +14,7 @@
   bind:invalid
   bind:value={monitor.productLink}
   label="Product Link"
+  input$name={`productLink${monitor.index}`}
   on:change={() => monitors.set($monitors)}
   style="width:100%;"
   type="url"

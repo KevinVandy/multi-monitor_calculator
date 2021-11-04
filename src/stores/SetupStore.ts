@@ -18,6 +18,7 @@ export const parsedDefaultSetup = getNewSetup();
 
 export const currentSetupId = writable(null);
 export const setups = writable<ISetups>({});
+export const description = writable<string>(parsedDefaultSetup.description);
 export const deskHeight = writable<number>(parsedDefaultSetup.deskHeight);
 export const deskWidth = writable<number>(parsedDefaultSetup.deskWidth);
 export const id = writable<string>(parsedDefaultSetup.id);
@@ -29,6 +30,7 @@ export const scale = writable<number>(parsedDefaultSetup.scale);
 export const loadSetup = (setup: ISetup): void => {
   deskHeight.set(setup.deskHeight);
   deskWidth.set(setup.deskWidth);
+  description.set(setup.description);
   id.set(setup.id);
   lastOpened.set(setup.lastOpened);
   monitors.set(setup.monitors);

@@ -9,7 +9,8 @@
     currentSetupId,
     name,
     scale,
-    setups
+    setups,
+    description
   } from '../stores/SetupStore';
   import {
     expandAdvancedOptionsByDefault,
@@ -75,18 +76,27 @@
       //parse a setup from url
       const parsedSetup = parseSetupFromUrl(urlSetup);
 
-      //if setup from url already exists locally, just load from local
-      if (
+      //detect if setup exists in local storage and url, warn user if
+      let confirmLoadFromUrl = false;
+      const urlAlreadyExistsLocally =
         storedSetups &&
-        Object.keys(storedSetups).includes(parsedSetup.parsedId)
-      ) {
-        loadSetup(storedSetups[parsedSetup.parsedId]);
-      } else {
+        Object.keys(storedSetups).includes(parsedSetup.parsedId);
+      if (urlAlreadyExistsLocally) {
+        confirmLoadFromUrl = confirm(
+          'You have already loaded this setup before. Do you want to overwrite from this link? Your recent changes could be lost if you made any.'
+        );
+      }
+
+      if (!urlAlreadyExistsLocally || confirmLoadFromUrl) {
         //load setup from url
         id.set(parsedSetup.parsedId);
         monitors.set(parsedSetup.parsedMonitors);
         scale.set(parsedSetup.parsedScale);
+      } else {
+        //load setup from local storage
+        loadSetup(storedSetups[parsedSetup.parsedId]);
       }
+
       //remove params from url so they don't get read again on page reload
       const newUrl = `${location.origin}${location.pathname}`;
       window.history.replaceState({ path: newUrl }, undefined, newUrl);
@@ -116,6 +126,7 @@
 
     //update current setup
     $setups[$id] = {
+      description: $description,
       deskHeight: $deskHeight,
       deskWidth: $deskWidth,
       id: $id,

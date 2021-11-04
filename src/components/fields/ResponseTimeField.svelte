@@ -9,10 +9,11 @@
 <TextField
   bind:value={monitor.responseTime}
   label="Response Time"
-  max="100"
-  min="0"
+  input$max="100"
+  input$min="0"
+  input$name={`responseTime${monitor.index}`}
   on:change={() => monitors.set($monitors)}
-  step="1"
+  input$step="1"
   type="number"
   variant="filled"
 />

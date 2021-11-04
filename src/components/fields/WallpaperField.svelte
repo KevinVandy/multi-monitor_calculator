@@ -14,6 +14,7 @@
   bind:invalid
   bind:value={monitor.wallpaper}
   label="Wallpaper Link"
+  input$name={`wallpaperLink${monitor.index}`}
   on:change={() => {
     $monitors[monitor.index].previewMode = urlRegex.test(monitor.wallpaper)
       ? 'wallpaper'

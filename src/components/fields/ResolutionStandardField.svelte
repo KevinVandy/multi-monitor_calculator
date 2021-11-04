@@ -9,6 +9,7 @@
 <Select
   bind:value={monitor.resolution.standard}
   label="Resolution Standard"
+  input$name={`resolutionStandard${monitor.index}`}
   on:MDCSelect:change={() => {
     [monitor.resolution.horizontal, monitor.resolution.vertical] =
       calcResolution(monitor.aspectRatio, monitor.resolution.standard) ?? [

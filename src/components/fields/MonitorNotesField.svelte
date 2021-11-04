@@ -7,10 +7,11 @@
 </script>
 
 <TextField
-  bind:value={monitor.bezelColor}
-  label="Bezel Color"
-  input$name={`bezelColor${monitor.index}`}
+  bind:value={monitor.notes}
+  label="Notes"
+  input$name={`monitorNotes${monitor.index}`}
   on:change={() => monitors.set($monitors)}
-  type="color"
+  textarea
+  style="width:100%;max-height:200px;"
   variant="filled"
 />

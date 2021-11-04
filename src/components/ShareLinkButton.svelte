@@ -7,11 +7,7 @@
     Label,
     SnackbarComponentDev
   } from '@smui/snackbar';
-  import {
-    monitors,
-    scale,
-    id,
-  } from '../stores/SetupStore';
+  import { monitors, scale, id } from '../stores/SetupStore';
   import { encodeSetupToUrl } from '../utils/linkGenerator';
 
   let copiedToClipboardSnackbar: SnackbarComponentDev;
