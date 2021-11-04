@@ -5,3 +5,9 @@
 <main>
   <Setup />
 </main>
+
+<form name="setup-submission" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="submissionLink" />
+  <input type="text" name="setupName" />
+  <input type="text" name="setupDescription" />
+</form>
