@@ -23,6 +23,7 @@
   import MonitorOptionsArea from './MonitorOptionsArea.svelte';
   import type { ISettings, ISetup, ISetups } from '../utils/interfaces';
   import { parseSetupFromUrl } from '../utils/linkGenerator';
+  import SetupSubmission from './SetupSubmission.svelte';
 
   let loading = true;
 
@@ -141,6 +142,7 @@
   <section>
     <Desk />
     <MonitorOptionsArea />
+    <SetupSubmission />
   </section>
 {/if}
 

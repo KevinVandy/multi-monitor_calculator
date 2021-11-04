@@ -2,12 +2,13 @@ import { getNewMonitor, parsedDefaultSetup } from '../stores/SetupStore';
 import { ShortCode } from './enums';
 import type { IMonitor } from './interfaces';
 import queryString from 'query-string';
+import { v4 as uuid } from 'uuid';
 
 export const parseSetupFromUrl = (urlSetup: {
   [x: string]: string | number;
 }): { parsedMonitors: IMonitor[]; parsedScale: number; parsedId: string } => {
-  const parsedId = String(urlSetup[ShortCode.SETUP_ID]) ?? null;
-  const parsedScale = +urlSetup[ShortCode.SCALE] || parsedDefaultSetup.scale;
+  const parsedId = String(urlSetup[ShortCode.SETUP_ID] || uuid());
+  const parsedScale = Number(urlSetup[ShortCode.SCALE] || parsedDefaultSetup.scale);
   const parsedMonitors: IMonitor[] = [];
   for (let i = 0; i < Math.min(+urlSetup?.num ?? 10, 10); i++) {
     const parsedMonitor: IMonitor = getNewMonitor(i);
@@ -46,15 +47,15 @@ export const parseSetupFromUrl = (urlSetup: {
       resolution: {
         horizontal: Number(
           urlSetup[`${ShortCode.HORIZONTAL_RESOLUTION}${i}`] ??
-            parsedMonitor.resolution.horizontal
+          parsedMonitor.resolution.horizontal
         ),
         standard: String(
           urlSetup[`${ShortCode.RESOLUTION_STANDARD}${i}`] ??
-            parsedMonitor.resolution.standard
+          parsedMonitor.resolution.standard
         ),
         vertical: Number(
           urlSetup[`${ShortCode.VERTICAL_RESOLUTION}${i}`] ??
-            parsedMonitor.resolution.vertical
+          parsedMonitor.resolution.vertical
         )
       },
       syncType: String(

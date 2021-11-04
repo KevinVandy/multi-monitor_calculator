@@ -1,37 +1,20 @@
 <script lang="ts">
   import Fab, { Icon } from '@smui/fab';
   import Tooltip, { Wrapper } from '@smui/tooltip';
-  import IconButton from '@smui/icon-button';
-  import Snackbar, {
-    Actions as SnackbarActions,
-    Label,
-    SnackbarComponentDev
-  } from '@smui/snackbar';
   import {
     monitors,
     scale,
     getNewMonitor,
-    id,
     deskWidth,
     deskHeight
   } from '../stores/SetupStore';
-  import { encodeSetupToUrl } from '../utils/linkGenerator';
   import ConfirmResetSetupDialog from './dialogs/ConfirmResetSetupDialog.svelte';
+  import ShareLinkButton from './ShareLinkButton.svelte';
 
-  let copiedToClipboardSnackbar: SnackbarComponentDev;
   let confirmResetDialogOpen = false;
 
   const handleAddMonitor = () => {
     monitors.update((ms) => [...ms, getNewMonitor(ms.length)]);
-  };
-
-  const handleGenerateLink = () => {
-    const newSearchString = encodeSetupToUrl($monitors, $scale, $id);
-    const newUrl = `${location.origin}${location.pathname}?${newSearchString}`;
-    window.history.replaceState({ path: newUrl }, undefined, newUrl);
-    navigator.clipboard.writeText(location.href);
-    copiedToClipboardSnackbar.open();
-    setTimeout(() => copiedToClipboardSnackbar.close(), 5000);
   };
 </script>
 
@@ -59,20 +42,7 @@
     </Fab>
     <Tooltip>Add Another Monitor</Tooltip>
   </Wrapper>
-  <Wrapper>
-    <Fab
-      class="fab-button"
-      color="primary"
-      extended
-      on:click={handleGenerateLink}
-    >
-      <Icon class="material-icons">link</Icon>Share Link
-    </Fab>
-    <Tooltip
-      >Generate a link to this setup that you can use to send to your other
-      devices or friends</Tooltip
-    >
-  </Wrapper>
+  <ShareLinkButton />
 </div>
 <div class="zoom-button-container">
   <Wrapper>
@@ -130,13 +100,6 @@
 </div>
 
 <ConfirmResetSetupDialog bind:confirmResetDialogOpen />
-
-<Snackbar bind:this={copiedToClipboardSnackbar}>
-  <Label>URL Copied to Clipboard!</Label>
-  <SnackbarActions>
-    <IconButton class="material-icons" title="Dismiss">close</IconButton>
-  </SnackbarActions>
-</Snackbar>
 
 <style>
   .fab-grid {
