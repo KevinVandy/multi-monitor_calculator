@@ -9,8 +9,8 @@
     expandStatsByDefault
   } from '../stores/SettingsStore';
 
-  $: advancedOptionsOpen = $expandAdvancedOptionsByDefault;
-  $: statsOpen = $expandStatsByDefault;
+  let advancedOptionsOpen: boolean = $expandAdvancedOptionsByDefault;
+  let statsOpen: boolean = $expandStatsByDefault;
   $: tabs = $monitors.map((m) => `Monitor ${m.index + 1}`);
   let active = tabs?.[0] ?? 'Monitor 1';
 
