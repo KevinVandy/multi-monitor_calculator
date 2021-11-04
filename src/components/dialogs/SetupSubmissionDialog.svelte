@@ -34,13 +34,7 @@
   };
 </script>
 
-<form
-  data-netlify="true"
-  method="POST"
-  name="setup-submission"
-  id="setup-submission"
-  on:submit={handleSubmit}
->
+<form on:submit={handleSubmit} id="setup-submission">
   <Dialog bind:open={setupSubmissionDialogOpen}>
     <Title>Submit Your Setup</Title>
     <Content>
