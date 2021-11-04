@@ -153,9 +153,11 @@
   <section>
     <Desk />
     <MonitorOptionsArea />
-    <SetupSubmission />
   </section>
 {/if}
+<section>
+  <SetupSubmission />
+</section>
 
 <style>
   div {
@@ -166,6 +168,6 @@
   }
 
   section {
-    padding-bottom: 20rem;
+    padding-bottom: 8rem;
   }
 </style>
