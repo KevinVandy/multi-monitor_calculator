@@ -36,10 +36,10 @@
 
 <form
   data-netlify="true"
-  on:submit={handleSubmit}
   id="setup-submission"
   name="setup-submission"
   netlify-honeypot="bot-field"
+  on:submit={handleSubmit}
 >
   <Dialog bind:open={setupSubmissionDialogOpen}>
     <Title>Submit Your Setup</Title>
