@@ -6,10 +6,26 @@ import { v4 as uuid } from 'uuid';
 
 export const parseSetupFromUrl = (urlSetup: {
   [x: string]: string | number;
-}): { parsedMonitors: IMonitor[]; parsedScale: number; parsedId: string } => {
+}): {
+  parsedDeskHeight: number;
+  parsedDeskWidth: number;
+  parsedId: string;
+  parsedMonitors: IMonitor[];
+  parsedScale: number;
+  parsedName: string;
+} => {
   const parsedId = String(urlSetup[ShortCode.SETUP_ID] || uuid());
+  const parsedName = String(
+    urlSetup[ShortCode.SETUP_NAME] || parsedDefaultSetup.name
+  );
   const parsedScale = Number(
     urlSetup[ShortCode.SCALE] || parsedDefaultSetup.scale
+  );
+  const parsedDeskHeight = Number(
+    urlSetup[ShortCode.DESK_HEIGHT] || parsedDefaultSetup.deskHeight
+  );
+  const parsedDeskWidth = Number(
+    urlSetup[ShortCode.DESK_WIDTH] || parsedDefaultSetup.deskWidth
   );
   const parsedMonitors: IMonitor[] = [];
   for (let i = 0; i < Math.min(+urlSetup?.num ?? 10, 10); i++) {
@@ -65,7 +81,14 @@ export const parseSetupFromUrl = (urlSetup: {
       )
     });
   }
-  return { parsedId, parsedMonitors, parsedScale };
+  return {
+    parsedId,
+    parsedMonitors,
+    parsedScale,
+    parsedDeskHeight,
+    parsedDeskWidth,
+    parsedName
+  };
 };
 
 /**
@@ -76,6 +99,9 @@ export const parseSetupFromUrl = (urlSetup: {
 export const encodeSetupToUrl = (
   monitors: IMonitor[],
   scale: number,
+  deskHeight: number,
+  deskWidth: number,
+  name: string,
   id: string
 ): string => {
   const defaultMonitor = getNewMonitor();
@@ -87,6 +113,9 @@ export const encodeSetupToUrl = (
           {
             num: monitors.length,
             [ShortCode.SCALE]: scale,
+            [ShortCode.DESK_HEIGHT]: deskHeight,
+            [ShortCode.DESK_WIDTH]: deskWidth,
+            [ShortCode.SETUP_NAME]: name,
             [ShortCode.SETUP_ID]: id
           },
           ...monitors.map((m: IMonitor, i: number) => ({
@@ -110,6 +139,18 @@ export const encodeSetupToUrl = (
       ).filter(([key, value]: [string, number | string]) => {
         if (!value) return false;
         if (key[0] === ShortCode.SCALE && scale === parsedDefaultSetup.scale)
+          return false;
+        if (
+          key[0] === ShortCode.DESK_HEIGHT &&
+          deskHeight === parsedDefaultSetup.deskHeight
+        )
+          return false;
+        if (
+          key[0] === ShortCode.DESK_WIDTH &&
+          deskWidth === parsedDefaultSetup.deskWidth
+        )
+          return false;
+        if (key[0] === ShortCode.SETUP_NAME && name.includes('Untitled'))
           return false;
         if (
           key[0] === ShortCode.ASPECT_RATIO &&

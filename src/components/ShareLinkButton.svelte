@@ -7,13 +7,27 @@
     Label,
     SnackbarComponentDev
   } from '@smui/snackbar';
-  import { monitors, scale, id } from '../stores/SetupStore';
+  import {
+    monitors,
+    scale,
+    id,
+    deskHeight,
+    deskWidth,
+    name
+  } from '../stores/SetupStore';
   import { encodeSetupToUrl } from '../utils/linkGenerator';
 
   let copiedToClipboardSnackbar: SnackbarComponentDev;
 
   const handleGenerateLink = () => {
-    const newSearchString = encodeSetupToUrl($monitors, $scale, $id);
+    const newSearchString = encodeSetupToUrl(
+      $monitors,
+      $scale,
+      $deskHeight,
+      $deskWidth,
+      $name,
+      $id
+    );
     const newUrl = `${location.origin}${location.pathname}?${newSearchString}`;
     window.history.replaceState({ path: newUrl }, undefined, newUrl);
     navigator.clipboard.writeText(location.href);

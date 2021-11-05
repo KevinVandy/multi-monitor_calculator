@@ -2,10 +2,11 @@ export enum ShortCode {
   ASPECT_RATIO = 'a',
   BEZEL_COLOR = 'c',
   BEZEL_WIDTH = 'b',
+  DESK_HEIGHT = 'g',
+  DESK_WIDTH = 'w',
   DIAGONAL = 'd',
   DISPLAY_TYPE = 'p',
   HORIZONTAL_RESOLUTION = 'h',
-  SETUP_ID = 'i',
   NAME = 'm',
   OFFSET_X = 'x',
   OFFSET_Y = 'y',
@@ -14,6 +15,8 @@ export enum ShortCode {
   RESOLUTION_STANDARD = 's',
   RESPONSE_TIME = 't',
   SCALE = 'z',
+  SETUP_ID = 'i',
+  SETUP_NAME = 'f',
   SYNC_TYPE = 'n',
   VERTICAL_RESOLUTION = 'v'
 }

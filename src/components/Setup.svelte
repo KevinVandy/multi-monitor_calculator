@@ -24,7 +24,7 @@
   import MonitorOptionsArea from './MonitorOptionsArea.svelte';
   import type { ISettings, ISetup, ISetups } from '../utils/interfaces';
   import { parseSetupFromUrl } from '../utils/linkGenerator';
-
+  import PrebuiltSetupsField from './fields/PrebuiltSetupsField.svelte';
 
   let loading = true;
 
@@ -90,7 +90,10 @@
       if (!urlAlreadyExistsLocally || confirmLoadFromUrl) {
         //load setup from url
         id.set(parsedSetup.parsedId);
+        deskHeight.set(parsedSetup.parsedDeskHeight);
+        deskWidth.set(parsedSetup.parsedDeskWidth);
         monitors.set(parsedSetup.parsedMonitors);
+        name.set(parsedSetup.parsedName);
         scale.set(parsedSetup.parsedScale);
       } else {
         //load setup from local storage
@@ -144,6 +147,7 @@
   });
 </script>
 
+<PrebuiltSetupsField />
 <CommandButtons />
 {#if loading}
   <div>

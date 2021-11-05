@@ -9,7 +9,14 @@
   import IconButton from '@smui/icon-button';
   import { afterUpdate } from 'svelte';
   import { encodeSetupToUrl } from '../../utils/linkGenerator';
-  import { monitors, scale, id } from '../../stores/SetupStore';
+  import {
+    monitors,
+    scale,
+    id,
+    deskHeight,
+    deskWidth,
+    name
+  } from '../../stores/SetupStore';
   import SetupNameField from '../fields/SetupNameField.svelte';
   import SetupDescriptionField from '../fields/SetupDescriptionField.svelte';
 
@@ -23,6 +30,9 @@
     submissionLink = `${location.origin}${location.pathname}?${encodeSetupToUrl(
       $monitors,
       $scale,
+      $deskHeight,
+      $deskWidth,
+      $name,
       $id
     )}`;
   });
