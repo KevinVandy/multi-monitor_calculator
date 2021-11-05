@@ -165,6 +165,6 @@
   }
 
   section {
-    padding-bottom: 20rem;
+    padding-bottom: 8rem;
   }
 </style>

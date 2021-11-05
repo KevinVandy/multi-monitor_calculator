@@ -8,3 +8,9 @@
   <Setup />
   <SetupSubmission />
 </main>
+
+<style>
+  main {
+    padding-bottom: 20rem;
+  }
+</style>
