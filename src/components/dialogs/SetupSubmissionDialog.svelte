@@ -1,6 +1,12 @@
 <script lang="ts">
   import Dialog, { Title, Content, Actions } from '@smui/dialog';
+  import Snackbar, {
+    Actions as SnackbarActions,
+    Label,
+    SnackbarComponentDev
+  } from '@smui/snackbar';
   import Button from '@smui/button';
+  import IconButton from '@smui/icon-button';
   import { afterUpdate } from 'svelte';
   import { encodeSetupToUrl } from '../../utils/linkGenerator';
   import { monitors, scale, id } from '../../stores/SetupStore';
@@ -9,6 +15,7 @@
 
   export let setupSubmissionDialogOpen = false;
 
+  let submissionReceivedSnackbar: SnackbarComponentDev;
   let submissionLink: string = '';
 
   afterUpdate(() => {
@@ -29,7 +36,10 @@
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(formData as {}).toString()
     })
-      .then(() => console.log('Form successfully submitted'))
+      .then(() => {
+        submissionReceivedSnackbar.open();
+        setTimeout(() => submissionReceivedSnackbar.close(), 15000);
+      })
       .catch((error) => console.error(error));
   };
 </script>
@@ -62,6 +72,13 @@
     </Actions>
   </Dialog>
 </form>
+
+<Snackbar bind:this={submissionReceivedSnackbar}>
+  <Label>Your Monitor Setup Submission Was Received</Label>
+  <SnackbarActions>
+    <IconButton class="material-icons" title="Dismiss">close</IconButton>
+  </SnackbarActions>
+</Snackbar>
 
 <style>
   div {
