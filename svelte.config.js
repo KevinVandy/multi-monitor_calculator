@@ -9,7 +9,13 @@ const config = {
 
   kit: {
     adapter: adapter(),
-    target: '#svelte'
+    target: '#svelte',
+    prerender: {
+      crawl: true,
+      enabled: true,
+      onError: "continue",
+      entries: ['*'],
+    },
   }
 };
 
