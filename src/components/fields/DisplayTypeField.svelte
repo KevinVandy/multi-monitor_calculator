@@ -13,8 +13,10 @@
   variant="filled"
 >
   <Option value="any">Any</Option>
-  <Option value="IPS">IPS</Option>
   <Option value="TN">TN</Option>
+  <Option value="IPS">IPS</Option>
   <Option value="VA">VA</Option>
   <Option value="OLED">OLED</Option>
+  <Option value="Mini LED">Mini LED</Option>
+  <Option value="Micro LED">Micro LED</Option>
 </Select>
