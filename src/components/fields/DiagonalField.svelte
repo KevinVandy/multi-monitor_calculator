@@ -8,13 +8,14 @@
 
 <TextField
   bind:value={monitor.diagonal}
-  label="Diagonal"
+  input$max="200"
+  input$min="1"
   input$name={`diagonal${monitor.index}`}
+  input$step="1"
+  label="Diagonal"
   on:change={() => monitors.set($monitors)}
   required
-  input$min="1"
-  input$max="200"
-  input$step="1"
+  suffix="inches"
   type="number"
   variant="filled"
 />

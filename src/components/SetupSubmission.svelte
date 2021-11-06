@@ -37,6 +37,6 @@
     gap: 1rem;
     margin: 2rem auto;
     max-width: 720px;
-    padding: 0.5rem;
+    padding: 10rem 0.5rem;
   }
 </style>

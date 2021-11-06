@@ -20,6 +20,7 @@
     );
     monitors.set($monitors);
   }}
+  suffix="pixels"
   type="number"
   variant="filled"
 />

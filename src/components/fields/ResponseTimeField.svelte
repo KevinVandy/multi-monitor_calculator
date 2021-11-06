@@ -14,6 +14,7 @@
   input$name={`responseTime${monitor.index}`}
   on:change={() => monitors.set($monitors)}
   input$step="1"
+  suffix="ms"
   type="number"
   variant="filled"
 />

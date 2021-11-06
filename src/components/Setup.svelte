@@ -15,7 +15,8 @@
   import {
     expandAdvancedOptionsByDefault,
     expandStatsByDefault,
-    preferredSearchEngine
+    preferredSearchEngine,
+    units
   } from '../stores/SettingsStore';
   import { afterUpdate, onMount } from 'svelte';
   import CircularProgress from '@smui/circular-progress';
@@ -54,6 +55,7 @@
         storedSettings.expandAdvancedOptionsByDefault
       );
       expandStatsByDefault.set(storedSettings.expandStatsByDefault);
+      units.set(storedSettings.units);
     }
 
     //load most recent setup id from local storage
@@ -123,7 +125,8 @@
       JSON.stringify({
         preferredSearchEngine: $preferredSearchEngine,
         expandAdvancedOptionsByDefault: $expandAdvancedOptionsByDefault,
-        expandStatsByDefault: $expandStatsByDefault
+        expandStatsByDefault: $expandStatsByDefault,
+        units: $units
       })
     );
 
@@ -166,9 +169,5 @@
     display: flex;
     justify-content: center;
     padding-top: 3rem;
-  }
-
-  section {
-    padding-bottom: 8rem;
   }
 </style>

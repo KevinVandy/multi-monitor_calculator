@@ -1,7 +1,8 @@
 export interface ISettings {
-  preferredSearchEngine: string;
   expandAdvancedOptionsByDefault: boolean;
   expandStatsByDefault: boolean;
+  preferredSearchEngine: string;
+  units: 'Metric' | 'Imperial';
 }
 
 export interface ISetups {

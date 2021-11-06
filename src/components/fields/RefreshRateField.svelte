@@ -14,6 +14,7 @@
   input$name={`refreshRate${monitor.index}`}
   on:change={() => monitors.set($monitors)}
   input$step="1"
+  suffix="Hz"
   type="number"
   variant="filled"
 />

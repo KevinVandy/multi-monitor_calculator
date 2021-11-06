@@ -3,6 +3,7 @@
   import Button from '@smui/button';
   import PreferredSearchEngineField from '../fields/PreferredSearchEngineField.svelte';
   import ExpandedByDefaultFields from '../fields/ExpandedByDefaultFields.svelte';
+  import UnitsField from '../fields/UnitsField.svelte';
 
   export let settingsDialogOpen = false;
 </script>
@@ -13,6 +14,7 @@
     <div class="settings-grid">
       <PreferredSearchEngineField />
       <ExpandedByDefaultFields />
+      <UnitsField />
       <span>
         <dark-mode-toggle
           appearance="switch"
