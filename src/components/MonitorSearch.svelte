@@ -41,6 +41,7 @@
                 <img
                   alt="{searchEngine.name} logo"
                   src={searchEngine.logoPng}
+                  loading="lazy"
                 />
               </picture>
               <Text>Search {searchEngine.name}</Text>
@@ -57,6 +58,7 @@
                 <img
                   alt="{searchEngine.name} logo"
                   src={searchEngine.logoPng}
+                  loading="lazy"
                 />
               </picture>
               <Text>Search {searchEngine.name}</Text>

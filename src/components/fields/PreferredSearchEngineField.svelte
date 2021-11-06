@@ -15,7 +15,11 @@
       <picture>
         <source srcSet={searchEngine.logoWebp} type="image/webp" />
         <source srcSet={searchEngine.logoPng} type="image/png" />
-        <img alt="{searchEngine.name} logo" src={searchEngine.logoPng} />
+        <img
+          alt="{searchEngine.name} logo"
+          src={searchEngine.logoPng}
+          loading="lazy"
+        />
       </picture>
       {searchEngine.name}
     </Option>
