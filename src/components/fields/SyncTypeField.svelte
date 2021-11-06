@@ -16,4 +16,5 @@
   <Option value="none">None</Option>
   <Option value="G-Sync">G-Sync</Option>
   <Option value="FreeSync">FreeSync</Option>
+  <Option value="ProMotion">ProMotion</Option>
 </Select>
