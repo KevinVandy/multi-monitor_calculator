@@ -46,19 +46,28 @@
 </div>
 <div class="zoom-button-container">
   <Wrapper>
-    <Fab color="secondary" on:click={() => $scale > 1 && $scale--}>
+    <Fab
+      aria-label="Zoom Out"
+      color="secondary"
+      on:click={() => $scale > 1 && $scale--}
+    >
       <Icon class="material-icons">zoom_out</Icon>
     </Fab>
-    <Tooltip>Zoom out</Tooltip>
-  </Wrapper>
-  <Wrapper>
-    <Fab color="secondary" on:click={() => $scale < 32 && $scale++}>
-      <Icon class="material-icons">zoom_in</Icon>
-    </Fab>
-    <Tooltip>Zoom in</Tooltip>
+    <Tooltip>Zoom Out</Tooltip>
   </Wrapper>
   <Wrapper>
     <Fab
+      aria-label="Zoom In"
+      color="secondary"
+      on:click={() => $scale < 32 && $scale++}
+    >
+      <Icon class="material-icons">zoom_in</Icon>
+    </Fab>
+    <Tooltip>Zoom In</Tooltip>
+  </Wrapper>
+  <Wrapper>
+    <Fab
+      aria-label="Decrease Available Desk Width"
       color="secondary"
       on:click={() => $deskWidth > 2 && ($deskWidth -= 0.5)}
     >
@@ -70,6 +79,7 @@
   </Wrapper>
   <Wrapper>
     <Fab
+      aria-label="Increase Available Desk Width"
       color="secondary"
       on:click={() => $deskWidth < 12 && ($deskWidth += 0.5)}
     >
@@ -81,6 +91,7 @@
   </Wrapper>
   <Wrapper>
     <Fab
+      aria-label="Decrease Available Desk Height"
       color="secondary"
       on:click={() => $deskHeight > 1 && ($deskHeight -= 0.25)}
     >
@@ -90,6 +101,7 @@
   </Wrapper>
   <Wrapper>
     <Fab
+      aria-label="Increase Available Desk Height"
       color="secondary"
       on:click={() => $deskHeight < 6 && ($deskHeight += 0.25)}
     >

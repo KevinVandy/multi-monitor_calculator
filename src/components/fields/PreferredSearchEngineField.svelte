@@ -2,6 +2,7 @@
   import Select, { Option } from '@smui/select';
   import { searchOptions } from '../../utils/searchEngine';
   import { preferredSearchEngine } from '../../stores/SettingsStore';
+  import Image from '../../utils/Image.svelte';
 </script>
 
 <Select
@@ -12,23 +13,21 @@
 >
   {#each [...Object.values(searchOptions.searchEngine), ...Object.values(searchOptions.store)] as searchEngine}
     <Option value={searchEngine.name}>
-      <picture>
-        <source srcSet={searchEngine.logoWebp} type="image/webp" />
-        <source srcSet={searchEngine.logoPng} type="image/png" />
-        <img
-          alt="{searchEngine.name} logo"
-          src={searchEngine.logoPng}
-          loading="lazy"
-        />
-      </picture>
+      <Image
+        alt="{searchEngine.name} logo"
+        class="se-img"
+        lazy
+        srcPng={searchEngine.logoPng}
+        srcWebp={searchEngine.logoWebp}
+      />
       {searchEngine.name}
     </Option>
   {/each}
 </Select>
 
 <style>
-  img {
-    width: 1.5rem;
+  :global(.se-img) {
     padding-right: 1rem;
+    width: 1.5rem;
   }
 </style>

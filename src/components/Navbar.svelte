@@ -10,6 +10,10 @@
   import SetupsDrawer from './dialogs/SetupsDrawer.svelte';
   import CreateSetupDialog from './dialogs/CreateSetupDialog.svelte';
   import SettingsDialog from './dialogs/SettingsDialog.svelte';
+  import Image from '../utils/Image.svelte';
+  import LogoPng from '../images/favicon.png';
+  import LogoWebp from '../images/favicon.webp';
+  import MediaQuery from '../utils/MediaQuery.svelte';
 
   let topAppBar: TopAppBarComponentDev;
   let drawerOpen: boolean = false;
@@ -52,6 +56,26 @@
         add
       </IconButton>
     </Section>
+    <MediaQuery query="(min-width: 500px)" let:matches>
+      {#if matches}
+        <TopAppBarTitle>
+          <Image
+            alt="monitor logo"
+            class="nav-logo"
+            height={50}
+            srcPng={LogoPng}
+            srcWebp={LogoWebp}
+          />
+          <Image
+            alt="monitor logo"
+            class="nav-logo"
+            height={50}
+            srcPng={LogoPng}
+            srcWebp={LogoWebp}
+          />
+        </TopAppBarTitle>
+      {/if}
+    </MediaQuery>
     <Section align="end" toolbar>
       <TopAppBarTitle style="dispay:flex;">
         <A style="color:white;" class="toolbar-link" href="/">Home</A>
@@ -68,5 +92,9 @@
   :global(.toolbar-link) {
     text-decoration: none;
     margin: 0 0.75rem;
+  }
+
+  :global(.nav-logo) {
+    margin: 0 -0.4rem;
   }
 </style>

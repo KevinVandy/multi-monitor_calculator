@@ -1,7 +1,7 @@
 <script lang="ts">
   import Radio from '@smui/radio';
   import FormField from '@smui/form-field';
-  import { Label } from '@smui/common'; 
+  import { Label } from '@smui/common';
   import { units } from '../../stores/SettingsStore';
 </script>
 

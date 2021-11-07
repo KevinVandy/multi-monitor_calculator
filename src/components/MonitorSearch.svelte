@@ -6,6 +6,7 @@
   import type { IMonitor } from '../utils/interfaces';
   import { preferredSearchEngine } from '../stores/SettingsStore';
   import { performSearch, searchOptions } from '../utils/searchEngine';
+  import Image from '../utils/Image.svelte';
 
   export let monitor: IMonitor;
 
@@ -23,6 +24,7 @@
     </Button>
     <div use:GroupItem>
       <Button
+        aria-label="Search With Other Search Engine"
         on:click={() => menu.setOpen(true)}
         variant="raised"
         style="padding: 0; min-width: 36px;"
@@ -35,15 +37,13 @@
             <Item
               on:SMUI:action={() => performSearch(searchEngine.name, monitor)}
             >
-              <picture>
-                <source srcSet={searchEngine.logoWebp} type="image/webp" />
-                <source srcSet={searchEngine.logoPng} type="image/png" />
-                <img
-                  alt="{searchEngine.name} logo"
-                  src={searchEngine.logoPng}
-                  loading="lazy"
-                />
-              </picture>
+              <Image
+                alt="{searchEngine.name} logo"
+                class="se-img"
+                lazy
+                srcPng={searchEngine.logoPng}
+                srcWebp={searchEngine.logoWebp}
+              />
               <Text>Search {searchEngine.name}</Text>
             </Item>
           {/each}
@@ -52,15 +52,13 @@
             <Item
               on:SMUI:action={() => performSearch(searchEngine.name, monitor)}
             >
-              <picture>
-                <source srcSet={searchEngine.logoWebp} type="image/webp" />
-                <source srcSet={searchEngine.logoPng} type="image/png" />
-                <img
-                  alt="{searchEngine.name} logo"
-                  src={searchEngine.logoPng}
-                  loading="lazy"
-                />
-              </picture>
+              <Image
+                alt="{searchEngine.name} logo"
+                class="se-img"
+                lazy
+                srcPng={searchEngine.logoPng}
+                srcWebp={searchEngine.logoWebp}
+              />
               <Text>Search {searchEngine.name}</Text>
             </Item>
           {/each}
@@ -82,8 +80,8 @@
     text-align: center;
   }
 
-  img {
-    width: 1.5rem;
+  :global(.se-img) {
     padding-right: 1rem;
+    width: 1.5rem;
   }
 </style>
