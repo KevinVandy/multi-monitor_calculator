@@ -54,6 +54,15 @@ export const parseSetupFromUrl = (urlSetup: {
       offsetY: Number(
         urlSetup[`${ShortCode.OFFSET_Y}${i}`] ?? parsedMonitor.offsetY
       ),
+      offsetZ: Number(
+        urlSetup[`${ShortCode.OFFSET_Z}${i}`] ?? parsedMonitor.offsetZ
+      ),
+      rotateX: Number(
+        urlSetup[`${ShortCode.ROTATE_X}${i}`] ?? parsedMonitor.rotateX
+      ),
+      rotateY: Number(
+        urlSetup[`${ShortCode.ROTATE_Y}${i}`] ?? parsedMonitor.rotateY
+      ),
       orientation: (urlSetup[`${ShortCode.ORIENTATION}${i}`] ??
         parsedMonitor.orientation) as 'l' | 'p',
       refreshRate: Number(
@@ -65,15 +74,15 @@ export const parseSetupFromUrl = (urlSetup: {
       resolution: {
         horizontal: Number(
           urlSetup[`${ShortCode.HORIZONTAL_RESOLUTION}${i}`] ??
-            parsedMonitor.resolution.horizontal
+          parsedMonitor.resolution.horizontal
         ),
         standard: String(
           urlSetup[`${ShortCode.RESOLUTION_STANDARD}${i}`] ??
-            parsedMonitor.resolution.standard
+          parsedMonitor.resolution.standard
         ),
         vertical: Number(
           urlSetup[`${ShortCode.VERTICAL_RESOLUTION}${i}`] ??
-            parsedMonitor.resolution.vertical
+          parsedMonitor.resolution.vertical
         )
       },
       syncType: String(
@@ -128,10 +137,13 @@ export const encodeSetupToUrl = (
             [`${ShortCode.NAME}${i}`]: m.name,
             [`${ShortCode.OFFSET_X}${i}`]: m.offsetX,
             [`${ShortCode.OFFSET_Y}${i}`]: m.offsetY,
+            [`${ShortCode.OFFSET_Z}${i}`]: m.offsetZ,
             [`${ShortCode.ORIENTATION}${i}`]: m.orientation,
             [`${ShortCode.REFRESH_RATE}${i}`]: m.refreshRate,
             [`${ShortCode.RESOLUTION_STANDARD}${i}`]: m.resolution.standard,
             [`${ShortCode.RESPONSE_TIME}${i}`]: m.responseTime,
+            [`${ShortCode.ROTATE_X}${i}`]: m.rotateX,
+            [`${ShortCode.ROTATE_Y}${i}`]: m.rotateY,
             [`${ShortCode.SYNC_TYPE}${i}`]: m.syncType,
             [`${ShortCode.VERTICAL_RESOLUTION}${i}`]: m.resolution.vertical
           }))
@@ -211,6 +223,12 @@ export const encodeSetupToUrl = (
         if (key[0] === ShortCode.OFFSET_X && value === defaultMonitor.offsetX)
           return false;
         if (key[0] === ShortCode.OFFSET_Y && value === defaultMonitor.offsetY)
+          return false;
+        if (key[0] === ShortCode.OFFSET_Z && value === defaultMonitor.offsetZ)
+          return false;
+        if (key[0] === ShortCode.ROTATE_X && value === defaultMonitor.rotateX)
+          return false;
+        if (key[0] === ShortCode.ROTATE_Y && value === defaultMonitor.rotateY)
           return false;
         return true;
       })
