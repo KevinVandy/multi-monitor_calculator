@@ -74,15 +74,15 @@ export const parseSetupFromUrl = (urlSetup: {
       resolution: {
         horizontal: Number(
           urlSetup[`${ShortCode.HORIZONTAL_RESOLUTION}${i}`] ??
-          parsedMonitor.resolution.horizontal
+            parsedMonitor.resolution.horizontal
         ),
         standard: String(
           urlSetup[`${ShortCode.RESOLUTION_STANDARD}${i}`] ??
-          parsedMonitor.resolution.standard
+            parsedMonitor.resolution.standard
         ),
         vertical: Number(
           urlSetup[`${ShortCode.VERTICAL_RESOLUTION}${i}`] ??
-          parsedMonitor.resolution.vertical
+            parsedMonitor.resolution.vertical
         )
       },
       syncType: String(

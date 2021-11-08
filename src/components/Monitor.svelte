@@ -1,6 +1,5 @@
 <script lang="ts">
   import { fade, blur } from 'svelte/transition';
-  import IconButton from '@smui/icon-button';
   import { monitors, scale } from '../stores/SetupStore';
   import { calcScreenHeight, calcScreenWidth, calcTheta } from '../utils/calc';
   import { draggable } from 'svelte-drag';
@@ -24,6 +23,12 @@
   $: height =
     $scale * calcScreenHeight(monitor.diagonal, monitor.orientation, theta);
   $: bezelWidth = (monitor.bezelWidth * $scale) / 2;
+
+  $: {
+    if (monitor.features.curved) {
+      width *= 0.95;
+    }
+  }
 </script>
 
 <div>
@@ -41,6 +46,7 @@
   >
     <div
       class="monitor monitor-screen monitor-move"
+      class:momitor-curved={monitor.features.curved}
       style="--monitorBorderRadius:{0.1875 *
         $scale}px;--bezelColor:{monitor.bezelColor};--bezelWidth:{bezelWidth ??
         0}px;--screenHeight:{height ?? 0}px;--screenWidth:{width ??
@@ -48,6 +54,10 @@
         0}deg;--monitor-rotateY:{monitor.rotateY ??
         0}deg;--monitor-offsetZ:{monitor.offsetZ ?? 0}px"
     >
+      {#if monitor.features.curved}
+        <div class="monitor-curve monitor-top-curve" />
+        <div class="monitor-curve monitor-bottom-curve" />
+      {/if}
       {#if !monitor.previewMode}
         {#if $scale > 6}
           <MonitorSwivelButtons {monitor} />
@@ -90,6 +100,33 @@
     min-width: var(--screenWidth);
     transition: all 300ms ease;
     width: var(--screenWidth);
+  }
+
+  .momitor-curved {
+    border-radius: 50% / calc(1rem - var(--bezelWidth));
+  }
+
+  .monitor-curve {
+    background: var(--mdc-theme-surface);
+    border-radius: 50% / 1rem;
+    height: 2em;
+    position: absolute;
+    width: calc(var(--screenWidth) + calc(var(--bezelWidth) * 2));
+    margin-left: calc(var(--bezelWidth) * -1);
+  }
+
+  .monitor-top-curve {
+    top: calc(-1.25rem - var(--bezelWidth));
+    border-bottom-style: solid;
+    border-bottom-color: var(--bezelColor);
+    border-bottom-width: calc(var(--bezelWidth) / 1.25);
+  }
+
+  .monitor-bottom-curve {
+    bottom: calc(-1.25rem - var(--bezelWidth));
+    border-top-style: solid;
+    border-top-color: var(--bezelColor);
+    border-top-width: calc(var(--bezelWidth) / 1.25);
   }
 
   .monitor-screen {
