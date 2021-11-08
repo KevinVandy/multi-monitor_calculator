@@ -1,13 +1,19 @@
 <script lang="ts">
   import { fade, blur } from 'svelte/transition';
+  import IconButton from '@smui/icon-button';
   import { monitors, scale } from '../stores/SetupStore';
   import { calcScreenHeight, calcScreenWidth, calcTheta } from '../utils/calc';
   import { draggable } from 'svelte-drag';
   import type { IMonitor } from '../utils/interfaces';
   import { urlRegex } from '../utils/regex';
   import { docImgs, movieImgs, videoImgs } from '../utils/randomImage';
+  import MonitorSwivelButtons from './MonitorSwivelButtons.svelte';
 
   export let monitor: IMonitor;
+
+  if (!monitor.rotateX) monitor.rotateX = 0;
+  if (!monitor.rotateY) monitor.rotateY = 0;
+  if (!monitor.offsetZ) monitor.offsetZ = 0;
 
   $: theta = calcTheta(
     monitor.resolution.horizontal,
@@ -34,11 +40,18 @@
       })}
   >
     <div
-      class="monitor monitor-screen"
+      class="monitor monitor-screen monitor-move"
       style="--monitorBorderRadius:{0.1875 *
-        $scale}px;--bezelColor:{monitor.bezelColor};--bezelWidth:{bezelWidth}px;--screenHeight:{height}px;--screenWidth:{width}px"
+        $scale}px;--bezelColor:{monitor.bezelColor};--bezelWidth:{bezelWidth ??
+        0}px;--screenHeight:{height ?? 0}px;--screenWidth:{width ??
+        0}px;--monitor-rotateX:{monitor.rotateX ??
+        0}deg;--monitor-rotateY:{monitor.rotateY ??
+        0}deg;--monitor-offsetZ:{monitor.offsetZ ?? 0}px"
     >
       {#if !monitor.previewMode}
+        {#if $scale > 6}
+          <MonitorSwivelButtons {monitor} />
+        {/if}
         <div in:blur={{ duration: 500 }}>
           {monitor.index + 1}
         </div>
@@ -67,10 +80,14 @@
 </div>
 
 <style>
+  .monitor-move {
+    transform: perspective(var(--screenWidth)) rotateX(var(--monitor-rotateX))
+      rotateY(var(--monitor-rotateY)) translateZ(var(--monitor-offsetZ));
+  }
+
   .monitor {
     height: var(--screenHeight);
     min-width: var(--screenWidth);
-    transition-property: height, width, border;
     transition: all 300ms ease;
     width: var(--screenWidth);
   }

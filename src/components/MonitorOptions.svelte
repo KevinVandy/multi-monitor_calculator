@@ -57,14 +57,14 @@
         <AspectRatioField {monitor} />
         <ResolutionStandardField {monitor} />
       </div>
-      <h4 class="advanced-options-toggle">
+      <h4
+        class="advanced-options-toggle"
+        on:click={() => (advancedOptionsOpen = !advancedOptionsOpen)}
+      >
         {advancedOptionsOpen
           ? 'Hide Advanced Options'
           : 'Show Advanced Options'}
-        <IconButton
-          class="material-icons"
-          on:click={() => (advancedOptionsOpen = !advancedOptionsOpen)}
-        >
+        <IconButton aria-label="Toggle Advanced Options" class="material-icons">
           {advancedOptionsOpen ? 'expand_less' : 'expand_more'}
         </IconButton>
       </h4>
@@ -89,12 +89,12 @@
           <FeatureFields {monitor} />
         </div>
       {/if}
-      <h4 class="advanced-options-toggle">
+      <h4
+        class="advanced-options-toggle"
+        on:click={() => (statsOpen = !statsOpen)}
+      >
         {statsOpen ? 'Hide Stats' : 'Show Stats'}
-        <IconButton
-          class="material-icons"
-          on:click={() => (statsOpen = !statsOpen)}
-        >
+        <IconButton aria-label="Toggle Stats" class="material-icons">
           {statsOpen ? 'expand_less' : 'expand_more'}
         </IconButton>
       </h4>
@@ -117,6 +117,11 @@
     width: 100%;
     margin-bottom: -1rem;
   }
+
+  h4 {
+    cursor: pointer;
+  }
+
   :global(.monitor-options-card) {
     padding: 1rem;
     margin: 0.5rem;

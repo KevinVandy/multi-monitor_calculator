@@ -14,6 +14,7 @@
 
 <Wrapper>
   <IconButton
+    aria-label="Edit Monitor Name"
     class="material-icons"
     on:click={function () {
       surface.setOpen(true);
@@ -26,6 +27,7 @@
 </Wrapper>
 <Wrapper>
   <IconButton
+    aria-label="Delete this monitor"
     class="material-icons"
     on:click={() => (confirmDeleteMonitorDialogOpen = true)}
   >

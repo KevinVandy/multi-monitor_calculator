@@ -32,6 +32,7 @@ export interface IMonitor {
   notes: string;
   offsetX: number;
   offsetY: number;
+  offsetZ: number;
   orientation: 'l' | 'p';
   ports: IPorts;
   previewMode: 'wallpaper' | 'movie' | 'tv' | 'doc' | null;
@@ -39,6 +40,8 @@ export interface IMonitor {
   refreshRate: number;
   resolution: IResolution;
   responseTime: number | null;
+  rotateX: number;
+  rotateY: number;
   syncType: string;
   wallpaper: string | null;
 }

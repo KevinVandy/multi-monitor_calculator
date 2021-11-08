@@ -26,6 +26,7 @@
       "notes": "",
       "offsetX": 0,
       "offsetY": 0,
+      "offsetZ": 0,
       "orientation": "l",
       "ports": {
         "displayPort": false,
@@ -40,6 +41,8 @@
       "refreshRate": 60,
       "resolution": { "standard": "FHD", "horizontal": 1920, "vertical": 1080 },
       "responseTime": null,
+      "rotateX": 0,
+      "rotateY": 0,
       "syncType": "any",
       "wallpaper": ""
     }

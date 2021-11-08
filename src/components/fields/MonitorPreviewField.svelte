@@ -24,7 +24,7 @@
       input$name={`monitorPreview${monitor.index}`}
       on:change={handlePreviewModeSwitchChange}
     />
-    <span slot="label">Display Preview</span>
+    <span slot="label">Turn Monitor {monitor.previewMode ? 'Off' : 'On'}</span>
   </FormField>
   {#if monitor.previewMode}
     <div class="button-container" transition:slide>
