@@ -18,10 +18,8 @@
     monitor.resolution.horizontal,
     monitor.resolution.vertical
   );
-  $: width =
-    $scale * calcScreenWidth(monitor.diagonal, monitor.orientation, theta);
-  $: height =
-    $scale * calcScreenHeight(monitor.diagonal, monitor.orientation, theta);
+  $: width = $scale * calcScreenWidth(monitor.diagonal, theta);
+  $: height = $scale * calcScreenHeight(monitor.diagonal, theta);
   $: bezelWidth = (monitor.bezelWidth * $scale) / 2;
 
   $: {
@@ -52,7 +50,9 @@
         0}px;--screenHeight:{height ?? 0}px;--screenWidth:{width ??
         0}px;--monitor-rotateX:{monitor.rotateX ??
         0}deg;--monitor-rotateY:{monitor.rotateY ??
-        0}deg;--monitor-offsetZ:{monitor.offsetZ ?? 0}px"
+        0}deg;--monitor-rotateZ:{monitor.orientation === 'p'
+        ? '90deg'
+        : 0};--monitor-offsetZ:{monitor.offsetZ ?? 0}px;"
     >
       {#if monitor.features.curved}
         <div class="monitor-curve monitor-top-curve" />
@@ -62,7 +62,10 @@
         {#if $scale > 6}
           <MonitorSwivelButtons {monitor} />
         {/if}
-        <div in:blur={{ duration: 500 }}>
+        <div
+          class:monitor-counter-rotate={monitor.orientation === 'p'}
+          in:blur={{ duration: 500 }}
+        >
           {monitor.index + 1}
         </div>
       {:else}
@@ -92,7 +95,8 @@
 <style>
   .monitor-move {
     transform: perspective(var(--screenWidth)) rotateX(var(--monitor-rotateX))
-      rotateY(var(--monitor-rotateY)) translateZ(var(--monitor-offsetZ));
+      rotateY(var(--monitor-rotateY)) rotateZ(var(--monitor-rotateZ))
+      translateZ(var(--monitor-offsetZ));
   }
 
   .monitor {
@@ -108,22 +112,22 @@
 
   .monitor-curve {
     background: var(--mdc-theme-surface);
-    border-radius: 50% / 1rem;
-    height: 2em;
+    border-radius: 50% / 0.5rem;
+    height: 1em;
     position: absolute;
     width: calc(var(--screenWidth) + calc(var(--bezelWidth) * 2));
     margin-left: calc(var(--bezelWidth) * -1);
   }
 
   .monitor-top-curve {
-    top: calc(-1.25rem - var(--bezelWidth));
+    top: calc(-0.5rem - var(--bezelWidth));
     border-bottom-style: solid;
     border-bottom-color: var(--bezelColor);
     border-bottom-width: calc(var(--bezelWidth) / 1.25);
   }
 
   .monitor-bottom-curve {
-    bottom: calc(-1.25rem - var(--bezelWidth));
+    bottom: calc(-0.5rem - var(--bezelWidth));
     border-top-style: solid;
     border-top-color: var(--bezelColor);
     border-top-width: calc(var(--bezelWidth) / 1.25);
@@ -142,6 +146,11 @@
     justify-content: center;
     margin: 2px;
     z-index: 99;
+  }
+
+  .monitor-counter-rotate {
+    transform: rotateZ(calc(var(--monitor-rotateZ) - 180deg));
+    transition: all 300ms ease;
   }
 
   .monitor-wallpaper {

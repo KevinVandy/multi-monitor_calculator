@@ -18,8 +18,8 @@
     monitor.resolution.horizontal,
     monitor.resolution.vertical
   );
-  $: screenWidth = calcScreenWidth(diagonal, monitor.orientation, theta);
-  $: screenHeight = calcScreenHeight(diagonal, monitor.orientation, theta);
+  $: screenWidth = calcScreenWidth(diagonal, theta, monitor.orientation);
+  $: screenHeight = calcScreenHeight(diagonal, theta, monitor.orientation);
   $: physicalWidth = screenWidth + bezelWidth * 2;
   $: physicalHeight = screenHeight + bezelWidth * 2;
   $: screenArea = screenWidth * screenHeight;
