@@ -74,20 +74,25 @@ export const parseSetupFromUrl = (urlSetup: {
       resolution: {
         horizontal: Number(
           urlSetup[`${ShortCode.HORIZONTAL_RESOLUTION}${i}`] ??
-            parsedMonitor.resolution.horizontal
+          parsedMonitor.resolution.horizontal
         ),
         standard: String(
           urlSetup[`${ShortCode.RESOLUTION_STANDARD}${i}`] ??
-            parsedMonitor.resolution.standard
+          parsedMonitor.resolution.standard
         ),
         vertical: Number(
           urlSetup[`${ShortCode.VERTICAL_RESOLUTION}${i}`] ??
-            parsedMonitor.resolution.vertical
+          parsedMonitor.resolution.vertical
         )
       },
       syncType: String(
         urlSetup[`${ShortCode.SYNC_TYPE}${i}`] ?? parsedMonitor.syncType
-      )
+      ),
+      features: {
+        ...parsedMonitor.features,
+        curved: Boolean(urlSetup[`${ShortCode.CURVED}${i}`] ?? parsedMonitor.features.curved),
+        hdr: Boolean(urlSetup[`${ShortCode.HDR}${i}`] ?? parsedMonitor.features.hdr),
+      }
     });
   }
   return {
@@ -131,8 +136,10 @@ export const encodeSetupToUrl = (
             [`${ShortCode.ASPECT_RATIO}${i}`]: m.aspectRatio,
             [`${ShortCode.BEZEL_COLOR}${i}`]: m.bezelColor,
             [`${ShortCode.BEZEL_WIDTH}${i}`]: m.bezelWidth,
+            [`${ShortCode.CURVED}${i}`]: m.features.curved,
             [`${ShortCode.DIAGONAL}${i}`]: m.diagonal,
             [`${ShortCode.DISPLAY_TYPE}${i}`]: m.displayType,
+            [`${ShortCode.HDR}${i}`]: m.features.hdr,
             [`${ShortCode.HORIZONTAL_RESOLUTION}${i}`]: m.resolution.horizontal,
             [`${ShortCode.NAME}${i}`]: m.name,
             [`${ShortCode.OFFSET_X}${i}`]: m.offsetX,
@@ -148,7 +155,7 @@ export const encodeSetupToUrl = (
             [`${ShortCode.VERTICAL_RESOLUTION}${i}`]: m.resolution.vertical
           }))
         )
-      ).filter(([key, value]: [string, number | string]) => {
+      ).filter(([key, value]: [string, number | string | boolean]) => {
         if (!value) return false;
         if (key[0] === ShortCode.SCALE && scale === parsedDefaultSetup.scale)
           return false;
@@ -179,7 +186,17 @@ export const encodeSetupToUrl = (
           value === defaultMonitor.bezelColor
         )
           return false;
+        if (
+          key[0] === ShortCode.CURVED &&
+          value === defaultMonitor.features.curved
+        )
+          return false;
         if (key[0] === ShortCode.DIAGONAL && value === defaultMonitor.diagonal)
+          return false;
+        if (
+          key[0] === ShortCode.HDR &&
+          value === defaultMonitor.features.hdr
+        )
           return false;
         if (
           key[0] === ShortCode.HORIZONTAL_RESOLUTION &&
