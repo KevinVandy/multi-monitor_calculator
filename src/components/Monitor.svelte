@@ -50,7 +50,6 @@
   >
     <div
       class="monitor monitor-screen monitor-move"
-      class:momitor-curved={monitor.features.curved}
       style="--monitorBorderRadius:{0.1875 *
         $scale}px;--bezelColor:{monitor.bezelColor};--bezelWidth:{bezelWidth ??
         0}px;--screenHeight:{height ?? 0}px;--screenWidth:{width ??
@@ -60,18 +59,6 @@
         ? '90deg'
         : 0};--monitor-offsetZ:{monitor.offsetZ ?? 0}px;"
     >
-      {#if monitor.features.curved}
-        <div
-          class="monitor-curve {monitor.orientation === 'l'
-            ? 'monitor-curve-horizontal monitor-top-curve'
-            : 'monitor-curve-vertical monitor-left-curve'}"
-        />
-        <div
-          class="monitor-curve {monitor.orientation === 'l'
-            ? 'monitor-curve-horizontal monitor-bottom-curve'
-            : 'monitor-curve-vertical monitor-right-curve'}"
-        />
-      {/if}
       {#if !monitor.previewMode}
         {#if $scale * monitor.diagonal > 150}
           <MonitorSwivelButtons {monitor} />
@@ -97,6 +84,18 @@
             : null}
           style="--screenHeight:{height}px;--screenWidth:{width}px"
           alt="Could not fetch your wallpaper link"
+        />
+      {/if}
+      {#if monitor.features.curved}
+        <div
+          class="monitor-curve {monitor.orientation === 'l'
+            ? 'monitor-curve-horizontal monitor-top-curve'
+            : 'monitor-curve-vertical monitor-left-curve'}"
+        />
+        <div
+          class="monitor-curve {monitor.orientation === 'l'
+            ? 'monitor-curve-horizontal monitor-bottom-curve'
+            : 'monitor-curve-vertical monitor-right-curve'}"
         />
       {/if}
     </div>
