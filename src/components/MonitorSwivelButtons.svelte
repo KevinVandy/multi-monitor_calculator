@@ -6,6 +6,9 @@
 
   export let monitor: IMonitor;
 
+  $: disableResetButton =
+    monitor.rotateX === 0 && monitor.rotateY === 0 && monitor.offsetZ === 0;
+    
   $: disableOffsetZ =
     !monitor.offsetZ &&
     ($monitors.length <= 1 ||
@@ -13,6 +16,22 @@
         $monitors.every((monitor) => monitor.rotateY === 0)));
 </script>
 
+<Wrapper>
+  <IconButton
+    aria-label="Reset Rotation and Tilt"
+    class="material-icons rotate-button reset-rotation-button"
+    disabled={disableResetButton}
+    on:click={() => {
+      monitor.rotateX = 0;
+      monitor.rotateY = 0;
+      monitor.offsetZ = 0;
+      monitors.set($monitors);
+    }}
+  >
+    reset_tv
+  </IconButton>
+  <Tooltip>Reset Rotation and Tilt</Tooltip>
+</Wrapper>
 <Wrapper>
   <IconButton
     aria-label="Rotate Monitor Up"
@@ -117,6 +136,11 @@
     color: #999;
     font-size: 1rem;
     position: absolute;
+  }
+
+  :global(reset-rotation-button) {
+    left: 0;
+    top: 0;
   }
 
   :global(.rotate-up-button) {
