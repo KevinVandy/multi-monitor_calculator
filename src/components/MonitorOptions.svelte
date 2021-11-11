@@ -26,6 +26,8 @@
   import { urlRegex } from '../utils/regex';
   import MonitorSearch from './MonitorSearch.svelte';
   import MonitorNotesField from './fields/MonitorNotesField.svelte';
+  import MonitorSwapButtons from './MonitorSwapButtons.svelte';
+  import { monitors } from '../stores/SetupStore';
 
   export let monitor: IMonitor;
   export let advancedOptionsOpen: boolean;
@@ -34,6 +36,9 @@
 
 <div transition:fade={{ duration: 200 }}>
   <Card class="monitor-options-card">
+    {#if monitor.index > 0}
+      <MonitorSwapButtons {monitor} />
+    {/if}
     <h3>
       {#if monitor.name}
         {monitor.name}
@@ -124,7 +129,7 @@
 
   :global(.monitor-options-card) {
     padding: 1rem;
-    margin: 0.5rem;
+    margin: 0.75rem;
     max-width: min(26rem, calc(100vw - 1rem));
     position: relative;
   }
