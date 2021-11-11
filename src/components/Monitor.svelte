@@ -18,8 +18,10 @@
     monitor.resolution.horizontal,
     monitor.resolution.vertical
   );
-  $: width = $scale * calcScreenWidth(monitor.diagonal, theta);
-  $: height = $scale * calcScreenHeight(monitor.diagonal, theta);
+  $: width =
+    $scale * calcScreenWidth(monitor.diagonal, theta, monitor.orientation);
+  $: height =
+    $scale * calcScreenHeight(monitor.diagonal, theta, monitor.orientation);
   $: bezelWidth = (monitor.bezelWidth * $scale) / 2;
 
   $: {
@@ -62,10 +64,7 @@
         {#if $scale > 6}
           <MonitorSwivelButtons {monitor} />
         {/if}
-        <div
-          class:monitor-counter-rotate={monitor.orientation === 'p'}
-          in:blur={{ duration: 500 }}
-        >
+        <div in:blur={{ duration: 500 }}>
           {monitor.index + 1}
         </div>
       {:else}
@@ -95,8 +94,7 @@
 <style>
   .monitor-move {
     transform: perspective(var(--screenWidth)) rotateX(var(--monitor-rotateX))
-      rotateY(var(--monitor-rotateY)) rotateZ(var(--monitor-rotateZ))
-      translateZ(var(--monitor-offsetZ));
+      rotateY(var(--monitor-rotateY)) translateZ(var(--monitor-offsetZ));
   }
 
   .monitor {
@@ -146,11 +144,6 @@
     justify-content: center;
     margin: 2px;
     z-index: 99;
-  }
-
-  .monitor-counter-rotate {
-    transform: rotateZ(calc(var(--monitor-rotateZ) - 180deg));
-    transition: all 300ms ease;
   }
 
   .monitor-wallpaper {
