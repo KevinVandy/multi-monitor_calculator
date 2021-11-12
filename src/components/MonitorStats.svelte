@@ -24,6 +24,7 @@
   $: physicalHeight = screenHeight + bezelWidth * 2;
   $: screenArea = screenWidth * screenHeight;
   $: numPixels = +monitor.resolution.horizontal * +monitor.resolution.vertical;
+  $: pps = numPixels * +monitor.refreshRate;
   $: ppi = calcPPI(
     monitor.resolution.horizontal,
     monitor.resolution.vertical,
@@ -47,6 +48,14 @@
     <Row>
       <Cell>Number Pixels</Cell>
       <Cell numeric>{numPixels.toLocaleString()}</Cell>
+    </Row>
+    <Row>
+      <Cell>Refresh Rate</Cell>
+      <Cell numeric>{monitor.refreshRate} Hz</Cell>
+    </Row>
+    <Row>
+      <Cell>Pixels Per Second (PPS)</Cell>
+      <Cell numeric>{pps.toLocaleString()}</Cell>
     </Row>
     <Row>
       <Cell
