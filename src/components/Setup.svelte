@@ -16,6 +16,7 @@
     expandAdvancedOptionsByDefault,
     expandStatsByDefault,
     preferredSearchEngine,
+    theme,
     units
   } from '../stores/SettingsStore';
   import { afterUpdate, onMount } from 'svelte';
@@ -56,6 +57,7 @@
       );
       expandStatsByDefault.set(storedSettings.expandStatsByDefault);
       units.set(storedSettings.units);
+      theme.set(storedSettings.theme);
     }
 
     //load most recent setup id from local storage
@@ -126,7 +128,8 @@
         preferredSearchEngine: $preferredSearchEngine,
         expandAdvancedOptionsByDefault: $expandAdvancedOptionsByDefault,
         expandStatsByDefault: $expandStatsByDefault,
-        units: $units
+        units: $units,
+        theme: $theme
       })
     );
 

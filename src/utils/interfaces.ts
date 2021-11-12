@@ -3,6 +3,7 @@ export interface ISettings {
   expandStatsByDefault: boolean;
   preferredSearchEngine: string;
   units: 'Metric' | 'Imperial';
+  theme: 'light' | 'dark';
 }
 
 export interface ISetups {

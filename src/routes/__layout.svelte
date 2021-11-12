@@ -1,5 +1,6 @@
 <script lang="ts">
   import { AppContent } from '@smui/drawer';
+  import DarkModeToggle from '../components/fields/DarkModeToggle.svelte';
   import Navbar from '../components/Navbar.svelte';
 </script>
 
@@ -10,7 +11,9 @@
     <h1>Multi-Monitor Calculator</h1>
     <h2>A Tool For Planning Your Multi-Monitor Setup!</h2>
   </header>
-  <dark-mode-toggle appearance="toggle" permanent dark="Dark" light="Light" />
+  <span>
+    <DarkModeToggle />
+  </span>
   <slot />
 </AppContent>
 
@@ -18,7 +21,7 @@
   header {
     padding-top: 3rem;
   }
-  dark-mode-toggle {
+  span {
     right: 0.5rem;
     top: 3.5rem;
     position: absolute;
