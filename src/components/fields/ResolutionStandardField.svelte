@@ -38,5 +38,6 @@
     <b>4K</b>
   </Option>
   <Option value="5K">5K</Option>
+  <Option value="6K">6K</Option>
   <Option value="8K">8K</Option>
 </Select>
