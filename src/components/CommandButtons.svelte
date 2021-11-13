@@ -1,6 +1,7 @@
 <script lang="ts">
   import Fab, { Icon } from '@smui/fab';
   import Tooltip, { Wrapper } from '@smui/tooltip';
+  import { inputUnits } from '../stores/SettingsStore';
   import {
     monitors,
     scale,
@@ -14,7 +15,10 @@
   let confirmResetDialogOpen = false;
 
   const handleAddMonitor = () => {
-    monitors.update((ms) => [...ms, getNewMonitor(ms.length)]);
+    monitors.update((ms) => [
+      ...ms,
+      getNewMonitor(ms.length, $inputUnits === 'Metric' ? Math.round(27 * 2.54) : 27)
+    ]);
   };
 </script>
 

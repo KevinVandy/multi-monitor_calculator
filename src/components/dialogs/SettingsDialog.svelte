@@ -29,6 +29,6 @@
     display: grid;
     gap: 2rem;
     overflow: visible;
-    width: 300px;
+    min-width: 320px;
   }
 </style>

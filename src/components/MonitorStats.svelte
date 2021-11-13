@@ -1,6 +1,6 @@
 <script lang="ts">
   import DataTable, { Body, Row, Cell } from '@smui/data-table';
-  import { units } from '../stores/SettingsStore';
+  import { inputUnits, statUnits } from '../stores/SettingsStore';
   import {
     calcPPI,
     calcScreenHeight,
@@ -10,10 +10,16 @@
   import type { IMonitor } from '../utils/interfaces';
   export let monitor: IMonitor;
 
-  $: diagonal =
-    $units === 'Metric' ? monitor.diagonal * 2.54 : monitor.diagonal;
+  $: convert =
+    $inputUnits === 'Imperial' && $statUnits === 'Metric'
+      ? 2.54
+      : $inputUnits === 'Metric' && $statUnits === 'Imperial'
+      ? 1 / 2.54
+      : 1;
+
+  $: diagonal = convert * monitor.diagonal;
   $: bezelWidth =
-    $units === 'Metric' ? monitor.bezelWidth * 2.54 : monitor.bezelWidth;
+    $statUnits === 'Metric' ? 2.54 * monitor.bezelWidth : monitor.bezelWidth;
   $: theta = calcTheta(
     monitor.resolution.horizontal,
     monitor.resolution.vertical
@@ -59,7 +65,7 @@
     </Row>
     <Row>
       <Cell
-        >{$units === 'Metric'
+        >{$statUnits === 'Metric'
           ? 'Pixels Per Centimeter (PPCM)'
           : 'Pixels Per Inch (PPI)'}</Cell
       >
@@ -68,45 +74,47 @@
     <Row>
       <Cell>Screen Diagonal</Cell>
       <Cell numeric
-        >{diagonal.toFixed(1)}{$units === 'Metric' ? ' cm' : '"'}</Cell
+        >{diagonal.toFixed(1)}{$statUnits === 'Metric' ? ' cm' : '"'}</Cell
       >
     </Row>
     <Row>
       <Cell>Screen Width</Cell>
       <Cell numeric
-        >{screenWidth.toFixed(1)}{$units === 'Metric' ? ' cm' : '"'}</Cell
+        >{screenWidth.toFixed(1)}{$statUnits === 'Metric' ? ' cm' : '"'}</Cell
       >
     </Row>
     <Row>
       <Cell>Screen Height</Cell>
       <Cell numeric
-        >{screenHeight.toFixed(1)}{$units === 'Metric' ? ' cm' : '"'}</Cell
+        >{screenHeight.toFixed(1)}{$statUnits === 'Metric' ? ' cm' : '"'}</Cell
       >
     </Row>
     <Row>
       <Cell>Bezel Width</Cell>
       <Cell numeric
-        >{bezelWidth.toFixed(2)}{$units === 'Metric' ? ' cm' : '"'}</Cell
+        >{bezelWidth.toFixed(2)}{$statUnits === 'Metric' ? ' cm' : '"'}</Cell
       >
     </Row>
     <Row>
       <Cell>Physical Width</Cell>
       <Cell numeric
-        >{physicalWidth.toFixed(1)}{$units === 'Metric' ? ' cm' : '"'}</Cell
+        >{physicalWidth.toFixed(1)}{$statUnits === 'Metric' ? ' cm' : '"'}</Cell
       >
     </Row>
     <Row>
       <Cell>Physical Height</Cell>
       <Cell numeric
-        >{physicalHeight.toFixed(1)}{$units === 'Metric' ? ' cm' : '"'}</Cell
+        >{physicalHeight.toFixed(1)}{$statUnits === 'Metric'
+          ? ' cm'
+          : '"'}</Cell
       >
     </Row>
     <Row>
       <Cell>Screen Area</Cell>
-      <Cell numeric
-        >{screenArea.toFixed(1)}{$units === 'Metric' ? ' cm' : '"'}<sup>2</sup
-        ></Cell
-      >
+      <Cell numeric>
+        {screenArea.toFixed(1)}{$statUnits === 'Metric' ? ' cm' : '"'}
+        <sup>2</sup>
+      </Cell>
     </Row>
   </Body>
 </DataTable>

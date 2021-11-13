@@ -7,8 +7,12 @@
   import { urlRegex } from '../utils/regex';
   import { docImgs, movieImgs, videoImgs } from '../utils/randomImage';
   import MonitorSwivelButtons from './MonitorSwivelButtons.svelte';
+  import { inputUnits } from '../stores/SettingsStore';
 
   export let monitor: IMonitor;
+
+  $: convert = $inputUnits === 'Metric' ? 1 / 2.54 : 1;
+  $: diagonal = monitor.diagonal * convert;
 
   if (!monitor.rotateX) monitor.rotateX = 0;
   if (!monitor.rotateY) monitor.rotateY = 0;
@@ -18,10 +22,8 @@
     monitor.resolution.horizontal,
     monitor.resolution.vertical
   );
-  $: width =
-    $scale * calcScreenWidth(monitor.diagonal, theta, monitor.orientation);
-  $: height =
-    $scale * calcScreenHeight(monitor.diagonal, theta, monitor.orientation);
+  $: width = $scale * calcScreenWidth(diagonal, theta, monitor.orientation);
+  $: height = $scale * calcScreenHeight(diagonal, theta, monitor.orientation);
   $: bezelWidth = (monitor.bezelWidth * $scale) / 2;
 
   $: {
@@ -60,7 +62,7 @@
         : 0};--monitor-offsetZ:{monitor.offsetZ ?? 0}px;"
     >
       {#if !monitor.previewMode}
-        {#if $scale * monitor.diagonal > 150}
+        {#if $scale * diagonal > 150}
           <MonitorSwivelButtons {monitor} />
         {/if}
         <div in:blur={{ duration: 500 }}>

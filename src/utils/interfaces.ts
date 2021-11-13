@@ -2,7 +2,8 @@ export interface ISettings {
   expandAdvancedOptionsByDefault: boolean;
   expandStatsByDefault: boolean;
   preferredSearchEngine: string;
-  units: 'Metric' | 'Imperial';
+  statUnits: 'Metric' | 'Imperial';
+  inputUnits: 'Metric' | 'Imperial';
   theme: 'light' | 'dark';
 }
 

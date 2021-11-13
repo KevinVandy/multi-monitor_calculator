@@ -17,7 +17,8 @@
     expandStatsByDefault,
     preferredSearchEngine,
     theme,
-    units
+    statUnits,
+inputUnits
   } from '../stores/SettingsStore';
   import { afterUpdate, onMount } from 'svelte';
   import CircularProgress from '@smui/circular-progress';
@@ -56,8 +57,9 @@
         storedSettings.expandAdvancedOptionsByDefault
       );
       expandStatsByDefault.set(storedSettings.expandStatsByDefault);
-      units.set(storedSettings.units);
-      theme.set(storedSettings.theme);
+      statUnits.set(storedSettings.statUnits ?? 'Imperial');
+      inputUnits.set(storedSettings.inputUnits ?? 'Imperial');
+      theme.set(storedSettings.theme ?? 'dark');
     }
 
     //load most recent setup id from local storage
@@ -128,7 +130,8 @@
         preferredSearchEngine: $preferredSearchEngine,
         expandAdvancedOptionsByDefault: $expandAdvancedOptionsByDefault,
         expandStatsByDefault: $expandStatsByDefault,
-        units: $units,
+        statUnits: $statUnits,
+        inputUnits: $inputUnits,
         theme: $theme
       })
     );

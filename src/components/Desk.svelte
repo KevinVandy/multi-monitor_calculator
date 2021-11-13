@@ -1,12 +1,12 @@
 <script lang="ts">
   import Card from '@smui/card';
-  import { units } from '../stores/SettingsStore';
+  import { statUnits } from '../stores/SettingsStore';
   import { deskWidth, scale, monitors, deskHeight } from '../stores/SetupStore';
   import Monitor from './Monitor.svelte';
 </script>
 
 <span>
-  {#if $units === 'Metric'}
+  {#if $statUnits === 'Metric'}
     {(($deskWidth * 12 * 2.54) / 100).toFixed(1)} m
   {:else}
     {$deskWidth.toFixed(1)} ft

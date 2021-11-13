@@ -9,8 +9,9 @@ export const getNewSetup = (name?: string, index?: number): ISetup => ({
   name: name ?? `Untitled Setup ${index ?? 1}`.trim()
 });
 
-export const getNewMonitor = (index = 0): IMonitor => ({
+export const getNewMonitor = (index = 0, diagonal = 27): IMonitor => ({
   ...getNewSetup().monitors[0],
+  diagonal: diagonal,
   index: index
 });
 
