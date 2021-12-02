@@ -2,7 +2,7 @@
   import TextField from '@smui/textfield';
   import type { IMonitor } from '../../utils/interfaces';
   import { monitors } from '../../stores/SetupStore';
-import { inputUnits } from '../../stores/SettingsStore';
+  import { inputUnits } from '../../stores/SettingsStore';
 
   export let monitor: IMonitor;
 </script>

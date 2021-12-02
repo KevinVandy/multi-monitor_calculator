@@ -18,7 +18,7 @@
     preferredSearchEngine,
     theme,
     statUnits,
-inputUnits
+    inputUnits
   } from '../stores/SettingsStore';
   import { afterUpdate, onMount } from 'svelte';
   import CircularProgress from '@smui/circular-progress';

@@ -74,15 +74,15 @@ export const parseSetupFromUrl = (urlSetup: {
       resolution: {
         horizontal: Number(
           urlSetup[`${ShortCode.HORIZONTAL_RESOLUTION}${i}`] ??
-          parsedMonitor.resolution.horizontal
+            parsedMonitor.resolution.horizontal
         ),
         standard: String(
           urlSetup[`${ShortCode.RESOLUTION_STANDARD}${i}`] ??
-          parsedMonitor.resolution.standard
+            parsedMonitor.resolution.standard
         ),
         vertical: Number(
           urlSetup[`${ShortCode.VERTICAL_RESOLUTION}${i}`] ??
-          parsedMonitor.resolution.vertical
+            parsedMonitor.resolution.vertical
         )
       },
       syncType: String(
@@ -90,8 +90,12 @@ export const parseSetupFromUrl = (urlSetup: {
       ),
       features: {
         ...parsedMonitor.features,
-        curved: Boolean(urlSetup[`${ShortCode.CURVED}${i}`] ?? parsedMonitor.features.curved),
-        hdr: Boolean(urlSetup[`${ShortCode.HDR}${i}`] ?? parsedMonitor.features.hdr),
+        curved: Boolean(
+          urlSetup[`${ShortCode.CURVED}${i}`] ?? parsedMonitor.features.curved
+        ),
+        hdr: Boolean(
+          urlSetup[`${ShortCode.HDR}${i}`] ?? parsedMonitor.features.hdr
+        )
       }
     });
   }
@@ -193,10 +197,7 @@ export const encodeSetupToUrl = (
           return false;
         if (key[0] === ShortCode.DIAGONAL && value === defaultMonitor.diagonal)
           return false;
-        if (
-          key[0] === ShortCode.HDR &&
-          value === defaultMonitor.features.hdr
-        )
+        if (key[0] === ShortCode.HDR && value === defaultMonitor.features.hdr)
           return false;
         if (
           key[0] === ShortCode.HORIZONTAL_RESOLUTION &&

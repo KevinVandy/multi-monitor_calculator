@@ -8,7 +8,7 @@
 
   $: disableResetButton =
     monitor.rotateX === 0 && monitor.rotateY === 0 && monitor.offsetZ === 0;
-    
+
   $: disableOffsetZ =
     !monitor.offsetZ &&
     ($monitors.length <= 1 ||

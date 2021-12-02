@@ -44,10 +44,7 @@ export const calcResolutionStandard = (verRes: number): string => {
 export const calcResolution = (
   aspectRatio: string,
   resolutionStandard: string
-): [number, number] =>
-  resolutions[aspectRatio]?.[resolutionStandard];
-;
-
+): [number, number] => resolutions[aspectRatio]?.[resolutionStandard];
 export const calcTheta = (horRes: number, verRes: number): number =>
   Math.atan(verRes / horRes);
 
