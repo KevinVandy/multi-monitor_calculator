@@ -37,7 +37,7 @@ export interface IMonitor {
   offsetZ: number;
   orientation: 'l' | 'p';
   ports: IPorts;
-  previewMode: 'wallpaper' | 'movie' | 'tv' | 'doc' | null;
+  previewMode: 'wallpaper' | 'movie' | 'tv' | 'doc' | '' | null;
   productLink: string | null;
   refreshRate: number;
   resolution: IResolution;
