@@ -68,12 +68,12 @@
         <div in:blur={{ duration: 500 }}>
           {monitor.index + 1}
         </div>
-      {:else if monitor.previewMode === ''}
+      {:else if monitor.previewMode === '🍎'}
         <iframe
-          height={height * 2}
+          height={height * 5/2}
           src="https://macos.vercel.app/"
           title="MacOS"
-          width={width * 2}
+          width={width * 5/2}
         />
       {:else}
         <img
@@ -113,7 +113,7 @@
 
 <style>
   iframe {
-    transform: scale(0.5);
+    transform: scale(.4);
   }
   .monitor-move {
     transform: perspective(var(--screenWidth)) rotateX(var(--monitor-rotateX))

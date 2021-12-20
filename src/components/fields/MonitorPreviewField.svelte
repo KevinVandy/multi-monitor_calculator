@@ -8,7 +8,7 @@
   import { monitors } from '../../stores/SetupStore';
   export let monitor: IMonitor;
 
-  let choices = ['wallpaper', 'movie', 'tv', 'doc', ''];
+  let choices = ['wallpaper', 'movie', 'tv', 'doc', '🍎'];
 
   const handlePreviewModeSwitchChange = (event) => {
     monitor.previewMode = event.target.checked ? 'wallpaper' : null;
