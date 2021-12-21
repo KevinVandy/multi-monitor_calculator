@@ -6,6 +6,8 @@
   import { Label } from '@smui/common';
   import type { IMonitor } from '../../utils/interfaces';
   import { monitors } from '../../stores/SetupStore';
+  import WallpaperField from './WallpaperField.svelte';
+
   export let monitor: IMonitor;
 
   let choices = ['wallpaper', 'movie', 'tv', 'doc', '🍎'];
@@ -39,6 +41,11 @@
           <Label>{segment}</Label>
         </Segment>
       </SegmentedButton>
+      {#if monitor.previewMode === 'wallpaper'}
+        <div transition:slide>
+          <WallpaperField {monitor} />
+        </div>
+      {/if}
     </div>
   {/if}
 </div>
@@ -50,6 +57,8 @@
   }
 
   .button-container {
+    display: grid;
     margin: 1rem auto;
+    gap: 1rem;
   }
 </style>

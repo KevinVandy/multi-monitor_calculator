@@ -1,6 +1,5 @@
 <script lang="ts">
   import TextField from '@smui/textfield';
-  import HelperText from '@smui/textfield/helper-text/index';
   import type { IMonitor } from '../../utils/interfaces';
   import { monitors } from '../../stores/SetupStore';
   import { urlRegex } from '../../utils/regex';
@@ -15,19 +14,9 @@
   bind:value={monitor.wallpaper}
   label="Wallpaper Link"
   input$name={`wallpaperLink${monitor.index}`}
-  on:change={() => {
-    $monitors[monitor.index].previewMode = urlRegex.test(monitor.wallpaper)
-      ? 'wallpaper'
-      : null;
-    monitors.set($monitors);
-  }}
-  required={monitor.previewMode === 'wallpaper'}
+  on:change={() => monitors.set($monitors)}
   style="width:100%;"
   type="url"
   validateOnValueChange
   variant="filled"
->
-  <HelperText persistent slot="helper" style="margin-top:-1rem;">
-    See how your favorite wallpapers look on this setup!
-  </HelperText>
-</TextField>
+/>

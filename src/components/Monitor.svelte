@@ -70,10 +70,10 @@
         </div>
       {:else if monitor.previewMode === '🍎'}
         <iframe
-          height={height * 5/2}
+          height={(height * 5) / 2}
           src="https://macos.vercel.app/"
           title="MacOS"
-          width={width * 5/2}
+          width={(width * 5) / 2}
         />
       {:else}
         <img
@@ -82,8 +82,7 @@
             ? ' monitor-wallpaper'
             : 'monitor-content'}"
           src={monitor.previewMode === 'wallpaper'
-            ? (urlRegex.test(monitor.wallpaper) && monitor.wallpaper) ||
-              'https://wallpaperaccess.com/full/90278.jpg'
+            ? urlRegex.test(monitor.wallpaper) && monitor.wallpaper
             : monitor.previewMode === 'movie'
             ? movieImgs[Math.min(monitor.index, movieImgs.length - 1)]
             : monitor.previewMode === 'tv'
@@ -113,10 +112,10 @@
 
 <style>
   iframe {
-    transform: scale(.4);
+    transform: scale(0.4);
   }
   .monitor-move {
-    transform: perspective(var(--screenWidth)) rotateX(var(--monitor-rotateX))
+    transform: perspective(666px) rotateX(var(--monitor-rotateX))
       rotateY(var(--monitor-rotateY)) translateZ(var(--monitor-offsetZ));
   }
 

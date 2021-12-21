@@ -19,7 +19,6 @@
   import MonitorStats from './MonitorStats.svelte';
   import PortFields from './fields/PortFields.svelte';
   import FeatureFields from './fields/FeatureFields.svelte';
-  import WallpaperField from './fields/WallpaperField.svelte';
   import MonitorPreviewField from './fields/MonitorPreviewField.svelte';
   import MonitorNameField from './fields/MonitorNameField.svelte';
   import ProductLinkField from './fields/ProductLinkField.svelte';
@@ -27,7 +26,6 @@
   import MonitorSearch from './MonitorSearch.svelte';
   import MonitorNotesField from './fields/MonitorNotesField.svelte';
   import MonitorSwapButtons from './MonitorSwapButtons.svelte';
-  import { monitors } from '../stores/SetupStore';
 
   export let monitor: IMonitor;
   export let advancedOptionsOpen: boolean;
@@ -86,7 +84,6 @@
             <BezelColorField {monitor} />
           </div>
           <div class="options-grid-1">
-            <WallpaperField {monitor} />
             <ProductLinkField {monitor} />
           </div>
           <MonitorNotesField {monitor} />
