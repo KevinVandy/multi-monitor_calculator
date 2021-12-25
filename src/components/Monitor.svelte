@@ -68,26 +68,33 @@
         <div in:blur={{ duration: 500 }}>
           {monitor.index + 1}
         </div>
-      {:else if monitor.previewMode === '🍎'}
+      {:else if monitor.previewMode?.name === 'apple'}
         <iframe
-          height={(height * 5) / 2}
+          height={height * 3}
           src="https://macos.vercel.app/"
           title="MacOS"
-          width={(width * 5) / 2}
+          width={width * 3}
+        />
+      {:else if monitor.previewMode?.name === 'windows'}
+        <iframe
+          height={height * 3}
+          src="https://win11.vercel.app/"
+          title="MacOS"
+          width={width * 3}
         />
       {:else}
         <img
           in:blur={{ duration: 500 }}
-          class="monitor {monitor.previewMode === 'wallpaper'
+          class="monitor {monitor.previewMode?.name === 'wallpaper'
             ? ' monitor-wallpaper'
             : 'monitor-content'}"
-          src={monitor.previewMode === 'wallpaper'
+          src={monitor.previewMode?.name === 'wallpaper'
             ? urlRegex.test(monitor.wallpaper) && monitor.wallpaper
-            : monitor.previewMode === 'movie'
+            : monitor.previewMode?.name === 'movie'
             ? movieImgs[Math.min(monitor.index, movieImgs.length - 1)]
-            : monitor.previewMode === 'tv'
+            : monitor.previewMode?.name === 'tv'
             ? videoImgs[Math.min(monitor.index, videoImgs.length - 1)]
-            : monitor.previewMode === 'doc'
+            : monitor.previewMode?.name === 'doc'
             ? docImgs[Math.min(monitor.index, docImgs.length - 1)]
             : null}
           style="--screenHeight:{height}px;--screenWidth:{width}px"
@@ -112,7 +119,7 @@
 
 <style>
   iframe {
-    transform: scale(0.4);
+    transform: scale(0.3333);
   }
   .monitor-move {
     transform: perspective(666px) rotateX(var(--monitor-rotateX))
