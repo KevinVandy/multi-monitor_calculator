@@ -22,7 +22,7 @@
     { name: 'tv', icon: '📺', tooltip: 'Visualize TV/Video Black Bars' },
     { name: 'doc', icon: '📄', tooltip: 'Visualize Vertical Applications' },
     { name: 'apple', icon: '🍎', tooltip: 'Simulate MacOS!' },
-    // { name: 'windows', icon: '🪟', tooltip: "Simulate Windows 11!" }
+    { name: 'windows', icon: '🪟', tooltip: "Simulate Windows 11!" }
   ];
 
   const handlePreviewModeSwitchChange = (event) => {
