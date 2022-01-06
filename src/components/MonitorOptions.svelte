@@ -2,7 +2,7 @@
   import type { IMonitor } from '../utils/interfaces';
   import Card, { Content } from '@smui/card';
   import IconButton from '@smui/icon-button';
-  import A from '@smui/common/elements/A.svelte';
+  // import A from '@smui/common/elements/A.svelte';
   import { fade, slide } from 'svelte/transition';
   import DiagonalField from './fields/DiagonalField.svelte';
   import OrientationField from './fields/OrientationField.svelte';
@@ -47,9 +47,9 @@
     </h3>
     <Content>
       {#if urlRegex.test(monitor.productLink) && monitor.productLink}
-        <A class="product-link" href={monitor.productLink} target="_blank">
+        <a class="product-link" href={monitor.productLink} target="_blank">
           {monitor.productLink}
-        </A>
+        </a>
       {/if}
       <div class="options-grid-1">
         <MonitorPreviewField {monitor} />

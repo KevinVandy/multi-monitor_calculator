@@ -1,5 +1,5 @@
 <script lang="ts">
-  import A from '@smui/common/elements/A.svelte';
+  // import A from '@smui/common/elements/A.svelte';
   import Paper, { Content } from '@smui/paper';
 </script>
 
@@ -11,38 +11,38 @@
       monitor, and much more.
     </Content>
     <Content>
-      A Kevin Vandy Tool - <A
+      A Kevin Vandy Tool - <a
         target="_blank"
         rel="no opener"
         href="https://www.kevinvancott.com"
         >kevinvancott.com
-      </A>
+      </a>
     </Content>
     <Content>
-      View the Source Code on <A
+      View the Source Code on <a
         target="_blank"
         rel="no opener"
-        href="https://github.com/KevinVandy/multi-monitor_calculator">Github</A
+        href="https://github.com/KevinVandy/multi-monitor_calculator">Github</a
       >
     </Content>
     <Content>
       If you find a bug or want to submit a feature request, feel free to submit
-      an issue on the github <A
+      an issue on the github <a
         target="_blank"
         rel="no opener"
         href="https://github.com/KevinVandy/multi-monitor_calculator/issues"
-        >issues</A
+        >issues</a
       > tab
     </Content>
     <Content>
-      Made with <A
+      Made with <a
         target="_blank"
         rel="no opener"
-        href="https://kit.svelte.dev/">SvelteKit</A
-      > and <A
-        target="_blank"
-        rel="no opener"
-        href="https://sveltematerialui.com/">Svelte Material UI (SMUI)</A
+        href="https://kit.svelte.dev/">SvelteKit</a
+      >
+      and
+      <a target="_blank" rel="no opener" href="https://sveltematerialui.com/"
+        >Svelte Material UI (SMUI)</a
       >
     </Content>
   </Paper>

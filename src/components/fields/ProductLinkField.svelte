@@ -1,6 +1,6 @@
 <script lang="ts">
   import TextField from '@smui/textfield';
-  import HelperText from '@smui/textfield/helper-text/index';
+  import HelperText from '@smui/textfield/helper-text';
   import type { IMonitor } from '../../utils/interfaces';
   import { monitors } from '../../stores/SetupStore';
   import { urlRegex } from '../../utils/regex';

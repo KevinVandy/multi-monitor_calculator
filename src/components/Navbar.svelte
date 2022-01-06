@@ -6,7 +6,7 @@
     Title as TopAppBarTitle
   } from '@smui/top-app-bar';
   import IconButton from '@smui/icon-button';
-  import A from '@smui/common/elements/A.svelte';
+  // import A from '@smui/common/elements/A.svelte';
   import SetupsDrawer from './dialogs/SetupsDrawer.svelte';
   import CreateSetupDialog from './dialogs/CreateSetupDialog.svelte';
   import SettingsDialog from './dialogs/SettingsDialog.svelte';
@@ -54,8 +54,8 @@
     </Section>
     <Section align="end" toolbar>
       <TopAppBarTitle style="dispay:flex;">
-        <A style="color:white;" class="toolbar-link" href="/">Home</A>
-        <A style="color:white;" class="toolbar-link" href="/about">About</A>
+        <a style="color:white;" class="toolbar-link" href="/">Home</a>
+        <a style="color:white;" class="toolbar-link" href="/about">About</a>
       </TopAppBarTitle>
     </Section>
   </Row>

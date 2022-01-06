@@ -2,7 +2,7 @@
   import Button, { Label, Icon, Group, GroupItem } from '@smui/button';
   import Menu, { MenuComponentDev } from '@smui/menu';
   import List, { Item, Separator, Text } from '@smui/list';
-  import HelperText from '@smui/textfield/helper-text/index';
+  import HelperText from '@smui/textfield/helper-text';
   import type { IMonitor } from '../utils/interfaces';
   import { preferredSearchEngine } from '../stores/SettingsStore';
   import { performSearch, searchOptions } from '../utils/searchEngine';
