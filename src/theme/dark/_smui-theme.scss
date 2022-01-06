@@ -1,13 +1,12 @@
 @use 'sass:color';
 @use '@material/theme/color-palette';
-@use '@material/theme/index' as theme with
-  (
-    $primary: #db3801,
-    $secondary: color.scale(#676778, $whiteness: -10%),
-    $surface: color.adjust(color-palette.$grey-900, $blue: +4),
-    $background: #000,
-    $error: color-palette.$red-700
-  );
+@use '@material/theme/index' as theme with (
+  $primary: #db3801,
+  $secondary: color.scale(#676778, $whiteness: -10%),
+  $surface: color.adjust(color-palette.$grey-900, $blue: +4),
+  $background: #000,
+  $error: color-palette.$red-700
+);
 @use '@material/typography/index' as typography;
 @use '../common.scss';
 

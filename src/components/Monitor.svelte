@@ -61,21 +61,21 @@
         ? '90deg'
         : 0};--monitor-offsetZ:{monitor.offsetZ ?? 0}px;"
     >
-      {#if !monitor.previewMode}
+      {#if !monitor.on}
         {#if $scale * diagonal > 150}
           <MonitorSwivelButtons {monitor} />
         {/if}
         <div in:blur={{ duration: 500 }}>
           {monitor.index + 1}
         </div>
-      {:else if monitor.previewMode?.name === 'apple'}
+      {:else if monitor.previewMode === 'apple'}
         <iframe
           height={height * 3}
           src="https://macos.vercel.app/"
           title="MacOS"
           width={width * 3}
         />
-      {:else if monitor.previewMode?.name === 'windows'}
+      {:else if monitor.previewMode === 'windows'}
         <iframe
           height={height * 3}
           src="https://win11.vercel.app/"
@@ -85,16 +85,16 @@
       {:else}
         <img
           in:blur={{ duration: 500 }}
-          class="monitor {monitor.previewMode?.name === 'wallpaper'
+          class="monitor {monitor.previewMode === 'wallpaper'
             ? ' monitor-wallpaper'
             : 'monitor-content'}"
-          src={monitor.previewMode?.name === 'wallpaper'
+          src={monitor.previewMode === 'wallpaper'
             ? urlRegex.test(monitor.wallpaper) && monitor.wallpaper
-            : monitor.previewMode?.name === 'movie'
+            : monitor.previewMode === 'movie'
             ? movieImgs[Math.min(monitor.index, movieImgs.length - 1)]
-            : monitor.previewMode?.name === 'tv'
+            : monitor.previewMode === 'tv'
             ? videoImgs[Math.min(monitor.index, videoImgs.length - 1)]
-            : monitor.previewMode?.name === 'doc'
+            : monitor.previewMode === 'doc'
             ? docImgs[Math.min(monitor.index, docImgs.length - 1)]
             : null}
           style="--screenHeight:{height}px;--screenWidth:{width}px"

@@ -35,12 +35,10 @@ export interface IMonitor {
   offsetX: number;
   offsetY: number;
   offsetZ: number;
+  on: boolean;
   orientation: 'l' | 'p';
   ports: IPorts;
-  previewMode: {
-    name: string;
-    icon: string;
-  } | null;
+  previewMode: string;
   productLink: string | null;
   refreshRate: number;
   resolution: IResolution;

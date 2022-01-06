@@ -4,7 +4,7 @@
   import Switch from '@smui/switch';
   import FormField from '@smui/form-field';
   import SegmentedButton, { Segment } from '@smui/segmented-button';
-  import { Icon, Label } from '@smui/common';
+  import { Label } from '@smui/common';
   import type { IMonitor } from '../../utils/interfaces';
   import { monitors } from '../../stores/SetupStore';
   import WallpaperField from './WallpaperField.svelte';
@@ -12,38 +12,28 @@
 
   export let monitor: IMonitor;
 
-  let choices = [
-    {
-      name: 'wallpaper',
-      icon: 'wallpaper',
-      tooltip: 'Try out your own wallpaper'
-    },
-    { name: 'movie', icon: '🎬', tooltip: 'Visualize Movie Black Bars' },
-    { name: 'tv', icon: '📺', tooltip: 'Visualize TV/Video Black Bars' },
-    { name: 'doc', icon: '📄', tooltip: 'Visualize Vertical Applications' },
-    { name: 'apple', icon: '🍎', tooltip: 'Simulate MacOS!' },
-    { name: 'windows', icon: '🪟', tooltip: "Simulate Windows 11!" }
-  ];
+  let choices = ['wallpaper', 'movie', 'tv', 'doc', 'apple', 'windows'];
 
-  const handlePreviewModeSwitchChange = (event) => {
-    monitor.previewMode = event.target.checked
-      ? { name: 'wallpaper', icon: 'wallpaper' }
-      : null;
-    monitors.set($monitors);
+  let choiceLabelMap = {
+    wallpaper: { icon: 'wallpaper', tooltip: 'Try out your own wallpaper' },
+    movie: { icon: '🎬', tooltip: 'Visualize Movie Black Bars' },
+    tv: { icon: '📺', tooltip: 'Visualize TV/Video Black Bars' },
+    doc: { icon: '📄', tooltip: 'Visualize Vertical Applications' },
+    apple: { icon: '🍎', tooltip: 'Simulate MacOS!' },
+    windows: { icon: '🪟', tooltip: 'Simulate Windows 11!' }
   };
 </script>
 
 <div class="container">
   <FormField align="end">
     <Switch
-      checked={!!monitor.previewMode}
+      bind:checked={monitor.on}
       color="primary"
-      input$name={`monitorPreview${monitor.index}`}
-      on:change={handlePreviewModeSwitchChange}
+      on:SMUISwitch:change={() => monitors.set($monitors)}
     />
-    <span slot="label">Turn Monitor {monitor.previewMode ? 'Off' : 'On'}</span>
+    <span slot="label">Turn Monitor {monitor.on ? 'Off' : 'On'}</span>
   </FormField>
-  {#if !!monitor.previewMode}
+  {#if monitor.on}
     <div class="button-container" transition:slide>
       <SegmentedButton
         bind:selected={monitor.previewMode}
@@ -54,18 +44,18 @@
       >
         <Segment {segment}>
           <Wrapper>
-            <Label title={segment.name}>
-              {segment.icon}
+            <Label title={segment}>
+              {choiceLabelMap[segment].icon}
             </Label>
-            <Tooltip>{segment.tooltip}</Tooltip>
+            <Tooltip>{choiceLabelMap[segment].tooltip}</Tooltip>
           </Wrapper>
         </Segment>
       </SegmentedButton>
-      {#if monitor.previewMode.name === 'wallpaper'}
+      {#if monitor.previewMode === 'wallpaper'}
         <div transition:slide>
           <WallpaperField {monitor} />
         </div>
-      {:else if monitor.previewMode.name === 'apple'}
+      {:else if monitor.previewMode === 'apple'}
         <div transition:slide>
           <p>
             <Link
@@ -83,7 +73,7 @@
             </Link>
           </p>
         </div>
-      {:else if monitor.previewMode.name === 'windows'}
+      {:else if monitor.previewMode === 'windows'}
         <div transition:slide>
           <p>
             <Link

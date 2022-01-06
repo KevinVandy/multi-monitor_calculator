@@ -47,7 +47,6 @@
   };
 
   onMount(() => {
-    console.log('onMount');
     //load settings from local storage
     const storedSettings: ISettings = JSON.parse(
       localStorage.getItem('settings')

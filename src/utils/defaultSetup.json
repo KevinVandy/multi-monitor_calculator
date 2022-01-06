@@ -27,6 +27,7 @@
       "offsetX": 0,
       "offsetY": 0,
       "offsetZ": 0,
+      "on": false,
       "orientation": "l",
       "ports": {
         "displayPort": false,
@@ -36,7 +37,7 @@
         "vga": false,
         "proprietary": false
       },
-      "previewMode": null,
+      "previewMode": "wallpaper",
       "productLink": "",
       "refreshRate": 60,
       "resolution": { "standard": "FHD", "horizontal": 1920, "vertical": 1080 },

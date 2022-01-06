@@ -12,7 +12,7 @@
   input$max={$inputUnits === 'Metric' ? 500 : 200}
   input$min="1"
   input$name={`diagonal${monitor.index}`}
-  input$step="1"
+  input$step=".1"
   label="Diagonal"
   on:change={() => monitors.set($monitors)}
   required

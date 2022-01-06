@@ -8,18 +8,10 @@
 </script>
 
 <FormField align="end" style="justify-content:space-between;">
-  <Switch
-    bind:checked={$expandAdvancedOptionsByDefault}
-    color="primary"
-    input$name="expandAdvancedOptionsByDefault"
-  />
+  <Switch bind:checked={$expandAdvancedOptionsByDefault} color="primary" />
   <span slot="label">Expand Advanced Options By Default</span>
 </FormField>
 <FormField align="end" style="justify-content:space-between;">
-  <Switch
-    bind:checked={$expandStatsByDefault}
-    color="primary"
-    input$name="expandStatsByDefault"
-  />
+  <Switch bind:checked={$expandStatsByDefault} color="primary" />
   <span slot="label">Expand Stats By Default</span>
 </FormField>
