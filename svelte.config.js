@@ -9,7 +9,6 @@ const config = {
 
   kit: {
     adapter: adapter(),
-    target: '#svelte',
     prerender: {
       crawl: true,
       enabled: true,
