@@ -2,7 +2,7 @@
   import { fade, blur } from 'svelte/transition';
   import { monitors, scale } from '../stores/SetupStore';
   import { calcScreenHeight, calcScreenWidth, calcTheta } from '../utils/calc';
-  import { draggable } from 'svelte-drag';
+  import { draggable } from '@neodrag/svelte';
   import type { IMonitor } from '../utils/interfaces';
   import { urlRegex } from '../utils/regex';
   import { docImgs, movieImgs, videoImgs } from '../utils/randomImage';
@@ -43,7 +43,7 @@
     use:draggable={{
       defaultPosition: { x: monitor.offsetX, y: monitor.offsetY }
     }}
-    on:svelte-drag:end={(e) =>
+    on:neodrag:end={(e) =>
       monitors.update((ms) => {
         ms[monitor.index].offsetX = e.detail.offsetX;
         ms[monitor.index].offsetY = e.detail.offsetY;
