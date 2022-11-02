@@ -27,6 +27,9 @@
   <Option value="16:10">
     <b>16:10</b>
   </Option>
+  <Option value="16:18">
+    <b>16:18</b>
+  </Option>
   <Option value="21:9">
     <b>21:9</b>
   </Option>
