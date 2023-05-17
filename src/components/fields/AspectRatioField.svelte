@@ -33,6 +33,7 @@
   <Option value="21:9">
     <b>21:9</b>
   </Option>
+  <Option value="24:10">24:10</Option>
   <Option value="32:9">32:9</Option>
   <Option value="2:1">2:1</Option>
   <Option value="4:3">4:3</Option>
