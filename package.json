@@ -2,6 +2,9 @@
 	"name": "multi-monitor-calculator",
 	"version": "4.0.0",
 	"private": true,
+	"engines": {
+		"node": ">=18.0.0"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
