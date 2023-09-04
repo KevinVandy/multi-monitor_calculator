@@ -11,8 +11,8 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"prepare": "npm run smui-theme-light && npm run smui-theme-dark",
-		"smui-theme-light": "smui-theme compile static/smui.css -i src/theme/light",
-		"smui-theme-dark": "smui-theme compile static/smui-dark.css -i src/theme/dark"
+		"smui-theme-light": "smui-theme compile static/smui.css -i src/lib/theme/light",
+		"smui-theme-dark": "smui-theme compile static/smui-dark.css -i src/lib/theme/dark"
 	},
 	"devDependencies": {
 		"@material/typography": "^14.0.0",

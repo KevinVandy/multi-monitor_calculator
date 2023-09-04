@@ -27,7 +27,7 @@
 
 <Wrapper>
 	<Fab class="fab-button" color="primary" extended on:click={handleGenerateLink}>
-		<Icon class="material-icons">share</Icon>Share Link
+		<Icon class="material-icons">link</Icon>Generate Link
 	</Fab>
 	<Tooltip>
 		Generate a link to this setup that you can use to send to your friends or other devices
