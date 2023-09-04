@@ -1,0 +1,32 @@
+@use 'sass:color';
+@use '@material/theme/color-palette';
+@use '@material/theme/index' as theme with (
+	$primary: #db3801,
+	$secondary: color.scale(#676778, $whiteness: -10%),
+	$surface: color.adjust(color-palette.$grey-900, $blue: +4),
+	$background: #000,
+	$error: color-palette.$red-700
+);
+@use '@material/typography/index' as typography;
+@use '../common.scss';
+
+:root {
+	--input-background-color: #2a2a2e;
+	--input-label-color: rgba(255, 255, 255, 0.6);
+	--mdc-theme-surface: #212125;
+}
+
+html,
+body {
+	@include typography.typography('body1');
+	background-color: #121212;
+	color: theme.$on-surface;
+	margin: 0;
+	padding: 0;
+}
+
+main {
+	background-image: linear-gradient(#121212, #000);
+	min-height: calc(100vh - 100px);
+	padding-bottom: 100px;
+}

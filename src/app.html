@@ -1,52 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="icon" href="/favicon.png" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
-    <link
-      as="style"
-      rel="preload"
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <link
-      as="style"
-      rel="preload"
-      href="https://fonts.googleapis.com/css?family=Roboto+Mono"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <link
-      rel="stylesheet"
-      href="/smui.css"
-      media="(prefers-color-scheme: light)"
-    />
-    <link
-      rel="stylesheet"
-      href="/smui-dark.css"
-      media="screen and (prefers-color-scheme: dark)"
-    />
-    <script
-      type="module"
-      src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"
-    ></script>
-    <script defer data-domain="multimonitorcalculator.com" src="https://plausible.io/js/script.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="A Tool For Planning Your Multi-Monitor Setup! Calculate PPI and other Screen Calculations, Preview Custom Desktop Wallpapers, Drag and Rearrange Monitors to Try Out Different Layouts, Search for your Dream Monitor, and Much More.
+	<head>
+		<meta charset="utf-8" />
+		<link rel="manifest" href="/manifest.json" />
+		<link rel="icon" href="/favicon.png" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+		<link
+			as="style"
+			rel="preload"
+			href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"
+			onload="this.onload=null;this.rel='stylesheet'"
+		/>
+		<link
+			as="style"
+			rel="preload"
+			href="https://fonts.googleapis.com/css?family=Roboto+Mono"
+			onload="this.onload=null;this.rel='stylesheet'"
+		/>
+		<link rel="stylesheet" href="/smui.css" media="(prefers-color-scheme: light)" />
+		<link rel="stylesheet" href="/smui-dark.css" media="screen and (prefers-color-scheme: dark)" />
+		<script
+			type="module"
+			src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"
+		></script>
+		<script
+			defer
+			data-domain="multimonitorcalculator.com"
+			src="https://plausible.io/js/script.js"
+		></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="description"
+			content="A Tool For Planning Your Multi-Monitor Setup! Calculate PPI and other Screen Calculations, Preview Custom Desktop Wallpapers, Drag and Rearrange Monitors to Try Out Different Layouts, Search for your Dream Monitor, and Much More.
       "
-    />
-    <meta property="og:image" content="/favicon.png" />
-    <title>Multi-Monitor Calculator</title>
-    %svelte.head%
-  </head>
-
-  <body>
-    <div id="svelte">%svelte.body%</div>
-  </body>
+		/>
+		<meta property="og:image" content="/favicon.png" />
+		<title>Multi-Monitor Calculator</title>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
 </html>

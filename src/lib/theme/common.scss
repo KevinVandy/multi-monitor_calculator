@@ -1,0 +1,93 @@
+@use 'sass:color';
+@use '@material/typography/index' as typography;
+
+h1 {
+	@include typography.typography('headline1');
+	text-align: center;
+	font-size: 2.5rem;
+	line-height: 3rem;
+	margin: 1.5rem auto;
+}
+
+h2 {
+	@include typography.typography('headline2');
+	text-align: center;
+	font-size: 2rem;
+	line-height: 3rem;
+	margin: 1rem auto;
+}
+
+h3 {
+	@include typography.typography('headline3');
+	text-align: center;
+	font-size: 1.5rem;
+	line-height: 2rem;
+	margin: 0.75rem auto;
+}
+
+h4 {
+	@include typography.typography('headline4');
+	text-align: center;
+	font-size: 1.3rem;
+	line-height: 1.5rem;
+	margin: 0.5rem auto;
+}
+
+h5 {
+	@include typography.typography('headline5');
+	text-align: center;
+	font-size: 1.2rem;
+	line-height: 1.5rem;
+	margin: 0.5rem auto;
+}
+
+h6 {
+	@include typography.typography('headline6');
+	text-align: center;
+	font-size: 1.1rem;
+	line-height: 1.3rem;
+	margin: 0.25rem auto;
+}
+
+caption {
+	@include typography.typography('caption');
+}
+
+code,
+pre {
+	font-family: 'Roboto Mono', monospace;
+}
+
+small {
+	font-size: 0.9em;
+}
+
+big {
+	font-size: 1.1em;
+}
+
+b,
+strong {
+	font-weight: bold;
+}
+
+a {
+	color: #40b3ff;
+}
+a:visited {
+	color: color.scale(#40b3ff, $lightness: -35%);
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar {
+	right: 0;
+	width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #666;
+	border-radius: 3px;
+}
