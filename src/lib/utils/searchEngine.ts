@@ -53,12 +53,13 @@ export const performSearch = (searchEngine: string, monitor: IMonitor) => {
 	let searchUrl = '';
 
 	//url based on search engine chosen
-	if (searchEngine === 'Google') searchUrl = 'https://www.google.com/search?q=';
 	if (searchEngine === 'Bing') searchUrl = 'https://www.bing.com/search?q=';
-	if (searchEngine === 'DuckDuckGo') searchUrl = 'https://www.duckduckgo.com/?q=';
-	if (searchEngine === 'Amazon') searchUrl = 'https://www.amazon.com/s?k=';
-	if (searchEngine === 'Newegg') searchUrl = 'https://www.newegg.com/p/pl?d=';
-	if (searchEngine === 'Best Buy') searchUrl = 'https://www.bestbuy.com/site/searchpage.jsp?st=';
+	else if (searchEngine === 'DuckDuckGo') searchUrl = 'https://www.duckduckgo.com/?q=';
+	else if (searchEngine === 'Amazon') searchUrl = 'https://www.amazon.com/s?k=';
+	else if (searchEngine === 'Newegg') searchUrl = 'https://www.newegg.com/p/pl?d=';
+	else if (searchEngine === 'Best Buy')
+		searchUrl = 'https://www.bestbuy.com/site/searchpage.jsp?st=';
+	else searchUrl = 'https://www.google.com/search?q=';
 
 	//base search string
 	searchUrl += 'monitor';

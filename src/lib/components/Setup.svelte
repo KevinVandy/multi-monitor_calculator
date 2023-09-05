@@ -50,9 +50,9 @@
 		//load settings from local storage
 		const storedSettings: ISettings = JSON.parse(localStorage.getItem('settings') ?? '{}');
 		if (storedSettings) {
-			preferredSearchEngine.set(storedSettings.preferredSearchEngine);
-			expandAdvancedOptionsByDefault.set(storedSettings.expandAdvancedOptionsByDefault);
-			expandStatsByDefault.set(storedSettings.expandStatsByDefault);
+			preferredSearchEngine.set(storedSettings.preferredSearchEngine ?? 'Google');
+			expandAdvancedOptionsByDefault.set(storedSettings.expandAdvancedOptionsByDefault ?? false);
+			expandStatsByDefault.set(storedSettings.expandStatsByDefault ?? true);
 			statUnits.set(storedSettings.statUnits ?? 'Imperial');
 			inputUnits.set(storedSettings.inputUnits ?? 'Imperial');
 			theme.set(storedSettings.theme ?? 'dark');
