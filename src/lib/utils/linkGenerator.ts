@@ -20,11 +20,13 @@ export const parseSetupFromUrl = (urlSetup: {
 	const parsedDeskHeight = Number(urlSetup[ShortCode.DESK_HEIGHT] || parsedDefaultSetup.deskHeight);
 	const parsedDeskWidth = Number(urlSetup[ShortCode.DESK_WIDTH] || parsedDefaultSetup.deskWidth);
 	const parsedMonitors: IMonitor[] = [];
-	for (let i = 0; i < Math.min(+urlSetup?.num ?? 10, 10); i++) {
+	for (let i = 0; i < Math.min(+urlSetup?.num || 10, 10); i++) {
 		const parsedMonitor: IMonitor = getNewMonitor(i);
 		parsedMonitors.push({
 			...parsedMonitor,
-			aspectRatio: String(urlSetup[`${ShortCode.ASPECT_RATIO}${i}`] ?? parsedMonitor.aspectRatio) as keyof IAspectRatioStandards,
+			aspectRatio: String(
+				urlSetup[`${ShortCode.ASPECT_RATIO}${i}`] ?? parsedMonitor.aspectRatio,
+			) as keyof IAspectRatioStandards,
 			bezelColor: String(urlSetup[`${ShortCode.BEZEL_COLOR}${i}`] ?? parsedMonitor.bezelColor),
 			bezelWidth: Number(urlSetup[`${ShortCode.BEZEL_WIDTH}${i}`] ?? parsedMonitor.bezelWidth),
 			diagonal: Number(urlSetup[`${ShortCode.DIAGONAL}${i}`] ?? parsedMonitor.diagonal),
