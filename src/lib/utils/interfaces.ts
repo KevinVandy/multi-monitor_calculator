@@ -40,6 +40,7 @@ export interface IMonitor {
 	ports: IPorts;
 	previewMode: string;
 	productLink: string | null;
+	scalingValue: 100 | 125 | 150 | 175 | 200 | 225 | 250 | 275 | 300;
 	refreshRate: number;
 	resolution: IResolution;
 	responseTime: number | null;

@@ -40,6 +40,7 @@ const defaultSetup: ISetup = {
 			},
 			previewMode: 'wallpaper',
 			productLink: '',
+			scalingValue: 100,
 			refreshRate: 60,
 			resolution: { standard: 'FHD', horizontal: 1920, vertical: 1080 },
 			responseTime: null,

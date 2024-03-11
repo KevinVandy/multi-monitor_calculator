@@ -9,8 +9,8 @@
 		$inputUnits === 'Imperial' && $statUnits === 'Metric'
 			? 2.54
 			: $inputUnits === 'Metric' && $statUnits === 'Imperial'
-			? 1 / 2.54
-			: 1;
+			  ? 1 / 2.54
+			  : 1;
 
 	$: diagonal = convert * monitor.diagonal;
 	$: bezelWidth = $statUnits === 'Metric' ? 2.54 * monitor.bezelWidth : monitor.bezelWidth;
@@ -40,10 +40,35 @@
 			<Cell>Resolution</Cell>
 			<Cell numeric>{monitor.resolution.horizontal} x {monitor.resolution.vertical}</Cell>
 		</Row>
+
+		{#if monitor.scalingValue != 100}
+			<Row>
+				<Cell>Scaled Resolution</Cell>
+				<Cell numeric
+					>{(monitor.resolution.horizontal / monitor.scalingValue) * 100} x {(monitor.resolution
+						.vertical /
+						monitor.scalingValue) *
+						100}</Cell
+				>
+			</Row>
+		{/if}
 		<Row>
 			<Cell>Number Pixels</Cell>
 			<Cell numeric>{numPixels.toLocaleString()}</Cell>
 		</Row>
+		{#if monitor.scalingValue != 100}
+			<Row>
+				<Cell>Scaled Pixels</Cell>
+				<Cell numeric
+					>{(
+						(monitor.resolution.horizontal / monitor.scalingValue) *
+						100 *
+						(monitor.resolution.vertical / monitor.scalingValue) *
+						100
+					).toLocaleString()}</Cell
+				>
+			</Row>
+		{/if}
 		<Row>
 			<Cell>Refresh Rate</Cell>
 			<Cell numeric>{monitor.refreshRate} Hz</Cell>
@@ -58,6 +83,16 @@
 			>
 			<Cell numeric>{ppi.toFixed(1)}</Cell>
 		</Row>
+		{#if monitor.scalingValue != 100}
+			<Row>
+				<Cell
+					>{$statUnits === 'Metric'
+						? 'Scaled Pixels Per Centimeter (PPCM)'
+						: 'Scaled Pixels Per Inch (PPI)'}</Cell
+				>
+				<Cell numeric>{((ppi / monitor.scalingValue) * 100).toFixed(1)}</Cell>
+			</Row>
+		{/if}
 		<Row>
 			<Cell>Screen Diagonal</Cell>
 			<Cell numeric>{diagonal.toFixed(1)}{$statUnits === 'Metric' ? ' cm' : '"'}</Cell>

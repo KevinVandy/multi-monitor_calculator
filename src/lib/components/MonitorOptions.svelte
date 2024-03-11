@@ -25,6 +25,7 @@
 	import MonitorSearch from './MonitorSearch.svelte';
 	import MonitorNotesField from './fields/MonitorNotesField.svelte';
 	import MonitorSwapButtons from './MonitorSwapButtons.svelte';
+	import ScalingValueField from './fields/ScalingValueField.svelte';
 
 	export let monitor: IMonitor;
 	export let advancedOptionsOpen: boolean;
@@ -83,6 +84,7 @@
 					</div>
 					<div class="options-grid-1">
 						<ProductLinkField {monitor} />
+						<ScalingValueField {monitor} />
 					</div>
 					<MonitorNotesField {monitor} />
 					<PortFields {monitor} />
